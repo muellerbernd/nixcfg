@@ -108,7 +108,7 @@
 
   # fonts
   fonts = {
-    packages = with pkgs; [
+    fonts = with pkgs; [
       (nerdfonts.override {
         fonts = [
           "FiraCode"
