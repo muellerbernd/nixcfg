@@ -63,6 +63,29 @@
 
   environment.pathsToLink =
     [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+
+  # icecream setup
+  services = {
+    icecream = {
+      daemon = {
+        enable = true;
+        # hostname = "daemon-icecream-biltower";
+        openFirewall = true;
+        openBroadcast = true;
+      };
+      scheduler = {
+        enable = true;
+        # netName = "scheduler-icecream-biltower";
+        openFirewall = true;
+      };
+    };
+  };
+
+  # nix-serve setup
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/cache-priv-key.pem";
+  };
 }
 
 # vim: set ts=2 sw=2:

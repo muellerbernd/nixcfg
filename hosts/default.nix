@@ -175,29 +175,6 @@
     };
   };
 
-  # icecream setup
-  services = {
-    icecream = {
-      daemon = {
-        enable = true;
-        # hostname = "daemon-icecream-biltower";
-        openFirewall = true;
-        openBroadcast = true;
-      };
-      scheduler = {
-        enable = true;
-        # netName = "scheduler-icecream-biltower";
-        openFirewall = true;
-      };
-    };
-  };
-
-  # nix-serve setup
-  # services.nix-serve = {
-  #   enable = true;
-  #   secretKeyFile = "/var/cache-priv-key.pem";
-  # };
-
   # Nix settings, auto cleanup and enable flakes
   nix = {
     package = pkgs.nixFlakes;
