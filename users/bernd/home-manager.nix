@@ -371,6 +371,8 @@
   #     };
   # }
 
+  # enable picom
+  # services.picom.enable = true;
   services.mpris-proxy.enable = true;
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
