@@ -28,14 +28,36 @@
   #   };
   # };
 
+  networking.hostName = "biltower"; # Define your hostname.
+
   # nvidia setup
   services.xserver.videoDrivers = [ "nvidia" ];
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia = {
+    # Modesetting is needed most of the time
+    modesetting.enable = true;
 
-  networking.hostName = "biltower"; # Define your hostname.
+    # Enable power management (do not disable this unless you have a reason to).
+    # Likely to cause problems on laptops and with screen tearing if disabled.
+    powerManagement.enable = true;
+
+    # Use the NVidia open source kernel module (which isn't “nouveau”).
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+    # Only available from driver 515.43.04+
+    open = false;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # tearing
+    forceFullCompositionPipeline = true;
+  };
 
   hardware = {
+    # enable opengl
     opengl = {
       enable = true;
       driSupport = true;
