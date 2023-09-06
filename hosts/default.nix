@@ -215,6 +215,8 @@
     playerctl
     xfce.thunar
     xfce.thunar-volman
+    xorg.xmodmap
+    xorg.xev
     #
     gnupg
     pam_gnupg
