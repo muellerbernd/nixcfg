@@ -32,6 +32,11 @@
 
   # nvidia setup
   services.xserver.videoDrivers = [ "nvidia" ];
+  # try to fix tearing
+  # services.xserver.screenSection = ''
+  #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
+  # '';
+
   # Optionally, you may need to select the appropriate driver version for your specific GPU.
   hardware.nvidia = {
     # Modesetting is needed most of the time
@@ -53,7 +58,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     # tearing
-    forceFullCompositionPipeline = true;
+    # forceFullCompositionPipeline = true;
   };
 
   hardware = {
