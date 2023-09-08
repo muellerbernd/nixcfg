@@ -91,6 +91,7 @@
       ctags
       ncdu
       lsd
+      bc
       # run github actions locally
       act
       # env

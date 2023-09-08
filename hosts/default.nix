@@ -220,6 +220,7 @@
     #
     gnupg
     pam_gnupg
+    bc
     # nix
     nixpkgs-lint
     nixpkgs-fmt
