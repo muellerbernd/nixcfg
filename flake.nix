@@ -32,6 +32,7 @@
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
         })
+        # (final: prev: { joshuto = nixpkgs-unstable.joshuto; })
       ];
     in {
       nixosConfigurations.x240 = mkDefault "x240" rec {

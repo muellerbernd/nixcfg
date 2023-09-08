@@ -23,7 +23,7 @@
       # better shell history
       atuin
       ranger
-      nnn
+      joshuto
       neofetch
       fzf
       fd
