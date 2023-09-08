@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # We use the unstable nixpkgs repo for all packages.
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -19,7 +19,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
     let
       # mkVM = import ./lib/mkvm.nix;
       mkDefault = (import ./lib/mkdefault.nix);
@@ -32,8 +32,14 @@
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
         })
-        # (final: prev: { joshuto = nixpkgs-unstable.joshuto; })
+        (final: prev: { joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto; })
       ];
+      # nixpkgs.config = {
+      #   packageOverrides = pkgs:
+      #     with pkgs; {
+      #       unstable = nixpkgs-unstable;
+      #     };
+      # };
     in {
       nixosConfigurations.x240 = mkDefault "x240" rec {
         inherit nixpkgs home-manager overlays;
