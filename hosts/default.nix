@@ -229,8 +229,8 @@
     # nix-serve-ng
   ];
 
-  environment.pathsToLink =
-    [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+  # environment.pathsToLink =
+  #   [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
 
   virtualisation = {
     podman = {
