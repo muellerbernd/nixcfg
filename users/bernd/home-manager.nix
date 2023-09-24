@@ -94,6 +94,8 @@
       bc
       # run github actions locally
       act
+      # gitlab-runner
+      gitlab-runner
       # env
       direnv
       # programming
