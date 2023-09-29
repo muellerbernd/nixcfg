@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
-    # We use the unstable nixpkgs repo for all packages.
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
@@ -35,6 +34,8 @@
         (final: prev: {
           joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
+          networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
+          openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
         })
       ];
       # nixpkgs.config = {
