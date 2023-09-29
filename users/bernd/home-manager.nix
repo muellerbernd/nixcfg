@@ -94,6 +94,8 @@
       bc
       # run github actions locally
       act
+      # gitlab-runner
+      gitlab-runner
       # env
       direnv
       # programming
@@ -140,13 +142,15 @@
       # messenger
       gajim
       teams-for-linux
+      # vpn
+      openconnect_openssl
+      networkmanager-openconnect
       # keyboard stuff
       qmk
       qmk_hid
       qmk-udev-rules
       avrdude
       #
-      openconnect
       picom
       # custom packages
       annotator
