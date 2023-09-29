@@ -221,6 +221,9 @@
     gnupg
     pam_gnupg
     bc
+    xbindkeys
+    xsel
+    xdotool
     # nix
     nixpkgs-lint
     nixpkgs-fmt
