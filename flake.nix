@@ -32,7 +32,10 @@
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
         })
-        (final: prev: { joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto; })
+        (final: prev: {
+          joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
+          teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
+        })
       ];
       # nixpkgs.config = {
       #   packageOverrides = pkgs:
