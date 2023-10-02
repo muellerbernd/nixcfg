@@ -142,6 +142,7 @@
       # messenger
       gajim
       teams-for-linux
+      dino
       # vpn
       openconnect_openssl
       networkmanager-openconnect
