@@ -36,6 +36,8 @@
           teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
           openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
+          dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
+          prusa-slicer = inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
       ];
       # nixpkgs.config = {
