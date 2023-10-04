@@ -33,6 +33,7 @@
         })
         (final: prev: {
           joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
+          neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
           openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;

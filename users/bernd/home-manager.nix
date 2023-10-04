@@ -5,6 +5,7 @@
     username = "bernd";
     homeDirectory = "/home/bernd";
     packages = with pkgs; [
+      procps
       # editors
       neovim
       #neovim-remote
