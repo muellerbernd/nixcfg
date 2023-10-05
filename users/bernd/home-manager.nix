@@ -13,6 +13,7 @@
       vim
       # git
       git
+      git-lfs
       lazygit
       vcstool
       # terminal
