@@ -145,6 +145,8 @@
       gajim
       teams-for-linux
       dino
+      # matrix client 
+      element-desktop
       # vpn
       openconnect_openssl
       networkmanager-openconnect
