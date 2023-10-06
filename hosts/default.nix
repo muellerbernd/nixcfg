@@ -301,6 +301,8 @@
     enableSSHSupport = true;
   };
 
+  programs.adb.enable = true;
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";

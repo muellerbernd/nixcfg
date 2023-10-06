@@ -21,6 +21,7 @@
       "lp"
       "storage"
       "users"
+      "adbusers"
     ];
   };
   users.extraGroups.vboxusers.members = [ "bernd" ];
