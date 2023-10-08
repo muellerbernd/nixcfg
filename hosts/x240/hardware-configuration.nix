@@ -31,8 +31,7 @@
     fsType = "vfat";
   };
 
-swapDevices =
-    [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   powerManagement = {
     enable = true;
