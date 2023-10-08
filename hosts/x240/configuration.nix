@@ -25,6 +25,12 @@
     #   "i915.enable_fbc=1"
     #   "i915.enable_dc=2"
     # ];
+    initrd.luks.devices = {
+      crypt = {
+        device = "/dev/vda2";
+        preLVM = true;
+      };
+    };
   };
 
   services = {
