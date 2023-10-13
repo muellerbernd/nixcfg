@@ -145,7 +145,7 @@
       gajim
       teams-for-linux
       dino
-      # matrix client 
+      # matrix client
       element-desktop
       # vpn
       openconnect_openssl
@@ -155,6 +155,7 @@
       qmk_hid
       qmk-udev-rules
       avrdude
+      evtest
       #
       picom
       # custom packages
