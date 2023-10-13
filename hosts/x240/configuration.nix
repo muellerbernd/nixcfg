@@ -14,7 +14,6 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/boot/efi";
       systemd-boot.configurationLimit = 8;
     };
     # kernelParams = [
@@ -25,6 +24,13 @@
     #   "i915.enable_fbc=1"
     #   "i915.enable_dc=2"
     # ];
+    # luks
+    initrd.luks.devices = {
+      crypt = {
+        device = "/dev/sda2";
+        preLVM = true;
+      };
+    };
   };
 
   services = {

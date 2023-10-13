@@ -22,17 +22,16 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d181de05-0bb6-42c1-9eb2-9ed1ba3ff369";
+    device = "/dev/disk/by-label/root";
     fsType = "ext4";
   };
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/C301-93B6";
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/6bb7224d-75e5-4d78-bf23-b1c6091c60fd"; }];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   powerManagement = {
     enable = true;
