@@ -53,6 +53,11 @@
         system = "x86_64-linux";
         user = "bernd";
       };
+      nixosConfigurations.t480 = mkDefault "t480" rec {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+        user = "bernd";
+      };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";

@@ -5,7 +5,6 @@
 { config, pkgs, ... }: {
   imports = [
     ../default.nix
-    ../../modules/users/muellerbernd.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
