@@ -19,7 +19,7 @@ nixpkgs.lib.nixosSystem rec {
       home-manager.useUserPackages = true;
       home-manager.users.${user} = import ../users/${user}/home-manager.nix;
     }
-    ../users/${user}/bernd.nix
+    ../users/${user}/${user}.nix
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
