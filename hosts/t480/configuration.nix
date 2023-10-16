@@ -26,7 +26,7 @@
     # luks
     initrd = {
       luks.devices."root" = {
-        device = "/dev/disk/by-uuid/6e60027f-edcd-41ee-9094-f2747e7f0c74";
+        device = "/dev/disk/by-uuid/6e4bc2ef-ff1a-4087-bf32-62637fa20d2d"; # UUID for /dev/nvme01np2
         preLVM = true;
         keyFile = "/keyfile0.bin";
         allowDiscards = true;

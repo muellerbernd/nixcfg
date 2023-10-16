@@ -32,15 +32,18 @@
   };
 
   fileSystems."/home" = {
+    device =
+      "/dev/disk/by-uuid/90c7dc68-80ba-49aa-8076-1e6d2bc1fa83"; # UUID for /dev/mapper/crypted-home
     encrypted = {
       enable = true;
       label = "crypted-home";
-      blkDev = "/dev/disk/by-uuid/90c7dc68-80ba-49aa-8076-1e6d2bc1fa83";
+      blkDev = "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/sda1
       keyFile = "/keyfile1.bin";
     };
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/a3854f23-5f76-4aaa-b7d7-eb9bee4cb1f7"; }];
+  swapDevices =
+    [{ device = "/dev/disk/by-uuid/a3854f23-5f76-4aaa-b7d7-eb9bee4cb1f7"; }];
 
   powerManagement = {
     enable = true;
