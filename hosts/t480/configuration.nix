@@ -13,6 +13,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot/efi";
       systemd-boot.configurationLimit = 8;
     };
     # kernelParams = [
