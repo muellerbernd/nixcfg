@@ -49,7 +49,7 @@
       #     # };
       #   };
       # };
-      root = {
+      "root" = {
         device = "/dev/nvme1n1p2";
         preLVM = true;
       };
