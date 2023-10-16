@@ -32,16 +32,20 @@
   };
 
   fileSystems."/home" = {
-    device =
-      "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
-    encrypted = {
-      enable = true;
-      label = "home";
-      # blkDev =
-      #   "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/nvme1n1p1
-      keyFile = "/keyfile1.bin";
-    };
+    device = "/dev/disk/by-label/home";
+    fsType = "ext4";
   };
+  # fileSystems."/home" = {
+  #   device =
+  #     "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
+  #   encrypted = {
+  #     enable = true;
+  #     label = "home";
+  #     # blkDev =
+  #     #   "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/nvme1n1p1
+  #     keyFile = "/keyfile1.bin";
+  #   };
+  # };
 
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 

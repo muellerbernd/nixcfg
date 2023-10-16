@@ -31,6 +31,11 @@
         keyFile = "/keyfile0.bin";
         allowDiscards = true;
       };
+      luks.devices."/home" = {
+        device = "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
+        keyFile = "/keyfile1.bin";
+        preLVM = true;
+      };
       secrets = {
         # Create /mnt/etc/secrets/initrd directory and copy keys to it
         "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
