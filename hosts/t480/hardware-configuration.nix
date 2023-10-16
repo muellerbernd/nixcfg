@@ -37,7 +37,7 @@
     encrypted = {
       enable = true;
       label = "crypted-home";
-      blkDev = "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/sda1
+      blkDev = "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/nvme1n1p1
       keyFile = "/keyfile1.bin";
     };
   };
