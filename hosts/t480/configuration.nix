@@ -33,7 +33,7 @@
       #     "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
       #   };
       luks.forceLuksSupportInInitrd = true;
-      boot.initrd.luks.devices = {
+      luks.devices = {
         # root = {
         #   device = "/dev/nvme0n1p2"; # UUID for /dev/nvme01np2
         #   preLVM = true;
