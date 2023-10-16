@@ -13,7 +13,6 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      efi.efiSysMountPoint = "/boot/efi";
       systemd-boot.configurationLimit = 8;
     };
     # kernelParams = [
@@ -27,7 +26,7 @@
     # luks
     initrd = {
       luks.devices."root" = {
-        device = "/dev/disk/by-uuid/6e4bc2ef-ff1a-4087-bf32-62637fa20d2d"; # UUID for /dev/nvme01np2
+        device = "/dev/nvme0n1p2"; # UUID for /dev/nvme01np2
         preLVM = true;
         keyFile = "/keyfile0.bin";
         allowDiscards = true;
@@ -52,11 +51,11 @@
     tlp = {
       enable = true;
       settings = {
-        # PCIE_ASPM_ON_BAT = "powersupersave";
-        # CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        # CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        # CPU_MAX_PERF_ON_AC = "100";
-        # CPU_MAX_PERF_ON_BAT = "30";
+        PCIE_ASPM_ON_BAT = "powersupersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_MAX_PERF_ON_AC = "100";
+        CPU_MAX_PERF_ON_BAT = "80";
         STOP_CHARGE_THRESH_BAT1 = "95";
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
