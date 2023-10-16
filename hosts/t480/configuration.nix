@@ -37,12 +37,12 @@
           keyFile = "/keyfile0.bin";
           allowDiscards = true;
         };
-        "home" = {
-          device = "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
-          preLVM = true;
-          keyFile = "/keyfile1.bin";
-          allowDiscards = true;
-        };
+        # "home" = {
+        #   device = "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
+        #   preLVM = true;
+        #   keyFile = "/keyfile1.bin";
+        #   allowDiscards = true;
+        # };
       };
     };
   };

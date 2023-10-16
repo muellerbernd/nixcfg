@@ -31,10 +31,10 @@
     fsType = "vfat";
   };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/home";
-    fsType = "ext4";
-  };
+  # fileSystems."/home" = {
+  #   device = "/dev/disk/by-label/home";
+  #   fsType = "ext4";
+  # };
   # fileSystems."/home" = {
   #   device =
   #     "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
