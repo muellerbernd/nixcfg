@@ -22,16 +22,25 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/root";
+    device = "/dev/disk/by-uuid/6e60027f-edcd-41ee-9094-f2747e7f0c74";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-uuid/D7E9-A4ED";
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  fileSystems."/home" = {
+    encrypted = {
+      enable = true;
+      label = "crypted-home";
+      blkDev = "/dev/disk/by-uuid/90c7dc68-80ba-49aa-8076-1e6d2bc1fa83";
+      keyFile = "/keyfile1.bin";
+    };
+  };
+
+  swapDevices = [{ device = "/dev/disk/by-uuid/a3854f23-5f76-4aaa-b7d7-eb9bee4cb1f7"; }];
 
   powerManagement = {
     enable = true;

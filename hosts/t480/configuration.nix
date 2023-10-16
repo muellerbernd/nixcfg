@@ -26,8 +26,15 @@
     # luks
     initrd.luks.devices = {
       crypt = {
-        device = "/dev/sda2";
+        device = "/dev/disk/by-uuid/6e60027f-edcd-41ee-9094-f2747e7f0c74";
         preLVM = true;
+        keyFile = "/keyfile0.bin";
+        allowDiscards = true;
+      };
+      secrets = {
+      # Create /mnt/etc/secrets/initrd directory and copy keys to it
+      "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
+      "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
       };
     };
   };
