@@ -8,12 +8,13 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  # Bootloader.
+
   boot = {
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 8;
+      efi.canTouchEfiVariables = true;
+      supportsInitrdSecrets = true;
     };
     # kernelParams = [
     #   "i915.modeset=1"
@@ -25,34 +26,35 @@
     # ];
     # luks
     initrd = {
-      secrets = {
-        # Create /mnt/etc/secrets/initrd directory and copy keys to it
-        "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
-        "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
-      };
-      luks.devices = {
-        crypt = {
-          device =
-            "/dev/disk/by-uuid/d51709e4-42a6-4ba1-bb92-cd3440d04cf7"; # UUID for /dev/nvme01np2
-          preLVM = true;
-          keyFile = "/keyfile0.bin";
-        };
-        # "root" = {
-        #   device = "/dev/disk/by-uuid/d51709e4-42a6-4ba1-bb92-cd3440d04cf7"; # UUID for /dev/nvme01np2
-        #   preLVM = true;
-        #   keyFile = "/keyfile0.bin";
-        #   allowDiscards = true;
-        # };
-        # "home" = {
-        #   device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
-        #   preLVM = true;
-        #   keyFile = "/keyfile1.bin";
-        #   allowDiscards = true;
-        # };
+      #   enable = true;
+      #   secrets = {
+      #     # Create /mnt/etc/secrets/initrd directory and copy keys to it
+      #     "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
+      #     "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
+      #   };
+      #   luks.forceLuksSupportInInitrd = true;
+      #   boot.initrd.luks.devices = {
+      #     root = {
+      #       device = "/dev/nvme0n1p2"; # UUID for /dev/nvme01np2
+      #       preLVM = true;
+      #       # keyFile = "/keyfile0.bin";
+      #       keyFileTimeout = 5;
+      #
+      #     };
+      #     # "home" = {
+      #     #   device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
+      #     #   preLVM = true;
+      #     #   keyFile = "/keyfile1.bin";
+      #     #   allowDiscards = true;
+      #     # };
+      #   };
+      # };
+      root = {
+        device = "/dev/nvme1n1p2";
+        preLVM = true;
       };
     };
   };
-
   services = {
     # udev.extraRules = ''
     #   # Gamecube Controller Adapter
