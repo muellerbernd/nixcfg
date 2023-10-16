@@ -31,18 +31,24 @@
         "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
       };
       luks.devices = {
-        "root" = {
-          device = "/dev/nvme0n1"; # UUID for /dev/nvme01np2
+        crypt = {
+          device =
+            "/dev/disk/by-uuid/d51709e4-42a6-4ba1-bb92-cd3440d04cf7"; # UUID for /dev/nvme01np2
           preLVM = true;
           keyFile = "/keyfile0.bin";
-          allowDiscards = true;
         };
-        "home" = {
-          device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
-          preLVM = true;
-          keyFile = "/keyfile1.bin";
-          allowDiscards = true;
-        };
+        # "root" = {
+        #   device = "/dev/disk/by-uuid/d51709e4-42a6-4ba1-bb92-cd3440d04cf7"; # UUID for /dev/nvme01np2
+        #   preLVM = true;
+        #   keyFile = "/keyfile0.bin";
+        #   allowDiscards = true;
+        # };
+        # "home" = {
+        #   device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
+        #   preLVM = true;
+        #   keyFile = "/keyfile1.bin";
+        #   allowDiscards = true;
+        # };
       };
     };
   };

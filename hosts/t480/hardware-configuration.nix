@@ -37,12 +37,12 @@
   # };
   # fileSystems."/home" = {
   #   device =
-  #     "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
+  #     "/dev/disk/by-uuid/74c721cb-aa2c-4ce9-ae3c-939f4a628bc7"; # UUID for /dev/mapper/crypted-home
   #   encrypted = {
   #     enable = true;
   #     label = "home";
-  #     # blkDev =
-  #     #   "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/nvme1n1p1
+  #     blkDev =
+  #       "/dev/disk/by-uuid/ad05f09e-c571-470e-8ea1-8a38c1bae557"; # UUID for /dev/nvme1n1p1
   #     keyFile = "/keyfile1.bin";
   #   };
   # };
