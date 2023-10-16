@@ -32,17 +32,17 @@
       };
       luks.devices = {
         "root" = {
-          device = "/dev/nvme0n1p2"; # UUID for /dev/nvme01np2
+          device = "/dev/nvme0n1"; # UUID for /dev/nvme01np2
           preLVM = true;
           keyFile = "/keyfile0.bin";
           allowDiscards = true;
         };
-        # "home" = {
-        #   device = "/dev/nvme1n1p1"; # UUID for /dev/mapper/crypted-home
-        #   preLVM = true;
-        #   keyFile = "/keyfile1.bin";
-        #   allowDiscards = true;
-        # };
+        "home" = {
+          device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
+          preLVM = true;
+          keyFile = "/keyfile1.bin";
+          allowDiscards = true;
+        };
       };
     };
   };
