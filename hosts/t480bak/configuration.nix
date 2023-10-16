@@ -8,12 +8,13 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  # Bootloader.
+
   boot = {
     loader = {
       systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 8;
+      efi.canTouchEfiVariables = true;
+      supportsInitrdSecrets = true;
     };
     # kernelParams = [
     #   "i915.modeset=1"
@@ -24,14 +25,35 @@
     #   "i915.enable_dc=2"
     # ];
     # luks
-    initrd.luks.devices = {
-      crypt = {
-        device = "/dev/nvme1n1p2";
-        preLVM = true;
+    initrd = {
+      enable = true;
+      #   secrets = {
+      #     # Create /mnt/etc/secrets/initrd directory and copy keys to it
+      #     "keyfile0.bin" = "/etc/secrets/initrd/keyfile0.bin";
+      #     "keyfile1.bin" = "/etc/secrets/initrd/keyfile1.bin";
+      #   };
+      luks.forceLuksSupportInInitrd = true;
+      luks.devices = {
+        # root = {
+        #   device = "/dev/nvme0n1p2"; # UUID for /dev/nvme01np2
+        #   preLVM = true;
+        #   # keyFile = "/keyfile0.bin";
+        #   keyFileTimeout = 5;
+        #
+        # };
+        root = {
+          device = "/dev/nvme1n1p2";
+          preLVM = true;
+        };
+        # "home" = {
+        #   device = "/dev/nvme1n1"; # UUID for /dev/mapper/crypted-home
+        #   preLVM = true;
+        #   keyFile = "/keyfile1.bin";
+        #   allowDiscards = true;
+        # };
       };
     };
   };
-
   services = {
     # udev.extraRules = ''
     #   # Gamecube Controller Adapter
@@ -44,11 +66,11 @@
     tlp = {
       enable = true;
       settings = {
-        # PCIE_ASPM_ON_BAT = "powersupersave";
-        # CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        # CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        # CPU_MAX_PERF_ON_AC = "100";
-        # CPU_MAX_PERF_ON_BAT = "30";
+        PCIE_ASPM_ON_BAT = "powersupersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_MAX_PERF_ON_AC = "100";
+        CPU_MAX_PERF_ON_BAT = "80";
         STOP_CHARGE_THRESH_BAT1 = "95";
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
