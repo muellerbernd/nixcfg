@@ -175,6 +175,11 @@
     };
   };
 
+  # ignore laptop lid
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+  services.logind.lidSwitchDocked = "ignore";
+  services.logind.lidSwitch = "ignore";
+
   # Nix settings, auto cleanup and enable flakes
   nix = {
     package = pkgs.nixFlakes;

@@ -9,7 +9,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "intel_pstate=disable" ];
   boot.initrd.availableKernelModules =
-    [ "ehci_pci" "thinkpad_acpi" "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "thinkpad_acpi" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
   boot.extraModulePackages = [ ];
@@ -31,7 +31,7 @@
     fsType = "vfat";
   };
 
-  # swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   powerManagement = {
     enable = true;
