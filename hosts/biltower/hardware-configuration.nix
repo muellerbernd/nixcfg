@@ -6,8 +6,22 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    # USB
+    "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
+  ];
   boot.initrd.kernelModules =
     [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.kernelModules = [ "kvm-amd" ];
