@@ -233,7 +233,7 @@
     nixpkgs-lint
     nixpkgs-fmt
     nixfmt
-    nix-serve
+    # nix-serve
     # nix-serve-ng
   ];
 
