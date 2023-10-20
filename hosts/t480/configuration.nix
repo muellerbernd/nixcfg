@@ -79,6 +79,12 @@
       };
     };
   };
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 100;
+  };
 }
 
 # vim: set ts=2 sw=2:
