@@ -197,16 +197,16 @@
       keep-derivations = true
       builders-use-substitutes = true
     '';
-    sshServe = {
-      enable = true;
-      protocol = "ssh-ng";
-      write = "true";
-      keys = [
-        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCr7tntTSMnedzhPA9ScXtX5JtRlsqQEqZisSXV/gs9Z7eDOrFiLZFVCZ7M+z9U4TvXCkEw1r06ruLcYHim5wSSLhW7tHpFm7fs1CA9gbftbUkKHx8Po+f6tA9J+f60gQHJeG2KPaYzjeBMIc4e+4E4jj0d+zzGUrKTcNu6fMZUT+dA1TR4+sCH5eTi476avLdbAcgYUWnuUJCXixFjjhdalIClcZGFnNFXz3CZfnPiE5tBitAMZJjc4Nkz14PyTQvDH7OSkqQvlBZ8L56SvZSX9ZxEbClgeVUEVI63QYIVjEgeOB4xFr0dpIlPlwAhaBsakr7hmvHpllvMgerUC61Et6T3PWmNO+uAyv0UBcWQG1lMXLlfnN4NfYMoun69kmM/t0KkhT6w2sHjBpuzaoz/0YZSniTOv/Ov5igK/OOwAcshXV0n9Tf31oPqe1UaI6CtyT1qrWgnvxTkTRlxT80g+Ky99BCCCE5BKvFrlq3UziMrRo3NNJ3q/diBhwcvDbc= bernd@t480i7"
-
-        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/XkOH/IXFjWKWj3RUXP44MHH9P551VeA37MXhl/FeTcitQEomTQzOld6sMzbfca0I0IID25HsXEVEwohp6cHB1sU/YecTu70Ya29r1uqnCmZsnipiNYIAvf8B7GYZZrsWMRn582Cj0vL0zWr5x4SaTydPEifurzUM8DUQLMuN3i1o8yBaUCnqQbjyTec07EpRl15qysWLRW/fg4+fw+V4u91E8X+fUCH63H4pAGRKuXybMlA9q5IDuvTAdlcXi3CiTVp7WKWo0rwkTgzNvvLG7gSyoZu0VCoXW0yTaGjCPg7k7vUsSpUutiIKo8TG1rtEOBS/efzVWc0j1bbBWl2Tgu6JfjYwGfHt//URPvoy4TMJLjoxQ1t3HoiBGhVvSpDeqSD1N2WeutSmArfdlHa0D3hy5lF/uOlEaUhxxxlOOy4F6EPo25JpAiny+UxMuABiH/YmqfuGfJ+TMbZyO9N7ePJuCH/GafLxNjb64yS9ogTGipanb3lQfi+X2zp7ZUU= bernd@x240"
-      ];
-    };
+    # sshServe = {
+    #   enable = true;
+    #   protocol = "ssh-ng";
+    #   write = "true";
+    #   keys = [
+    #     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCr7tntTSMnedzhPA9ScXtX5JtRlsqQEqZisSXV/gs9Z7eDOrFiLZFVCZ7M+z9U4TvXCkEw1r06ruLcYHim5wSSLhW7tHpFm7fs1CA9gbftbUkKHx8Po+f6tA9J+f60gQHJeG2KPaYzjeBMIc4e+4E4jj0d+zzGUrKTcNu6fMZUT+dA1TR4+sCH5eTi476avLdbAcgYUWnuUJCXixFjjhdalIClcZGFnNFXz3CZfnPiE5tBitAMZJjc4Nkz14PyTQvDH7OSkqQvlBZ8L56SvZSX9ZxEbClgeVUEVI63QYIVjEgeOB4xFr0dpIlPlwAhaBsakr7hmvHpllvMgerUC61Et6T3PWmNO+uAyv0UBcWQG1lMXLlfnN4NfYMoun69kmM/t0KkhT6w2sHjBpuzaoz/0YZSniTOv/Ov5igK/OOwAcshXV0n9Tf31oPqe1UaI6CtyT1qrWgnvxTkTRlxT80g+Ky99BCCCE5BKvFrlq3UziMrRo3NNJ3q/diBhwcvDbc= bernd@t480i7"
+    #
+    #     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/XkOH/IXFjWKWj3RUXP44MHH9P551VeA37MXhl/FeTcitQEomTQzOld6sMzbfca0I0IID25HsXEVEwohp6cHB1sU/YecTu70Ya29r1uqnCmZsnipiNYIAvf8B7GYZZrsWMRn582Cj0vL0zWr5x4SaTydPEifurzUM8DUQLMuN3i1o8yBaUCnqQbjyTec07EpRl15qysWLRW/fg4+fw+V4u91E8X+fUCH63H4pAGRKuXybMlA9q5IDuvTAdlcXi3CiTVp7WKWo0rwkTgzNvvLG7gSyoZu0VCoXW0yTaGjCPg7k7vUsSpUutiIKo8TG1rtEOBS/efzVWc0j1bbBWl2Tgu6JfjYwGfHt//URPvoy4TMJLjoxQ1t3HoiBGhVvSpDeqSD1N2WeutSmArfdlHa0D3hy5lF/uOlEaUhxxxlOOy4F6EPo25JpAiny+UxMuABiH/YmqfuGfJ+TMbZyO9N7ePJuCH/GafLxNjb64yS9ogTGipanb3lQfi+X2zp7ZUU= bernd@x240"
+    #   ];
+    # };
   };
   # nix.envVars.SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
 
