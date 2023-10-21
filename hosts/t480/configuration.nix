@@ -68,14 +68,15 @@
     libinput = {
       enable = true;
       mouse = {
-        accelProfile = "flat";
-        accelSpeed = "0";
+        # accelProfile = "flat";
+        # accelSpeed = "0";
         middleEmulation = false;
       };
       touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
+        # accelProfile = "flat";
+        # accelSpeed = "0.5";
         naturalScrolling = true;
+        tapping=true;
       };
     };
   };
