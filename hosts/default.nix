@@ -68,12 +68,16 @@
   sound.enable = true;
   hardware = {
     opengl.enable = true;
-    trackpoint = {
-      enable = true;
-      sensitivity = 255;
-    };
+    # opengl.extraPackages = with pkgs; [
+    #   vulkan-loader
+    #   vulkan-validation-layers
+    #   vulkan-extension-layer
+    #   vulkan-tools
+    # ];
     pulseaudio.enable = true;
-    bluetooth.enable = true;
+    bluetooth.enable = true; # enables support for Bluetooth
+    bluetooth.powerOnBoot =
+      true; # powers up the default Bluetooth controller on boot
     keyboard.qmk.enable = true;
   };
 
@@ -176,9 +180,13 @@
   };
 
   # ignore laptop lid
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitch = "ignore";
+  services.logind.extraConfig = ''
+    HandleLidSwitch=ignore
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=ignore
+  '';
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
