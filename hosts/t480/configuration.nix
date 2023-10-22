@@ -15,14 +15,6 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 8;
     };
-    # kernelParams = [
-    #   "i915.modeset=1"
-    #   "i915.fastboot=1"
-    #   "i915.enable_guc=2"
-    #   "i915.enable_psr=1"
-    #   "i915.enable_fbc=1"
-    #   "i915.enable_dc=2"
-    # ];
     # luks
     initrd.luks.devices = {
       crypt = {
@@ -60,6 +52,19 @@
   networking.hostName = "t480"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  hardware = {
+    opengl.enable = true;
+    # opengl.extraPackages = with pkgs; [
+    #   vulkan-loader
+    #   vulkan-validation-layers
+    #   vulkan-extension-layer
+    #   vulkan-tools
+    # ];
+    trackpoint = {
+      enable = true;
+      sensitivity = 255;
+    };
+  };
   # Configure xserver
   services.xserver = {
     layout = "de";

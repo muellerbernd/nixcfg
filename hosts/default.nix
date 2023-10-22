@@ -68,16 +68,12 @@
   sound.enable = true;
   hardware = {
     opengl.enable = true;
-    opengl.extraPackages = with pkgs; [
-      vulkan-loader
-      vulkan-validation-layers
-      vulkan-extension-layer
-      vulkan-tools
-    ];
-    trackpoint = {
-      enable = true;
-      sensitivity = 255;
-    };
+    # opengl.extraPackages = with pkgs; [
+    #   vulkan-loader
+    #   vulkan-validation-layers
+    #   vulkan-extension-layer
+    #   vulkan-tools
+    # ];
     pulseaudio.enable = true;
     bluetooth.enable = true; # enables support for Bluetooth
     bluetooth.powerOnBoot =
