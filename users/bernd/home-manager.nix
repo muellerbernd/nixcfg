@@ -42,6 +42,7 @@
       # pdf
       zathura
       okular
+      pdfarranger
       # tools
       stow
       networkmanagerapplet
