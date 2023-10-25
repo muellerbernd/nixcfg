@@ -113,16 +113,16 @@
     };
   };
 
-  # nix = {
-  #   sshServe = {
-  #     protocol = "ssh-ng";
-  #     enable = true;
-  #     write = true;
-  #     keys = [
-  #       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD1kobWixjrXRDr4017qV0PxX9+29Sw94o54B+BV6gcBug6q6UnE5cVXB6Se3Yw5dBV0Cw0zGJ6IBCEp2jT4HrVzhLb5Qw59pgaXj7YFkqnRv2Srnp0QHp3GewbKveM9mTxn8NVjlE/d3jMjOlKDW32eRo1hhL3d3RWxIRYSzd9GNaU9029bPWmsUTwsGqF4qr0jASD6ktJENgLwSI+Gk8AbjZnqRNXZzIN+lfQ4Hg4GusuvtCfDAMhILNpATuWoTo7P2K+8TBRQ4uJ+vzjsXWw+zf7BvQSrpv6r54Zku5YZMqnsdXNdpsDfhWoABXKiiHBXd10stFBqhh24PlUpEq+kOe8DeC5o/xRK5xMnGj59ciEQip7Se/Lcfa+nj1zbXImaSn9Xp9jt8RnlovIve6ExRmc1LzPo248mEANzyWkesGW7dMuYZkCAVep/JZuc33TBd27dd6kkQq73EDRC6TSccpsaIinU+zTyF/0Itz2LllC9tNeqo+d1GnK4Sf85xk= bernd@home-t480"
-  #     ];
-  #   };
-  # };
+  nix = {
+    sshServe = {
+      protocol = "ssh-ng";
+      enable = true;
+      write = true;
+      keys = [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD1kobWixjrXRDr4017qV0PxX9+29Sw94o54B+BV6gcBug6q6UnE5cVXB6Se3Yw5dBV0Cw0zGJ6IBCEp2jT4HrVzhLb5Qw59pgaXj7YFkqnRv2Srnp0QHp3GewbKveM9mTxn8NVjlE/d3jMjOlKDW32eRo1hhL3d3RWxIRYSzd9GNaU9029bPWmsUTwsGqF4qr0jASD6ktJENgLwSI+Gk8AbjZnqRNXZzIN+lfQ4Hg4GusuvtCfDAMhILNpATuWoTo7P2K+8TBRQ4uJ+vzjsXWw+zf7BvQSrpv6r54Zku5YZMqnsdXNdpsDfhWoABXKiiHBXd10stFBqhh24PlUpEq+kOe8DeC5o/xRK5xMnGj59ciEQip7Se/Lcfa+nj1zbXImaSn9Xp9jt8RnlovIve6ExRmc1LzPo248mEANzyWkesGW7dMuYZkCAVep/JZuc33TBd27dd6kkQq73EDRC6TSccpsaIinU+zTyF/0Itz2LllC9tNeqo+d1GnK4Sf85xk= bernd@home-t480"
+      ];
+    };
+  };
 }
 
 # vim: set ts=2 sw=2:
