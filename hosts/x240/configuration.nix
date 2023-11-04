@@ -76,6 +76,7 @@
         accelProfile = "flat";
         accelSpeed = "0.5";
         naturalScrolling = true;
+        tapping = true;
       };
     };
   };

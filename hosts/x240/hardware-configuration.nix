@@ -7,9 +7,33 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "intel_pstate=disable" ];
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "thinkpad_acpi" ];
+  boot.kernelParams = [
+    "intel_pstate=disable"
+    "psmouse.synaptics_intertouch=0"
+    "i915.modeset=1"
+    "i915.fastboot=1"
+    "i915.enable_guc=2"
+    "i915.enable_psr=1"
+    "i915.enable_fbc=1"
+    "i915.enable_dc=2"
+  ];
+  boot.initrd.availableKernelModules = [
+    "thinkpad_acpi"
+    # USB
+    "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
   boot.extraModulePackages = [ ];
@@ -52,4 +76,6 @@
   # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # New ThinkPads have a different TrackPoint manufacturer/name.
+  hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
 }
