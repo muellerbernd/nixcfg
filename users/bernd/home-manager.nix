@@ -73,6 +73,7 @@
       blender
       prusa-slicer
       # cli helpers
+      usbutils
       man
       tealdeer
       # cli
@@ -117,6 +118,7 @@
       black
       clang-tools
       nodePackages.prettier
+      beautysh
       # lsp
       ccls
       python311Packages.python-lsp-server
@@ -130,6 +132,12 @@
       marksman
       cmake-language-server
       texlab
+      # nodePackages.vscode-langservers-extracted
+      # nodePackages.bash-language-server
+      gopls
+      # rust-analyzer
+      # haskell
+      haskellPackages.haskell-language-server
       # python packages
       pkgs.python311Packages.flask
       pkgs.python311Packages.requests
