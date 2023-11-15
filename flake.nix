@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
@@ -40,7 +41,7 @@
           neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
           teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
-          # openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
+          openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
           dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
           prusa-slicer = inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
