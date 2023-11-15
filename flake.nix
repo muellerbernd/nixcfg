@@ -16,6 +16,8 @@
     # nur.url = "github:nix-community/NUR";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    openconnect-sso.url = "github:vlaci/openconnect-sso";
   };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
@@ -25,7 +27,8 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
-        # inputs.neovim-nightly-overlay.overlay
+        inputs.neovim-nightly.overlay
+        inputs.openconnect-sso.overlay
         # inputs.zig.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
@@ -33,10 +36,11 @@
         })
         (final: prev: {
           joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
-          neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
+          # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
+          neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
           teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
-          openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
+          # openconnect_ssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_ssl;
           dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
           prusa-slicer = inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })

@@ -323,6 +323,7 @@
     memoryPercent = 90;
   };
 
+  # nixpkgs.config.permittedInsecurePackages = [ "python3.10-requests-2.28.2" "python3.10-cryptography-40.0.1" ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

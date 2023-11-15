@@ -159,6 +159,7 @@
       # vpn
       openconnect_openssl
       networkmanager-openconnect
+      # openconnect-sso
       # keyboard stuff
       qmk
       qmk_hid
