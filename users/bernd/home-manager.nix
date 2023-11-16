@@ -157,7 +157,7 @@
       # matrix client
       element-desktop
       # vpn
-      openconnect_openssl
+      # openconnect
       networkmanager-openconnect
       # openconnect-sso
       # keyboard stuff

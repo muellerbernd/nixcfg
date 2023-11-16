@@ -35,16 +35,21 @@
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
+          networkmanager-openconnect =
+            super.callPackage ./pkgs/networkmanager-openconnect
+            { }; # path containing default.nix
         })
         (final: prev: {
           joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
-          teams-for-linux = inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
-          networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
-          openconnect_openssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_openssl;
+          teams-for-linux =
+            inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
+          # networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
+          # openconnect_openssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_openssl;
           dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
-          prusa-slicer = inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
+          prusa-slicer =
+            inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
       ];
       # nixpkgs.config = {
