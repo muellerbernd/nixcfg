@@ -17,7 +17,6 @@
       lazygit
       vcstool
       # terminal
-      coreutils
       alacritty
       antigen
       starship
