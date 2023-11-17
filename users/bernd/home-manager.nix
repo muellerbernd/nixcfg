@@ -119,6 +119,7 @@
       clang-tools
       nodePackages.prettier
       beautysh
+      libxml2 # for xmllint
       # lsp
       ccls
       python311Packages.python-lsp-server
