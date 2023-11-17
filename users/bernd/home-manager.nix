@@ -17,6 +17,7 @@
       lazygit
       vcstool
       # terminal
+      coreutils
       alacritty
       antigen
       starship
@@ -34,6 +35,7 @@
       fd
       ripgrep
       chafa
+      file
       ripgrep-all
       # notifications
       dunst
