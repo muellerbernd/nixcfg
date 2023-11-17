@@ -27,6 +27,8 @@
       atuin
       ranger
       ueberzugpp
+      mupdf
+      poppler_utils
       exiftool
       bat
       joshuto
