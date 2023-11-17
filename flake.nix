@@ -2,14 +2,14 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
-      # url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
 
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +20,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     openconnect-sso.url = "github:vlaci/openconnect-sso";
+    joshuto.url = "github:kamiyaa/joshuto";
   };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
@@ -30,6 +31,7 @@
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
         inputs.neovim-nightly.overlay
+        inputs.joshuto.overlays.default
         inputs.openconnect-sso.overlay
         # inputs.zig.overlays.default
         (self: super: {
@@ -40,16 +42,16 @@
             # { }; # path containing default.nix
         })
         (final: prev: {
-          joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
+          # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
-          teams-for-linux =
-            inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
-          networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
-          openconnect_openssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_openssl;
-          dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
-          prusa-slicer =
-            inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
+          # teams-for-linux =
+          #   inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
+          # networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
+          # openconnect_openssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_openssl;
+          # dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
+          # prusa-slicer =
+          #   inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
       ];
       # nixpkgs.config = {

@@ -25,11 +25,15 @@
       # better shell history
       atuin
       ranger
+      ueberzugpp
+      exiftool
+      bat
       joshuto
       neofetch
       fzf
       fd
       ripgrep
+      chafa
       ripgrep-all
       # notifications
       dunst

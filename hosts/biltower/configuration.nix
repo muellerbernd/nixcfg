@@ -19,13 +19,13 @@
     };
   };
 
-  systemd = {
-    services.nvidia-control-devices = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig.ExecStart =
-        "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
-    };
-  };
+  # systemd = {
+  #   services.nvidia-control-devices = {
+  #     wantedBy = [ "multi-user.target" ];
+  #     serviceConfig.ExecStart =
+  #       "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
+  #   };
+  # };
 
   networking.hostName = "biltower"; # Define your hostname.
 
@@ -66,7 +66,7 @@
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      # package = config.boot.kernelPackages.nvidiaPackages.beta;
       # tearing
       forceFullCompositionPipeline = true;
     };
