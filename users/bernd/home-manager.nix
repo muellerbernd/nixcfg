@@ -30,6 +30,7 @@
       poppler_utils
       exiftool
       bat
+      trash-cli
       joshuto
       neofetch
       fzf
