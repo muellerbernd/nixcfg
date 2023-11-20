@@ -39,7 +39,7 @@
             { }; # path containing default.nix
           # networkmanager-openconnect =
           #   super.callPackage ./pkgs/networkmanager-openconnect
-            # { }; # path containing default.nix
+          # { }; # path containing default.nix
         })
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
@@ -75,11 +75,6 @@
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         user = "bernd";
-      };
-      nixosConfigurations.eis_station = mkDefault "eis_station" rec {
-        inherit nixpkgs home-manager overlays;
-        system = "x86_64-linux";
-        user = "ros";
       };
     };
 }
