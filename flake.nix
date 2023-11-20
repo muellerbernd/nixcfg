@@ -79,7 +79,7 @@
       nixosConfigurations.eis_station = mkDefault "eis_station" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        user = "bernd";
+        user = "ros";
       };
     };
 }
