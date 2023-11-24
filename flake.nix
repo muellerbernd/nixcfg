@@ -41,6 +41,8 @@
             { }; # path containing default.nix
           lycheeslicer = super.callPackage ./pkgs/lycheeslicer
             { }; # path containing default.nix
+          uvtools = super.callPackage ./pkgs/uvtools
+            { }; # path containing default.nix
           # networkmanager-openconnect =
           #   super.callPackage ./pkgs/networkmanager-openconnect
           # { }; # path containing default.nix

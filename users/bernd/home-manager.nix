@@ -180,6 +180,7 @@
       # custom packages
       annotator
       lycheeslicer
+      uvtools
     ];
   };
 
