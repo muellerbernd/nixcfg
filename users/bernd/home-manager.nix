@@ -179,6 +179,7 @@
       picom
       # custom packages
       annotator
+      lycheeslicer
     ];
   };
 
