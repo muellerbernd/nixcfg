@@ -1,41 +1,66 @@
-{ pkgs, lib, stdenv, fetchurl, dpkg, wrapGAppsHook, makeWrapper }:
+{ pkgs, lib, stdenv, fetchurl, dpkg, wrapGAppsHook, makeWrapper, gtk3, libsecret
+, libnotify, nss, xdg-utils, at-spi2-atk, at-spi2-core, xorg, autoPatchelfHook
+, libsForQt5, alsa-lib, mesa, icu, icu58 }:
 
 stdenv.mkDerivation rec {
   pname = "lycheeslicer";
-  version = "git";
+  version = "5.4.0";
 
-  # src = builtins.fetchTarball {
-  #   url = "https://github.com/ifm/ifm3d/archive/refs/tags/${version}.tar.gz";
-  #   sha256 = "sha256:0r5c6qy8sxk6jk31cc0s1cidzyqnqxfhby5sjlm02in8ydlrjk4w";
-  # };
   src = fetchurl {
-    url = "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.deb";
-    sha256 = "88888";
+    url =
+      "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.deb";
+    sha256 = "sha256-Qvc05LEoRrh/hkQMfrdq8Tk56AVDazEoIoGEE2YJuTs=";
   };
 
-  nativeBuildInputs = [ dpkg makeWrapper wrapGAppsHook ];
-
-  buildInputs = [  ];
+  # dontBuild = true;
+  # dontWrapGApps = true; # we only want $gappsWrapperArgs here
 
   unpackPhase = ''
-    dpkg-deb -R $src .
+    dpkg-deb -x $src .
   '';
 
   installPhase = ''
     runHook preInstall
-    mkdir -p "$out"
-    ls
+    mkdir -p $out/bin
 
-    cp -dr --no-preserve='ownership' usr/ $out/usr
-    cp -dr --no-preserve='ownership' opt/ $out/opt
-
+    cp -R usr/share opt $out/
+    cp opt/LycheeSlicer/lycheeslicer $out/bin/lycheeslicer
+    substituteInPlace \
+      $out/share/applications/lycheeslicer.desktop \
+      --replace /opt/ $out/opt/
+    wrapProgram $out/bin/lycheeslicer
     runHook postInstall
   '';
+
+  nativeBuildInputs = [
+    dpkg
+    makeWrapper
+    wrapGAppsHook
+  ];
+
+  buildInputs = [
+    gtk3
+    libsecret
+    libnotify
+    nss
+    xdg-utils
+    at-spi2-atk
+    at-spi2-core
+    xorg.libXtst
+    autoPatchelfHook
+    libsForQt5.wrapQtAppsHook
+    xorg.libxshmfence
+    libsForQt5.qt5.qtbase
+    alsa-lib
+    mesa
+    icu
+    icu58
+  ];
 
   meta = with lib; {
     description = "";
     homepage = "";
-    license = with licenses; [ gpl3 ];
+    license = with licenses; [ unfree ];
     maintainers = with maintainers; [ muellerbernd ];
     platforms = platforms.linux;
   };
