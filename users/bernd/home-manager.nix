@@ -75,6 +75,8 @@
       pavucontrol
       xfce.thunar
       xfce.thunar-volman
+      gnome.file-roller
+      archiver
       xfce.xfce4-screenshooter
       ntfs3g
       gvfs
