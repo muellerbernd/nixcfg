@@ -1,61 +1,28 @@
-{ pkgs, lib, stdenv, fetchurl, dpkg, wrapGAppsHook, makeWrapper, gtk3, libsecret
-, libnotify, nss, xdg-utils, at-spi2-atk, at-spi2-core, xorg, autoPatchelfHook
-, libsForQt5, alsa-lib, mesa, icu, icu58 }:
+{ appimageTools, fetchurl, lib, makeWrapper, stdenv }:
+let
 
-stdenv.mkDerivation rec {
   pname = "lycheeslicer";
   version = "5.4.0";
 
   src = fetchurl {
     url =
-      "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.deb";
-    sha256 = "sha256-Qvc05LEoRrh/hkQMfrdq8Tk56AVDazEoIoGEE2YJuTs=";
+      "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-${version}.AppImage";
+    sha256 = "sha256-IsfYPeW77ks2pObAQQKpUVFtgCXZiIZ5GMwNOpiwCIs=";
   };
+  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+in appimageTools.wrapType2 {
+  inherit pname version src;
 
-  # dontBuild = true;
-  # dontWrapGApps = true; # we only want $gappsWrapperArgs here
-
-  unpackPhase = ''
-    dpkg-deb -x $src .
+  extraInstallCommands = ''
+    mv $out/bin/{${pname}-${version},${pname}}
+    source "${makeWrapper}/nix-support/setup-hook"
+    wrapProgram $out/bin/${pname} \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+    install -Dm444 ${appimageContents}/${pname}.desktop -t $out/share/applications/
+    install -Dm444 ${appimageContents}/${pname}.png -t $out/share/pixmaps/
+    substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Exec=AppRun --no-sandbox' 'Exec=${pname}'
   '';
-
-  installPhase = ''
-    runHook preInstall
-    mkdir -p $out/bin
-
-    cp -R usr/share opt $out/
-    cp opt/LycheeSlicer/lycheeslicer $out/bin/lycheeslicer
-    substituteInPlace \
-      $out/share/applications/lycheeslicer.desktop \
-      --replace /opt/ $out/opt/
-    wrapProgram $out/bin/lycheeslicer
-    runHook postInstall
-  '';
-
-  nativeBuildInputs = [
-    dpkg
-    makeWrapper
-    wrapGAppsHook
-  ];
-
-  buildInputs = [
-    gtk3
-    libsecret
-    libnotify
-    nss
-    xdg-utils
-    at-spi2-atk
-    at-spi2-core
-    xorg.libXtst
-    autoPatchelfHook
-    libsForQt5.wrapQtAppsHook
-    xorg.libxshmfence
-    libsForQt5.qt5.qtbase
-    alsa-lib
-    mesa
-    icu
-    icu58
-  ];
 
   meta = with lib; {
     description = "";
