@@ -4,6 +4,7 @@
     isNormalUser = true;
     description = "Bernd Müller";
     extraGroups = [
+      "adbusers"
       "wheel"
       "disk"
       "libvirtd"
