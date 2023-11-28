@@ -161,6 +161,7 @@
       firefox
       # media
       spotify
+      monophony
       # messenger
       gajim
       teams-for-linux
