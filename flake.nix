@@ -23,6 +23,7 @@
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     openconnect-sso.url = "github:vlaci/openconnect-sso";
     joshuto.url = "github:kamiyaa/joshuto";
+    rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
   };
 
   outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
@@ -34,8 +35,6 @@
       overlays = [
         inputs.neovim-nightly.overlay
         inputs.joshuto.overlays.default
-        inputs.openconnect-sso.overlay
-        # inputs.zig.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
@@ -43,14 +42,12 @@
             { }; # path containing default.nix
           uvtools = super.callPackage ./pkgs/uvtools
             { }; # path containing default.nix
-          # networkmanager-openconnect =
-          #   super.callPackage ./pkgs/networkmanager-openconnect
-          # { }; # path containing default.nix
         })
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
+          rofi-music-rs = inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
           # teams-for-linux =
           #   inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           # networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;

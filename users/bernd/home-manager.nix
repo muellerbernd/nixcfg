@@ -184,6 +184,7 @@
       annotator
       lycheeslicer
       uvtools
+      rofi-music-rs
     ];
   };
 
