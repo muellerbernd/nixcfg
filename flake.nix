@@ -42,6 +42,8 @@
             { }; # path containing default.nix
           uvtools = super.callPackage ./pkgs/uvtools
             { }; # path containing default.nix
+          chituboxslicer = super.callPackage ./pkgs/chitubox
+            { }; # path containing default.nix
         })
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
