@@ -1,5 +1,7 @@
-{ pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm, zlib, glib
-, fontconfig, freetype }:
+{ pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm, zlib
+, glib, fontconfig, freetype, xorg, libxkbcommon, libpulseaudio, libsForQt5
+, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, libGL
+}:
 
 stdenv.mkDerivation rec {
   pname = "chitubox";
@@ -16,7 +18,19 @@ stdenv.mkDerivation rec {
       "https://sac.chitubox.com/software/download.do?softwareId=17839&softwareVersionId=v${version}&fileName=CHITUBOX_V${version}.tar.gz";
     hash = "sha256-mNEMfuzRSKBo5tGITWrwg68caLx8Zjz+CaSnbt35Nis=";
   };
-  nativeBuildInputs = [ autoPatchelfHook ];
+
+  unpackPhase =
+    # bash
+    ''
+      mkdir chitubox
+      cd chitubox
+      tar xfvz ${src}
+    '';
+
+  # QT_QPA_PLATFORM_PLUGIN_PATH =
+  #   "${qt6.qtbase.bin}/lib/qt-${qt6.qtbase.version}/plugins/platforms";
+  nativeBuildInputs =
+    [ autoPatchelfHook libsForQt5.wrapQtAppsHook pkg-config wrapGAppsHook ];
 
   buildInputs = [
     stdenv.cc.cc.lib
@@ -27,6 +41,20 @@ stdenv.mkDerivation rec {
     fontconfig
     freetype
     libdrm
+    xorg.libxcb
+    xorg.xcbutil
+    xorg.xcbutilimage
+    xorg.xcbutilrenderutil
+    xorg.xcbutilkeysyms
+    libpulseaudio
+    xorg.libX11
+    libsForQt5.qt5.qtbase
+    libxkbcommon
+    alsa-lib
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    libGL
+    libsForQt5.qt5.qttools
   ];
 
   buildPhase = ''
@@ -37,8 +65,8 @@ stdenv.mkDerivation rec {
     rm AppRun
 
     # Place resources where ChiTuBox can expect to find them
-    mkdir ChiTuBox
-    mv resource ChiTuBox/
+    # mkdir ChiTuBox
+    mv resource bin/
 
     # Configure Qt paths
     cat << EOF > bin/qt.conf
