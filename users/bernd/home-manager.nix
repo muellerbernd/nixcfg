@@ -183,7 +183,7 @@
       # custom packages
       annotator
       lycheeslicer
-      chituboxslicer
+      # chituboxslicer
       uvtools
       rofi-music-rs
     ];

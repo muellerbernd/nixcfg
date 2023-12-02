@@ -1,6 +1,6 @@
-{ pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm, zlib
-, glib, fontconfig, freetype, xorg, libxkbcommon, libpulseaudio, libsForQt5
-, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, libGL, qt6 }:
+{ lib, pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm
+, zlib, glib, fontconfig, freetype, xorg, libxkbcommon, libpulseaudio
+, libsForQt5, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, qt6 }:
 
 stdenv.mkDerivation rec {
   pname = "chitubox";
@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   # QT_QPA_PLATFORM_PLUGIN_PATH =
   #   "${qt6.qtbase.bin}/lib/qt-${qt6.qtbase.version}/plugins/platforms";
   nativeBuildInputs =
-    [ autoPatchelfHook qt6.wrapQtAppsHook pkg-config wrapGAppsHook ];
+    [ autoPatchelfHook libsForQt5.qt5.wrapQtAppsHook pkg-config wrapGAppsHook ];
 
   buildInputs = [
     stdenv.cc.cc.lib
@@ -51,44 +51,63 @@ stdenv.mkDerivation rec {
     alsa-lib
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
-    libGL
-    qt6.qtbase
-    qt6.qttools
+    libsForQt5.qt5.qtbase
+    libsForQt5.qt5.qttools
+    libsForQt5.qt5.qtdeclarative
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtquickcontrols
+    libsForQt5.qt5.qtmultimedia
+    libsForQt5.qt5.qtremoteobjects
+    libsForQt5.qt5.qtx11extras
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
-  propagatedBuildInputs = [ xorg.libxcb ];
-  buildPhase = ''
-    mkdir -p bin
-    mv CHITUBOX bin/chitubox
+  libraries = lib.makeLibraryPath [
+    libsForQt5.qt5.qtbase
+    libsForQt5.qt5.qttools
+    libsForQt5.qt5.qtdeclarative
+    libsForQt5.qt5.qtquickcontrols2
+    libsForQt5.qt5.qtquickcontrols
+    libsForQt5.qt5.qtmultimedia
+    libsForQt5.qt5.qtremoteobjects
+    libsForQt5.qt5.qtx11extras
+    libsForQt5.qt5.qtgraphicaleffects
+  ];
 
-    # Remove unused stuff
-    rm AppRun
+  installPhase =
+    # bash
+    ''
+      mkdir -p $out/bin
+      mv CHITUBOX $out/bin/chitubox
 
-    # Place resources where ChiTuBox can expect to find them
-    # mkdir ChiTuBox
-    mv resource bin/
+      # Remove unused stuff
+      # rm AppRun
 
-    # Configure Qt paths
-    cat << EOF > bin/qt.conf
-      [Paths]
-      Prefix = $out
-      Plugins = plugins
-      Imports = qml
-      Qml2Imports = qml
-    EOF
-  '';
+      # Place resources where ChiTuBox can expect to find them
+      mv resource $out/bin/
+      # mv qml $out/
+      mv translations $out/
+      # mv lib $out/
+      mv plugins $out
 
-  # dontWrapQtApps = true;
-  # QT_XCB_GL_INTEGRATION="none";
+      # Configure Qt paths
+      # cat << EOF > bin/qt.conf
+      #   [Paths]
+      #   Prefix = $out
+      #   Plugins = plugins
+      #   Imports = qml
+      #   Qml2Imports = qml
+      # EOF
 
-  postFixup = ''
-    wrapQtApp $out/bin/chitubox
-  '';
-
-  installPhase = ''
-    mkdir -p $out
-    mv * $out/
-  '';
+      # qt.conf is not working, so override everything using environment variables
+      wrapProgram $out/bin/chitubox \
+        --set QT_QPA_PLATFORM "xcb" \
+        --set QT_PLUGIN_PATH $out/plugins \
+        --set QT_XKB_CONFIG_ROOT ${xorg.xkeyboardconfig}/share/X11/xkb \
+        --set QTCOMPOSE ${xorg.libX11.out}/share/X11/locale \
+        --set LD_LIBRARY_PATH $libraries \
+        --set QML2_IMPORT_PATH ${libsForQt5.qt5.qtdeclarative}/lib \
+    '';
 
   meta = {
     description =
