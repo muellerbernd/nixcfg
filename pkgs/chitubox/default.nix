@@ -1,7 +1,6 @@
 { pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm, zlib
 , glib, fontconfig, freetype, xorg, libxkbcommon, libpulseaudio, libsForQt5
-, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, libGL
-}:
+, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, libGL, qt6 }:
 
 stdenv.mkDerivation rec {
   pname = "chitubox";
@@ -30,7 +29,7 @@ stdenv.mkDerivation rec {
   # QT_QPA_PLATFORM_PLUGIN_PATH =
   #   "${qt6.qtbase.bin}/lib/qt-${qt6.qtbase.version}/plugins/platforms";
   nativeBuildInputs =
-    [ autoPatchelfHook libsForQt5.wrapQtAppsHook pkg-config wrapGAppsHook ];
+    [ autoPatchelfHook qt6.wrapQtAppsHook pkg-config wrapGAppsHook ];
 
   buildInputs = [
     stdenv.cc.cc.lib
@@ -41,22 +40,23 @@ stdenv.mkDerivation rec {
     fontconfig
     freetype
     libdrm
-    xorg.libxcb
+    xorg.libxcb.dev
     xorg.xcbutil
     xorg.xcbutilimage
     xorg.xcbutilrenderutil
     xorg.xcbutilkeysyms
     libpulseaudio
     xorg.libX11
-    libsForQt5.qt5.qtbase
     libxkbcommon
     alsa-lib
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     libGL
-    libsForQt5.qt5.qttools
+    qt6.qtbase
+    qt6.qttools
   ];
 
+  propagatedBuildInputs = [ xorg.libxcb ];
   buildPhase = ''
     mkdir -p bin
     mv CHITUBOX bin/chitubox
@@ -76,6 +76,13 @@ stdenv.mkDerivation rec {
       Imports = qml
       Qml2Imports = qml
     EOF
+  '';
+
+  # dontWrapQtApps = true;
+  # QT_XCB_GL_INTEGRATION="none";
+
+  postFixup = ''
+    wrapQtApp $out/bin/chitubox
   '';
 
   installPhase = ''
