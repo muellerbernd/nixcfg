@@ -76,6 +76,11 @@
         system = "x86_64-linux";
         user = "bernd";
       };
+      nixosConfigurations.p14s = mkDefault "p14s" rec {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+        user = "bernd";
+      };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
