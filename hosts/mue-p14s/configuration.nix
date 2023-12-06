@@ -53,29 +53,36 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {
-    opengl.enable = true;
-    # opengl.extraPackages = with pkgs; [
-    #   vulkan-loader
-    #   vulkan-validation-layers
-    #   vulkan-extension-layer
-    #   vulkan-tools
-    # ];
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
     trackpoint = {
       enable = true;
       sensitivity = 255;
     };
-  };
-
-  hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    nvidia = {
+      # fix screen tearing in sync mode
+      modesetting.enable = true;
+      # fix suspend/resume screen corruption in sync mode
+      powerManagement.enable = true;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        # Make sure to use the correct Bus ID values for your system!
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:3:0:0";
+      };
     };
-    # Make sure to use the correct Bus ID values for your system!
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:3:0:0";
   };
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = [ "nvidia" ];
 
+  environment.systemPackages = with pkgs; [ glxinfo ];
   # specialisation = {
   #   on-the-go.configuration = {
   #     system.nixos.tags = [ "on-the-go" ];
