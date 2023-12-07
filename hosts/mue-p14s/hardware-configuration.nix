@@ -10,12 +10,12 @@
   boot.kernelParams = [
     "intel_pstate=disable"
     "psmouse.synaptics_intertouch=0"
-    "i915.modeset=1"
-    "i915.fastboot=1"
-    "i915.enable_guc=2"
-    "i915.enable_psr=1"
-    "i915.enable_fbc=1"
-    "i915.enable_dc=2"
+    # "i915.modeset=1"
+    # "i915.fastboot=1"
+    # "i915.enable_guc=2"
+    # "i915.enable_psr=1"
+    # "i915.enable_fbc=1"
+    # "i915.enable_dc=2"
   ];
   boot.initrd.availableKernelModules = [
     "thinkpad_acpi"
@@ -68,9 +68,6 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s25.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wwp0s20u4.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode =

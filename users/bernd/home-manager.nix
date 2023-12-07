@@ -63,6 +63,7 @@
       gnupg
       # bluetooth
       blueman
+      bluetuith
       # apps
       gnome.simple-scan
       xclip
