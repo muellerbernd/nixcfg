@@ -75,9 +75,11 @@
     #   vulkan-tools
     # ];
     pulseaudio.enable = true;
-    bluetooth.enable = true; # enables support for Bluetooth
-    bluetooth.powerOnBoot =
-      true; # powers up the default Bluetooth controller on boot
+    bluetooth = {
+      enable = true; # enables support for Bluetooth
+      powerOnBoot = true; # powers up the default Bluetooth controller on boot
+      extraConfig = "ControllerMode = bredr";
+    };
     keyboard.qmk.enable = true;
   };
 

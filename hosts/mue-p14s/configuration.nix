@@ -36,18 +36,13 @@
     tlp = {
       enable = true;
       settings = {
-        # PCIE_ASPM_ON_BAT = "powersupersave";
-        # CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        # CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        # CPU_MAX_PERF_ON_AC = "100";
-        # CPU_MAX_PERF_ON_BAT = "30";
         CPU_BOOST_ON_AC = 1;
         CPU_BOOST_ON_BAT = 0;
-        CPU_SCALING_GOVERNOR_ON_AC = "ondemand";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "ondemand";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
         CPU_MIN_PERF_ON_AC = 0;
         CPU_MAX_PERF_ON_AC = 100;
@@ -77,7 +72,6 @@
   services.upower.enable = true;
 
   networking.hostName = "mue-p14s"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {
     opengl = {
