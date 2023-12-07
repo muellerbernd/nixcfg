@@ -8,35 +8,36 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
-    "intel_pstate=disable"
-    "psmouse.synaptics_intertouch=0"
-    "i915.modeset=1"
-    "i915.fastboot=1"
-    "i915.enable_guc=2"
-    "i915.enable_psr=1"
-    "i915.enable_fbc=1"
-    "i915.enable_dc=2"
+    # "intel_pstate=disable"
+    # "psmouse.synaptics_intertouch=0"
+    # "i915.modeset=1"
+    # "i915.fastboot=1"
+    # "i915.enable_guc=2"
+    # "i915.enable_psr=1"
+    # "i915.enable_fbc=1"
+    # "i915.enable_dc=2"
+    "acpi_backlight=native"
   ];
   boot.initrd.availableKernelModules = [
-    "thinkpad_acpi"
-    # USB
-    "ehci_pci"
-    "xhci_pci"
-    "usb_storage"
-    "usbhid"
-    # Keyboard
-    "hid_generic"
-    # Disks
-    "nvme"
-    "ahci"
-    "sd_mod"
-    "sr_mod"
-    # SSD
-    "isci"
+    # "thinkpad_acpi"
+    # # USB
+    # "ehci_pci"
+    # "xhci_pci"
+    # "usb_storage"
+    # "usbhid"
+    # # Keyboard
+    # "hid_generic"
+    # # Disks
+    # "nvme"
+    # "ahci"
+    # "sd_mod"
+    # "sr_mod"
+    # # SSD
+    # "isci"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [ "acpi_call" ];
 
   boot.extraModprobeConfig = lib.mkMerge [
     # idle audio card after one second

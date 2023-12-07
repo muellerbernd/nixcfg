@@ -80,7 +80,10 @@
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
       settings = {
         General = {
-          ControllerMode = "bredr";
+          # Restricts all controllers to the specified transport. Default value
+          # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
+          # Possible values: "dual", "bredr", "le"
+          ControllerMode = "dual";
           Enable = "Source,Sink,Media,Socket";
         };
       };
