@@ -68,11 +68,10 @@
       };
     };
     logind.killUserProcesses = true;
+    # services.throttled.enable = true;
+    upower.enable = true;
+    fwupd.enable = true;
   };
-  # services.throttled.enable = true;
-  services.thermald.enable = true;
-  services.upower.enable = true;
-  services.fwupd.enable = true;
   # Includes the Wi-Fi and Bluetooth firmware
   hardware.enableRedistributableFirmware = true;
 
@@ -85,47 +84,23 @@
     thinkfan = {
       enable = true;
 
-      sensors = ''
-        # Entries here discovered by:
-        # find /sys/devices -type f -name "temp*_input"
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp6_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp3_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp7_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp4_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp8_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp1_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp5_input
-        /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon6/temp2_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp6_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp13_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp3_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp10_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp7_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp4_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp11_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp8_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp5_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp12_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp9_input
-        /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input
-        /sys/devices/pci0000:00/0000:00:06.0/0000:02:00.0/nvme/nvme0/hwmon0/temp3_input
-        /sys/devices/pci0000:00/0000:00:06.0/0000:02:00.0/nvme/nvme0/hwmon0/temp1_input
-        /sys/devices/pci0000:00/0000:00:06.0/0000:02:00.0/nvme/nvme0/hwmon0/temp2_input
-        /sys/devices/virtual/thermal/thermal_zone0/hwmon2/temp1_input
-        /sys/devices/virtual/thermal/thermal_zone9/hwmon7/temp1_input
-      '';
+      sensors = [{
+        type = "tpacpi";
+        query = "/proc/acpi/ibm/thermal";
+      }];
 
-      levels = ''
-        (0,     0,      42)
-        (1,     40,     47)
-        (2,     45,     52)
-        (3,     50,     57)
-        (4,     55,     62)
-        (5,     60,     77)
-        (7,     73,     93)
-        (127,   85,     32767)
-      '';
+      levels = [
+        [ 0 0 55 ]
+        [ 1 48 60 ]
+        [ 2 50 61 ]
+        [ 3 52 63 ]
+        [ 6 56 65 ]
+        [ 7 60 85 ]
+        [ "level auto" 80 32767 ]
+      ];
+
+      preStart =
+        "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
     };
   };
 
