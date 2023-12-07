@@ -12,7 +12,7 @@
     # "psmouse.synaptics_intertouch=0"
     # "i915.modeset=1"
     # "i915.fastboot=1"
-    # "i915.enable_guc=2"
+    "i915.enable_guc=2"
     # "i915.enable_psr=1"
     # "i915.enable_fbc=1"
     # "i915.enable_dc=2"
@@ -23,12 +23,12 @@
     # # USB
     # "ehci_pci"
     # "xhci_pci"
-    # "usb_storage"
+    "usb_storage"
     # "usbhid"
     # # Keyboard
     # "hid_generic"
     # # Disks
-    # "nvme"
+    "nvme"
     # "ahci"
     # "sd_mod"
     # "sr_mod"
@@ -37,7 +37,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
-  boot.extraModulePackages = [ "acpi_call" ];
+  boot.extraModulePackages = [ ];
 
   boot.extraModprobeConfig = lib.mkMerge [
     # idle audio card after one second
@@ -61,7 +61,7 @@
   powerManagement = {
     enable = true;
     # powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
+    # cpuFreqGovernor = lib.mkDefault "ondemand";
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
