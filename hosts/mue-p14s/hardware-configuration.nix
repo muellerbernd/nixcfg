@@ -6,7 +6,9 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "5.2")
+    pkgs.linuxPackages_latest;
   boot.kernelParams = [
     # "intel_pstate=disable"
     # "psmouse.synaptics_intertouch=0"
@@ -19,21 +21,21 @@
     "acpi_backlight=native"
   ];
   boot.initrd.availableKernelModules = [
-    # "thinkpad_acpi"
+    "thinkpad_acpi"
     # # USB
-    # "ehci_pci"
-    # "xhci_pci"
+    "ehci_pci"
+    "xhci_pci"
     "usb_storage"
-    # "usbhid"
-    # # Keyboard
-    # "hid_generic"
-    # # Disks
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
     "nvme"
-    # "ahci"
-    # "sd_mod"
-    # "sr_mod"
-    # # SSD
-    # "isci"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
@@ -75,4 +77,5 @@
     lib.mkDefault config.hardware.enableRedistributableFirmware;
   # New ThinkPads have a different TrackPoint manufacturer/name.
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
+
 }
