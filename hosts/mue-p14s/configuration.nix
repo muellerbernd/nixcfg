@@ -68,7 +68,7 @@
       };
     };
     logind.killUserProcesses = true;
-    # services.throttled.enable = true;
+    throttled.enable = true;
     upower.enable = true;
     fwupd.enable = true;
   };
@@ -98,11 +98,10 @@
         [ 7 60 85 ]
         [ "level auto" 80 32767 ]
       ];
-
-      preStart =
-        "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
     };
   };
+  systemd.services.thinkfan.preStart =
+    "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
   networking.hostName = "mue-p14s"; # Define your hostname.
 
