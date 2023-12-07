@@ -78,7 +78,12 @@
     bluetooth = {
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
-      extraConfig = "ControllerMode = bredr";
+      settings = {
+        General = {
+          ControllerMode = "bredr";
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
     };
     keyboard.qmk.enable = true;
   };
