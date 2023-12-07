@@ -107,6 +107,8 @@
     # for a WiFi printer
     avahi.openFirewall = true;
   };
+  # enable the thunderbolt daemon
+  services.hardware.bolt.enable = true;
 
   security.polkit.enable = true;
 
