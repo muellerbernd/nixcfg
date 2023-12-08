@@ -69,22 +69,22 @@
       nixosConfigurations.x240 = mkDefault "x240" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        user = "bernd";
+        setup_multiuser = false;
       };
       nixosConfigurations.t480 = mkDefault "t480" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        user = "bernd";
+        setup_multiuser = false;
       };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        user = "bernd";
+        setup_multiuser = true;
       };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        user = "bernd";
+        setup_multiuser = false;
       };
     };
 }

@@ -1,12 +1,15 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
 name:
-{ nixpkgs, home-manager, system, user, overlays }:
+{ nixpkgs, home-manager, system, setup_multiuser, overlays }:
 let
   userFolderNames = nixpkgs.lib.filterAttrs (n: v: v == "directory")
     (builtins.readDir (builtins.toString ../users));
-  user_cfgs = nixpkgs.lib.forEach (nixpkgs.lib.attrNames userFolderNames)
-    (u: ../users/${u}/${u}.nix);
+  user_cfgs = if setup_multiuser then
+    nixpkgs.lib.forEach (nixpkgs.lib.attrNames userFolderNames)
+    (u: ../users/${u}/${u}.nix)
+  else
+    [ ../users/bernd/bernd.nix ];
 in nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -30,9 +33,6 @@ in nixpkgs.lib.nixosSystem rec {
         (nixpkgs.lib.attrNames userFolderNames);
       # import ../users/${user}/home-manager.nix;
     }
-
-    # nixpkgs.lib.lists.flatten user_cfgs
-    # ../users/${user}/${user}.nix
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
