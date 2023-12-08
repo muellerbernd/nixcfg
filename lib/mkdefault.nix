@@ -3,9 +3,11 @@
 name:
 { nixpkgs, home-manager, system, user, overlays }:
 let
-    userFolderNames = builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir (builtins.toString ../users )));
-in
-nixpkgs.lib.nixosSystem rec {
+  userFolderNames = nixpkgs.lib.filterAttrs (n: v: v == "directory")
+    (builtins.readDir (builtins.toString ../users));
+  user_cfgs = nixpkgs.lib.forEach (nixpkgs.lib.attrNames userFolderNames)
+    (u: ../users/${u}/${u}.nix);
+in nixpkgs.lib.nixosSystem rec {
   inherit system;
 
   modules = [
@@ -16,16 +18,21 @@ nixpkgs.lib.nixosSystem rec {
 
     ../hosts/${name}/configuration.nix
 
-# include user configs
+    # include user configs
 
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      # home-manager.users.${user} = import ../users/${user}/home-manager.nix;
-      home-manager.users = import ../users;
+      home-manager.users = nixpkgs.lib.foldl' (acc: domain:
+        let u = domain;
+        in acc // { "${u}" = import ../users/${u}/home-manager.nix; }) { }
+        (nixpkgs.lib.attrNames userFolderNames);
+      # import ../users/${user}/home-manager.nix;
     }
-    ../users/${user}/${user}.nix
+
+    # nixpkgs.lib.lists.flatten user_cfgs
+    # ../users/${user}/${user}.nix
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
@@ -35,6 +42,6 @@ nixpkgs.lib.nixosSystem rec {
         currentSystem = system;
       };
     }
-  ];
+  ] ++ user_cfgs;
 }
 # vim: set ts=2 sw=2:
