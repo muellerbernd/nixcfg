@@ -3,13 +3,17 @@
 name:
 { nixpkgs, home-manager, system, setup_multiuser, overlays }:
 let
-  userFolderNames = nixpkgs.lib.filterAttrs (n: v: v == "directory")
-    (builtins.readDir (builtins.toString ../users));
+  default_user = "bernd";
+  userFolderNames = if setup_multiuser then
+    nixpkgs.lib.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory")
+      (builtins.readDir (builtins.toString ../users)))
+  else
+    [ default_user ];
   user_cfgs = if setup_multiuser then
     nixpkgs.lib.forEach (nixpkgs.lib.attrNames userFolderNames)
     (u: ../users/${u}/${u}.nix)
   else
-    [ ../users/bernd/bernd.nix ];
+    [ ../users/${default_user}/${default_user}.nix ];
 in nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -30,7 +34,7 @@ in nixpkgs.lib.nixosSystem rec {
       home-manager.users = nixpkgs.lib.foldl' (acc: domain:
         let u = domain;
         in acc // { "${u}" = import ../users/${u}/home-manager.nix; }) { }
-        (nixpkgs.lib.attrNames userFolderNames);
+        (userFolderNames);
     }
 
     # We expose some extra arguments so that our modules can parameterize
