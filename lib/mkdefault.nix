@@ -31,7 +31,6 @@ in nixpkgs.lib.nixosSystem rec {
         let u = domain;
         in acc // { "${u}" = import ../users/${u}/home-manager.nix; }) { }
         (nixpkgs.lib.attrNames userFolderNames);
-      # import ../users/${user}/home-manager.nix;
     }
 
     # We expose some extra arguments so that our modules can parameterize

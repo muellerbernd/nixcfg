@@ -301,6 +301,10 @@
   '';
 
   # programs
+
+  # use zsh as default shell
+  users.defaultUserShell = pkgs.zsh;
+
   # thunar settings
   programs.thunar = {
     enable = true;

@@ -59,6 +59,4 @@
   };
   users.extraGroups.vboxusers.members = [ "bernd" ];
   users.extraGroups.video.members = [ "bernd" ];
-  # use zsh as default shell
-  users.defaultUserShell = pkgs.zsh;
 }
