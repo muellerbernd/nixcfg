@@ -9,7 +9,6 @@
       # editors
       neovim
       #neovim-remote
-      tree-sitter
       vim
       # git
       git
@@ -36,7 +35,6 @@
       fzf
       fd
       ripgrep
-      chafa
       file
       ripgrep-all
       # notifications
@@ -63,7 +61,6 @@
       gnupg
       # bluetooth
       blueman
-      bluetuith
       # apps
       gnome.simple-scan
       xclip
@@ -107,10 +104,6 @@
       ncdu
       lsd
       bc
-      # run github actions locally
-      act
-      # gitlab-runner
-      gitlab-runner
       # env
       direnv
       # programming
@@ -179,11 +172,12 @@
       qmk-udev-rules
       avrdude
       evtest
-      #
-      picom
+      # mesh and pointcloud
+      meshlab
+      cloudcompare
       # custom packages
       annotator
-      lycheeslicer
+      # lycheeslicer
       # chituboxslicer
       uvtools
       rofi-music-rs

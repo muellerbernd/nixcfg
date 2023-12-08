@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
 
@@ -33,7 +33,7 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
-        inputs.neovim-nightly.overlay
+        # inputs.neovim-nightly.overlay
         inputs.joshuto.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
@@ -48,7 +48,7 @@
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
-          neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
+          # neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
           rofi-music-rs = inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
           # teams-for-linux =
           #   inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;

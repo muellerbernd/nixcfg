@@ -152,26 +152,9 @@
   };
   # Configure xserver
   services.xserver = {
+    enable = true;
     layout = "de";
     xkbVariant = "";
-    #xkbOptions = "ctrl:nocaps";
-    # libinput = {
-    #   enable = true;
-    #   mouse = {
-    #     accelProfile = "flat";
-    #     accelSpeed = "0";
-    #     middleEmulation = false;
-    #   };
-    #   touchpad = {
-    #     accelProfile = "flat";
-    #     accelSpeed = "0.5";
-    #     naturalScrolling = true;
-    #   };
-    # };
-  };
-  # xserver
-  services.xserver = {
-    enable = true;
     # Enable touchpad support (enabled default in most desktopManager).
     # libinput = { enable = true; };
 

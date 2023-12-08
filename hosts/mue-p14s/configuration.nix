@@ -177,18 +177,13 @@
     };
   };
 
-  # nix = {
-  #   settings = {
-  #     extra-substituters = [
-  #       "http://192.168.178.142:5000"
-  #       "https://ros.cachix.org"
-  #     ];
-  #     extra-trusted-public-keys = [
-  #       "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%"
-  #       "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
-  #     ];
-  #   };
-  # };
+  nix = {
+    settings = {
+      extra-substituters = [ "http://192.168.178.142:5000" ];
+      extra-trusted-public-keys =
+        [ "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%" ];
+    };
+  };
 
 }
 
