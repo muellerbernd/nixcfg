@@ -2,7 +2,9 @@
 # particular architecture.
 name:
 { nixpkgs, home-manager, system, user, overlays }:
-
+let
+    userFolderNames = builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir (builtins.toString ../users )));
+in
 nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -13,11 +15,15 @@ nixpkgs.lib.nixosSystem rec {
     { nixpkgs.overlays = overlays; }
 
     ../hosts/${name}/configuration.nix
+
+# include user configs
+
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = import ../users/${user}/home-manager.nix;
+      # home-manager.users.${user} = import ../users/${user}/home-manager.nix;
+      home-manager.users = import ../users;
     }
     ../users/${user}/${user}.nix
 

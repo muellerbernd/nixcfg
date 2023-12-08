@@ -135,7 +135,16 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  environment.systemPackages = with pkgs; [ glxinfo ];
+  # samba filer
+  services.gvfs = {
+    enable = true;
+    # package = lib.mkForce pkgs.gnome3.gvfs;
+  };
+  networking.firewall.extraCommands =
+    "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
+
+  environment.systemPackages = with pkgs; [ glxinfo cifs-utils ];
+
   # specialisation = {
   #   on-the-go.configuration = {
   #     system.nixos.tags = [ "on-the-go" ];
@@ -180,6 +189,7 @@
   #     ];
   #   };
   # };
+
 }
 
 # vim: set ts=2 sw=2:
