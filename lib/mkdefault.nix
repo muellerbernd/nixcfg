@@ -10,8 +10,7 @@ let
   else
     [ default_user ];
   user_cfgs = if setup_multiuser then
-    nixpkgs.lib.forEach (nixpkgs.lib.attrNames userFolderNames)
-    (u: ../users/${u}/${u}.nix)
+    nixpkgs.lib.forEach (userFolderNames) (u: ../users/${u}/${u}.nix)
   else
     [ ../users/${default_user}/${default_user}.nix ];
 in nixpkgs.lib.nixosSystem rec {
