@@ -27,17 +27,19 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = false;
+      enable = true;
       allowedTCPPorts = [ 80 443 8080 5000 ];
       allowedUDPPortRanges = [
         {
           from = 4000;
-          to = 4007;
+          to = 50000;
         }
-        {
-          from = 8000;
-          to = 8010;
-        }
+        # # ROS2 needs 7400 + (250 * Domain) + 1
+        # # here Domain is 41 or 42
+        # {
+        #   from = 17650;
+        #   to = 17910;
+        # }
       ];
     };
   };
