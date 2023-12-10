@@ -27,7 +27,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = true;
+      enable = false;
       allowedTCPPorts = [ 80 443 8080 5000 ];
       allowedUDPPortRanges = [
         {
@@ -315,6 +315,7 @@
   };
 
   programs.adb.enable = true;
+  programs.wireshark.enable = true;
 
   zramSwap = {
     enable = true;
