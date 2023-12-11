@@ -76,15 +76,20 @@
         system = "x86_64-linux";
         setup_multiuser = false;
       };
+      nixosConfigurations.biltower = mkDefault "biltower" rec {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+        setup_multiuser = false;
+      };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = true;
       };
-      nixosConfigurations.biltower = mkDefault "biltower" rec {
+      nixosConfigurations.eis-machine = mkDefault "EIS-machine" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = false;
+        setup_multiuser = true;
       };
     };
 }
