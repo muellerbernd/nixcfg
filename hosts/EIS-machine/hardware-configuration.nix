@@ -20,7 +20,7 @@
     "isci"
   ];
   boot.initrd.kernelModules =
-    [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "amdgpu"];
+    [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 

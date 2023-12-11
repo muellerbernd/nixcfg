@@ -1,9 +1,8 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
 name:
-{ nixpkgs, home-manager, system, setup_multiuser, overlays }:
+{ nixpkgs, home-manager, system, setup_multiuser, default_user, overlays }:
 let
-  default_user = "bernd";
   userFolderNames = if setup_multiuser then
     nixpkgs.lib.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory")
       (builtins.readDir (builtins.toString ../users)))

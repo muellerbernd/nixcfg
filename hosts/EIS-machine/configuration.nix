@@ -29,7 +29,7 @@
   networking.hostName = "EIS-machine"; # Define your hostname.
 
   # nvidia setup
-  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   # try to fix tearing
   # services.xserver.screenSection = ''
   #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"

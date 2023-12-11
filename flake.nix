@@ -70,26 +70,31 @@
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = false;
+        default_user = "bernd";
       };
       nixosConfigurations.t480 = mkDefault "t480" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = false;
+        default_user = "bernd";
       };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = false;
+        default_user = "bernd";
       };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = true;
+        setup_multiuser = false;
+        default_user = "bernd";
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = true;
+        default_user = "bernd";
       };
     };
 }
