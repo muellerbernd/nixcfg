@@ -14,7 +14,6 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      # efi.efiSysMountPoint = "/boot/efi";
       systemd-boot.configurationLimit = 8;
     };
   };
@@ -30,7 +29,7 @@
   networking.hostName = "EIS-machine"; # Define your hostname.
 
   # nvidia setup
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" "amdgpu" ];
   # try to fix tearing
   # services.xserver.screenSection = ''
   #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
