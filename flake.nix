@@ -86,7 +86,7 @@
         system = "x86_64-linux";
         setup_multiuser = true;
       };
-      nixosConfigurations.eis-machine = mkDefault "EIS-machine" rec {
+      nixosConfigurations.EIS-machine = mkDefault "EIS-machine" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         setup_multiuser = true;

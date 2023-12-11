@@ -106,10 +106,10 @@
       };
     };
     # nix-serve setup
-    nix-serve = {
-      enable = true;
-      secretKeyFile = "/var/cache-priv-key.pem";
-    };
+    # nix-serve = {
+    #   enable = true;
+    #   secretKeyFile = "/var/cache-priv-key.pem";
+    # };
   };
 }
 
