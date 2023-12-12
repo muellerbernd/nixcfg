@@ -239,6 +239,7 @@
     nixpkgs-lint
     nixpkgs-fmt
     nixfmt
+    home-manager
     # nix-serve
     # nix-serve-ng
   ];
