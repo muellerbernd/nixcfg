@@ -177,13 +177,13 @@
     };
   };
 
-  nix = {
-    settings = {
-      extra-substituters = [ "http://192.168.178.142:5000" ];
-      extra-trusted-public-keys =
-        [ "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%" ];
-    };
-  };
+  # nix = {
+  #   settings = {
+  #     extra-substituters = [ "http://192.168.178.142:5000" ];
+  #     extra-trusted-public-keys =
+  #       [ "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%" ];
+  #   };
+  # };
 
 }
 
