@@ -87,7 +87,7 @@
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = false;
+        setup_multiuser = true;
         default_user = "bernd";
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" rec {
