@@ -40,16 +40,17 @@
             { }; # path containing default.nix
           lycheeslicer = super.callPackage ./pkgs/lycheeslicer
             { }; # path containing default.nix
-          uvtools = super.callPackage ./pkgs/uvtools
-            { }; # path containing default.nix
-          chituboxslicer = super.callPackage ./pkgs/chitubox
-            { }; # path containing default.nix
+          uvtools =
+            super.callPackage ./pkgs/uvtools { }; # path containing default.nix
+          chituboxslicer =
+            super.callPackage ./pkgs/chitubox { }; # path containing default.nix
         })
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
-          rofi-music-rs = inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
+          rofi-music-rs =
+            inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
           # teams-for-linux =
           #   inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
           # networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
@@ -69,32 +70,24 @@
       nixosConfigurations.x240 = mkDefault "x240" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = false;
-        default_user = "bernd";
       };
       nixosConfigurations.t480 = mkDefault "t480" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = false;
-        default_user = "bernd";
       };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = false;
-        default_user = "bernd";
       };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = true;
-        default_user = "bernd";
+        users = [ "bernd" "student" ];
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        setup_multiuser = true;
-        default_user = "bernd";
+        users = [ "bernd" "student" ];
       };
     };
 }
