@@ -15,7 +15,10 @@
       git-lfs
       lazygit
       vcstool
+      yarn
+      nodejs
       # terminal
+      glow
       alacritty
       antigen
       starship
