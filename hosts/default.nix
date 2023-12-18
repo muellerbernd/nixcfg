@@ -1,7 +1,7 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   # NixOS uses NTFS-3G for NTFS support.
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = [ "ntfs" "cifs" ];
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -27,9 +27,9 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = true;
-      allowedTCPPorts = [ 80 443 8080 5000 ];
-      allowedUDPPortRanges = [{
+      enable = lib.mkDefault true;
+      allowedTCPPorts = lib.mkDefault [ 80 443 8080 5000 ];
+      allowedUDPPortRanges = lib.mkDefault [{
         from = 4000;
         to = 50000;
       }
@@ -114,7 +114,7 @@
     # Enable CUPS to print documents.
     printing.enable = true;
     avahi.enable = true;
-    avahi.nssmdns = true;
+    avahi.nssmdns4 = true;
     # for a WiFi printer
     avahi.openFirewall = true;
   };

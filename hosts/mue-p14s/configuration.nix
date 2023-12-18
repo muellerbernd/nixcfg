@@ -23,6 +23,8 @@
       };
     };
   };
+  # use lts kernel
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services = {
     # udev.extraRules = ''
@@ -135,15 +137,77 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # samba filer
-  services.gvfs = {
-    enable = true;
-    # package = lib.mkForce pkgs.gnome3.gvfs;
+  networking = {
+    networkmanager.enable = true;
+    firewall = {
+      enable = false;
+      allowedTCPPorts = [
+        80
+        443
+        8080
+        5000
+        445 # samba
+        137
+        138
+        139
+      ];
+      allowedUDPPorts = [
+        80
+        443
+        8080
+        5000
+        445 # samba
+        137
+        138
+        139
+      ];
+      allowedUDPPortRanges = [{
+        from = 4000;
+        to = 50000;
+      }
+      # # ROS2 needs 7400 + (250 * Domain) + 1
+      # # here Domain is 41 or 42
+      # {
+      #   from = 17650;
+      #   to = 17910;
+      # }
+        ];
+      extraCommands =
+        "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
+      allowPing = true;
+    };
   };
-  networking.firewall.extraCommands =
-    "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
 
-  environment.systemPackages = with pkgs; [ glxinfo cifs-utils ];
+  environment.systemPackages = with pkgs; [
+    glxinfo
+    cifs-utils
+    samba
+    lxqt.lxqt-policykit
+  ];
+  services.samba = { openFirewall = true; };
+  services.gvfs.enable = true;
+  # For mount.cifs, required unless domain name resolution is not needed.
+  # fileSystems."/mnt/EIS" = {
+  #   device = "//ast.intern/EIS";
+  #   fsType = "cifs";
+  #   options = [
+  #     "noauto"
+  #     "x-systemd.idle-timeout=60"
+  #     "x-systemd.device-timeout=5s"
+  #     "x-systemd.mount-timeout=5s"
+  #     "user"
+  #     "uid=1000"
+  #     "gid=100"
+  #     "credentials=/home/bernd/smb-credentials"
+  #     "iocharset=utf8"
+  #     "rw"
+  #     "x-systemd.automount"
+  #     "nounix"
+  #     "noacl"
+  #     "vers=2.0"
+  #     "sec=ntlmv2"
+  #   ];
+  # };
 
   # specialisation = {
   #   on-the-go.configuration = {
