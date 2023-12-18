@@ -22,11 +22,11 @@
           device = "/dev/nvme1n1p2";
           preLVM = true;
         };
-        data = {
-          device = "/dev/nvme0n1p1";
-          keyFile = "/keyfile";
-          allowDiscards = true;
-        };
+        # data = {
+        #   device = "/dev/nvme0n1p1";
+        #   keyFile = "/keyfile";
+        #   allowDiscards = true;
+        # };
       };
       secrets = {
         # Create /mnt/etc/secrets/initrd directory and copy keys to it
@@ -57,10 +57,13 @@
       };
     };
     logind.killUserProcesses = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
   };
   services.upower.enable = true;
 
-  networking.hostName = "t480_ilmpad"; # Define your hostname.
+  networking.hostName = "t480ilmpad"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {

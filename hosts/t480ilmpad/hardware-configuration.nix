@@ -60,13 +60,16 @@
   # Data mount
   fileSystems."/data" = {
     device = "/dev/disk/by-label/data"; # UUID for /dev/mapper/crypted-data
-    # encrypted = {
-    #   enable = true;
-    #   label = "crypted-data";
-    #   blkDev =
-    #     "/dev/disk/by-uuid/7bf9ca7f-12eb-4232-9a51-780b05a20629"; # UUID for /dev/sda1
-    #   keyFile = "/keyfile";
-    # };
+    depends = [ "/dev/disk/by-label/root" ];
+    encrypted = {
+      enable = true;
+      label = "crypted-data";
+      blkDev =
+        "/dev/disk/by-uuid/7bf9ca7f-12eb-4232-9a51-780b05a20629"; # UUID for /dev/sda1
+      keyFile = "/keyfile";
+    };
+    # options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" ];
+    # options = [ "auto" "user" "rw" "nofail" "noatime" ];
   };
 
   powerManagement = {
