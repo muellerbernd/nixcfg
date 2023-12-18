@@ -105,6 +105,8 @@
   systemd.services.thinkfan.preStart =
     "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
+  systemd.services.modem-manager.enable = true;
+
   networking.hostName = "mue-p14s"; # Define your hostname.
 
   hardware = {
@@ -183,6 +185,7 @@
     cifs-utils
     samba
     lxqt.lxqt-policykit
+    iperf
   ];
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
