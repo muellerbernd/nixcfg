@@ -46,21 +46,20 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/root";
+    device = "/dev/disk/by-uuid/6fa0b8be-b139-4ccb-9cbc-faf31a892680";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-uuid/049E-1629";
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
+  swapDevices = [{ device = "/dev/disk/by-uuid/1ac292a7-96a9-42be-a19a-069e743ef251"; }];
 
   # Data mount
   fileSystems."/data" = {
-    device = "/dev/disk/by-label/data"; # UUID for /dev/mapper/crypted-data
-    depends = [ "/dev/disk/by-label/root" ];
+    device = "/dev/disk/by-uuid/f873c34d-1d1d-4ffc-8227-a2260a2fb573"; # UUID for /dev/mapper/crypted-data
     encrypted = {
       enable = true;
       label = "crypted-data";

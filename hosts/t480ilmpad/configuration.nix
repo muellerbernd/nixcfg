@@ -19,7 +19,7 @@
     initrd = {
       luks.devices = {
         crypt = {
-          device = "/dev/nvme1n1p2";
+          device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
           preLVM = true;
         };
         # data = {
@@ -110,6 +110,7 @@
       ];
     };
   };
+  zramSwap = { enable = false; };
 }
 
 # vim: set ts=2 sw=2:
