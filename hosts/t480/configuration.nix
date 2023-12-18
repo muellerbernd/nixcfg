@@ -16,10 +16,16 @@
       systemd-boot.configurationLimit = 8;
     };
     # luks
-    initrd.luks.devices = {
-      crypt = {
-        device = "/dev/nvme1n1p2";
-        preLVM = true;
+    initrd = {
+      luks.devices = {
+        crypt = {
+          device = "/dev/nvme1n1p2";
+          preLVM = true;
+        };
+      };
+      secrets = {
+        # Create /mnt/etc/secrets/initrd directory and copy keys to it
+        "keyfile" = "/etc/secrets/initrd/keyfile";
       };
     };
   };
@@ -88,10 +94,8 @@
 
   nix = {
     settings = {
-      extra-substituters = [
-        "http://192.168.178.142:5000"
-        "https://ros.cachix.org"
-      ];
+      extra-substituters =
+        [ "http://192.168.178.142:5000" "https://ros.cachix.org" ];
       extra-trusted-public-keys = [
         "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%"
         "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="

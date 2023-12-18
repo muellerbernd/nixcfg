@@ -22,6 +22,11 @@
           device = "/dev/nvme1n1p2";
           preLVM = true;
         };
+        data = {
+          device = "/dev/nvme0n1p1";
+          keyFile = "/keyfile";
+          allowDiscards = true;
+        };
       };
       secrets = {
         # Create /mnt/etc/secrets/initrd directory and copy keys to it
