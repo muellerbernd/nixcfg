@@ -46,16 +46,16 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6fa0b8be-b139-4ccb-9cbc-faf31a892680";
+    device = "/dev/disk/by-label/root";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/049E-1629";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-uuid/1ac292a7-96a9-42be-a19a-069e743ef251"; }];
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   # Data mount
   fileSystems."/data" = {
