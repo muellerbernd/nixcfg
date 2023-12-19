@@ -320,7 +320,7 @@
   programs.wireshark.enable = true;
 
   zramSwap = {
-    enable = true;
+    enable = lib.mkDefault true;
     algorithm = "zstd";
     memoryPercent = 90;
   };

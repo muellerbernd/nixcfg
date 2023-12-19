@@ -75,6 +75,10 @@
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
       };
+      nixosConfigurations.t480ilmpad = mkDefault "t480ilmpad" rec {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+      };
       nixosConfigurations.biltower = mkDefault "biltower" rec {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";

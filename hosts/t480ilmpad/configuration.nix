@@ -19,9 +19,18 @@
     initrd = {
       luks.devices = {
         crypt = {
-          device = "/dev/nvme1n1p2";
+          device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
           preLVM = true;
         };
+        # data = {
+        #   device = "/dev/nvme0n1p1";
+        #   keyFile = "/keyfile";
+        #   allowDiscards = true;
+        # };
+      };
+      secrets = {
+        # Create /mnt/etc/secrets/initrd directory and copy keys to it
+        "keyfile" = "/etc/secrets/initrd/keyfile";
       };
     };
   };
@@ -48,10 +57,13 @@
       };
     };
     logind.killUserProcesses = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
   };
   services.upower.enable = true;
 
-  networking.hostName = "t480"; # Define your hostname.
+  networking.hostName = "t480ilmpad"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {
@@ -98,6 +110,7 @@
       ];
     };
   };
+  zramSwap = { enable = false; };
 }
 
 # vim: set ts=2 sw=2:
