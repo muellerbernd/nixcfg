@@ -48,7 +48,7 @@
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
-          neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
+          # neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
           rofi-music-rs =
             inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
           # teams-for-linux =
