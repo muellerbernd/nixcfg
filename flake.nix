@@ -33,8 +33,8 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
-        inputs.neovim-nightly.overlay
-        inputs.joshuto.overlays.default
+        # inputs.neovim-nightly.overlay
+        # inputs.joshuto.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
