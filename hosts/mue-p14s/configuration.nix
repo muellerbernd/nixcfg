@@ -251,6 +251,15 @@
   #       [ "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%" ];
   #   };
   # };
+  nix.settings.cores = 10;
+  systemd.services.nix-daemon.serviceConfig = {
+    CPUWeight = 30;
+    IOWeight = 30;
+
+    MemoryMax = "80%";
+    MemoryHigh = "75%";
+    MemorySwapMax = "50%";
+  };
 
   zramSwap = { enable = false; };
 }
