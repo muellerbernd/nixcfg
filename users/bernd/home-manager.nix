@@ -134,7 +134,8 @@
       python311Packages.pylsp-rope
       python311Packages.pyls-flake8
       nodePackages.pyright
-      rnix-lsp
+      # rnix-lsp
+      nil
       sumneko-lua-language-server
       nodePackages_latest.bash-language-server
       marksman
