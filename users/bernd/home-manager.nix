@@ -121,6 +121,7 @@
       icecream
       icemon
       # formatter
+      yamlfmt
       stylua
       black
       clang-tools
