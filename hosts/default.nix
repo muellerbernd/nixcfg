@@ -69,12 +69,6 @@
   sound.enable = true;
   hardware = {
     opengl.enable = true;
-    # opengl.extraPackages = with pkgs; [
-    #   vulkan-loader
-    #   vulkan-validation-layers
-    #   vulkan-extension-layer
-    #   vulkan-tools
-    # ];
     pulseaudio.enable = true;
     bluetooth = {
       enable = true; # enables support for Bluetooth
@@ -95,7 +89,6 @@
   # Configure console keymap
   console.keyMap = "de";
 
-  # List services that you want to enable:
   services = {
     logind.killUserProcesses = true;
     gnome.gnome-keyring.enable = true;
@@ -169,7 +162,6 @@
         rofi # application launcher most people use
         i3status # gives you the default i3 status bar
         i3lock # default i3 screen locker
-        #i3blocks #if you are planning on using i3blocks over i3status
         xidlehook
         i3status-rust
       ];
@@ -271,13 +263,6 @@
 
       defaultNetwork.settings = { dns_enabled = true; };
     };
-    # docker = {
-    #   enable = true;
-    #   rootless = {
-    #     enable = true;
-    #     setSocketVariable = true;
-    #   };
-    # };
   };
   environment.extraInit = ''
     if [ -z "$DOCKER_HOST" -a -n "$XDG_RUNTIME_DIR" ]; then
@@ -305,7 +290,6 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    #package = pkgs.neovim-nightly;
   };
   programs.zsh.enable = true;
 
@@ -325,7 +309,6 @@
     memoryPercent = 90;
   };
 
-  # nixpkgs.config.permittedInsecurePackages = [ "python3.10-requests-2.28.2" "python3.10-cryptography-40.0.1" ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
