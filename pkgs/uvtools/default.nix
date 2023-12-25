@@ -1,18 +1,19 @@
-{ appimageTools, fetchurl, lib, makeWrapper, stdenv, icu }:
+{ appimageTools, fetchurl, lib, makeWrapper, icu }:
 let
 
   pname = "uvtools";
-  version = "4.0.4";
+  version = "4.0.6";
 
   src = fetchurl {
     url =
       "https://github.com/sn4k3/UVtools/releases/download/v${version}/UVtools_linux-x64_v${version}.AppImage";
-    sha256 = "sha256-mHHrVm5ZSAd702eg7HnpbnDkBu3CugvrzZiYVMfrsE4=";
+    sha256 = "sha256-2O7031B3wkRjxiTDtF8m+RhtnMlqSv/GzyyLdtHmZMU=";
   };
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in appimageTools.wrapType2 {
+in
+appimageTools.wrapType2 {
   inherit pname version src;
-  extraPkgs = pkgs: with pkgs; [ icu ];
+  extraPkgs = pkgs: [ icu ];
 
   extraInstallCommands = ''
     mv $out/bin/{${pname}-${version},${pname}}
