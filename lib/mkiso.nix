@@ -16,6 +16,7 @@ in nixpkgs.lib.nixosSystem rec {
     { nixpkgs.overlays = overlays; }
 
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+    ../hosts/iso
 
     # include user configs
 

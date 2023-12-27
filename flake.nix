@@ -30,6 +30,7 @@
     let
       # mkVM = import ./lib/mkvm.nix;
       mkDefault = (import ./lib/mkdefault.nix);
+      mkISO = (import ./lib/mkiso.nix);
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
@@ -94,7 +95,7 @@
         system = "x86_64-linux";
         users = [ "bernd" "student" ];
       };
-      nixosConfigurations.ISO = mkDefault "ISO" {
+      nixosConfigurations.ISO = mkISO "ISO" {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
         users = [ "bernd" ];
