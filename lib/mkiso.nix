@@ -12,6 +12,12 @@ nixpkgs.lib.nixosSystem rec {
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     ../hosts/iso
 
+    home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.root = ../hosts/iso/home.nix ;
+    }
     # include user configs
 
     # home-manager.nixosModules.home-manager
