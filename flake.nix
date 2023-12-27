@@ -98,7 +98,6 @@
       nixosConfigurations.ISO = mkISO "ISO" {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
-        users = [ "bernd" ];
       };
     };
 }

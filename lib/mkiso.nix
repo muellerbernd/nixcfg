@@ -16,19 +16,8 @@ nixpkgs.lib.nixosSystem rec {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.root = ../hosts/iso/home.nix ;
+      home-manager.users.root = ../hosts/iso/home.nix;
     }
-    # include user configs
-
-    # home-manager.nixosModules.home-manager
-    # {
-    #   home-manager.useGlobalPkgs = true;
-    #   home-manager.useUserPackages = true;
-    #   home-manager.users = nixpkgs.lib.foldl' (acc: domain:
-    #     let u = domain;
-    #     in acc // { "${u}" = import ../users/${u}/home-manager.nix; }) { }
-    #     (possible_users);
-    # }
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.

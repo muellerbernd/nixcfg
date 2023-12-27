@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, headless ? true, ... }:
+{ pkgs, ... }:
 
 {
   home = {
@@ -19,12 +19,29 @@
 
   programs.zsh = {
     enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
+    autocd = true;
+    dotDir = ".config/zsh";
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    shellAliases = { };
+    history = {
+      expireDuplicatesFirst = true;
+      save = 100000000;
+      size = 1000000000;
     };
-    histSize = 10000;
-    histFile = "${config.xdg.dataHome}/zsh/history";
+    oh-my-zsh = {
+      enable = true;
+
+      plugins = [
+        "command-not-found"
+        "git"
+        "history"
+        "sudo"
+      ];
+    };
+    plugins = [
+
+    ];
   };
 
   # You can update Home Manager without changing this value. See
