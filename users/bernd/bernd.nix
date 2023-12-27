@@ -22,7 +22,8 @@
       "storage"
       "users"
     ];
-    openssh.authorizedKeys.keys = [ # bernd smartphone key:
+    openssh.authorizedKeys.keys = [
+      # bernd smartphone key:
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDmVutzPV7bDLbyorV+kK4xQ6usfYzxHdT/M76iQ3bgcVHdtAMPN/5hOnvCj5NwEiUn2k7W5WKHrwKYOdYvDHPohMi/y2j0ZXvLrRIOFfKfAmHQWJkjC527N8xUBrM+qBl/oHpjTCGS4Ia7lY7ADZBKvpEHyQ/prdVMa+pmChQHFiALEipoHBjsM8A984hRVI7bzvBkzO0mVo0TAylsr9xxMqjROqtZHNIb2dMPgx4Lbx3uFHKN8yQLT8Yhjx3ViVp4jgcMdSYtvK0i+xXsl6KwDH3g9HM921ZHE+gbA02vOmm0zXQJmiqW+pwuP3iQigxWsK/3FYI45jpaltmsJHg9"
 
       #bernd lenovo x240 key
