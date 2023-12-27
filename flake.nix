@@ -94,5 +94,10 @@
         system = "x86_64-linux";
         users = [ "bernd" "student" ];
       };
+      nixosConfigurations.ISO = mkDefault "ISO" {
+        inherit nixpkgs home-manager overlays;
+        system = "x86_64-linux";
+        users = [ "bernd" ];
+      };
     };
 }

@@ -20,3 +20,6 @@ update:
 
 upgrade:
 	make update && make switch
+
+iso:
+	nix build .#nixosConfigurations.ISO.config.system.build.isoImage
