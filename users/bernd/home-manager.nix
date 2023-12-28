@@ -412,6 +412,39 @@
   # enable picom
   # services.picom.enable = true;
   services.mpris-proxy.enable = true;
+
+  # gtk = {
+  #   enable = true;
+  #   font.name = "Hack Nerd Font 10";
+  #   theme = {
+  #     name = "prefer-dark";
+  #     package = pkgs.solarc-gtk-theme;
+  #   };
+  # };
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
+  gtk = {
+    enable = true;
+    font.name = "Cantarell 10";
+    theme = {
+      # name = "orchis-theme";
+      # package = pkgs.orchis-theme;
+      name = "Adwaita-dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+    iconTheme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+    cursorTheme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

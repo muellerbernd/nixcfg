@@ -1,4 +1,22 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text =
+      let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+      in
+      ''
+        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+        gnome_schema=org.gnome.desktop.interface
+        gsettings set $gnome_schema color-scheme 'prefer-dark'
+      '';
+  };
+in
+{
 
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = [ "ntfs" "cifs" ];
@@ -226,6 +244,8 @@
     xbindkeys
     xsel
     xdotool
+    # gtk settings
+    # configure-gtk
     # nix
     nixpkgs-lint
     nixpkgs-fmt
@@ -269,6 +289,21 @@
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
     fi
   '';
+
+  # environment.etc = {
+  #   "xdg/gtk-2.0/gtkrc".text = "gtk-error-bell=0";
+  #   "xdg/gtk-3.0/settings.ini".text = ''
+  #     [Settings]
+  #     gtk-error-bell=false
+  #     color-scheme 'prefer-dark'
+  #   '';
+  #   "xdg/gtk-4.0/settings.ini".text = ''
+  #     [Settings]
+  #     gtk-error-bell=false
+  #     color-scheme 'prefer-dark'
+  #   '';
+  # };
+
 
   # programs
 
