@@ -2,6 +2,7 @@
 
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = [ "ntfs" "cifs" ];
+  boot.swraid.enable = lib.mkForce false;
 
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
   # Allow unfree packages

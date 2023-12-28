@@ -33,13 +33,13 @@
         from = 4000;
         to = 50000;
       }
-      # # ROS2 needs 7400 + (250 * Domain) + 1
-      # # here Domain is 41 or 42
-      # {
-      #   from = 17650;
-      #   to = 17910;
-      # }
-        ];
+        # # ROS2 needs 7400 + (250 * Domain) + 1
+        # # here Domain is 41 or 42
+        # {
+        #   from = 17650;
+        #   to = 17910;
+        # }
+      ];
     };
   };
 
@@ -302,6 +302,13 @@
 
   programs.adb.enable = true;
   programs.wireshark.enable = true;
+  programs.tmux = {
+    enable = true;
+    # clock24 = true;
+    # extraConfig = '' # used for less common options, intelligently combines if defined in multiple places.
+    #   ...
+    # '';
+  };
 
   zramSwap = {
     enable = lib.mkDefault true;
