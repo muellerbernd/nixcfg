@@ -56,18 +56,52 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {
-    opengl.enable = true;
-    # opengl.extraPackages = with pkgs; [
-    #   vulkan-loader
-    #   vulkan-validation-layers
-    #   vulkan-extension-layer
-    #   vulkan-tools
-    # ];
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        # vulkan-loader
+        # vulkan-validation-layers
+        # vulkan-extension-layer
+        # vulkan-tools
+        mesa.drivers
+      ];
+    };
     trackpoint = {
       enable = true;
       sensitivity = 255;
     };
   };
+
+  # postconditions:
+  # 1) status should be enabled:
+  # cat /proc/acpi/ibm/fan
+  # 2) No errors in systemd logs:
+  # journalctl -u thinkfan.service -f
+  services = {
+    thinkfan = {
+      enable = true;
+
+      sensors = [{
+        type = "tpacpi";
+        query = "/proc/acpi/ibm/thermal";
+      }];
+
+      levels = [
+        [ 0 0 55 ]
+        [ 1 48 60 ]
+        [ 2 50 61 ]
+        [ 3 52 63 ]
+        [ 6 56 65 ]
+        [ 7 60 85 ]
+        [ "level auto" 80 32767 ]
+      ];
+    };
+  };
+  systemd.services.thinkfan.preStart =
+    "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
+
   # Configure xserver
   services.xserver = {
     layout = "de";
@@ -89,6 +123,10 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    glxinfo
+  ];
+
   zramSwap = { enable = false; };
 
   specialisation = {
@@ -100,6 +138,7 @@
       };
     };
   };
+
   networking.networkmanager.ensureProfiles.profiles = {
     "37C3" = {
       connection = {
