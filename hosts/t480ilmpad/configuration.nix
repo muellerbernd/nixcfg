@@ -134,19 +134,31 @@
     };
   };
 
-  # distributedBuilds on eis-buildserve
+  # distributedBuilds
   nix = {
     distributedBuilds = true;
-    buildMachines = [{
-      hostName = "eis-buildserver";
-      systems = [ "x86_64-linux" ];
-      # protocol = "ssh-ng";
-      sshUser = "root";
-      sshKey = "/root/.ssh/eis-remote";
-      maxJobs = 99;
-      speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-    }];
+    buildMachines = [
+      {
+        hostName = "biltower";
+        systems = [ "x86_64-linux" ];
+        # protocol = "ssh-ng";
+        sshUser = "root";
+        sshKey = "/root/.ssh/eis-remote";
+        maxJobs = 99;
+        speedFactor = 5;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      }
+      {
+        hostName = "eis-buildserver";
+        systems = [ "x86_64-linux" ];
+        # protocol = "ssh-ng";
+        sshUser = "root";
+        sshKey = "/root/.ssh/eis-remote";
+        maxJobs = 99;
+        speedFactor = 2;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      }
+    ];
     extraOptions = ''
       builders-use-substitutes = true
     '';
