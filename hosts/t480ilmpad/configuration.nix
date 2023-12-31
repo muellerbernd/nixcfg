@@ -53,7 +53,6 @@
   services.upower.enable = true;
 
   networking.hostName = "t480ilmpad"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   hardware = {
     opengl = {
@@ -61,10 +60,6 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        # vulkan-loader
-        # vulkan-validation-layers
-        # vulkan-extension-layer
-        # vulkan-tools
         mesa.drivers
       ];
     };

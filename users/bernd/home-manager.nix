@@ -60,6 +60,7 @@
       keepassxc
       gnome.gnome-keyring
       gnome.seahorse
+      gnome.adwaita-icon-theme
       lxde.lxsession
       gnupg
       # bluetooth
