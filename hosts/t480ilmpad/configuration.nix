@@ -143,7 +143,7 @@
         systems = [ "x86_64-linux" ];
         # protocol = "ssh-ng";
         sshUser = "root";
-        sshKey = "/root/.ssh/eis-remote";
+        # sshKey = "/root/.ssh/eis-remote";
         maxJobs = 99;
         speedFactor = 5;
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
@@ -153,7 +153,7 @@
         systems = [ "x86_64-linux" ];
         # protocol = "ssh-ng";
         sshUser = "root";
-        sshKey = "/root/.ssh/eis-remote";
+        # sshKey = "/root/.ssh/eis-remote";
         maxJobs = 99;
         speedFactor = 2;
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
