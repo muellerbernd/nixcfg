@@ -139,36 +139,22 @@
     };
   };
 
-  networking.networkmanager.ensureProfiles.profiles = {
-    "37C3" = {
-      connection = {
-        id = "37C3";
-        type = "wifi";
-        interface-name = "wlp3s0";
-      };
-      wifi = {
-        mode = "infrastructure";
-        ssid = "37C3";
-      };
-      wifi-security = {
-        auth-alg = "open";
-        key-mgmt = "wpa-eap";
-      };
-      "802-1x" = {
-        anonymous-identity = "37C3";
-        eap = "ttls;";
-        identity = "37C3";
-        password = "37C3";
-        phase2-auth = "mschapv2";
-      };
-      ipv4 = {
-        method = "auto";
-      };
-      ipv6 = {
-        addr-gen-mode = "default";
-        method = "auto";
-      };
-    };
+  # distributedBuilds on eis-buildserve
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [{
+      hostName = "eis-buildserver";
+      systems = [ "x86_64-linux" ];
+      # protocol = "ssh-ng";
+      sshUser = "root";
+      sshKey = "/root/.ssh/eis-remote";
+      maxJobs = 99;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+    }];
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
   };
 }
 
