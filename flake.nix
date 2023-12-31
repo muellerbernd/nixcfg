@@ -24,9 +24,10 @@
     openconnect-sso.url = "github:vlaci/openconnect-sso";
     joshuto.url = "github:kamiyaa/joshuto";
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, unstable, home-manager, agenix, ... }@inputs:
     let
       # mkVM = import ./lib/mkvm.nix;
       mkDefault = (import ./lib/mkdefault.nix);
@@ -70,28 +71,28 @@
     in
     {
       nixosConfigurations.x240 = mkDefault "x240" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
       };
       nixosConfigurations.t480 = mkDefault "t480" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
       };
       nixosConfigurations.t480ilmpad = mkDefault "t480ilmpad" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
       };
       nixosConfigurations.biltower = mkDefault "biltower" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
       };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
         users = [ "bernd" ];
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" {
-        inherit nixpkgs home-manager overlays;
+        inherit nixpkgs home-manager overlays agenix;
         system = "x86_64-linux";
         users = [ "bernd" "student" ];
       };

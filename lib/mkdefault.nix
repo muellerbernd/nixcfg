@@ -1,5 +1,5 @@
 name:
-{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays }:
+{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix }:
 let
   user_folder_names = nixpkgs.lib.attrNames
     (nixpkgs.lib.filterAttrs (n: v: v == "directory")
@@ -37,6 +37,8 @@ in nixpkgs.lib.nixosSystem rec {
         currentSystem = system;
       };
     }
+
+    agenix.nixosModules.default
   ] ++ user_cfgs;
 }
 # vim: set ts=2 sw=2:
