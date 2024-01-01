@@ -71,28 +71,28 @@
     in
     {
       nixosConfigurations.x240 = mkDefault "x240" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
       };
       nixosConfigurations.t480 = mkDefault "t480" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
       };
       nixosConfigurations.t480ilmpad = mkDefault "t480ilmpad" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
       };
       nixosConfigurations.biltower = mkDefault "biltower" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
       };
       nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
         users = [ "bernd" ];
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" {
-        inherit nixpkgs home-manager overlays agenix;
+        inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
         users = [ "bernd" "student" ];
       };

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
   configure-gtk = pkgs.writeTextFile {
     name = "configure-gtk";
@@ -253,6 +253,7 @@ in
     home-manager
     # nix-serve
     # nix-serve-ng
+    inputs.agenix.packages.${system}.default
   ];
 
   # environment.pathsToLink =

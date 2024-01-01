@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -134,6 +134,15 @@
     };
   };
 
+  age = {
+    identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      distributedBuilderKey = {
+        file = "${inputs.self}/secrets/distributedBuilderKey.age";
+      };
+    };
+  };
+
   # distributedBuilds
   nix = {
     distributedBuilds = true;
@@ -142,22 +151,23 @@
         hostName = "biltower";
         systems = [ "x86_64-linux" ];
         # protocol = "ssh-ng";
-        sshUser = "root";
+        sshUser = "bernd";
         # sshKey = "/root/.ssh/eis-remote";
+        sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
         speedFactor = 5;
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
       }
-      {
-        hostName = "eis-buildserver";
-        systems = [ "x86_64-linux" ];
-        # protocol = "ssh-ng";
-        sshUser = "root";
-        # sshKey = "/root/.ssh/eis-remote";
-        maxJobs = 99;
-        speedFactor = 2;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      }
+      # {
+      #   hostName = "eis-buildserver";
+      #   systems = [ "x86_64-linux" ];
+      #   # protocol = "ssh-ng";
+      #   sshUser = "root";
+      #   # sshKey = "/root/.ssh/eis-remote";
+      #   maxJobs = 99;
+      #   speedFactor = 2;
+      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      # }
     ];
     extraOptions = ''
       builders-use-substitutes = true
