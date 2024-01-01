@@ -12,5 +12,5 @@ in
 {
   # "secret1.age".publicKeys = [ user1 system1 ];
   # "secret2.age".publicKeys = users ++ systems;
-  "distributedBuilderKey.age".publicKeys = allUsers ++ [ systems.biltower systems.t480ilmpad ];
+  "distributedBuilderKey.age".publicKeys = allUsers;
 }
