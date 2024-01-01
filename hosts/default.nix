@@ -108,7 +108,7 @@ in
   console.keyMap = "de";
 
   services = {
-    logind.killUserProcesses = true;
+    logind.killUserProcesses = false;
     gnome.gnome-keyring.enable = true;
     # Enable the OpenSSH daemon.
     openssh = {
