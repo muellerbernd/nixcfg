@@ -150,7 +150,7 @@
         hostName = "biltower";
         systems = [ "x86_64-linux" ];
         # protocol = "ssh-ng";
-        sshUser = "root";
+        sshUser = "bernd";
         # sshUser = "ssh-ng://nix-ssh";
         # sshKey = "/root/.ssh/eis-remote";
         sshKey = config.age.secrets.distributedBuilderKey.path;
