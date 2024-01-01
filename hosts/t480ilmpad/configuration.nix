@@ -45,7 +45,6 @@
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    logind.killUserProcesses = true;
     devmon.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
@@ -152,6 +151,7 @@
         systems = [ "x86_64-linux" ];
         # protocol = "ssh-ng";
         sshUser = "bernd";
+        # sshUser = "ssh-ng://nix-ssh";
         # sshKey = "/root/.ssh/eis-remote";
         sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
