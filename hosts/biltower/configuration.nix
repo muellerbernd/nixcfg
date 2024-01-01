@@ -124,6 +124,8 @@
   #   };
   # };
 
+  zramSwap = { enable = false; };
+
   users.users.root = {
     openssh.authorizedKeys.keys = [
       # eis-remote
