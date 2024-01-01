@@ -55,18 +55,18 @@
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   # Data mount
-  fileSystems."/data" = {
-    device = "/dev/disk/by-uuid/f873c34d-1d1d-4ffc-8227-a2260a2fb573"; # UUID for /dev/mapper/crypted-data
-    encrypted = {
-      enable = true;
-      label = "crypted-data";
-      blkDev =
-        "/dev/disk/by-uuid/7bf9ca7f-12eb-4232-9a51-780b05a20629"; # UUID for /dev/sda1
-      keyFile = "/keyfile";
-    };
-    # options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" ];
-    # options = [ "auto" "user" "rw" "nofail" "noatime" ];
-  };
+  # fileSystems."/data" = {
+  #   device = "/dev/disk/by-uuid/f873c34d-1d1d-4ffc-8227-a2260a2fb573"; # UUID for /dev/mapper/crypted-data
+  #   encrypted = {
+  #     enable = true;
+  #     label = "crypted-data";
+  #     blkDev =
+  #       "/dev/disk/by-uuid/7bf9ca7f-12eb-4232-9a51-780b05a20629"; # UUID for /dev/sda1
+  #     keyFile = "/keyfile";
+  #   };
+  #   # options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" ];
+  #   # options = [ "auto" "user" "rw" "nofail" "noatime" ];
+  # };
 
   powerManagement = {
     enable = true;
