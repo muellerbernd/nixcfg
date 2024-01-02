@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -69,7 +69,6 @@
         # TPSMAPI_ENABLE = 1;
       };
     };
-    logind.killUserProcesses = true;
     throttled.enable = true;
     upower.enable = true;
     fwupd.enable = true;
@@ -167,13 +166,13 @@
         from = 4000;
         to = 50000;
       }
-      # # ROS2 needs 7400 + (250 * Domain) + 1
-      # # here Domain is 41 or 42
-      # {
-      #   from = 17650;
-      #   to = 17910;
-      # }
-        ];
+        # # ROS2 needs 7400 + (250 * Domain) + 1
+        # # here Domain is 41 or 42
+        # {
+        #   from = 17650;
+        #   to = 17910;
+        # }
+      ];
       extraCommands =
         "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
       allowPing = true;
@@ -261,7 +260,55 @@
     MemorySwapMax = "50%";
   };
 
-  zramSwap = { enable = false; };
+  specialisation = {
+    on-the-go.configuration = {
+      system.nixos.tags = [ "on-the-go" ];
+      powerManagement = {
+        enable = true;
+        cpuFreqGovernor = "powersave";
+      };
+    };
+  };
+
+  age = {
+    identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets = {
+      distributedBuilderKey = {
+        file = "${inputs.self}/secrets/distributedBuilderKey.age";
+      };
+    };
+  };
+
+  # distributedBuilds
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "biltower";
+        systems = [ "x86_64-linux" ];
+        # protocol = "ssh-ng";
+        sshUser = "bernd";
+        # sshKey = "/root/.ssh/eis-remote";
+        sshKey = config.age.secrets.distributedBuilderKey.path;
+        maxJobs = 99;
+        speedFactor = 5;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      }
+      # {
+      #   hostName = "eis-buildserver";
+      #   systems = [ "x86_64-linux" ];
+      #   # protocol = "ssh-ng";
+      #   sshUser = "root";
+      #   # sshKey = "/root/.ssh/eis-remote";
+      #   maxJobs = 99;
+      #   speedFactor = 2;
+      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      # }
+    ];
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
+  };
 }
 
 # vim: set ts=2 sw=2:
