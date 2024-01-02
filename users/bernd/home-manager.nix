@@ -188,6 +188,12 @@
       # chituboxslicer
       uvtools
       rofi-music-rs
+
+      # theming
+      lxqt.lxqt-qtplugin
+      libsForQt5.qtstyleplugin-kvantum
+      xdg-desktop-portal
+      papirus-icon-theme
     ];
   };
 
@@ -431,21 +437,45 @@
     enable = true;
     font.name = "Cantarell 10";
     theme = {
-      # name = "orchis-theme";
-      # package = pkgs.orchis-theme;
       name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.gnome.gnome-themes-extra;
     };
     iconTheme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.gnome.gnome-themes-extra;
     };
     cursorTheme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.gnome.gnome-themes-extra;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
     };
   };
 
+  home.sessionVariables = {
+    QT_STYLE_OVERRIDE = "kvantum";
+    GTK_USE_PORTAL = 1;
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "kvantum";
+  };
+
+  xdg =
+    {
+      enable = true;
+      configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+        General.theme = "Adwaita-dark";
+      };
+
+
+    };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
