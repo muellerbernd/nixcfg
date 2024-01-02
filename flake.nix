@@ -79,10 +79,6 @@
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
       };
-      nixosConfigurations.t480ilmpad = mkDefault "t480ilmpad" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-      };
       nixosConfigurations.biltower = mkDefault "biltower" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
