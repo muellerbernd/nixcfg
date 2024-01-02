@@ -294,16 +294,15 @@
         speedFactor = 5;
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
       }
-      # {
-      #   hostName = "eis-buildserver";
-      #   systems = [ "x86_64-linux" ];
-      #   # protocol = "ssh-ng";
-      #   sshUser = "root";
-      #   # sshKey = "/root/.ssh/eis-remote";
-      #   maxJobs = 99;
-      #   speedFactor = 2;
-      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      # }
+      {
+        hostName = "eis-buildserver";
+        systems = [ "x86_64-linux" ];
+        sshUser = "root";
+        sshKey = config.age.secrets.distributedBuilderKey.path;
+        maxJobs = 99;
+        speedFactor = 9;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      }
     ];
     extraOptions = ''
       builders-use-substitutes = true
