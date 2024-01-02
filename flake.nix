@@ -68,9 +68,9 @@
       #       unstable = nixpkgs-unstable;
       #     };
       # };
-      nixosModules = import ./modules { lib = nixpkgs.lib; };
     in
     {
+      nixosModules = import ./modules { lib = nixpkgs.lib; };
       nixosConfigurations.x240 = mkDefault "x240" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";

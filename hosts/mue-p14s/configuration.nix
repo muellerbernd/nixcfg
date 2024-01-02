@@ -7,7 +7,8 @@
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    distributed-builder-client
+    # modules
+    mixins-distributed-builder-client
   ];
   # Bootloader.
   boot = {
