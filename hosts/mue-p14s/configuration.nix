@@ -3,10 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, inputs, ... }: {
-  imports = [
+  imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    distributed-builder-client
   ];
   # Bootloader.
   boot = {
@@ -270,44 +271,6 @@
     };
   };
 
-  age = {
-    identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets = {
-      distributedBuilderKey = {
-        file = "${inputs.self}/secrets/distributedBuilderKey.age";
-      };
-    };
-  };
-
-  # distributedBuilds
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "biltower";
-        systems = [ "x86_64-linux" ];
-        # protocol = "ssh-ng";
-        sshUser = "bernd";
-        # sshKey = "/root/.ssh/eis-remote";
-        sshKey = config.age.secrets.distributedBuilderKey.path;
-        maxJobs = 99;
-        speedFactor = 5;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      }
-      {
-        hostName = "eis-buildserver";
-        systems = [ "x86_64-linux" ];
-        sshUser = "root";
-        sshKey = config.age.secrets.distributedBuilderKey.path;
-        maxJobs = 99;
-        speedFactor = 9;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      }
-    ];
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
-  };
 }
 
 # vim: set ts=2 sw=2:

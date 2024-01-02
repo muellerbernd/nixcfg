@@ -68,6 +68,7 @@
       #       unstable = nixpkgs-unstable;
       #     };
       # };
+      nixosModules = import ./modules { lib = nixpkgs.lib; };
     in
     {
       nixosConfigurations.x240 = mkDefault "x240" {
