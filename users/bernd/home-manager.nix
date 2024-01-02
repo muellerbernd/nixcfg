@@ -192,6 +192,7 @@
       # theming
       lxqt.lxqt-qtplugin
       libsForQt5.qtstyleplugin-kvantum
+      libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
     ];
@@ -428,10 +429,10 @@
   #     package = pkgs.solarc-gtk-theme;
   #   };
   # };
-  dconf = {
-    enable = true;
-    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  # };
 
   gtk = {
     enable = true;
@@ -467,15 +468,12 @@
     style.name = "kvantum";
   };
 
-  xdg =
-    {
-      enable = true;
-      configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
-        General.theme = "Adwaita-dark";
-      };
-
-
+  xdg = {
+    enable = true;
+    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+      General.theme = "Adwaita-dark";
     };
+  };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
