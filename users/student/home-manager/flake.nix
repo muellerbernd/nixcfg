@@ -15,6 +15,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
+      defaultPackage.${system} = home-manager.defaultPackage.${system};
       homeConfigurations."student" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
