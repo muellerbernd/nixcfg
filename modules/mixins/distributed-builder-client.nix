@@ -30,7 +30,7 @@
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
       }
       {
-        hostName = "eis-buildserver";
+        hostName = "eis-machine";
         systems = [ "x86_64-linux" ];
         sshUser = "root";
         sshKey = config.age.secrets.distributedBuilderKey.path;

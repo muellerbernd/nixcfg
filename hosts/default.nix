@@ -254,6 +254,7 @@ in
     # nix-serve
     # nix-serve-ng
     inputs.agenix.packages.${system}.default
+    wireguard-tools
   ];
 
   # environment.pathsToLink =
