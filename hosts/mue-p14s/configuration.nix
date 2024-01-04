@@ -273,6 +273,10 @@
     };
   };
 
+  services.udev.extraRules = ''
+    KERNEL=="ttyACM0", MODE:="666"
+    KERNEL=="ttyACM1", MODE:="666"
+  '';
 }
 
 # vim: set ts=2 sw=2:

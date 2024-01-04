@@ -21,6 +21,7 @@
       "lp"
       "storage"
       "users"
+      "tty"
     ];
     openssh.authorizedKeys.keys = [
       # bernd smartphone key:
