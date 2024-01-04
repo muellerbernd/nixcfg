@@ -1,23 +1,9 @@
 { config, pkgs, lib, inputs, ... }:
-let
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-    text =
-      let
-        schema = pkgs.gsettings-desktop-schemas;
-        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-      in
-      ''
-        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-        gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema color-scheme 'prefer-dark'
-      '';
-  };
-in
 {
-
+  imports = with inputs.self.nixosModules; [
+    # modules
+    # mixins-greetd
+  ];
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = [ "ntfs" "cifs" ];
 
@@ -45,19 +31,41 @@ in
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = lib.mkDefault true;
-      allowedTCPPorts = lib.mkDefault [ 80 443 8080 5000 ];
-      allowedUDPPortRanges = lib.mkDefault [{
-        from = 4000;
-        to = 50000;
-      }
-        # # ROS2 needs 7400 + (250 * Domain) + 1
-        # # here Domain is 41 or 42
-        # {
-        #   from = 17650;
-        #   to = 17910;
-        # }
+      enable = lib.mkDefault false;
+      allowedTCPPorts = [
+        80
+        443
+        8080
+        5000
+        445 # samba
+        137
+        138
+        139
       ];
+      allowedUDPPorts = [
+        80
+        443
+        8080
+        5000
+        445 # samba
+        137
+        138
+        139
+        4500
+        51820
+      ];
+      # allowedUDPPortRanges = lib.mkDefault [{
+      #   from = 4000;
+      #   to = 50000;
+      # }
+      # # ROS2 needs 7400 + (250 * Domain) + 1
+      # # here Domain is 41 or 42
+      # {
+      #   from = 17650;
+      #   to = 17910;
+      # }
+      # ];
+      allowPing = lib.mkDefault true;
     };
   };
 
@@ -185,6 +193,16 @@ in
       ];
     };
   };
+
+  programs.hyprland = {
+    enable = false;
+    xwayland.enable = false;
+  };
+
+  # Hint Electon apps to use wayland
+  # environment.sessionVariables = {
+  #   NIXOS_OZONE_WL = "1";
+  # };
 
   # ignore laptop lid
   services.logind.lidSwitchDocked = "ignore";

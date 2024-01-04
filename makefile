@@ -12,11 +12,6 @@ switch:
 		else \
 			nixos-rebuild switch --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace; \
 	fi
-	# ifeq ($(USE_REMOTE_BUILDERS), "true")
-	#	echo "use remote builders";
-	# endif
-	#	echo "not use remote builders";
-	# fi
 
 boot:
 	nixos-rebuild boot --use-remote-sudo --flake .#${HOSTNAME} -L
