@@ -4,6 +4,12 @@
     "biltower" = {
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAt7MEJjzVNUPs5KIkE55lw6+Ss6n9EEspuUQJsZm3J";
     };
+    "eis-machine" = {
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
+    };
+    "eis-machine-vpn" = {
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
+    };
   };
   age = {
     identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
@@ -31,6 +37,15 @@
       }
       {
         hostName = "eis-machine";
+        systems = [ "x86_64-linux" ];
+        sshUser = "root";
+        sshKey = config.age.secrets.distributedBuilderKey.path;
+        maxJobs = 99;
+        speedFactor = 9;
+        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      }
+      {
+        hostName = "eis-machine-vpn";
         systems = [ "x86_64-linux" ];
         sshUser = "root";
         sshKey = config.age.secrets.distributedBuilderKey.path;
