@@ -135,6 +135,7 @@
       yamlfmt
       stylua
       black
+      isort
       clang-tools
       nodePackages.prettier
       beautysh

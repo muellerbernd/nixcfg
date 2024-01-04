@@ -7,7 +7,16 @@ ifndef HOSTNAME
 endif
 
 switch:
-	nixos-rebuild switch --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace
+	if [ -n $(dont_use_remote) ]; then \
+			nixos-rebuild switch --builders '' --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace; \
+		else \
+			nixos-rebuild switch --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace; \
+	fi
+	# ifeq ($(USE_REMOTE_BUILDERS), "true")
+	#	echo "use remote builders";
+	# endif
+	#	echo "not use remote builders";
+	# fi
 
 boot:
 	nixos-rebuild boot --use-remote-sudo --flake .#${HOSTNAME} -L
