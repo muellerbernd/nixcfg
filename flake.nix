@@ -46,6 +46,11 @@
             super.callPackage ./pkgs/uvtools { }; # path containing default.nix
           chituboxslicer =
             super.callPackage ./pkgs/chitubox { }; # path containing default.nix
+          # alacritty-patched =
+          #   super.callPackage ./pkgs/alacritty {
+          #     inherit (nixpkgs.darwin.apple_sdk.frameworks)
+          #       AppKit CoreGraphics CoreServices CoreText Foundation libiconv OpenGL;
+          #   }; # path containing default.nix
         })
         (final: prev: {
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;

@@ -20,11 +20,13 @@
       # terminal
       glow
       alacritty
+      wezterm
       antigen
       starship
       tmux
       zoxide
       # better shell history
+      w3m
       atuin
       ranger
       ueberzugpp
@@ -33,7 +35,15 @@
       exiftool
       bat
       trash-cli
+      yazi
+      ffmpegthumbnailer
+      unar
+      jq
       joshuto
+      imgcat
+      timg
+      chafa
+      libsixel
       neofetch
       fzf
       fd
