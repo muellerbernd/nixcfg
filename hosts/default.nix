@@ -3,26 +3,11 @@
   imports = with inputs.self.nixosModules; [
     # modules
     # mixins-greetd
+    mixins-locale
+    mixins-common
+    mixins-virtualisation
   ];
-  # NixOS uses NTFS-3G for NTFS support.
-  boot.supportedFilesystems = [ "ntfs" "cifs" ];
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -69,28 +54,6 @@
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-  location.provider = "geoclue2";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
-
   # Enable sound.
   sound.enable = true;
   hardware = {
@@ -111,9 +74,6 @@
     };
     keyboard.qmk.enable = true;
   };
-
-  # Configure console keymap
-  console.keyMap = "de";
 
   services = {
     logind.killUserProcesses = false;
@@ -213,118 +173,6 @@
     HandlePowerKey=ignore
   '';
 
-  # Nix settings, auto cleanup and enable flakes
-  nix = {
-    package = pkgs.nixFlakes;
-    settings.auto-optimise-store = true;
-    settings.allowed-users = [ "bernd" "nix-serve" ];
-    settings.trusted-users = [ "@wheel" "root" "nix-ssh" ];
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-      builders-use-substitutes = true
-    '';
-    # sshServe = {
-    #   enable = true;
-    #   protocol = "ssh-ng";
-    #   write = "true";
-    #   keys = [
-    #     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCr7tntTSMnedzhPA9ScXtX5JtRlsqQEqZisSXV/gs9Z7eDOrFiLZFVCZ7M+z9U4TvXCkEw1r06ruLcYHim5wSSLhW7tHpFm7fs1CA9gbftbUkKHx8Po+f6tA9J+f60gQHJeG2KPaYzjeBMIc4e+4E4jj0d+zzGUrKTcNu6fMZUT+dA1TR4+sCH5eTi476avLdbAcgYUWnuUJCXixFjjhdalIClcZGFnNFXz3CZfnPiE5tBitAMZJjc4Nkz14PyTQvDH7OSkqQvlBZ8L56SvZSX9ZxEbClgeVUEVI63QYIVjEgeOB4xFr0dpIlPlwAhaBsakr7hmvHpllvMgerUC61Et6T3PWmNO+uAyv0UBcWQG1lMXLlfnN4NfYMoun69kmM/t0KkhT6w2sHjBpuzaoz/0YZSniTOv/Ov5igK/OOwAcshXV0n9Tf31oPqe1UaI6CtyT1qrWgnvxTkTRlxT80g+Ky99BCCCE5BKvFrlq3UziMrRo3NNJ3q/diBhwcvDbc= bernd@t480i7"
-    #
-    #     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/XkOH/IXFjWKWj3RUXP44MHH9P551VeA37MXhl/FeTcitQEomTQzOld6sMzbfca0I0IID25HsXEVEwohp6cHB1sU/YecTu70Ya29r1uqnCmZsnipiNYIAvf8B7GYZZrsWMRn582Cj0vL0zWr5x4SaTydPEifurzUM8DUQLMuN3i1o8yBaUCnqQbjyTec07EpRl15qysWLRW/fg4+fw+V4u91E8X+fUCH63H4pAGRKuXybMlA9q5IDuvTAdlcXi3CiTVp7WKWo0rwkTgzNvvLG7gSyoZu0VCoXW0yTaGjCPg7k7vUsSpUutiIKo8TG1rtEOBS/efzVWc0j1bbBWl2Tgu6JfjYwGfHt//URPvoy4TMJLjoxQ1t3HoiBGhVvSpDeqSD1N2WeutSmArfdlHa0D3hy5lF/uOlEaUhxxxlOOy4F6EPo25JpAiny+UxMuABiH/YmqfuGfJ+TMbZyO9N7ePJuCH/GafLxNjb64yS9ogTGipanb3lQfi+X2zp7ZUU= bernd@x240"
-    #   ];
-    # };
-  };
-  # nix.envVars.SSH_AUTH_SOCK = "/run/user/1000/gnupg/S.gpg-agent.ssh";
-
-  environment.systemPackages = with pkgs; [
-    xorg.xhost
-    # gtk
-    gtk-engine-murrine
-    gtk_engines
-    gsettings-desktop-schemas
-    lxappearance
-    playerctl
-    xfce.thunar
-    xfce.thunar-volman
-    xorg.xmodmap
-    xorg.xev
-    #
-    gnupg
-    pam_gnupg
-    bc
-    xbindkeys
-    xsel
-    xdotool
-    # gtk settings
-    # configure-gtk
-    # nix
-    nixpkgs-lint
-    nixpkgs-fmt
-    nixfmt
-    home-manager
-    # nix-serve
-    # nix-serve-ng
-    inputs.agenix.packages.${system}.default
-    wireguard-tools
-  ];
-
-  # environment.pathsToLink =
-  #   [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
-
-  virtualisation = {
-    containers.enable = true;
-    containers.storage.settings = {
-      storage = {
-        driver = "overlay";
-        runroot = "/run/containers/storage";
-        graphroot = "/var/lib/containers/storage";
-        rootless_storage_path = "/tmp/containers-$USER";
-        options.overlay.mountopt = "nodev,metacopy=on";
-      };
-    };
-    # declare containers
-    oci-containers = {
-      # use podman as default container engine
-      backend = "podman";
-    };
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-      enableNvidia = true;
-
-      defaultNetwork.settings = { dns_enabled = true; };
-    };
-  };
-  environment.extraInit = ''
-    if [ -z "$DOCKER_HOST" -a -n "$XDG_RUNTIME_DIR" ]; then
-      export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
-    fi
-  '';
-
-  # environment.etc = {
-  #   "xdg/gtk-2.0/gtkrc".text = "gtk-error-bell=0";
-  #   "xdg/gtk-3.0/settings.ini".text = ''
-  #     [Settings]
-  #     gtk-error-bell=false
-  #     color-scheme 'prefer-dark'
-  #   '';
-  #   "xdg/gtk-4.0/settings.ini".text = ''
-  #     [Settings]
-  #     gtk-error-bell=false
-  #     color-scheme 'prefer-dark'
-  #   '';
-  # };
-
-
   # programs
 
   # use zsh as default shell
@@ -359,16 +207,6 @@
   programs.wireshark.enable = true;
   programs.tmux = {
     enable = true;
-    # clock24 = true;
-    # extraConfig = '' # used for less common options, intelligently combines if defined in multiple places.
-    #   ...
-    # '';
-  };
-
-  zramSwap = {
-    enable = lib.mkDefault false;
-    algorithm = "zstd";
-    memoryPercent = 90;
   };
 
   # This value determines the NixOS release from which the default
