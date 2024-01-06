@@ -71,11 +71,11 @@
   ];
 
   # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "spotify"
-    "uvtools-4.0.6"
-  ];
+  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  #   "spotify"
+  #   "uvtools-4.0.6"
+  # ];
 
   # ignore laptop lid
   services.logind.lidSwitchDocked = "ignore";
