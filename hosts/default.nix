@@ -2,10 +2,12 @@
 {
   imports = with inputs.self.nixosModules; [
     # modules
-    # mixins-greetd
+    mixins-greetd
     mixins-locale
     mixins-common
     mixins-virtualisation
+    mixins-i3
+    mixins-sway
   ];
 
   # Configure network proxy if necessary
@@ -129,84 +131,6 @@
       terminus_font_ttf
       babelstone-han
     ];
-  };
-  # Configure xserver
-  services.xserver = {
-    enable = true;
-    layout = "de";
-    xkbVariant = "";
-    # Enable touchpad support (enabled default in most desktopManager).
-    # libinput = { enable = true; };
-
-    desktopManager = { xterm.enable = false; };
-
-    displayManager = { defaultSession = "none+i3"; };
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        rofi # application launcher most people use
-        i3status # gives you the default i3 status bar
-        i3lock # default i3 screen locker
-        xidlehook
-        i3status-rust
-      ];
-    };
-  };
-
-  programs.hyprland = {
-    enable = false;
-    xwayland.enable = false;
-  };
-
-  # Hint Electon apps to use wayland
-  # environment.sessionVariables = {
-  #   NIXOS_OZONE_WL = "1";
-  # };
-
-  # ignore laptop lid
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.lidSwitch = "ignore";
-  services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    # don’t shutdown when power button is short-pressed
-    HandlePowerKey=ignore
-  '';
-
-  # programs
-
-  # use zsh as default shell
-  users.defaultUserShell = pkgs.zsh;
-
-  # thunar settings
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
-
-  };
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-
-  #
-  programs.dconf.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-  programs.zsh.enable = true;
-
-  programs.light.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  programs.adb.enable = true;
-  programs.wireshark.enable = true;
-  programs.tmux = {
-    enable = true;
   };
 
   # This value determines the NixOS release from which the default
