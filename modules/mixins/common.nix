@@ -84,15 +84,6 @@
   #   "uvtools-4.0.6"
   # ];
 
-  # ignore laptop lid
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.lidSwitch = "ignore";
-  services.logind.extraConfig = ''
-    HandleLidSwitch=ignore
-    # don’t shutdown when power button is short-pressed
-    HandlePowerKey=ignore
-  '';
-
   # programs
 
   # use zsh as default shell
@@ -183,6 +174,15 @@
   };
   # enable the thunderbolt daemon
   services.hardware.bolt.enable = true;
+  # ignore laptop lid
+  services.logind.lidSwitchDocked = "ignore";
+  services.logind.lidSwitch = "ignore";
+  services.logind.extraConfig = ''
+    HandleLidSwitch=ignore
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=ignore
+  '';
+
 
   security.polkit.enable = true;
 }
