@@ -55,6 +55,16 @@
           #   }; # path containing default.nix
         })
         (final: prev: {
+          # sway = prev.sway.overrideAttrs (old: {
+          #   name = "sway-git";
+          #   version = "git";
+          #   src = prev.fetchFromGitHub {
+          #     owner = "nim65s";
+          #     repo = "sway";
+          #     rev = "issue-7409";
+          #     hash = "sha256-WxnT+le9vneQLFPz2KoBduOI+zfZPhn1fKlaqbPL6/g=";
+          #   };
+          # });
           # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
           # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
           # neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
