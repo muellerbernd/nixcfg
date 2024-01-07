@@ -43,7 +43,6 @@
       driSupport = true;
       driSupport32Bit = true;
     };
-    pulseaudio.enable = true;
     bluetooth.enable = true;
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     nvidia = {
