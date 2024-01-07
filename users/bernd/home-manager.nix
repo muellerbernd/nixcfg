@@ -91,7 +91,6 @@
       archiver
       xfce.xfce4-screenshooter
       grim
-      flameshot
       ntfs3g
       gvfs
       blender

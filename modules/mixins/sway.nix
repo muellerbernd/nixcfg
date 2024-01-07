@@ -25,6 +25,9 @@ in
       wl-clipboard
       clipman
       sway-run
+      gammastep
+      grim
+      slurp
     ];
   };
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
