@@ -2,7 +2,8 @@
 {
   imports = with inputs.self.nixosModules; [
     # modules
-    mixins-greetd
+    # mixins-greetd
+    mixins-lightdm
     mixins-locale
     mixins-fonts
     mixins-virtualisation
