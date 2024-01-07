@@ -122,6 +122,7 @@
     };
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     nvidia = {
+      open = true;
       # fix screen tearing in sync mode
       modesetting.enable = true;
       # fix suspend/resume screen corruption in sync mode
