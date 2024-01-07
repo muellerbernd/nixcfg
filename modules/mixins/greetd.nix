@@ -31,8 +31,9 @@
     };
   };
 
-  # environment.etc."greetd/environments".text = ''
-  #   startx
-  #   # sway
-  # '';
+  environment.etc."greetd/environments".text = ''
+    startx
+    sway
+    zsh
+  '';
 }

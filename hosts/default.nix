@@ -2,10 +2,7 @@
 {
   imports = with inputs.self.nixosModules; [
     # modules
-    mixins-greetd
-    mixins-locale
     mixins-common
-    mixins-virtualisation
     mixins-i3
     mixins-sway
   ];
@@ -54,83 +51,6 @@
       # ];
       allowPing = lib.mkDefault true;
     };
-  };
-
-  # Enable sound.
-  sound.enable = true;
-  hardware = {
-    opengl.enable = true;
-    pulseaudio.enable = true;
-    bluetooth = {
-      enable = true; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-      settings = {
-        General = {
-          # Restricts all controllers to the specified transport. Default value
-          # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
-          # Possible values: "dual", "bredr", "le"
-          ControllerMode = "dual";
-          Enable = "Source,Sink,Media,Socket";
-        };
-      };
-    };
-    keyboard.qmk.enable = true;
-  };
-
-  services = {
-    logind.killUserProcesses = false;
-    gnome.gnome-keyring.enable = true;
-    # Enable the OpenSSH daemon.
-    openssh = {
-      enable = true;
-      settings.X11Forwarding = true;
-      # require public key authentication for better security
-      settings.PasswordAuthentication = false;
-      settings.KbdInteractiveAuthentication = false;
-      settings.PermitRootLogin = "yes";
-      openFirewall = true;
-    };
-    # enable blueman
-    blueman.enable = true;
-    # Enable CUPS to print documents.
-    printing.enable = true;
-    avahi.enable = true;
-    avahi.nssmdns4 = true;
-    # for a WiFi printer
-    avahi.openFirewall = true;
-  };
-  # enable the thunderbolt daemon
-  services.hardware.bolt.enable = true;
-
-  security.polkit.enable = true;
-
-  # fonts
-  fonts = {
-    packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "DroidSansMono"
-          "Hack"
-          # "Iosevka"
-        ];
-      })
-      fira-code
-      fira-code-symbols
-      terminus_font
-      jetbrains-mono
-      powerline-fonts
-      gelasio
-      # nerdfonts
-      iosevka
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      source-code-pro
-      ttf_bitstream_vera
-      terminus_font_ttf
-      babelstone-han
-    ];
   };
 
   # This value determines the NixOS release from which the default

@@ -1,5 +1,12 @@
 { config, pkgs, lib, inputs, ... }:
 {
+  imports = with inputs.self.nixosModules; [
+    # modules
+    mixins-greetd
+    mixins-locale
+    mixins-fonts
+    mixins-virtualisation
+  ];
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = [ "ntfs" "cifs" ];
 
@@ -122,6 +129,60 @@
     enable = true;
   };
 
+  #
   services.xserver.displayManager.startx.enable = true;
 
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
+
+  # Enable sound.
+  sound.enable = true;
+  hardware = {
+    opengl.enable = true;
+    pulseaudio.enable = false;
+    bluetooth = {
+      enable = true; # enables support for Bluetooth
+      powerOnBoot = true; # powers up the default Bluetooth controller on boot
+      settings = {
+        General = {
+          # Restricts all controllers to the specified transport. Default value
+          # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
+          # Possible values: "dual", "bredr", "le"
+          ControllerMode = "dual";
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
+    };
+    keyboard.qmk.enable = true;
+  };
+
+  services = {
+    logind.killUserProcesses = false;
+    gnome.gnome-keyring.enable = true;
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      settings.X11Forwarding = true;
+      # require public key authentication for better security
+      settings.PasswordAuthentication = false;
+      settings.KbdInteractiveAuthentication = false;
+      settings.PermitRootLogin = "yes";
+      openFirewall = true;
+    };
+    # enable blueman
+    blueman.enable = true;
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    avahi.enable = true;
+    avahi.nssmdns4 = true;
+    # for a WiFi printer
+    avahi.openFirewall = true;
+  };
+  # enable the thunderbolt daemon
+  services.hardware.bolt.enable = true;
+
+  security.polkit.enable = true;
 }
