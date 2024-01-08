@@ -164,6 +164,7 @@
       pkgs.python311Packages.flask
       pkgs.python311Packages.requests
       pkgs.python311Packages.pygments
+      pkgs.python311Packages.numpy
       # latex
       texlive.combined.scheme-full
       # texlive.combined.scheme-medium
