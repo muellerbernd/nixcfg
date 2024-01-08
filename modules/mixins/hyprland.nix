@@ -7,7 +7,7 @@
     xwayland.enable = true;
   };
   environment.systemPackages = with pkgs; [
-    rofi-wayland # application launcher most people use
+    wofi # application launcher most people use
     swaylock
     swayidle
     wl-clipboard
@@ -15,6 +15,7 @@
     gammastep
     grim
     slurp
+    waybar
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
