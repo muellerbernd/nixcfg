@@ -12,7 +12,7 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd sway
+            --cmd startx
         '';
         # command = "sway";
       };
