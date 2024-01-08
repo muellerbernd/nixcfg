@@ -398,8 +398,11 @@
       };
 
       "$mod" = "SUPER";
+      "$movemouse" = "sh -c 'eval `xdotool getactivewindow getwindowgeometry --shell`; xdotool mousemove $((X+WIDTH-80)) $((Y+120))'";
 
       bind = [
+        "$mod,Shift,q,kill"
+        "$mod,Period,exec,dunstctl close"
         # move focus
         "$mod,Left,movefocus,l"
         "$mod,Down,movefocus,d"
@@ -410,7 +413,7 @@
         "$mod,Shift,Left,movewindow,l"
         "$mod,Shift,Down,movewindow,d"
         "$mod,Shift,Up,movewindow,u"
-        "$mod,Shift,right,movewindow,r"
+        "$mod,Shift,Right,movewindow,r"
 
         # go to workspace
         "$mod,1,workspace,1"
@@ -436,7 +439,8 @@
         "$mod,9,movetoworkspace,9"
         "$mod,0,movetoworkspace,10"
         #
-        "$mod, D, exec, rofi"
+        "$mod, Return, exec, wezterm"
+        "$mod, D, exec, rofi -combi-modi window#drun#run -show combi -lines 20 -show-icons"
       ];
     };
   };
