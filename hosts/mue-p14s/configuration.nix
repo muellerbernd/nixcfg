@@ -278,6 +278,8 @@
     KERNEL=="ttyACM0", MODE:="666"
     KERNEL=="ttyACM1", MODE:="666"
   '';
+  virtualisation.vmware.host.enable = true;
+
 }
 
 # vim: set ts=2 sw=2:
