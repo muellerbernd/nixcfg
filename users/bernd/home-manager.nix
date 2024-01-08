@@ -322,34 +322,124 @@
     };
   };
 
-  # wayland.windowManager.hyprland = {
-  #   # Whether to enable Hyprland wayland compositor
-  #   enable = true;
-  #   # The hyprland package to use
-  #   package = pkgs.hyprland;
-  #   # Whether to enable XWayland
-  #   xwayland.enable = true;
-  #
-  #   # Optional
-  #   # Whether to enable hyprland-session.target on hyprland startup
-  #   systemd.enable = true;
-  #
-  #   settings = {
-  #     decoration = {
-  #       shadow_offset = "0 5";
-  #       "col.shadow" = "rgba(00000099)";
-  #     };
-  #
-  #     "$mod" = "SUPER";
-  #
-  #     bindm = [
-  #       # mouse movements
-  #       "$mod, mouse:272, movewindow"
-  #       "$mod, mouse:273, resizewindow"
-  #       "$mod ALT, mouse:272, resizewindow"
-  #     ];
-  #   };
-  # };
+  wayland.windowManager.hyprland = {
+    # Whether to enable Hyprland wayland compositor
+    enable = true;
+    # The hyprland package to use
+    package = pkgs.hyprland;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+
+    # Optional
+    # Whether to enable hyprland-session.target on hyprland startup
+    systemd.enable = true;
+
+    settings = {
+      env = lib.mapAttrsToList (name: value: "${name},${toString value}") {
+        SDL_VIDEODRIVER = "wayland";
+        _JAVA_AWT_WM_NONREPARENTING = 1;
+        WLR_DRM_NO_ATOMIC = 1;
+        XCURSOR_SIZE = 24;
+        CLUTTER_BACKEND = "wayland";
+        XDG_SESSION_TYPE = "wayland";
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+        MOZ_ENABLE_WAYLAND = "1";
+        # WLR_BACKEND = "vulkan";
+        QT_QPA_PLATFORM = "wayland";
+        GDK_BACKEND = "wayland";
+        NIXOS_OZONE_WL = "1";
+      };
+
+      decoration = {
+        shadow_offset = "0 5";
+        "col.shadow" = "rgba(00000099)";
+      };
+
+      monitor = [ "eDP-1,1920x1080@60,0x0,1" ];
+
+      misc = {
+        vfr = true;
+        # enable_swallow = true;
+        # swallow_regex = "^(foot)$";
+        animate_manual_resizes = false;
+        force_default_wallpaper = 0;
+      };
+
+      input = {
+        follow_mouse = 1;
+        force_no_accel = 1;
+        repeat_delay = 200;
+        repeat_rate = 40;
+
+        touchpad = {
+          natural_scroll = true;
+          tap_to_click = true;
+          disable_while_typing = true;
+          clickfinger_behavior = true;
+          middle_button_emulation = false;
+        };
+
+        kb_layout = "de";
+      };
+
+      general = {
+        sensitivity = 0.2;
+
+        gaps_in = 1;
+        gaps_out = 4;
+        border_size = 1;
+        allow_tearing = true;
+
+        layout = "dwindle";
+      };
+      binds = {
+        workspace_back_and_forth = 0;
+        allow_workspace_cycles = 1;
+      };
+
+      "$mod" = "SUPER";
+
+      bind = [
+        # move focus
+        "$mod,Left,movefocus,l"
+        "$mod,Down,movefocus,d"
+        "$mod,Up,movefocus,u"
+        "$mod,right,movefocus,r"
+
+        #movewindow
+        "$mod,Shift,Left,movewindow,l"
+        "$mod,Shift,Down,movewindow,d"
+        "$mod,Shift,Up,movewindow,u"
+        "$mod,Shift,right,movewindow,r"
+
+        # go to workspace
+        "$mod,1,workspace,1"
+        "$mod,2,workspace,2"
+        "$mod,3,workspace,3"
+        "$mod,4,workspace,4"
+        "$mod,5,workspace,5"
+        "$mod,6,workspace,6"
+        "$mod,7,workspace,7"
+        "$mod,8,workspace,8"
+        "$mod,9,workspace,9"
+        "$mod,0,workspace,10"
+
+        # move container to workspace
+        "$mod,1,movetoworkspace,1"
+        "$mod,2,movetoworkspace,2"
+        "$mod,3,movetoworkspace,3"
+        "$mod,4,movetoworkspace,4"
+        "$mod,5,movetoworkspace,5"
+        "$mod,6,movetoworkspace,6"
+        "$mod,7,movetoworkspace,7"
+        "$mod,8,movetoworkspace,8"
+        "$mod,9,movetoworkspace,9"
+        "$mod,0,movetoworkspace,10"
+        #
+        "$mod, D, exec, rofi"
+      ];
+    };
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

@@ -4,7 +4,7 @@
     # modules
     mixins-common
     mixins-i3
-    mixins-sway
+    mixins-hyprland
   ];
 
   # Configure network proxy if necessary
