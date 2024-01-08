@@ -12,7 +12,7 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd startx
+            --cmd sway
         '';
         # command = "sway";
       };
@@ -24,4 +24,5 @@
     startxfce4
   '';
 
+  services.xserver.displayManager.startx.enable = true;
 }
