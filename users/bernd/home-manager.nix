@@ -401,19 +401,29 @@
       "$movemouse" = "sh -c 'eval `xdotool getactivewindow getwindowgeometry --shell`; xdotool mousemove $((X+WIDTH-80)) $((Y+120))'";
 
       bind = [
-        "$mod,Shift,q,kill"
+        "$mod,Shift,q,killactive"
         "$mod,Period,exec,dunstctl close"
+        #
+        "$mod, Return, exec, wezterm"
+        "$mod, P, pseudo" # dwindle
+        "$mod, J, togglesplit" # dwindle
+        "$mod, D, exec, rofi -combi-modi window#drun#run -show combi -lines 20 -show-icons"
+
+        "$mod, Space, togglefloating"
+        # scratchpad
+        "$mod, Minus, togglespecialworkspace, magic"
+        "$mod SHIFT, Minus, movetoworkspace, special:magic"
         # move focus
         "$mod,Left,movefocus,l"
         "$mod,Down,movefocus,d"
         "$mod,Up,movefocus,u"
-        "$mod,right,movefocus,r"
+        "$mod,Right,movefocus,r"
 
         #movewindow
-        "$mod,Shift,Left,movewindow,l"
-        "$mod,Shift,Down,movewindow,d"
-        "$mod,Shift,Up,movewindow,u"
-        "$mod,Shift,Right,movewindow,r"
+        "$mod,SHIFT,Left,movewindow,l"
+        "$mod,SHIFT,Down,movewindow,d"
+        "$mod,SHIFT,Up,movewindow,u"
+        "$mod,SHIFT,Right,movewindow,r"
 
         # go to workspace
         "$mod,1,workspace,1"
@@ -428,19 +438,16 @@
         "$mod,0,workspace,10"
 
         # move container to workspace
-        "$mod,1,movetoworkspace,1"
-        "$mod,2,movetoworkspace,2"
-        "$mod,3,movetoworkspace,3"
-        "$mod,4,movetoworkspace,4"
-        "$mod,5,movetoworkspace,5"
-        "$mod,6,movetoworkspace,6"
-        "$mod,7,movetoworkspace,7"
-        "$mod,8,movetoworkspace,8"
-        "$mod,9,movetoworkspace,9"
-        "$mod,0,movetoworkspace,10"
-        #
-        "$mod, Return, exec, wezterm"
-        "$mod, D, exec, rofi -combi-modi window#drun#run -show combi -lines 20 -show-icons"
+        "$mod SHIFT,1,movetoworkspace,1"
+        "$mod SHIFT,2,movetoworkspace,2"
+        "$mod SHIFT,3,movetoworkspace,3"
+        "$mod SHIFT,4,movetoworkspace,4"
+        "$mod SHIFT,5,movetoworkspace,5"
+        "$mod SHIFT,6,movetoworkspace,6"
+        "$mod SHIFT,7,movetoworkspace,7"
+        "$mod SHIFT,8,movetoworkspace,8"
+        "$mod SHIFT,9,movetoworkspace,9"
+        "$mod SHIFT,0,movetoworkspace,10"
       ];
     };
   };
