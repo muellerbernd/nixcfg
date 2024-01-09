@@ -12,17 +12,17 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd startx
+            --cmd Hyprland
         '';
         # command = "sway";
       };
     };
   };
-  environment.etc."greetd/environments".text = ''
-    sway
-    startx
-    startxfce4
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   sway
+  #   startx
+  #   startxfce4
+  # '';
 
   services.xserver.displayManager.startx.enable = true;
 }

@@ -58,7 +58,7 @@
       # supported GPUs is at:
       # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
       # Only available from driver 515.43.04+
-      open = true;
+      open = false;
 
       #Fixes a glitch
       nvidiaPersistenced = true;
