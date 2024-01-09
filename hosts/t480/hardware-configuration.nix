@@ -31,7 +31,7 @@
     # SSD
     "isci"
   ];
-  boot.initrd.kernelModules = [ "i915" ];
+  # boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
   boot.extraModulePackages = [ ];
 
