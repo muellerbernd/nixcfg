@@ -17,6 +17,7 @@
     gammastep
     grim
     slurp
+    # eww-wayland
     waybar
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces

@@ -184,6 +184,7 @@ in
       dino
       # matrix client
       element-desktop
+      fractal
       # vpn
       openconnect_openssl
       networkmanager-openconnect
