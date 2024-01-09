@@ -37,7 +37,7 @@
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
         inputs.neovim-nightly.overlay
-        inputs.yazi.overlays.default
+        # inputs.yazi.overlays.default
         inputs.rofi-music-rs.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
