@@ -53,6 +53,9 @@
           #     inherit (nixpkgs.darwin.apple_sdk.frameworks)
           #       AppKit CoreGraphics CoreServices CoreText Foundation libiconv OpenGL;
           #   }; # path containing default.nix
+          waybar = super.waybar.overrideAttrs (oldAttrs: {
+            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+          });
         })
         (final: prev: {
           # sway = prev.sway.overrideAttrs (old: {
