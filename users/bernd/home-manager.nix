@@ -94,6 +94,8 @@ in
       gnome.file-roller
       archiver
       xfce.xfce4-screenshooter
+      flameshot
+      obs-studio
       grim
       ntfs3g
       gvfs
