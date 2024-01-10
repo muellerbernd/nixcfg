@@ -61,6 +61,9 @@
 
       # eis-remote
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJij7unHFBR6aCD75wKYdcjVikDaxOhF6laTR1gdzTE6 bernd@t480ilmpad"
+
+      # bernd ssh
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe bernd@muellerbernd.de"
     ];
   };
   users.extraGroups.vboxusers.members = [ "bernd" ];
