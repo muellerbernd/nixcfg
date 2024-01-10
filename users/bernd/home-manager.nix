@@ -183,10 +183,10 @@ in
       # messenger
       gajim
       teams-for-linux
-      dino
       # matrix client
-      element-desktop
-      fractal
+      cinny-desktop
+      #
+      thunderbird
       # vpn
       openconnect_openssl
       networkmanager-openconnect
