@@ -1,5 +1,18 @@
 { config, pkgs, lib, inputs, ... }:
 {
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    (writeShellScriptBin "qemu-system-x86_64-uefi" ''
+        qemu-system-x86_64 \
+      - bios ${
+      pkgs.OVMF.fd}/FV/OVMF.fd \
+      "$@"''
+    )
+    qemu
+  ];
+
   virtualisation = {
     containers.enable = true;
     containers.storage.settings = {
