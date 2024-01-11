@@ -61,7 +61,10 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        mesa.drivers
+        vulkan-loader
+        vulkan-validation-layers
+        vulkan-extension-layer
+        vulkan-tools
       ];
     };
     trackpoint = {
