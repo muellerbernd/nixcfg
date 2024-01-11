@@ -18,11 +18,11 @@
     gammastep
     grim
     slurp
-    # eww-wayland
     wayland
     waybar
     qt6.qtwayland
-    libsForQt5.qt5.qtwayland
+    libsForQt5.qtwayland
+    glxinfo
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
