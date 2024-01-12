@@ -120,11 +120,8 @@
   programs.wireshark.enable = true;
   programs.tmux.enable = true;
 
-  #
-  # services.xserver.displayManager.startx.enable = true;
-
   # Enable sound.
-  # sound.enable = true;
+  sound.enable = true;
   hardware = {
     enableAllFirmware = true;
     opengl.enable = true;
@@ -138,6 +135,7 @@
           # Possible values: "dual", "bredr", "le"
           ControllerMode = "dual";
           Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
         };
       };
     };
