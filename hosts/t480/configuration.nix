@@ -17,7 +17,7 @@
     initrd = {
       luks.devices = {
         crypt = {
-          device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
+          device = "/dev/nvme1n1p2";
           preLVM = true;
         };
         # data = {
@@ -122,17 +122,17 @@
     glxinfo
   ];
 
-  zramSwap = { enable = false; };
+  services.fwupd.enable = true;
 
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = [ "on-the-go" ];
-      powerManagement = {
-        enable = true;
-        cpuFreqGovernor = "powersave";
-      };
-    };
-  };
+  # specialisation = {
+  #   on-the-go.configuration = {
+  #     system.nixos.tags = [ "on-the-go" ];
+  #     powerManagement = {
+  #       enable = true;
+  #       cpuFreqGovernor = "powersave";
+  #     };
+  #   };
+  # };
 }
 
 # vim: set ts=2 sw=2:
