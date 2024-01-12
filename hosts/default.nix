@@ -5,6 +5,7 @@
     mixins-common
     mixins-i3
     mixins-hyprland
+    mixins-sway
   ];
 
   # Configure network proxy if necessary
