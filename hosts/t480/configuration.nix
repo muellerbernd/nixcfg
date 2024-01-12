@@ -26,10 +26,6 @@
         #   allowDiscards = true;
         # };
       };
-      secrets = {
-        # Create /mnt/etc/secrets/initrd directory and copy keys to it
-        "keyfile" = "/etc/secrets/initrd/keyfile";
-      };
     };
   };
 
