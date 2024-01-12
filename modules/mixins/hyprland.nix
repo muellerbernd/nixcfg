@@ -6,7 +6,7 @@
     # Whether to enable XWayland
     xwayland.enable = true;
     # The hyprland package to use
-    package = pkgs.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
@@ -34,7 +34,7 @@
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
+    # extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk ];
   };
   security.pam.services.swaylock = { };
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1

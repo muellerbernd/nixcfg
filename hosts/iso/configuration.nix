@@ -1,10 +1,5 @@
 { config, pkgs, lib, ... }: {
-
-  boot.swraid.enable = lib.mkForce false;
-
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -25,6 +20,8 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  services.xserver.enable = true;
+
   # Configure console keymap
   console.keyMap = "de";
 
@@ -41,31 +38,12 @@
     };
   };
 
-  # Configure xserver
-  services.xserver = {
-    enable = false;
-    layout = "de";
-    xkbVariant = "";
-  };
-
-  # Nix settings, auto cleanup and enable flakes
-  nix = {
-    package = pkgs.nixFlakes;
-    settings.auto-optimise-store = true;
-    settings.trusted-users = [ "@wheel" "root" ];
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-      builders-use-substitutes = true
-    '';
-  };
-
-  environment.systemPackages = with pkgs; [
+  environment.defaultPackages = with pkgs; [
     neovim
+    nano
+    vim
+    rsync
     git
-    # nix
-    home-manager
   ];
 
   # use zsh as default shell
@@ -80,11 +58,6 @@
   };
   programs.zsh.enable = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   # Enable SSH in the boot process.
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
   users.users.root.openssh.authorizedKeys.keys = [
@@ -95,11 +68,20 @@
   ];
 
 
-  # Enable networking
-  networking = {
-    networkmanager.enable = true;
-    wireless.enable = false;
-  };
+  # Provide networkmanager for easy wireless configuration.
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = lib.mkImageMediaOverride false;
+
+  # VM guest additions to improve host-guest interaction
+  services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true;
+  virtualisation.vmware.guest.enable = pkgs.stdenv.hostPlatform.isx86;
+  virtualisation.hypervGuest.enable = true;
+  services.xe-guest-utilities.enable = pkgs.stdenv.hostPlatform.isx86;
+  # The VirtualBox guest additions rely on an out-of-tree kernel module
+  # which lags behind kernel releases, potentially causing broken builds.
+  virtualisation.virtualbox.guest.enable = false;
+
 
   system.stateVersion = "23.11";
 }

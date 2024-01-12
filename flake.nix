@@ -18,6 +18,10 @@
     };
 
     # nur.url = "github:nix-community/NUR";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
