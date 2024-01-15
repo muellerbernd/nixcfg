@@ -185,7 +185,6 @@ in
       firefox
       # media
       spotify
-      monophony
       # messenger
       gajim
       teams-for-linux
@@ -206,7 +205,7 @@ in
       evtest
       # mesh and pointcloud
       meshlab
-      cloudcompare
+      # cloudcompare
       # custom packages
       annotator
       # lycheeslicer
