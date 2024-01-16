@@ -190,6 +190,7 @@ in
       teams-for-linux
       # matrix client
       cinny-desktop
+      nheko
       #
       thunderbird
       # vpn
