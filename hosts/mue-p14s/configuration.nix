@@ -194,6 +194,8 @@
     samba
     lxqt.lxqt-policykit
     iperf
+    nmap
+    socat
   ];
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
