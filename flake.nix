@@ -22,6 +22,12 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # hy3 = {
+    #   url = "github:outfoxxed/hy3"; # where {version} is the hyprland release version
+    #   # or "github:outfoxxed/hy3" to follow the development branch.
+    #   # (you may encounter issues if you dont do the same for hyprland)
+    #   inputs.hyprland.follows = "hyprland";
+    # };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
