@@ -30,3 +30,6 @@ upgrade:
 
 iso:
 	nix build .#nixosConfigurations.ISO.config.system.build.isoImage --show-trace
+
+vm:
+	nixos-rebuild build-vm --flake .#${HOSTNAME}
