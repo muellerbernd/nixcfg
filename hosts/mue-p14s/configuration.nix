@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, inputs, ... }: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
@@ -10,6 +6,7 @@
     # modules
     mixins-distributed-builder-client
   ];
+
   # Bootloader.
   boot = {
     loader = {
@@ -25,8 +22,6 @@
       };
     };
   };
-  # use lts kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services = {
     # udev.extraRules = ''
@@ -54,21 +49,6 @@
         CPU_MAX_PERF_ON_BAT = 20;
         STOP_CHARGE_THRESH_BAT1 = "95";
         STOP_CHARGE_THRESH_BAT0 = "95";
-        # Enable audio power saving for Intel HDA, AC97 devices (timeout in secs).
-        # A value of 0 disables, >=1 enables power saving (recommended: 1).
-        # Default: 0 (AC), 1 (BAT)
-        # SOUND_POWER_SAVE_ON_AC = 0;
-        # SOUND_POWER_SAVE_ON_BAT = 1;
-        # Runtime Power Management for PCI(e) bus devices: on=disable, auto=enable.
-        # Default: on (AC), auto (BAT)
-        # RUNTIME_PM_ON_AC = "on";
-        # RUNTIME_PM_ON_BAT = "auto";
-
-        # Battery feature drivers: 0=disable, 1=enable
-        # Default: 1 (all)
-        # NATACPI_ENABLE = 1;
-        # TPACPI_ENABLE = 1;
-        # TPSMAPI_ENABLE = 1;
       };
     };
     throttled.enable = true;
@@ -78,6 +58,7 @@
   # Includes the Wi-Fi and Bluetooth firmware
   hardware.enableRedistributableFirmware = true;
 
+  # thinkfan config
   # postconditions:
   # 1) status should be enabled:
   # cat /proc/acpi/ibm/fan
@@ -106,6 +87,7 @@
   systemd.services.thinkfan.preStart =
     "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
+  # enable modem manager
   systemd.services.modem-manager.enable = true;
 
   networking.hostName = "mue-p14s"; # Define your hostname.
@@ -133,6 +115,7 @@
       # fix suspend/resume screen corruption in sync mode
       powerManagement.enable = true;
       prime = {
+        # enable offload command
         offload = {
           enable = true;
           enableOffloadCmd = true;
@@ -222,17 +205,6 @@
   #   ];
   # };
 
-  # specialisation = {
-  #   on-the-go.configuration = {
-  #     system.nixos.tags = [ "on-the-go" ];
-  #     hardware.nvidia = {
-  #       prime.offload.enable = lib.mkForce true;
-  #       prime.offload.enableOffloadCmd = lib.mkForce true;
-  #       prime.sync.enable = lib.mkForce false;
-  #     };
-  #   };
-  # };
-
   # Configure xserver
   services.xserver = {
     layout = "de";
@@ -254,23 +226,7 @@
     };
   };
 
-  # nix = {
-  #   settings = {
-  #     extra-substituters = [ "http://192.168.178.142:5000" ];
-  #     extra-trusted-public-keys =
-  #       [ "192.168.178.142:3qJNJbeIjoWRcb+E0YEoek2Bpumh/4IXrAkyk96izqQ=%" ];
-  #   };
-  # };
-  nix.settings.cores = 10;
-  systemd.services.nix-daemon.serviceConfig = {
-    CPUWeight = 30;
-    IOWeight = 30;
-
-    MemoryMax = "80%";
-    MemoryHigh = "75%";
-    MemorySwapMax = "50%";
-  };
-
+  # specialisation for traveling
   specialisation = {
     on-the-go.configuration = {
       system.nixos.tags = [ "on-the-go" ];
@@ -280,12 +236,25 @@
       };
     };
   };
+  # specialisation = {
+  #   on-the-go.configuration = {
+  #     system.nixos.tags = [ "on-the-go" ];
+  #     hardware.nvidia = {
+  #       prime.offload.enable = lib.mkForce true;
+  #       prime.offload.enableOffloadCmd = lib.mkForce true;
+  #       prime.sync.enable = lib.mkForce false;
+  #     };
+  #   };
+  # };
 
+  # udev rules for rtls
   services.udev.extraRules = ''
     KERNEL=="ttyACM0", MODE:="666"
     KERNEL=="ttyACM1", MODE:="666"
   '';
-  virtualisation.vmware.host.enable = true;
+
+  # vmware stuff
+  # virtualisation.vmware.host.enable = true;
 
 }
 
