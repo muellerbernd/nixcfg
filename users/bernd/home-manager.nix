@@ -5,10 +5,10 @@ let
   '';
 in
 {
-  # imports = [
-  #   ../../modules/profiles/kanshi.nix
-  #   ../../modules/profiles/hyprland.nix
-  # ];
+  imports = [
+    ../../modules/profiles/kanshi.nix
+    # ../../modules/profiles/hyprland.nix
+  ];
   # imports = with inputs.self.nixosModules; [
   # modules
   # profiles-kanshi
