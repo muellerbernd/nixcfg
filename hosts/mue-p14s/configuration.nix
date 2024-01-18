@@ -179,6 +179,8 @@
     iperf
     nmap
     socat
+    x2goclient
+    remmina
   ];
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
