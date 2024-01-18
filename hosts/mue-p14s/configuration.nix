@@ -257,7 +257,8 @@
 
   # vmware stuff
   # virtualisation.vmware.host.enable = true;
-
+  # teamviewer
+  services.teamviewer.enable = true;
 }
 
 # vim: set ts=2 sw=2:

@@ -20,6 +20,7 @@
     slurp
     wayland
     waybar
+    waypipe
     qt6.qtwayland
     libsForQt5.qtwayland
     glxinfo
