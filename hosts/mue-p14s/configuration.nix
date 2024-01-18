@@ -142,6 +142,8 @@
         137
         138
         139
+        8000
+        5901
       ];
       allowedUDPPorts = [
         80
@@ -180,7 +182,7 @@
     nmap
     socat
     x2goclient
-    remmina
+    turbovnc
   ];
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
