@@ -1,5 +1,5 @@
 name:
-{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs }:
+{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname, crypt_device }:
 let
   user_folder_names = nixpkgs.lib.attrNames
     (nixpkgs.lib.filterAttrs (n: v: v == "directory")
@@ -43,6 +43,6 @@ nixpkgs.lib.nixosSystem rec {
       };
     }
   ] ++ user_cfgs;
-  specialArgs = { inherit inputs; };
+  specialArgs = { inherit inputs hostname crypt_device; };
 }
 # vim: set ts=2 sw=2:

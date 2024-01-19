@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, hostname, crypt_device, ... }: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
@@ -17,7 +17,8 @@
     initrd = {
       luks.devices = {
         crypt = {
-          device = "/dev/nvme1n1p2";
+          # device = "/dev/nvme1n1p2";
+          device = crypt_device;
           preLVM = true;
         };
         # data = {
@@ -49,7 +50,8 @@
   };
   services.upower.enable = true;
 
-  networking.hostName = "t480"; # Define your hostname.
+  # networking.hostName = "t480"; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
 
   hardware = {
     opengl = {
