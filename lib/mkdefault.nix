@@ -1,5 +1,5 @@
 name:
-{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname, crypt_device }:
+{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname ? "", crypt_device ? "" }:
 let
   user_folder_names = nixpkgs.lib.attrNames
     (nixpkgs.lib.filterAttrs (n: v: v == "directory")
