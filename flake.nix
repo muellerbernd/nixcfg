@@ -19,7 +19,8 @@
 
     # nur.url = "github:nix-community/NUR";
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      # url = "github:hyprwm/Hyprland";
+      url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hy3 = {
