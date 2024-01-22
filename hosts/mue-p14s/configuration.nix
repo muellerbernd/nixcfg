@@ -7,6 +7,8 @@
     mixins-distributed-builder-client
   ];
 
+  # needed for https://github.com/nixos/nixpkgs/issues/58959
+  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs" ];
   # Bootloader.
   boot = {
     loader = {
@@ -132,7 +134,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = false;
+      enable = lib.mkForce false;
       allowedTCPPorts = [
         80
         443
@@ -181,33 +183,48 @@
     iperf
     nmap
     socat
-    x2goclient
     turbovnc
   ];
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
   # For mount.cifs, required unless domain name resolution is not needed.
-  # fileSystems."/mnt/EIS" = {
-  #   device = "//ast.intern/EIS";
-  #   fsType = "cifs";
-  #   options = [
-  #     "noauto"
-  #     "x-systemd.idle-timeout=60"
-  #     "x-systemd.device-timeout=5s"
-  #     "x-systemd.mount-timeout=5s"
-  #     "user"
-  #     "uid=1000"
-  #     "gid=100"
-  #     "credentials=/home/bernd/smb-credentials"
-  #     "iocharset=utf8"
-  #     "rw"
-  #     "x-systemd.automount"
-  #     "nounix"
-  #     "noacl"
-  #     "vers=2.0"
-  #     "sec=ntlmv2"
-  #   ];
-  # };
+  fileSystems."/mnt/EIS" = {
+    device = "//10.87.18.12/EIS";
+    fsType = "cifs";
+    # options = ["credentials=/home/bernd/smb-credentials,uid=1000,gid=100"];
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "user"
+      "credentials=/etc/samba/smb-credentials"
+      "iocharset=utf8"
+      "vers=3.1.1"
+      "nodfs"
+      # "uid=${config.users.users.bernd.uid}"
+      # "gid=${config.users.groups.bernd.gid}"
+      # "x-systemd.requires=openvpn-myvpn.service"
+    ];
+    # options = [
+    #   "noauto"
+    #   "x-systemd.idle-timeout=60"
+    #   "x-systemd.device-timeout=5s"
+    #   "x-systemd.mount-timeout=5s"
+    #   # "user"
+    #   # "uid=1000"
+    #   # "gid=100"
+    #   "credentials=/etc/nixos/smb-credentials"
+    #   "iocharset=utf8"
+    #   "rw"
+    #   "x-systemd.automount"
+    #   "nounix"
+    #   "noacl"
+    #   "vers=2.0"
+    #   "sec=ntlmv2"
+    # ];
+  };
 
   # Configure xserver
   services.xserver = {
