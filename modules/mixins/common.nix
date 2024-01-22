@@ -139,7 +139,7 @@
         };
       };
     };
-    keyboard.qmk.enable = true;
+    # keyboard.qmk.enable = true;
   };
 
   services = {
