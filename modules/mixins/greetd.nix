@@ -12,7 +12,8 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd "systemd-cat Hyprland"
+            --cmd Hyprland
+            # --cmd "systemd-cat Hyprland"
         '';
         # command = "sway";
       };
