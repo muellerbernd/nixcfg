@@ -240,6 +240,21 @@
       # "x-systemd.requires=openvpn-myvpn.service"
     ];
   };
+  fileSystems."/mnt/ber54988" = {
+    device = "//ast.intern/user/home/ber54988";
+    fsType = "cifs";
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5s"
+      "x-systemd.mount-timeout=5s"
+      "uid=bernd"
+      "credentials=/etc/samba/smb-credentials"
+      "vers=2.0"
+      # "x-systemd.requires=openvpn-myvpn.service"
+    ];
+  };
 
   # Configure xserver
   services.xserver = {
