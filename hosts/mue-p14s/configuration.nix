@@ -278,6 +278,21 @@
   # virtualisation.vmware.host.enable = true;
   # teamviewer
   services.teamviewer.enable = true;
-}
 
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "HP_Color_LaserJet_flow_MFP_M880";
+        location = "Work";
+        deviceUri = "http://10.87.13.17:631/ipp";
+        model = "drv:///sample.drv/generic.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
+    ];
+    ensureDefaultPrinter = "HP_Color_LaserJet_flow_MFP_M880";
+  };
+
+}
 # vim: set ts=2 sw=2:
