@@ -100,6 +100,8 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
+        mesa.drivers
+        libva-utils
         vaapiVdpau
         libvdpau-va-gl
         nvidia-vaapi-driver
