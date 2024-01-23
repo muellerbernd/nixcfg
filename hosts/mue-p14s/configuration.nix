@@ -178,6 +178,7 @@
   environment.systemPackages = with pkgs; [
     glxinfo
     cifs-utils
+    keyutils
     samba
     lxqt.lxqt-policykit
     iperf
@@ -185,45 +186,59 @@
     socat
     turbovnc
   ];
+
+  # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
+  # The TL;DR is: the kernel calls out to the hard-coded path of
+  # /sbin/request-key as part of its CIFS auth process, which of course does
+  # not exist on NixOS due to the usage of Nix store paths.
+  system.activationScripts.symlink-requestkey = ''
+    if [ ! -d /sbin ]; then
+      mkdir /sbin
+    fi
+    ln -sfn /run/current-system/sw/bin/request-key /sbin/request-key
+  '';
+  # request-key expects a configuration file under /etc
+  environment.etc."request-key.conf" = lib.mkForce {
+    text =
+      let
+        upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
+        keyctl = "${pkgs.keyutils}/bin/keyctl";
+      in
+      ''
+        #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
+        # -t is required for DFS share servers...
+        create  cifs.spnego   *            *             ${upcall} -t %k
+        create  dns_resolver  *            *             ${upcall} %k
+        # Everything below this point is essentially the default configuration,
+        # modified minimally to work under NixOS. Notably, it provides debug
+        # logging.
+        create  user          debug:*      negate        ${keyctl} negate %k 30 %S
+        create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
+        create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
+        create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
+        negate  *             *            *             ${keyctl} negate %k 30 %S
+      '';
+  };
+
   services.samba = { openFirewall = true; };
   services.gvfs.enable = true;
   # For mount.cifs, required unless domain name resolution is not needed.
   fileSystems."/mnt/EIS" = {
-    device = "//10.87.18.12/EIS";
+    device = "//ast.intern/EIS";
     fsType = "cifs";
-    # options = ["credentials=/home/bernd/smb-credentials,uid=1000,gid=100"];
     options = [
       "x-systemd.automount"
       "noauto"
       "x-systemd.idle-timeout=60"
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
-      "user"
+      "uid=bernd"
       "credentials=/etc/samba/smb-credentials"
-      "iocharset=utf8"
-      "vers=3.1.1"
-      "nodfs"
-      # "uid=${config.users.users.bernd.uid}"
-      # "gid=${config.users.groups.bernd.gid}"
+      "vers=2.0"
       # "x-systemd.requires=openvpn-myvpn.service"
     ];
-    # options = [
-    #   "noauto"
-    #   "x-systemd.idle-timeout=60"
-    #   "x-systemd.device-timeout=5s"
-    #   "x-systemd.mount-timeout=5s"
-    #   # "user"
-    #   # "uid=1000"
-    #   # "gid=100"
-    #   "credentials=/etc/nixos/smb-credentials"
-    #   "iocharset=utf8"
-    #   "rw"
-    #   "x-systemd.automount"
-    #   "nounix"
-    #   "noacl"
-    #   "vers=2.0"
-    #   "sec=ntlmv2"
-    # ];
   };
 
   # Configure xserver
