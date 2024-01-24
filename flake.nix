@@ -30,6 +30,7 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    openconnect-sso.url = "github:vlaci/openconnect-sso";
     joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
@@ -44,6 +45,7 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
+        # inputs.openconnect-sso.overlay
         inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
         (self: super: {
