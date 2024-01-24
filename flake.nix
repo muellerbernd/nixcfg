@@ -23,16 +23,13 @@
       url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # hy3 = {
-    #   url = "github:outfoxxed/hy3"; # where {version} is the hyprland release version
-    #   # or "github:outfoxxed/hy3" to follow the development branch.
-    #   # (you may encounter issues if you dont do the same for hyprland)
-    #   inputs.hyprland.follows = "hyprland";
-    # };
+    waybar = {
+      url = "github:alexays/waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    openconnect-sso.url = "github:vlaci/openconnect-sso";
     joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
@@ -48,7 +45,6 @@
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
         inputs.neovim-nightly.overlay
-        # inputs.yazi.overlays.default
         inputs.rofi-music-rs.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
@@ -61,9 +57,10 @@
             super.callPackage ./pkgs/chitubox { }; # path containing default.nix
           webots =
             super.callPackage ./pkgs/webots { }; # path containing default.nix
-          waybar = super.waybar.overrideAttrs (oldAttrs: {
-            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          });
+          # waybar = super.waybar.overrideAttrs (oldAttrs: {
+          #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+          # });
+          waybar = inputs.waybar.packages."x86_64-linux".waybar;
         })
         (final: prev: {
           # sway = prev.sway.overrideAttrs (old: {

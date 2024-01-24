@@ -199,7 +199,6 @@ in
       # vpn
       openconnect_openssl
       networkmanager-openconnect
-      # openconnect-sso
       wireshark
       # keyboard stuff
       qmk
