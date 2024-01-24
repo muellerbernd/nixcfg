@@ -1,9 +1,9 @@
 {
   description = "A very basic flake";
-  nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  flake-utils.url = "github:numtide/flake-utils";
-
-
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
   outputs =
     { self
     , nixpkgs
@@ -23,7 +23,7 @@
         # packages.rofi-music-rs = rofi-music-rs;
         # packages.default = rofi-music-rs;
 
-        devShells.default = ./shell.nix { inherit pkgs; };
+        devShells.default = import ./shell.nix { inherit pkgs; };
       })
     // {
       # overlays.default = final: prev: {
@@ -32,3 +32,4 @@
     };
 }
 
+# vim: set ts=2 sw=2:

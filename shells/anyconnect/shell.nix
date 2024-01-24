@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{ pkgs }:
 let
   pname = "anyconnect";
   version = "0.0.0";
@@ -108,3 +107,11 @@ in
   runScript = "bash";
 
 }).env
+# pkgs.mkShell {
+#   buildInputs =
+#     [
+#       anyconnect
+#     ];
+# }
+
+# vim: set ts=2 sw=2:
