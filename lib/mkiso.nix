@@ -11,8 +11,8 @@ nixpkgs.lib.nixosSystem rec {
       # nixpkgs.overlays = overlays;
     }
 
-    "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-    "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
+    "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+    # "${nixpkgs}/nixos/modules/installer/cd-dvd/channel.nix"
     ../hosts/iso/configuration.nix
 
     # home-manager.nixosModules.home-manager
