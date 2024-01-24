@@ -217,6 +217,9 @@ in
       uvtools
       rofi-music-rs
 
+      # anyconnect :/
+      anyconnect
+
       # theming
       lxqt.lxqt-qtplugin
       libsForQt5.qtstyleplugin-kvantum

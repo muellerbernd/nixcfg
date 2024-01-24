@@ -59,6 +59,8 @@
             super.callPackage ./pkgs/chitubox { }; # path containing default.nix
           webots =
             super.callPackage ./pkgs/webots { }; # path containing default.nix
+          anyconnect =
+            super.callPackage ./pkgs/anyconnect { }; # path containing default.nix
           # waybar = super.waybar.overrideAttrs (oldAttrs: {
           #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
           # });
