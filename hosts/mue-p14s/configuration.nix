@@ -136,7 +136,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = lib.mkForce false;
+      enable = lib.mkForce true;
       allowedTCPPorts = [
         80
         443
@@ -159,6 +159,7 @@
         138
         139
         4500
+        67
       ];
       allowedUDPPortRanges = [{
         from = 4000;
@@ -172,7 +173,8 @@
         # }
       ];
       extraCommands =
-        "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
+        "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
+        iptables -I INPUT -p udp --dport 67 -j ACCEPT";
       allowPing = true;
     };
   };

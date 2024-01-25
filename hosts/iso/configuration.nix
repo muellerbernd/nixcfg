@@ -20,7 +20,7 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  services.xserver.enable = true;
+  services.xserver.enable = false;
 
   # Configure console keymap
   console.keyMap = "de";

@@ -215,7 +215,9 @@ in
       # lycheeslicer
       # chituboxslicer
       uvtools
+      # from custom overlays
       rofi-music-rs
+      lsleases
 
       # theming
       lxqt.lxqt-qtplugin
@@ -223,7 +225,7 @@ in
       libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
-      #
+      # custom rofi command
       rofi-script
     ];
   };

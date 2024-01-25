@@ -16,8 +16,9 @@
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # predefined hardware stuff
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    # nur.url = "github:nix-community/NUR";
     hyprland = {
       # url = "github:hyprwm/Hyprland";
       url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
@@ -28,13 +29,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    openconnect-sso.url = "github:vlaci/openconnect-sso";
     joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
-    rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     agenix.url = "github:ryantm/agenix";
+
+    # openconnect-sso.url = "github:vlaci/openconnect-sso";
+
+    rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
+    lsleases.url = "github:muellerbernd/lsleases";
   };
 
   outputs = { self, nixpkgs, unstable, home-manager, agenix, ... }@inputs:
@@ -48,6 +51,7 @@
         # inputs.openconnect-sso.overlay
         inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
+        inputs.lsleases.overlays.default
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
