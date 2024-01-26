@@ -18,7 +18,7 @@ let
         cd vpn
          # install binaries
         for binary in "vpnagentd" "vpn" "vpndownloader" "vpndownloader-cli" "manifesttool_vpn" "acinstallhelper" "vpnui" "acwebhelper" "load_tun.sh"; do
-            install -Dm755 $binary "$out/opt/cisco/anyconnect/bin/$binary"
+            install -Dm755 $binary "$out/bin/$binary"
         done
 
         # install libs
@@ -27,42 +27,42 @@ let
             "cfom.so" "libboost_date_time.so" "libboost_filesystem.so" "libboost_regex.so" "libboost_system.so" \
             "libboost_thread.so" "libboost_signals.so" "libboost_chrono.so" \
             "libaccurl.so.4.8.0"; do
-            install -Dm755 $lib "$out/opt/cisco/anyconnect/lib/lib"
+            install -Dm755 $lib "$out/lib/$lib"
         done
 
         # the installer copies all the other symlinks, but creates this one
         # for some reason so let's just create it ourselves
-        ln -s $out/opt/cisco/anyconnect/lib/libaccurl.so.4.8.0 "$out/opt/cisco/anyconnect/lib/libaccurl.so.4"
+        ln -s $out/lib/libaccurl.so.4.8.0 "$out/lib/libaccurl.so.4"
 
         # install plugins
         # we intentionally don't install the telemetry plugin here
         # because it tries to write to /opt and we don't want that
         for plugin in "libacwebhelper.so" "libvpnipsec.so"; do
-            install -Dm755 $plugin "$out/opt/cisco/anyconnect/bin/plugins/$plugin"
+            install -Dm755 $plugin "$out/bin/plugins/$plugin"
         done
 
-        cp -R resources "$out/opt/cisco/anyconnect/resources"
+        cp -R resources "$out/resources"
 
         # install some misc stuff
-        install -Dm444 AnyConnectProfile.xsd "$out/opt/cisco/anyconnect/profile/AnyConnectProfile.xsd"
-
-        for file in "ACManifestVPN.xml" "update.txt" "AnyConnectLocalPolicy.xsd"; do
-            install -Dm444 $file "$out/opt/cisco/anyconnect/$file"
-        done
+        # install -Dm444 AnyConnectProfile.xsd "$out/opt/cisco/anyconnect/profile/AnyConnectProfile.xsd"
+        #
+        # for file in "ACManifestVPN.xml" "update.txt" "AnyConnectLocalPolicy.xsd"; do
+        #     install -Dm444 $file "$out/opt/cisco/anyconnect/$file"
+        # done
 
         # install desktop file for vpnui
-        install -Dm644 resources/vpnui48.png "$out/usr/share/icons/hicolor/48x48/apps/cisco-anyconnect.png"
-        install -Dm644 resources/vpnui128.png "$out/usr/share/icons/hicolor/128x128/apps/cisco-anyconnect.png"
+        # install -Dm644 resources/vpnui48.png "$out/usr/share/icons/hicolor/48x48/apps/cisco-anyconnect.png"
+        # install -Dm644 resources/vpnui128.png "$out/usr/share/icons/hicolor/128x128/apps/cisco-anyconnect.png"
 
         # install CA certificates
-        mkdir -p "$out/opt/.cisco/certificates/ca"
+        # mkdir -p "$out/opt/.cisco/certificates/ca"
 
         # first, install our own system root
-        ln -s /etc/ca-certificates/extracted/tls-ca-bundle.pem "$out/opt/.cisco/certificates/ca/system-ca.pem"
+        # ln -s /etc/ca-certificates/extracted/tls-ca-bundle.pem "$out/opt/.cisco/certificates/ca/system-ca.pem"
 
         # then, install Cisco's, because it doesn't actually trace to any of the trusted roots we have
         # (thanks, VeriSign)
-        install -Dm644 VeriSignClass3PublicPrimaryCertificationAuthority-G5.pem "$out/opt/.cisco/certificates/ca/VeriSignClass3PublicPrimaryCertificationAuthority-G5.pem"
+        # install -Dm644 VeriSignClass3PublicPrimaryCertificationAuthority-G5.pem "$out/opt/.cisco/certificates/ca/VeriSignClass3PublicPrimaryCertificationAuthority-G5.pem"
 
         # install custom policy to disable auto updates
         # AnyConnect will attempt to update itself as root, and then run all over both itself and our packaging
