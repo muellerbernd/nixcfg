@@ -53,7 +53,7 @@ nixpkgs.lib.nixosSystem rec {
         currentSystem = system;
       };
     }
-  ] ++ user_cfgs;
+  ] ++ user_cfgs ++ student_user_cfgs;
   specialArgs = { inherit inputs hostname crypt_device; };
 }
 # vim: set ts=2 sw=2:

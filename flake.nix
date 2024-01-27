@@ -42,7 +42,7 @@
 
   outputs = { self, nixpkgs, unstable, home-manager, agenix, ... }@inputs:
     let
-      # mkVM = import ./lib/mkvm.nix;
+      mkVM = import (./lib/mkvm.nix);
       mkDefault = (import ./lib/mkdefault.nix);
       mkISO = (import ./lib/mkiso.nix);
 
@@ -135,6 +135,12 @@
       nixosConfigurations.ISO = mkISO "ISO" {
         inherit nixpkgs home-manager overlays;
         system = "x86_64-linux";
+      };
+      nixosConfigurations.balodil = mkVM "balodil" {
+        inherit nixpkgs home-manager overlays agenix inputs;
+        system = "x86_64-linux";
+        users = [ "bernd" ];
+        students = [ "test1" "test2" ];
       };
     };
 }

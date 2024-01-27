@@ -1,7 +1,5 @@
 HOSTNAME = $(shell hostname)
 
-NIX_FILES = $(shell find . -name '*.nix' -type f)
-
 ifndef HOSTNAME
 	$(error Hostname unknown)
 endif
@@ -31,5 +29,8 @@ upgrade:
 iso:
 	nix build .#nixosConfigurations.ISO.config.system.build.isoImage --show-trace
 
-vm:
+system-vm:
 	nixos-rebuild build-vm --flake .#${HOSTNAME}
+
+balodil:
+	nixos-rebuild build-vm --flake .#balodil

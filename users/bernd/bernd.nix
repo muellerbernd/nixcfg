@@ -65,6 +65,7 @@
       # work
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
     ];
+    initialPassword = "bernd";
   };
   users.extraGroups.vboxusers.members = [ "bernd" ];
   users.extraGroups.video.members = [ "bernd" ];

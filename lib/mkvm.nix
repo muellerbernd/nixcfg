@@ -1,8 +1,23 @@
-# This function creates a NixOS system based on our VM setup for a
-# particular architecture.
 name:
-{ nixpkgs, home-manager, system, user, overlays }:
-
+{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname ? "", students ? [ ] }:
+let
+  user_folder_names = nixpkgs.lib.attrNames
+    (nixpkgs.lib.filterAttrs (n: v: v == "directory")
+      (builtins.readDir (builtins.toString ../users)));
+  possible_users = nixpkgs.lib.lists.intersectLists users user_folder_names;
+  user_cfgs = nixpkgs.lib.forEach (possible_users) (u: ../users/${u}/${u}.nix);
+  pkgs = import nixpkgs { inherit system; };
+  mkHomeCfg = (import ../users/student-template/mkHomeManager.nix);
+  mkUser = (import ../users/student-template/mkStudent.nix);
+  student_user_cfgs = nixpkgs.lib.forEach (students)
+    (student: mkUser { name = student; });
+  student_hm_cfgs = nixpkgs.lib.foldl'
+    (acc: domain:
+      let u = domain;
+      in acc // { "${u}" = mkHomeCfg { inherit pkgs; name = "${u}"; }; })
+    { }
+    (students);
+in
 nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -12,14 +27,23 @@ nixpkgs.lib.nixosSystem rec {
     # the overlays are available globally.
     { nixpkgs.overlays = overlays; }
 
-    ../hardware/${name}.nix
-    ../machines/${name}.nix
+    ../hosts/${name}/configuration.nix
+
+    # include user configs
+
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = import ../users/${user}/home-manager.nix;
+      home-manager.users = nixpkgs.lib.foldl'
+        (acc: domain:
+          let u = domain;
+          in acc // { "${u}" = import ../users/${u}/home-manager.nix; })
+        { }
+        (possible_users) // student_hm_cfgs;
     }
+
+    agenix.nixosModules.age
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
@@ -29,5 +53,8 @@ nixpkgs.lib.nixosSystem rec {
         currentSystem = system;
       };
     }
-  ];
+  ] ++ user_cfgs ++ student_user_cfgs;
+  specialArgs = { inherit inputs hostname; };
 }
+# vim: set ts=2 sw=2:
+
