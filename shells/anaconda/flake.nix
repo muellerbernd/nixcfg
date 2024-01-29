@@ -16,7 +16,15 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        devShells.default = import ./shell.nix { inherit pkgs; };
+        devShells.default = pkgs.mkShell {
+          name = "Conda devShell";
+
+          buildInputs = with pkgs;[
+            conda
+          ];
+
+          shellHook = "";
+        };
       })
     // {
       # overlays.default = final: prev: {
