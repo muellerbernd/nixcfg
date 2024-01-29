@@ -179,6 +179,19 @@
     };
   };
 
+  services = {
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      settings.X11Forwarding = true;
+      # require public key authentication for better security
+      settings.PasswordAuthentication = false;
+      settings.KbdInteractiveAuthentication = false;
+      settings.PermitRootLogin = "yes";
+      openFirewall = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     glxinfo
     cifs-utils

@@ -147,13 +147,13 @@
     gnome.gnome-keyring.enable = true;
     # Enable the OpenSSH daemon.
     openssh = {
-      enable = true;
-      settings.X11Forwarding = true;
+      enable = lib.mkDefault true;
+      settings.X11Forwarding = lib.mkDefault true;
       # require public key authentication for better security
-      settings.PasswordAuthentication = false;
-      settings.KbdInteractiveAuthentication = false;
-      settings.PermitRootLogin = "yes";
-      openFirewall = true;
+      settings.PasswordAuthentication = lib.mkDefault false;
+      settings.KbdInteractiveAuthentication = lib.mkDefault false;
+      settings.PermitRootLogin = lib.mkDefault "yes";
+      openFirewall = lib.mkDefault true;
     };
     # enable blueman
     blueman.enable = true;
