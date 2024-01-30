@@ -30,6 +30,7 @@
     swaybg
     wlr-randr
     wdisplays
+    nwg-displays
     nwg-look
     wl-mirror
     pipectl
