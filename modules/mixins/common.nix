@@ -176,4 +176,7 @@
   '';
 
   security.polkit.enable = true;
+  environment.shellInit = ''
+    [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true
+  '';
 }
