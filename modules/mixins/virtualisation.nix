@@ -29,6 +29,7 @@
     oci-containers = {
       # use podman as default container engine
       backend = "podman";
+      # backend = "docker";
     };
     podman = {
       enable = true;
@@ -39,6 +40,14 @@
 
       defaultNetwork.settings = { dns_enabled = true; };
     };
+    # docker = {
+    #   enable = true;
+    #   enableNvidia = true;
+    #   rootless = {
+    #     enable = true;
+    #     setSocketVariable = true;
+    #   };
+    # };
   };
   environment.extraInit = ''
     if [ -z "$DOCKER_HOST" -a -n "$XDG_RUNTIME_DIR" ]; then
