@@ -16,7 +16,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = lib.mkDefault false;
+      enable = lib.mkDefault true;
       allowedTCPPorts = [
         80
         443
