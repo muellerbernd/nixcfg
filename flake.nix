@@ -4,6 +4,8 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:ereslibre/nixpkgs/containers-cdi";
+    # nixpkgs.url = "github:aaronmondal/nixpkgs/nvidia-container-toolkit-v1.15.0-rc.1";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
 
@@ -45,6 +47,7 @@
       mkVM = import (./lib/mkvm.nix);
       mkDefault = (import ./lib/mkdefault.nix);
       mkISO = (import ./lib/mkiso.nix);
+      nixpkgs-tars = "https://github.com/NixOS/nixpkgs/archive/";
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
@@ -93,12 +96,6 @@
           #   inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
       ];
-      # nixpkgs.config = {
-      #   packageOverrides = pkgs:
-      #     with pkgs; {
-      #       unstable = nixpkgs-unstable;
-      #     };
-      # };
     in
     {
       nixosModules = import ./modules { lib = nixpkgs.lib; };

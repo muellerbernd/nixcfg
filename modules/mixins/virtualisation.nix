@@ -12,24 +12,28 @@
     )
     qemu
     distrobox
-    nvidia-podman
+    # nvidia-podman
+    # libnvidia-container
   ];
 
   virtualisation = {
-    containers.enable = true;
-    containers.storage.settings = {
-      storage = {
-        driver = "overlay";
-        runroot = "/run/containers/storage";
-        graphroot = "/var/lib/containers/storage";
-        rootless_storage_path = "/tmp/containers-$USER";
-        options.overlay.mountopt = "nodev,metacopy=on";
+    containers = {
+      enable = true;
+      storage.settings = {
+        storage = {
+          driver = "overlay";
+          runroot = "/run/containers/storage";
+          graphroot = "/var/lib/containers/storage";
+          rootless_storage_path = "/tmp/containers-$USER";
+          options.overlay.mountopt = "nodev,metacopy=on";
+        };
       };
     };
     # declare containers
     oci-containers = {
       # use podman as default container engine
       backend = "podman";
+      # backend = "docker";
     };
     podman = {
       enable = true;
@@ -40,12 +44,24 @@
 
       defaultNetwork.settings = { dns_enabled = true; };
     };
+    # docker = {
+    #   enable = true;
+    #   enableNvidia = true;
+    #   rootless = {
+    #     enable = true;
+    #     setSocketVariable = true;
+    #   };
+    # };
   };
   environment.extraInit = ''
     if [ -z "$DOCKER_HOST" -a -n "$XDG_RUNTIME_DIR" ]; then
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
     fi
   '';
+  # libnvidia-container does not support cgroups v2
+  # https://github.com/NVIDIA/nvidia-docker/issues/1447
+  systemd.enableUnifiedCgroupHierarchy = false;
+
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.virtualbox.guest.enable = true;
