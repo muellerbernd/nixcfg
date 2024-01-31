@@ -42,6 +42,12 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        libva-utils
+        vaapiVdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+      ];
     };
     bluetooth.enable = true;
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
