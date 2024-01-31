@@ -71,6 +71,7 @@
     # nix
     nixpkgs-lint
     nixpkgs-fmt
+    nixpkgs-review
     nixfmt
     home-manager
     # nix-serve
