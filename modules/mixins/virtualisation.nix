@@ -12,7 +12,6 @@
     )
     qemu
     distrobox
-    nvidia-podman
   ];
 
   virtualisation = {
