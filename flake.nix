@@ -9,7 +9,7 @@
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
 
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       # url = "github:nix-community/home-manager/release-23.05";
@@ -32,7 +32,7 @@
     };
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
-    joshuto.url = "github:kamiyaa/joshuto";
+    # joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
@@ -42,7 +42,7 @@
     lsleases.url = "github:muellerbernd/lsleases";
   };
 
-  outputs = { self, nixpkgs, unstable, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
     let
       mkVM = import (./lib/mkvm.nix);
       mkDefault = (import ./lib/mkdefault.nix);
@@ -55,17 +55,19 @@
         inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
         inputs.lsleases.overlays.default
+        inputs.yazi.overlays.default
+
         (self: super: {
           annotator = super.callPackage ./pkgs/annotator
             { }; # path containing default.nix
-          lycheeslicer = super.callPackage ./pkgs/lycheeslicer
-            { }; # path containing default.nix
+          # lycheeslicer = super.callPackage ./pkgs/lycheeslicer
+          #   { }; # path containing default.nix
           uvtools =
             super.callPackage ./pkgs/uvtools { }; # path containing default.nix
-          chituboxslicer =
-            super.callPackage ./pkgs/chitubox { }; # path containing default.nix
-          webots =
-            super.callPackage ./pkgs/webots { }; # path containing default.nix
+          # chituboxslicer =
+          #   super.callPackage ./pkgs/chitubox { }; # path containing default.nix
+          # webots =
+          #   super.callPackage ./pkgs/webots { }; # path containing default.nix
           # waybar = super.waybar.overrideAttrs (oldAttrs: {
           #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
           # });
