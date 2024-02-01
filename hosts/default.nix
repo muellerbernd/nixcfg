@@ -39,10 +39,10 @@
         4500
         51820
       ];
-      # allowedUDPPortRanges = lib.mkDefault [{
-      #   from = 4000;
-      #   to = 50000;
-      # }
+      allowedUDPPortRanges = lib.mkDefault [{
+        from = 4000;
+        to = 50000;
+      }];
       # # ROS2 needs 7400 + (250 * Domain) + 1
       # # here Domain is 41 or 42
       # {
