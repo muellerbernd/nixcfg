@@ -47,7 +47,6 @@
       mkVM = import (./lib/mkvm.nix);
       mkDefault = (import ./lib/mkdefault.nix);
       mkISO = (import ./lib/mkiso.nix);
-      nixpkgs-tars = "https://github.com/NixOS/nixpkgs/archive/";
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
@@ -84,18 +83,8 @@
           #     hash = "sha256-WxnT+le9vneQLFPz2KoBduOI+zfZPhn1fKlaqbPL6/g=";
           #   };
           # });
-          # joshuto = inputs.unstable.legacyPackages."x86_64-linux".joshuto;
-          # neovim = inputs.unstable.legacyPackages."x86_64-linux".neovim;
-          # neovim = inputs.neovim-nightly.packages."x86_64-linux".neovim;
           # rofi-music-rs =
           #   inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
-          # teams-for-linux =
-          #   inputs.unstable.legacyPackages."x86_64-linux".teams-for-linux;
-          # networkmanager-openconnect = inputs.unstable.legacyPackages."x86_64-linux".networkmanager-openconnect;
-          # openconnect_openssl = inputs.unstable.legacyPackages."x86_64-linux".openconnect_openssl;
-          # dino = inputs.unstable.legacyPackages."x86_64-linux".dino;
-          # prusa-slicer =
-          #   inputs.unstable.legacyPackages."x86_64-linux".prusa-slicer;
         })
       ];
     in
