@@ -12,8 +12,8 @@
     )
     qemu
     distrobox
-    # nvidia-podman
-    # libnvidia-container
+    nvidia-podman
+    libnvidia-container
   ];
 
   virtualisation = {
@@ -60,7 +60,7 @@
   '';
   # libnvidia-container does not support cgroups v2
   # https://github.com/NVIDIA/nvidia-docker/issues/1447
-  systemd.enableUnifiedCgroupHierarchy = false;
+  # systemd.enableUnifiedCgroupHierarchy = false;
 
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;

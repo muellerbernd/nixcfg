@@ -4,7 +4,7 @@
   services.xserver = {
     enable = true;
     layout = "de";
-    xkbVariant = "";
+    xkb.variant = "";
     # Enable touchpad support (enabled default in most desktopManager).
     # libinput = { enable = true; };
 
