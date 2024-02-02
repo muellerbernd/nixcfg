@@ -93,8 +93,8 @@
 
   # Configure xserver
   services.xserver = {
-    layout = "de";
-    xkbVariant = "";
+    xkb.layout = "de";
+    xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
     libinput = {
       enable = true;
