@@ -11,7 +11,7 @@
       "$@"''
     )
     qemu
-    distrobox
+    # distrobox
     nvidia-podman
     libnvidia-container
   ];
