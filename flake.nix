@@ -104,7 +104,7 @@
       nixosConfigurations.ammerapad = mkDefault "t480" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
-        crypt_device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c"; # TODO:
+        crypt_device = "/dev/disk/by-uuid/496f14bb-9a70-4509-aaac-e898b02f152b";
         hostname = "ammerapad";
       };
       nixosConfigurations.biltower = mkDefault "biltower" {
