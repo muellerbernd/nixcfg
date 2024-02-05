@@ -115,6 +115,7 @@ in
       man
       tealdeer
       # cli
+      nmap
       pandoc
       haskellPackages.pandoc-crossref
       curl
