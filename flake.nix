@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:ereslibre/nixpkgs/containers-cdi";
     # nixpkgs.url = "github:aaronmondal/nixpkgs/nvidia-container-toolkit-v1.15.0-rc.1";
@@ -13,7 +13,7 @@
     # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      # url = "github:nix-community/home-manager/release-23.05";
+      # url = "github:nix-community/home-manager/release-23.11";
       url = "github:nix-community/home-manager";
 
       # We want to use the same set of nixpkgs as our system.
@@ -36,8 +36,6 @@
     # joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
-
-    # openconnect-sso.url = "github:vlaci/openconnect-sso";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
