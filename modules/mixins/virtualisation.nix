@@ -12,8 +12,8 @@
     )
     qemu
     # distrobox
-    nvidia-podman
-    libnvidia-container
+    # nvidia-podman
+    # libnvidia-container
   ];
 
   virtualisation = {

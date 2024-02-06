@@ -37,7 +37,8 @@
         138
         139
         4500
-        51820
+        51820 # wireguard
+        5353 # avahi
       ];
       allowedUDPPortRanges = lib.mkDefault [{
         from = 4000;

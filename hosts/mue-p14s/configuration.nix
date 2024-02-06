@@ -160,6 +160,8 @@
         139
         4500
         67
+        51820 # wireguard
+        5353 # avahi
       ];
       allowedUDPPortRanges = [{
         from = 4000;
@@ -345,5 +347,12 @@
     # Add any missing dynamic libraries for unpackaged programs
     # here, NOT in environment.systemPackages
   ];
+
+  networking.wg-quick.interfaces =
+    {
+      wgEIS = {
+        configFile = config.age.secrets.workVpnConfig.path;
+      };
+    };
 }
 # vim: set ts=2 sw=2:

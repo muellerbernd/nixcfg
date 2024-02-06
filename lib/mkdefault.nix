@@ -43,7 +43,18 @@ import (nixpkgs + "/nixos/lib/eval-config.nix") rec {
         (possible_users) // student_hm_cfgs;
     }
 
-    agenix.nixosModules.age
+    # agenix.nixosModules.age
+    agenix.nixosModules.default
+    {
+      age.secrets = {
+        distributedBuilderKey = {
+          file = "${inputs.self}/secrets/distributedBuilderKey.age";
+        };
+        workVpnConfig = {
+          file = "${inputs.self}/secrets/workVpnConfig.age";
+        };
+      };
+    }
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.

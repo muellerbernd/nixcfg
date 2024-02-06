@@ -11,14 +11,14 @@
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
     };
   };
-  age = {
-    identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets = {
-      distributedBuilderKey = {
-        file = "${inputs.self}/secrets/distributedBuilderKey.age";
-      };
-    };
-  };
+  # age = {
+  #   identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
+  #   secrets = {
+  #     distributedBuilderKey = {
+  #       file = "${inputs.self}/secrets/distributedBuilderKey.age";
+  #     };
+  #   };
+  # };
 
   # distributedBuilds
   nix = {

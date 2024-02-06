@@ -160,10 +160,21 @@
     blueman.enable = true;
     # Enable CUPS to print documents.
     printing.enable = true;
-    avahi.enable = true;
-    avahi.nssmdns4 = true;
-    # for a WiFi printer
-    avahi.openFirewall = true;
+
+    avahi =
+      if (config.system.nixos.release != "24.05")
+      then {
+        enable = true;
+        nssmdns = true;
+        # for a WiFi printer
+        openFirewall = true;
+      }
+      else {
+        enable = true;
+        nssmdns4 = true;
+        # for a WiFi printer
+        openFirewall = true;
+      };
   };
   # enable the thunderbolt daemon
   services.hardware.bolt.enable = true;
