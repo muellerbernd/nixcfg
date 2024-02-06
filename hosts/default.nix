@@ -36,6 +36,8 @@
         137
         138
         139
+        # anyconnect?
+        500
         4500
         51820 # wireguard
         5353 # avahi
