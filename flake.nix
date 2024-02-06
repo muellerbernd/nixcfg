@@ -77,7 +77,7 @@
       #   # }
       # ];
       # localNixpkgsPatches = [ ];
-      originPkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+      # originPkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
       # nixpkgs = originPkgs.applyPatches {
       #   name = "nixpkgs-patched";
       #   src = inputs.nixpkgs;
@@ -87,7 +87,8 @@
       #     echo "+patch-$patch" >.version-suffix
       #   '';
       # };
-      lib = originPkgs.lib;
+      # lib = originPkgs.lib;
+      lib = nixpkgs.lib;
     in
     {
       # nixosModules = import ./modules { lib = nixpkgs.lib; };
@@ -116,11 +117,6 @@
       nixosConfigurations.biltower = mkDefault "biltower" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
-      };
-      nixosConfigurations.EIS-machine = mkDefault "EIS-machine" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        users = [ "bernd" "student" ];
       };
       nixosConfigurations.ISO = mkISO "ISO" {
         inherit nixpkgs home-manager overlays;
