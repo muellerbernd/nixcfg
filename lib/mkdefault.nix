@@ -18,7 +18,8 @@ let
     { }
     (students);
 in
-import (nixpkgs + "/nixos/lib/eval-config.nix") rec {
+# import (nixpkgs + "/nixos/lib/eval-config.nix") rec {
+lib.nixosSystem rec {
   inherit system;
 
   modules = [
