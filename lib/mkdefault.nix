@@ -1,24 +1,24 @@
 name:
-{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname ? "", crypt_device ? "", students ? [ ] }:
+{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays, agenix, inputs, hostname ? "", crypt_device ? "", students ? [ ], lib ? nixpkgs.lib }:
 let
-  user_folder_names = nixpkgs.lib.attrNames
-    (nixpkgs.lib.filterAttrs (n: v: v == "directory")
+  user_folder_names = lib.attrNames
+    (lib.filterAttrs (n: v: v == "directory")
       (builtins.readDir (builtins.toString ../users)));
-  possible_users = nixpkgs.lib.lists.intersectLists users user_folder_names;
-  user_cfgs = nixpkgs.lib.forEach (possible_users) (u: ../users/${u}/${u}.nix);
+  possible_users = lib.lists.intersectLists users user_folder_names;
+  user_cfgs = lib.forEach (possible_users) (u: ../users/${u}/${u}.nix);
   pkgs = import nixpkgs { inherit system; };
   mkHomeCfg = (import ../users/student-template/mkHomeManager.nix);
   mkUser = (import ../users/student-template/mkStudent.nix);
-  student_user_cfgs = nixpkgs.lib.forEach (students)
+  student_user_cfgs = lib.forEach (students)
     (student: mkUser { name = student; });
-  student_hm_cfgs = nixpkgs.lib.foldl'
+  student_hm_cfgs = lib.foldl'
     (acc: domain:
       let u = domain;
       in acc // { "${u}" = mkHomeCfg { inherit pkgs; name = "${u}"; }; })
     { }
     (students);
 in
-nixpkgs.lib.nixosSystem rec {
+import (nixpkgs + "/nixos/lib/eval-config.nix") rec {
   inherit system;
 
   modules = [
@@ -35,7 +35,7 @@ nixpkgs.lib.nixosSystem rec {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users = nixpkgs.lib.foldl'
+      home-manager.users = lib.foldl'
         (acc: domain:
           let u = domain;
           in acc // { "${u}" = import ../users/${u}/home-manager.nix; })

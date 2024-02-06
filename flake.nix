@@ -57,40 +57,48 @@
         inputs.lsleases.overlays.default
         inputs.yazi.overlays.default
 
-        (self: super: {
-          annotator = super.callPackage ./pkgs/annotator
+        (final: prev: {
+          annotator = prev.callPackage ./pkgs/annotator
             { }; # path containing default.nix
-          # lycheeslicer = super.callPackage ./pkgs/lycheeslicer
-          #   { }; # path containing default.nix
           uvtools =
-            super.callPackage ./pkgs/uvtools { }; # path containing default.nix
-          # chituboxslicer =
-          #   super.callPackage ./pkgs/chitubox { }; # path containing default.nix
-          # webots =
-          #   super.callPackage ./pkgs/webots { }; # path containing default.nix
-          # waybar = super.waybar.overrideAttrs (oldAttrs: {
-          #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          # });
+            prev.callPackage ./pkgs/uvtools { }; # path containing default.nix
           waybar = inputs.waybar.packages."x86_64-linux".waybar;
         })
-        (final: prev: {
-          # sway = prev.sway.overrideAttrs (old: {
-          #   name = "sway-git";
-          #   version = "git";
-          #   src = prev.fetchFromGitHub {
-          #     owner = "nim65s";
-          #     repo = "sway";
-          #     rev = "issue-7409";
-          #     hash = "sha256-WxnT+le9vneQLFPz2KoBduOI+zfZPhn1fKlaqbPL6/g=";
-          #   };
-          # });
-          # rofi-music-rs =
-          #   inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
-        })
       ];
+
+      # remoteNixpkgsPatches = [
+      #   # {
+      #   #   meta.description = "nixos/binfmt: Add support for using statically-linked QEMU";
+      #   #   url = "https://github.com/NixOS/nixpkgs/pull/160802.diff";
+      #   #   sha256 = "sha256-1HvhUUN2CaDZ+oVHLqp0oFK25vCGn81K6W1C601rhKM=";
+      #   # }
+      #   # {
+      #   #   meta.description = "";
+      #   #   url = "https://github.com/NixOS/nixpkgs/pull/284507.patch";
+      #   #   sha256 = "sha256-eS+HU6ZcIh1vO1azPCkz82yQsxTfGgOZFuVVd7NP6xM=";
+      #   # }
+      # ];
+      # localNixpkgsPatches = [ ];
+      originPkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
+      # nixpkgs = originPkgs.applyPatches {
+      #   name = "nixpkgs-patched";
+      #   src = inputs.nixpkgs;
+      #   patches = map originPkgs.fetchpatch remoteNixpkgsPatches ++ localNixpkgsPatches;
+      #   postPatch = ''
+      #     patch=$(printf '%s\n' ${builtins.concatStringsSep " " (map (p: p.sha256) remoteNixpkgsPatches ++ localNixpkgsPatches)} |sort | sha256sum | cut -c -7)
+      #     echo "+patch-$patch" >.version-suffix
+      #   '';
+      # };
+      lib = originPkgs.lib;
     in
     {
-      nixosModules = import ./modules { lib = nixpkgs.lib; };
+      # nixosModules = import ./modules { lib = nixpkgs.lib; };
+      nixosModules = import ./modules { inherit lib; };
+      nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
+        inherit nixpkgs home-manager overlays agenix inputs lib;
+        system = "x86_64-linux";
+        users = [ "bernd" ];
+      };
       nixosConfigurations.x240 = mkDefault "x240" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
@@ -110,11 +118,6 @@
       nixosConfigurations.biltower = mkDefault "biltower" {
         inherit nixpkgs home-manager overlays agenix inputs;
         system = "x86_64-linux";
-      };
-      nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        users = [ "bernd" ];
       };
       nixosConfigurations.EIS-machine = mkDefault "EIS-machine" {
         inherit nixpkgs home-manager overlays agenix inputs;
