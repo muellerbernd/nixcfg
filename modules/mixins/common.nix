@@ -78,6 +78,7 @@
     # nix-serve-ng
     inputs.agenix.packages.${system}.default
     wireguard-tools
+    samba
   ];
 
   # Allow unfree packages

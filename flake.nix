@@ -37,6 +37,12 @@
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
+    openconnect-sso = {
+      url = "github:ThinkChaos/openconnect-sso/fix/nix-flake";
+      # inputs.flake-utils.follows = "utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.systems.follows = "systems";
+    };
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
   };
@@ -61,6 +67,7 @@
           uvtools =
             prev.callPackage ./pkgs/uvtools { }; # path containing default.nix
           waybar = inputs.waybar.packages."x86_64-linux".waybar;
+          openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
         })
       ];
 

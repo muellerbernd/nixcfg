@@ -204,6 +204,7 @@
     nmap
     socat
     turbovnc
+    # openconnect-sso
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
