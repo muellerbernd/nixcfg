@@ -37,12 +37,6 @@
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
-    openconnect-sso = {
-      url = "github:ThinkChaos/openconnect-sso/fix/nix-flake";
-      # inputs.flake-utils.follows = "utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.systems.follows = "systems";
-    };
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
   };
@@ -55,7 +49,6 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
-        # inputs.openconnect-sso.overlay
         inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
         inputs.lsleases.overlays.default

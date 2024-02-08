@@ -161,7 +161,6 @@
         4500
         67
         51820 # wireguard
-        5353 # avahi
       ];
       allowedUDPPortRanges = [{
         from = 4000;
