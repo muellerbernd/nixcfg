@@ -131,14 +131,14 @@
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
       settings = {
-        General = {
-          # Restricts all controllers to the specified transport. Default value
-          # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
-          # Possible values: "dual", "bredr", "le"
-          ControllerMode = "dual";
-          Enable = "Source,Sink,Media,Socket";
-          Experimental = true;
-        };
+        # General = {
+        #   # Restricts all controllers to the specified transport. Default value
+        #   # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
+        #   # Possible values: "dual", "bredr", "le"
+        #   ControllerMode = "dual";
+        #   Enable = "Source,Sink,Media,Socket";
+        #   Experimental = true;
+        # };
       };
     };
     keyboard.qmk.enable = true;
