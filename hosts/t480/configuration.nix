@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     # modules
     mixins-distributed-builder-client
+    mixins-workVPN
   ];
   # Bootloader.
   boot = {

@@ -351,7 +351,7 @@
   networking.wg-quick.interfaces =
     {
       "wgEIS" = {
-        configFile = config.age.secrets.workVpnConfig.path;
+        configFile = config.age.secrets.workVpnP14sConfig.path;
         autostart = false;
       };
     };

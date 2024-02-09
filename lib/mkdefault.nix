@@ -51,6 +51,9 @@ lib.nixosSystem rec {
         distributedBuilderKey = {
           file = "${inputs.self}/secrets/distributedBuilderKey.age";
         };
+        workVpnP14sConfig = {
+          file = "${inputs.self}/secrets/workVpnP14sConfig.age";
+        };
         workVpnConfig = {
           file = "${inputs.self}/secrets/workVpnConfig.age";
         };
