@@ -79,6 +79,7 @@
     inputs.agenix.packages.${system}.default
     wireguard-tools
     samba
+    turbovnc
   ];
 
   # Allow unfree packages
