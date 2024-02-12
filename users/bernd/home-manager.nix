@@ -146,7 +146,7 @@ in
       rustup
       python311Full
       go
-      icecream
+      # icecream
       icemon
       # formatter
       yamlfmt

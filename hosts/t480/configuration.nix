@@ -124,6 +124,7 @@
 
   environment.systemPackages = with pkgs; [
     glxinfo
+    icecream
   ];
 
   services.fwupd.enable = true;
@@ -137,6 +138,15 @@
   #     };
   #   };
   # };
+
+  services.icecream.daemon = {
+    enable = true;
+    noRemote = true;
+    openBroadcast = true;
+    openFirewall = true;
+    maxProcesses = 2;
+    extraArgs = [ "-v" ];
+  };
 }
 
 # vim: set ts=2 sw=2:
