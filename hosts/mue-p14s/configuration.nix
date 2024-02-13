@@ -393,9 +393,11 @@
 
   services.icecream.daemon = {
     enable = true;
-    noRemote = true;
+    noRemote = false;
+    maxProcesses = 2;
     openBroadcast = true;
     openFirewall = true;
+    extraArgs = [ "-v" ];
   };
 }
 # vim: set ts=2 sw=2:

@@ -62,6 +62,16 @@
           waybar = inputs.waybar.packages."x86_64-linux".waybar;
           openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
           # qemu = prev.qemu.override { smbdSupport = true; };
+          icecream = prev.icecream.overrideAttrs (old: rec {
+            version = "1.4";
+            src = prev.fetchFromGitHub {
+              owner = "icecc";
+              repo = old.pname;
+              rev = "cd74801e0fa4e83e3ae254ca1d7fe98642f36b89";
+              sha256 = "sha256-nBdUbWNmTxKpkgFM3qbooNQISItt5eNKtnnzpBGVbd4=";
+            };
+            nativeBuildInputs = old.nativeBuildInputs ++ [ prev.pkg-config ];
+          });
         })
       ];
 
