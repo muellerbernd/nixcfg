@@ -148,7 +148,7 @@
   };
 
   systemd.services."icecc-daemon".environment = lib.mkForce {
-    PATH = "/run/current-system/sw/bin/";
+    PATH = "/run/current-system/sw/bin/:$PATH";
   };
 }
 
