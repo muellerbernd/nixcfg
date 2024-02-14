@@ -1,8 +1,8 @@
-{ config, hostname, ... }:
+{ config, ... }:
 {
   networking.wg-quick.interfaces = {
     "wgEIS" =
-      if hostname == "mue-p14s" then
+      if config.networking.hostName == "mue-p14s" then
         {
           configFile = config.age.secrets.workVpnP14sConfig.path;
           autostart = false;
