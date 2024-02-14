@@ -145,8 +145,9 @@
     openBroadcast = true;
     openFirewall = true;
     maxProcesses = 2;
-    extraArgs = [ "-v" ];
+    extraArgs = [ "PATH=/run/current-system/sw/bin/" ];
   };
+
 }
 
 # vim: set ts=2 sw=2:
