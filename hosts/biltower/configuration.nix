@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -104,7 +104,6 @@
         # hostname = "daemon-icecream-biltower";
         openFirewall = true;
         openBroadcast = true;
-        extraArgs = [ "PATH=/run/current-system/sw/bin/" ];
       };
       scheduler = {
         enable = true;
@@ -151,6 +150,9 @@
     ];
   };
 
+  systemd.services."icecc-daemon".environment = lib.mkForce {
+    PATH = "/run/current-system/sw/bin/";
+  };
 }
 
 # vim: set ts=2 sw=2:
