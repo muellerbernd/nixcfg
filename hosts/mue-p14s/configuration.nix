@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     # modules
     mixins-distributed-builder-client
+    mixins-workVPN
   ];
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
