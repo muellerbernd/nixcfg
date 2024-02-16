@@ -143,6 +143,8 @@
       };
     };
     keyboard.qmk.enable = true;
+    # enable usb-modeswitch (e.g. usb umts sticks)
+    usb-modeswitch.enable = true;
   };
 
   services = {
@@ -177,6 +179,16 @@
         # for a WiFi printer
         openFirewall = true;
       };
+
+    # udev.extraRules = ''
+    #   ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1f01", RUN+
+    #   ="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1f01 --type option-zerocd"
+    # '';
+    # # Gamecube Controller Adapter
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
+    # # Xiaomi Mi 9 Lite
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9039", MODE="0666"
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666"
   };
   # enable the thunderbolt daemon
   services.hardware.bolt.enable = true;
