@@ -27,6 +27,10 @@
       url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     waybar = {
       url = "github:alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +77,7 @@
             nativeBuildInputs = old.nativeBuildInputs ++ [ prev.pkg-config ];
           });
         })
+        inputs.hypridle.overlays.default
       ];
 
       # remoteNixpkgsPatches = [
