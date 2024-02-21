@@ -10,7 +10,7 @@
   };
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
-    rofi
+    rofi-wayland
     swaylock
     swayidle
     wl-clipboard
