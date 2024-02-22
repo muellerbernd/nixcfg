@@ -144,7 +144,7 @@ in
       gcc
       gdb
       rustup
-      python311Full
+      python3Full
       go
       # icecream
       icemon
@@ -177,10 +177,10 @@ in
       # haskell
       haskellPackages.haskell-language-server
       # python packages
-      pkgs.python311Packages.flask
-      pkgs.python311Packages.requests
-      pkgs.python311Packages.pygments
-      pkgs.python311Packages.numpy
+      pkgs.python3Packages.flask
+      pkgs.python3Packages.requests
+      pkgs.python3Packages.pygments
+      pkgs.python3Packages.numpy
       # latex
       texlive.combined.scheme-full
       # texlive.combined.scheme-medium
@@ -193,10 +193,7 @@ in
       gajim
       teams-for-linux
       # matrix client
-      cinny-desktop
       nheko
-      #
-      thunderbird
       # vpn
       openconnect_openssl
       networkmanager-openconnect

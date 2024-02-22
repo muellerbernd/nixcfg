@@ -3,10 +3,8 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:ereslibre/nixpkgs/containers-cdi";
-    # nixpkgs.url = "github:aaronmondal/nixpkgs/nvidia-container-toolkit-v1.15.0-rc.1";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-containers-cdi";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-nvidia-ctk";
     # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
 
