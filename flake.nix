@@ -21,8 +21,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+      url = "github:hyprwm/Hyprland";
+      # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hypridle = {
