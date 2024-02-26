@@ -154,9 +154,11 @@ in
       isort
       clang-tools
       nodePackages.prettier
-      beautysh
-      libxml2 # for xmllint
+      # beautysh
+      # libxml2 # for xmllint
+      shfmt
       # lsp
+      lemminx
       ccls
       python311Packages.python-lsp-server
       python311Packages.python-lsp-black
