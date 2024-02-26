@@ -3,8 +3,8 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:muellerbernd/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-nvidia-ctk";
     # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
 
@@ -54,7 +54,7 @@
         inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
         inputs.lsleases.overlays.default
-        inputs.yazi.overlays.default
+        # inputs.yazi.overlays.default
 
         (final: prev: {
           annotator = prev.callPackage ./pkgs/annotator

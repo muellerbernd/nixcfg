@@ -108,7 +108,6 @@ in
       grim
       ntfs3g
       gvfs
-      blender
       prusa-slicer
       # cli helpers
       usbutils
