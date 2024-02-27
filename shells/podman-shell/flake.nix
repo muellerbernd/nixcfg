@@ -1,7 +1,8 @@
 {
   description = "A podman shell";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:zhaofengli/nixpkgs/binfmt-qemu-static";
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =

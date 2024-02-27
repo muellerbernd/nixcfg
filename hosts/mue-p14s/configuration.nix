@@ -400,5 +400,9 @@
     openFirewall = true;
     extraArgs = [ "-v" ];
   };
+
+  systemd.services."icecc-daemon".environment = lib.mkForce {
+    PATH = "/run/current-system/sw/bin/";
+  };
 }
 # vim: set ts=2 sw=2:

@@ -57,16 +57,18 @@
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
     fi
   '';
-  # https://github.com/NixOS/nixpkgs/pull/284507
-  virtualisation.containers.cdi.dynamic.nvidia.enable = true;
 
-    # virtualisation.virtualbox.host.enable = true;
-    # virtualisation.virtualbox.host.enableExtensionPack = true;
-    # virtualisation.virtualbox.guest.enable = true;
-    # virtualisation.virtualbox.guest.x11 = true;
-    # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  # https://github.com/NixOS/nixpkgs/pull/160802
+  # nixpkgs.config.allowBroken = true;
+  # nixpkgs.config.allowUnsupportedSystem = true;
+  # boot.binfmt.preferStaticEmulators = true;
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.guest.enable = true;
+  # virtualisation.virtualbox.guest.x11 = true;
+  # users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
-    virtualisation.vmVariant = {
+  virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
       memorySize = 2048; # Use 2048MiB memory.
