@@ -25,7 +25,6 @@
     libsForQt5.qtwayland
     glxinfo
     kanshi
-    sway-audio-idle-inhibit
     hyprpaper
     swaybg
     wlr-randr
