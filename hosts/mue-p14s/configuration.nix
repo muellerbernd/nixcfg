@@ -187,7 +187,7 @@
       enable = true;
       settings.X11Forwarding = true;
       # require public key authentication for better security
-      settings.PasswordAuthentication = false;
+      settings.PasswordAuthentication = true;
       settings.KbdInteractiveAuthentication = false;
       settings.PermitRootLogin = "yes";
       openFirewall = true;
