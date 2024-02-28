@@ -10,10 +10,13 @@
       pkgs.OVMF.fd}/FV/OVMF.fd \
       "$@"''
     )
-    qemu
     distrobox
-    # nvidia-podman
-    # libnvidia-container
+    qemu
+    # https://github.com/quickemu-project/quickemu
+    quickemu
+    # Enhanced SPICE integration for linux QEMU guest
+    spice-vdagent
+    spice
   ];
 
   virtualisation = {
