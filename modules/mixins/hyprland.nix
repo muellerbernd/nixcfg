@@ -1,6 +1,6 @@
 { config, pkgs, lib, inputs, ... }:
 {
-  # enable sway window manager
+  # enable hyprland window manager
   programs.hyprland = {
     enable = true;
     # Whether to enable XWayland
@@ -12,7 +12,6 @@
   environment.systemPackages = with pkgs; [
     rofi-wayland
     swaylock
-    swayidle
     wl-clipboard
     clipman
     gammastep
