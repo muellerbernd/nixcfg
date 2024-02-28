@@ -1,15 +1,21 @@
 { config, pkgs, inputs, lib, ... }:
 let
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
-    gateway=$(ip -o route get "$1" | grep -E -o ' via ([0-9]+.){3}[0-9]+'|sed 's/^ via //')
-    echo "$1"
-    echo "$2"
-    echo "$gateway"
-    [ "$gateway" = "$2" ] # final test and return code
+    subnet=$1
+    ips=$(ip -4 -o addr show scope global | awk '{gsub(/\/.*/,"",$4); print $4}')
+    is_in=false
+    for ip in $ips; do
+        output_grepcidr=$(grepcidr "$subnet" <(echo "$ip"))
+        if [[ "$output_grepcidr" = "$ip" ]]; then
+            is_in=true
+        fi
+    done
+    [ "$is_in" = true ]
   '';
 in
 {
   environment.systemPackages = with pkgs; [
+    grepcidr
     ssh-script
   ];
   programs.ssh = {
@@ -20,33 +26,20 @@ in
       "eis-machine" = {
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
       };
-      "eis-machine-vpn" = {
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
-      };
     };
     extraConfig = ''
-      Host eis-machine
+      Host remote-builder
           ConnectTimeout 3
-      Match originalhost eis-machine exec "${ssh-script} 10.200.200.1"
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 10.200.200.0/24"
           HostName 10.200.200.28
-      Match originalhost eis-machine
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 192.168.1.0/24"
           HostName 192.168.1.28
-      Host biltower
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 192.168.178.0/24"
           HostName 192.168.178.142
-          ConnectTimeout 3
       Host *
           UpdateHostKeys yes
     '';
   };
-
-  # age = {
-  #   identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
-  #   secrets = {
-  #     distributedBuilderKey = {
-  #       file = "${inputs.self}/secrets/distributedBuilderKey.age";
-  #     };
-  #   };
-  # };
 
   # distributedBuilds
   nix = {
@@ -64,7 +57,7 @@ in
       #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
       # }
       {
-        hostName = "eis-machine";
+        hostName = "remote-builder";
         systems = [ "x86_64-linux" ];
         sshUser = "root";
         sshKey = config.age.secrets.distributedBuilderKey.path;
