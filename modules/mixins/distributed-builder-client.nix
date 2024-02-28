@@ -2,10 +2,10 @@
 let
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
     subnet=$1
-    ips=$(ip -4 -o addr show scope global | awk '{gsub(/\/.*/,"",$4); print $4}')
+    ips=$(${pkgs.iproute2}/bin/ip -4 -o addr show scope global | ${pkgs.gawk}/bin/awk '{gsub(/\/.*/,"",$4); print $4}')
     is_in=false
     for ip in $ips; do
-        output_grepcidr=$(grepcidr "$subnet" <(echo "$ip"))
+        output_grepcidr=$(${pkgs.grepcidr}/bin/grepcidr "$subnet" <(echo "$ip"))
         if [[ "$output_grepcidr" = "$ip" ]]; then
             is_in=true
         fi
@@ -15,6 +15,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    gawk
     grepcidr
     ssh-script
   ];
