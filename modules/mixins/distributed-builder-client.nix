@@ -2,6 +2,9 @@
 let
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
     gateway=$(ip -o route get "$1" | grep -E -o ' via ([0-9]+.){3}[0-9]+'|sed 's/^ via //')
+    echo "$1"
+    echo "$2"
+    echo "$gateway"
     [ "$gateway" = "$2" ] # final test and return code
   '';
 in
