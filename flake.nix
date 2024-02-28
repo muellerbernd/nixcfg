@@ -6,6 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-qemu-static";
+    # nixpkgs.url = "github:muellerbernd/nixpkgs/binfmt-qemu-static";
     # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 
     # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
