@@ -29,6 +29,10 @@
       url = "github:hyprwm/hypridle";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprlang = {
+      url = "github:hyprwm/hyprlang";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     waybar = {
       url = "github:alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -76,6 +80,7 @@
           });
         })
         inputs.hypridle.overlays.default
+        inputs.hyprlang.overlays.default
       ];
 
       # remoteNixpkgsPatches = [
