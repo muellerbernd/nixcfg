@@ -56,7 +56,7 @@
 
       # Overlays is the list of overlays we want to apply from flake inputs.
       overlays = [
-        inputs.neovim-nightly.overlay
+        # inputs.neovim-nightly.overlay
         inputs.rofi-music-rs.overlays.default
         inputs.lsleases.overlays.default
         # inputs.yazi.overlays.default
