@@ -1,5 +1,8 @@
 { config, pkgs, lib, inputs, ... }:
 {
+  # imports = [
+  #   inputs.hyprland.nixosModules.default
+  # ];
   # enable hyprland window manager
   programs.hyprland = {
     enable = true;
@@ -33,7 +36,6 @@
     wl-mirror
     pipectl
     hypridle
-    hyprlang
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
