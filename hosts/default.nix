@@ -69,7 +69,7 @@
   };
 
   # for cross compilation of arm
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv7l-linux" ];
 
 
 #   security.pki.certificates = [
