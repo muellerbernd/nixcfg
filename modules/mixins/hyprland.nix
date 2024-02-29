@@ -1,15 +1,15 @@
 { config, pkgs, lib, inputs, ... }:
 {
-  # imports = [
-  #   inputs.hyprland.nixosModules.default
-  # ];
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
   # enable hyprland window manager
   programs.hyprland = {
     enable = true;
     # Whether to enable XWayland
     xwayland.enable = true;
     # The hyprland package to use
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
