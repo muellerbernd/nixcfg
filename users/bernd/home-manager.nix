@@ -167,6 +167,8 @@ in
       nodePackages.pyright
       # rnix-lsp
       nil
+      nixd
+      alejandra
       sumneko-lua-language-server
       marksman
       cmake-language-server
@@ -177,11 +179,11 @@ in
       # rust-analyzer
       # haskell
       haskellPackages.haskell-language-server
-      # python packages
-      pkgs.python3Packages.flask
-      pkgs.python3Packages.requests
-      pkgs.python3Packages.pygments
-      pkgs.python3Packages.numpy
+      # # python packages
+      # pkgs.python3Packages.flask
+      # pkgs.python3Packages.requests
+      # pkgs.python3Packages.pygments
+      # pkgs.python3Packages.numpy
       # latex
       texlive.combined.scheme-full
       # texlive.combined.scheme-medium
