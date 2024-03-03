@@ -79,6 +79,16 @@
             };
             nativeBuildInputs = old.nativeBuildInputs ++ [ prev.pkg-config ];
           });
+          # rofi-wayland = prev.rofi-wayland.overrideAttrs (old: rec {
+          #   version = "git";
+          #   src = prev.fetchFromGitHub {
+          #     owner = "lbonn";
+          #     repo = "rofi";
+          #     fetchSubmodules = true;
+          #     rev = "be7c088eea13341746a93e6bba8ee442d8a513e1";
+          #     sha256 = "HJCisTRg2I/UAHuiN4uvuVgmWKlsBmJElGBbNLgvqWA=";
+          #   };
+          # });
         })
         inputs.hypridle.overlays.default
         inputs.hyprlang.overlays.default
