@@ -192,6 +192,7 @@ in
       firefox
       # media
       spotify
+      spotify-player
       # messenger
       gajim
       teams-for-linux
