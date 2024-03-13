@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
@@ -9,7 +15,7 @@
   ];
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs" ];
+  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];
   # Bootloader.
   boot = {
     loader = {
@@ -71,24 +77,25 @@
     thinkfan = {
       enable = true;
 
-      sensors = [{
-        type = "tpacpi";
-        query = "/proc/acpi/ibm/thermal";
-      }];
+      sensors = [
+        {
+          type = "tpacpi";
+          query = "/proc/acpi/ibm/thermal";
+        }
+      ];
 
       levels = [
-        [ 0 0 55 ]
-        [ 1 48 60 ]
-        [ 2 50 61 ]
-        [ 3 52 63 ]
-        [ 6 56 65 ]
-        [ 7 60 85 ]
-        [ "level auto" 80 32767 ]
+        [0 0 55]
+        [1 48 60]
+        [2 50 61]
+        [3 52 63]
+        [6 56 65]
+        [7 60 85]
+        ["level auto" 80 32767]
       ];
     };
   };
-  systemd.services.thinkfan.preStart =
-    "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
+  systemd.services.thinkfan.preStart = "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
   # enable modem manager
   systemd.services.modem-manager.enable = true;
@@ -132,7 +139,7 @@
     };
   };
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   networking = {
     networkmanager.enable = true;
@@ -163,10 +170,11 @@
         67
         51820 # wireguard
       ];
-      allowedUDPPortRanges = [{
-        from = 4000;
-        to = 50000;
-      }
+      allowedUDPPortRanges = [
+        {
+          from = 4000;
+          to = 50000;
+        }
         # # ROS2 needs 7400 + (250 * Domain) + 1
         # # here Domain is 41 or 42
         # {
@@ -174,8 +182,7 @@
         #   to = 17910;
         # }
       ];
-      extraCommands =
-        "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
+      extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
         iptables -I INPUT -p udp --dport 67 -j ACCEPT";
       allowPing = true;
     };
@@ -204,6 +211,8 @@
     nmap
     socat
     turbovnc
+    hidapi
+    libusb
     # openconnect-sso
   ];
 
@@ -219,30 +228,28 @@
   '';
   # request-key expects a configuration file under /etc
   environment.etc."request-key.conf" = lib.mkForce {
-    text =
-      let
-        upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
-        keyctl = "${pkgs.keyutils}/bin/keyctl";
-      in
-      ''
-        #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
-        # -t is required for DFS share servers...
-        create  cifs.spnego   *            *             ${upcall} -t %k
-        create  dns_resolver  *            *             ${upcall} %k
-        # Everything below this point is essentially the default configuration,
-        # modified minimally to work under NixOS. Notably, it provides debug
-        # logging.
-        create  user          debug:*      negate        ${keyctl} negate %k 30 %S
-        create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
-        create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
-        create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
-        create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
-        create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
-        negate  *             *            *             ${keyctl} negate %k 30 %S
-      '';
+    text = let
+      upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
+      keyctl = "${pkgs.keyutils}/bin/keyctl";
+    in ''
+      #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
+      # -t is required for DFS share servers...
+      create  cifs.spnego   *            *             ${upcall} -t %k
+      create  dns_resolver  *            *             ${upcall} %k
+      # Everything below this point is essentially the default configuration,
+      # modified minimally to work under NixOS. Notably, it provides debug
+      # logging.
+      create  user          debug:*      negate        ${keyctl} negate %k 30 %S
+      create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
+      create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
+      create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
+      create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
+      create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
+      negate  *             *            *             ${keyctl} negate %k 30 %S
+    '';
   };
 
-  services.samba = { openFirewall = true; };
+  services.samba = {openFirewall = true;};
   services.gvfs.enable = true;
   # For mount.cifs, required unless domain name resolution is not needed.
   fileSystems."/mnt/EIS" = {
@@ -300,7 +307,7 @@
   # specialisation for traveling
   specialisation = {
     on-the-go.configuration = {
-      system.nixos.tags = [ "on-the-go" ];
+      system.nixos.tags = ["on-the-go"];
       powerManagement = {
         enable = true;
         cpuFreqGovernor = "powersave";
@@ -318,10 +325,12 @@
   #   };
   # };
 
-  # udev rules for rtls
+  # udev rules for rtls and co2monitor
   services.udev.extraRules = ''
     KERNEL=="ttyACM0", MODE:="666"
     KERNEL=="ttyACM1", MODE:="666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
   '';
 
   services.printing.drivers = [
@@ -398,7 +407,7 @@
     maxProcesses = 2;
     openBroadcast = true;
     openFirewall = true;
-    extraArgs = [ "-v" ];
+    extraArgs = ["-v"];
   };
 
   systemd.services."icecc-daemon".environment = lib.mkForce {
@@ -406,3 +415,4 @@
   };
 }
 # vim: set ts=2 sw=2:
+
