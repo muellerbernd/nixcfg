@@ -1,8 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -30,7 +34,7 @@
   networking.hostName = "biltower"; # Define your hostname.
 
   # nvidia setup
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   # try to fix tearing
   # services.xserver.screenSection = ''
   #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
@@ -129,7 +133,7 @@
     };
   };
 
-  zramSwap = { enable = false; };
+  zramSwap = {enable = false;};
 
   users.users.root = {
     openssh.authorizedKeys.keys = [
@@ -153,6 +157,8 @@
   systemd.services."icecc-daemon".environment = lib.mkForce {
     PATH = "/run/current-system/sw/bin/";
   };
-}
 
+  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkDefault true;
+}
 # vim: set ts=2 sw=2:
+
