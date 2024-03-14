@@ -60,6 +60,7 @@
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
     fi
   '';
+  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkDefault false;
 
   # https://github.com/NixOS/nixpkgs/pull/160802
   # nixpkgs.config.allowBroken = true;

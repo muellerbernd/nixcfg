@@ -158,7 +158,7 @@
     PATH = "/run/current-system/sw/bin/";
   };
 
-  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkDefault true;
+  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkForce true;
 }
 # vim: set ts=2 sw=2:
 
