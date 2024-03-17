@@ -76,8 +76,8 @@
           {}; # path containing default.nix
         uvtools =
           prev.callPackage ./pkgs/uvtools {}; # path containing default.nix
-        waybar = inputs.waybar.packages."x86_64-linux".waybar;
-        openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
+        # waybar = inputs.waybar.packages."x86_64-linux".waybar;
+        # openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
         qemu = prev.qemu.override {smbdSupport = true;};
         icecream = prev.icecream.overrideAttrs (old: rec {
           version = "1.4";

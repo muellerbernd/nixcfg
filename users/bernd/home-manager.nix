@@ -1,10 +1,15 @@
-{ config, lib, pkgs, inputs, headless ? true, ... }:
-let
-  rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
-    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
-  '';
-in
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  headless ? true,
+  ...
+}: let
+  rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
+    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun" -show combi -lines 20 -show-icons
+  '';
+in {
   imports = [
     ../../modules/profiles/kanshi.nix
     # ../../modules/profiles/hyprland.nix
@@ -244,8 +249,7 @@ in
       name = "Bernd Müller";
 
       # userChome.css to make it look better
-      userChrome =
-        "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
+      userChrome = "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
@@ -282,9 +286,7 @@ in
       #   # plasma-integration
       # ];
     };
-
   };
-
 
   # enable picom
   # services.picom.enable = true;
@@ -339,8 +341,32 @@ in
 
   xdg = {
     enable = true;
-    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
       General.theme = "Adwaita-dark";
+    };
+    desktopEntries = {
+      nvim = {
+        name = "Neovim";
+        genericName = "Texteditor";
+        exec = "alacritty -e nvim";
+        terminal = false;
+        # categories = ["Application"];
+        mimeType = [
+          "application/xml"
+          "text/x-csrc"
+          "text/plain"
+          "text/x-c++src"
+          "application/x-shellscript"
+          "text/x-tex"
+          "text/x-makefile"
+          "text/x-lua"
+          "text/csv"
+          "application/json"
+          "text/markdown"
+          "text/x-chd"
+          "application/xm"
+        ];
+      };
     };
   };
   # not so fancy pointer
