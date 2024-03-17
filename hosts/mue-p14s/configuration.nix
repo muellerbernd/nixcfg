@@ -413,6 +413,7 @@
   systemd.services."icecc-daemon".environment = lib.mkForce {
     PATH = "/run/current-system/sw/bin/";
   };
+  virtualisation.containers.cdi.dynamic.nvidia.enable = true;
 }
 # vim: set ts=2 sw=2:
 
