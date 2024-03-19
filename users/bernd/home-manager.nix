@@ -165,10 +165,10 @@ in {
       # lsp
       lemminx
       ccls
-      python311Packages.python-lsp-server
-      python311Packages.python-lsp-black
-      python311Packages.pylsp-rope
-      python311Packages.pyls-flake8
+      python3Packages.python-lsp-server
+      python3Packages.python-lsp-black
+      python3Packages.pylsp-rope
+      python3Packages.pyls-flake8
       nodePackages.pyright
       # rnix-lsp
       nil
