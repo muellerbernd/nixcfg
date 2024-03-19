@@ -127,6 +127,7 @@ in {
       light
       lm_sensors
       htop
+      nmon
       bottom
       dmidecode
       unzip
@@ -204,7 +205,6 @@ in {
       # matrix client
       nheko
       # vpn
-      openconnect_openssl
       networkmanager-openconnect
       # openconnect-sso
       wireshark
