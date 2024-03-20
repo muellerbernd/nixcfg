@@ -37,6 +37,7 @@ in {
       # terminal
       glow
       alacritty
+      foot
       wezterm
       antigen
       starship
