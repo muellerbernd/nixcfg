@@ -41,7 +41,7 @@
     wl-mirror
     pipectl
     hypridle
-    wmctrl
+    obs-studio-plugins.wlrobs
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
@@ -53,7 +53,7 @@
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+    # extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
   };
   security.pam.services.swaylock = {};
   security.pam.services.swaylock.fprintAuth = false;
