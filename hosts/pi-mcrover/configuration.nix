@@ -190,15 +190,8 @@
   networking.hostName = "ros-rover";
   networking = {
     networkmanager.enable = true;
-    interfaces.wlan0.useDHCP = true;
-    interfaces.enu1u1.useDHCP = true;
-    # wireless = {
-    #   interfaces = [ "wlan0" ];
-    #   enable = true;
-    #   networks = {
-    #     "Judaeische Volksfront".psk = "17450535586538697570";
-    #   };
-    # };
+    # interfaces.wlan0.useDHCP = true;
+    # interfaces.enu1u1.useDHCP = true;
     useDHCP = lib.mkDefault true;
   };
   users.extraUsers.root.openssh.authorizedKeys.keys = [
