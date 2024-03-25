@@ -129,9 +129,38 @@
     # };
     # lib = originPkgs.lib;
     lib = nixpkgs.lib;
-  in {
-    # nixosModules = import ./modules { lib = nixpkgs.lib; };
+  in rec {
+    images = {
+      pi-mcrover =
+        (self.nixosConfigurations.rover.extendModules {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
+            }
+          ];
+        })
+        .config
+        .system
+        .build
+        .sdImage;
+    };
+    packages.x86_64-linux.pi-mcrover-image = images.pi-mcrover;
+    packages.aarch64-linux.pi-mcrover-image = images.pi-mcrover;
+
     nixosModules = import ./modules {inherit lib;};
+
+    nixosConfigurations.pi-mcrover = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+        ./hosts/pi-mcrover/configuration.nix
+        ./hosts/pi-mcrover/base.nix
+      ];
+    };
+
     nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
       inherit nixpkgs home-manager overlays agenix inputs lib;
       system = "x86_64-linux";
