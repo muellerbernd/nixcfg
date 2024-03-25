@@ -80,6 +80,7 @@
     wireguard-tools
     samba
     turbovnc
+    remmina
   ];
 
   # Allow unfree packages
