@@ -108,10 +108,7 @@ in {
       gnome.file-roller
       archiver
       xfce.xfce4-screenshooter
-      grimblast
-      flameshot
       obs-studio
-      grim
       ntfs3g
       gvfs
       prusa-slicer
