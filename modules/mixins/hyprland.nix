@@ -5,16 +5,17 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
+  # imports = [
+  #   inputs.hyprland.nixosModules.default
+  # ];
   # enable hyprland window manager
   programs.hyprland = {
     enable = true;
     # Whether to enable XWayland
     xwayland.enable = true;
     # The hyprland package to use
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
@@ -27,12 +28,11 @@
     slurp
     wayland
     waybar
-    waypipe
     qt6.qtwayland
     libsForQt5.qtwayland
     glxinfo
     kanshi
-    hyprpaper
+    # hyprpaper
     swaybg
     wlr-randr
     wdisplays
@@ -41,7 +41,6 @@
     wl-mirror
     pipectl
     hypridle
-    obs-studio-plugins.wlrobs
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
@@ -53,12 +52,13 @@
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
-    # extraPortals = [pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+    # extraPortals = [pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
+    # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
   security.pam.services.swaylock = {};
   security.pam.services.swaylock.fprintAuth = false;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  nixpkgs.config.chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --use-angle=vulkan --use-cmd-decoder=passthrough";
+  # nixpkgs.config.chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --use-angle=vulkan --use-cmd-decoder=passthrough";
 }
