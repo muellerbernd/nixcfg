@@ -109,6 +109,7 @@ in {
       archiver
       xfce.xfce4-screenshooter
       obs-studio
+      shotcut
       ntfs3g
       gvfs
       prusa-slicer
