@@ -20,6 +20,7 @@
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
     rofi-wayland
+    # walker
     swaylock
     wl-clipboard
     clipman

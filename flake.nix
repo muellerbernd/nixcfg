@@ -46,6 +46,7 @@
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
+    walker.url = "github:abenz1267/walker";
 
     # nil.url = "github:oxalica/nil";
     nixd.url = "github:nix-community/nixd";
@@ -99,6 +100,7 @@
         #     sha256 = "HJCisTRg2I/UAHuiN4uvuVgmWKlsBmJElGBbNLgvqWA=";
         #   };
         # });
+        walker = inputs.walker.packages."x86_64-linux".walker;
       })
       inputs.hypridle.overlays.default
       inputs.hyprlang.overlays.default

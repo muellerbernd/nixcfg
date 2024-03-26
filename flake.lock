@@ -167,6 +167,27 @@
         "type": "github"
       }
     },
+    "flake-parts_4": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "walker",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709336216,
+        "narHash": "sha256-Dt/wOWeW6Sqm11Yh+2+t0dfEWxoMxGBvv3JpIocFl9E=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f7b3c975cf067e56e7cda6cb098ebe3fb4d74ca2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems_6"
@@ -361,11 +382,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1711331441,
-        "narHash": "sha256-Tvgc9hUfNELWl3R2gtCBQ2D7lVIjumzLHs6JiM1RT6g=",
+        "lastModified": 1711419979,
+        "narHash": "sha256-3MHxCysSDf+2anImp6UQInHJnQUp+3Ble2Y7tllwHkA=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "356414639fc06ace7045236ec41d673342981057",
+        "rev": "a9d7526aae38dcdceb391fe9f00919c6c400abe3",
         "type": "github"
       },
       "original": {
@@ -519,11 +540,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1711323947,
-        "narHash": "sha256-Vc478rxwJkMuOcgBXm+brraWk9lbFqrGEdXVuST2l/A=",
+        "lastModified": 1711405268,
+        "narHash": "sha256-ixaLbLdtiUBy03xG7jg8hgGsvZdjgiTLoPa+/S6nqXA=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "02d00cf3eed6681c6dde40585551c8243d7c003f",
+        "rev": "00e71d3da3464df2b4c4f33bfd5fac6d88e7c867",
         "type": "github"
       },
       "original": {
@@ -542,11 +563,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1711325009,
-        "narHash": "sha256-c5OJdyuXYzTP+k+PN73X+0pvgXR1yYMYok+72x4SLVg=",
+        "lastModified": 1711411421,
+        "narHash": "sha256-4sp4EIymCtkaBI37L0pYnasSxLJ7EWmedzNxXuEpIoI=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "119bbc295f56b531cb87502f5d2fff13dcc35a35",
+        "rev": "73b284862eb33c198207ca11f8e1eb99fe086653",
         "type": "github"
       },
       "original": {
@@ -721,6 +742,22 @@
     },
     "nixpkgs_8": {
       "locked": {
+        "lastModified": 1710451336,
+        "narHash": "sha256-pP86Pcfu3BrAvRO7R64x7hs+GaQrjFes+mEPowCfkxY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d691274a972b3165335d261cc4671335f5c67de9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_9": {
+      "locked": {
         "lastModified": 1701174899,
         "narHash": "sha256-1W+FMe8mWsJKXoBc+QgKmEeRj33kTFnPq7XCjU+bfnA=",
         "owner": "NixOS",
@@ -768,6 +805,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "rofi-music-rs": "rofi-music-rs",
+        "walker": "walker",
         "waybar": "waybar",
         "yazi": "yazi"
       }
@@ -932,6 +970,25 @@
         "type": "github"
       }
     },
+    "walker": {
+      "inputs": {
+        "flake-parts": "flake-parts_4",
+        "nixpkgs": "nixpkgs_8"
+      },
+      "locked": {
+        "lastModified": 1711434976,
+        "narHash": "sha256-tTwjsc0EJZhNHgs/l8CeejuMSgMDt34kEm+VIeex1Yo=",
+        "owner": "abenz1267",
+        "repo": "walker",
+        "rev": "5d4922e838f25b44769e581f361014fa7f1f0c50",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abenz1267",
+        "repo": "walker",
+        "type": "github"
+      }
+    },
     "waybar": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -940,11 +997,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1711314416,
-        "narHash": "sha256-xxGx5ortDMIQIdVAYn/vtakiLjNdgNKUNkUc8b5wBbc=",
+        "lastModified": 1711389786,
+        "narHash": "sha256-mDP36IuJJAIYzzqbmKJWWZuCJtvjRtt87W5aLlipDGU=",
         "owner": "alexays",
         "repo": "waybar",
-        "rev": "487ab2325996b922b5f62e1930040b6d71bfd39f",
+        "rev": "b652b4296d4e953b08c4886467fb521f8ae716be",
         "type": "github"
       },
       "original": {
@@ -1008,7 +1065,7 @@
     "yazi": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_8",
+        "nixpkgs": "nixpkgs_9",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
