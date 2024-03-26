@@ -26,6 +26,7 @@
     clipman
     gammastep
     grim
+    grimblast
     slurp
     wayland
     waybar
