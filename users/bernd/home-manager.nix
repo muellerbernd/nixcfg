@@ -208,9 +208,9 @@ in {
       # openconnect-sso
       wireshark
       # keyboard stuff
-      qmk
-      qmk_hid
-      qmk-udev-rules
+      # qmk
+      # qmk_hid
+      # qmk-udev-rules
       avrdude
       evtest
       # mesh and pointcloud
