@@ -3,6 +3,7 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-qemu-static";
@@ -55,8 +56,10 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-stable,
     home-manager,
     agenix,
+    nixos-hardware,
     ...
   } @ inputs: let
     mkVM = import ./lib/mkvm.nix;
@@ -105,38 +108,28 @@
       inputs.hypridle.overlays.default
       inputs.hyprlang.overlays.default
     ];
-
-    # remoteNixpkgsPatches = [
-    #   # {
-    #   #   meta.description = "nixos/binfmt: Add support for using statically-linked QEMU";
-    #   #   url = "https://github.com/NixOS/nixpkgs/pull/160802.diff";
-    #   #   sha256 = "sha256-1HvhUUN2CaDZ+oVHLqp0oFK25vCGn81K6W1C601rhKM=";
-    #   # }
-    #   # {
-    #   #   meta.description = "";
-    #   #   url = "https://github.com/NixOS/nixpkgs/pull/284507.patch";
-    #   #   sha256 = "sha256-eS+HU6ZcIh1vO1azPCkz82yQsxTfGgOZFuVVd7NP6xM=";
-    #   # }
-    # ];
-    # localNixpkgsPatches = [ ];
-    # originPkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-    # nixpkgs = originPkgs.applyPatches {
-    #   name = "nixpkgs-patched";
-    #   src = inputs.nixpkgs;
-    #   patches = map originPkgs.fetchpatch remoteNixpkgsPatches ++ localNixpkgsPatches;
-    #   postPatch = ''
-    #     patch=$(printf '%s\n' ${builtins.concatStringsSep " " (map (p: p.sha256) remoteNixpkgsPatches ++ localNixpkgsPatches)} |sort | sha256sum | cut -c -7)
-    #     echo "+patch-$patch" >.version-suffix
-    #   '';
-    # };
-    # lib = originPkgs.lib;
     lib = nixpkgs.lib;
   in rec {
     images = {
       pi-mcrover =
         (self.nixosConfigurations.rover.extendModules {
           modules = [
-            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
+            }
+          ];
+        })
+        .config
+        .system
+        .build
+        .sdImage;
+      pi4 =
+        (self.nixosConfigurations.pi4.extendModules {
+          modules = [
+            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             {
               disabledModules = ["profiles/base.nix"];
               # Disable zstd compression
@@ -151,12 +144,23 @@
     };
     packages.x86_64-linux.pi-mcrover-image = images.pi-mcrover;
     packages.aarch64-linux.pi-mcrover-image = images.pi-mcrover;
+    packages.x86_64-linux.pi4-image = images.pi4;
+    packages.aarch64-linux.pi4-image = images.pi4;
 
     nixosModules = import ./modules {inherit lib;};
 
     nixosConfigurations.pi-mcrover = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
+        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+        ./hosts/pi-mcrover/configuration.nix
+        ./hosts/pi-mcrover/base.nix
+      ];
+    };
+    nixosConfigurations.pi4 = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        # nixos-hardware.nixosModules.raspberry-pi-4
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
         ./hosts/pi-mcrover/configuration.nix
         ./hosts/pi-mcrover/base.nix
