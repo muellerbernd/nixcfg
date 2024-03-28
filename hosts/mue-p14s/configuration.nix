@@ -109,10 +109,10 @@
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         mesa.drivers
-        libva-utils
-        vaapiVdpau
-        libvdpau-va-gl
-        nvidia-vaapi-driver
+        # libva-utils
+        # vaapiVdpau
+        # libvdpau-va-gl
+        # nvidia-vaapi-driver
       ];
     };
     trackpoint = {
@@ -123,9 +123,9 @@
     nvidia = {
       # open = true;
       # fix screen tearing in sync mode
-      modesetting.enable = true;
+      modesetting.enable = false;
       # fix suspend/resume screen corruption in sync mode
-      powerManagement.enable = true;
+      powerManagement.enable = false;
       prime = {
         # enable offload command
         offload = {
