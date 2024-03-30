@@ -1,8 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -30,7 +34,7 @@
   networking.hostName = "biltower"; # Define your hostname.
 
   # nvidia setup
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   # try to fix tearing
   # services.xserver.screenSection = ''
   #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
@@ -124,12 +128,12 @@
       enable = true;
       write = true;
       keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJij7unHFBR6aCD75wKYdcjVikDaxOhF6laTR1gdzTE6 bernd@t480ilmpad"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJij7unHFBR6aCD75wKYdcjVikDaxOhF6laTR1gdzTE6 bernd@t480ilmpad"
       ];
     };
   };
 
-  zramSwap = { enable = false; };
+  zramSwap = {enable = false;};
 
   users.users.root = {
     openssh.authorizedKeys.keys = [
@@ -149,6 +153,12 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+qvbVWlZRERjS1MohguRWZgq/r3+K8TRgp981RHtUop/LBjyzc4/bBM3q7dIu+6WatORZuk52Eu+quagYtU2OscYX5+j4djkC6s6/FzIkNITrnSQw3+K+M9wAYINfehu8AkojQ/l/6eIrPkxt4vtCBoVKo2BnV0K45klBCU29IhaJgibZ7L4wsKy4MltYAuQQaooyOJVWLlvseRYKCviZ1lPTD9Yy8Z3zKj5c8w3QK5RngozzgOWtX0+KjUWS4/fJWmp+jl7ijhS2kGqUNTgBGqMNAcZwdoggntDnESeBuaokefedJwcoAJfq38U/lnIvPL4ygRnIAYeFoIcu0fnB bernd@debian-wood-server"
     ];
   };
-}
 
+  systemd.services."icecc-daemon".environment = lib.mkForce {
+    PATH = "/run/current-system/sw/bin/";
+  };
+
+  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkForce true;
+}
 # vim: set ts=2 sw=2:
+

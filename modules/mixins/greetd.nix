@@ -1,4 +1,6 @@
 { pkgs
+, lib
+, config
 , ...
 }:
 {
@@ -12,7 +14,7 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd Hyprland
+            --cmd ${lib.getExe config.programs.hyprland.package}
             # --cmd "systemd-cat Hyprland"
         '';
         # command = "sway";
@@ -24,6 +26,24 @@
   #   startx
   #   startxfce4
   # '';
+  # greetd display manager
+  # services.greetd =
+  #   let
+  #     session = {
+  #       command = "${lib.getExe config.programs.hyprland.package}";
+  #       user = "bernd";
+  #     };
+  #   in
+  #   {
+  #     enable = true;
+  #     settings = {
+  #       terminal.vt = 1;
+  #       default_session = session;
+  #       initial_session = session;
+  #     };
+  #   };
 
   services.xserver.displayManager.startx.enable = true;
+  # unlock GPG keyring on login
+  security.pam.services.greetd.enableGnomeKeyring = true;
 }

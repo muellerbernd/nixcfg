@@ -78,6 +78,9 @@
     # nix-serve-ng
     inputs.agenix.packages.${system}.default
     wireguard-tools
+    samba
+    turbovnc
+    remmina
   ];
 
   # Allow unfree packages
@@ -130,17 +133,19 @@
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
       settings = {
-        General = {
-          # Restricts all controllers to the specified transport. Default value
-          # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
-          # Possible values: "dual", "bredr", "le"
-          ControllerMode = "dual";
-          Enable = "Source,Sink,Media,Socket";
-          Experimental = true;
-        };
+        # General = {
+        #   # Restricts all controllers to the specified transport. Default value
+        #   # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
+        #   # Possible values: "dual", "bredr", "le"
+        #   ControllerMode = "dual";
+        #   Enable = "Source,Sink,Media,Socket";
+        #   Experimental = true;
+        # };
       };
     };
     keyboard.qmk.enable = true;
+    # enable usb-modeswitch (e.g. usb umts sticks)
+    usb-modeswitch.enable = true;
   };
 
   services = {
@@ -160,10 +165,31 @@
     blueman.enable = true;
     # Enable CUPS to print documents.
     printing.enable = true;
-    avahi.enable = true;
-    avahi.nssmdns4 = true;
-    # for a WiFi printer
-    avahi.openFirewall = true;
+
+    avahi =
+      if (config.system.nixos.release != "24.05")
+      then {
+        enable = true;
+        nssmdns = true;
+        # for a WiFi printer
+        openFirewall = true;
+      }
+      else {
+        enable = true;
+        nssmdns4 = true;
+        # for a WiFi printer
+        openFirewall = true;
+      };
+
+    # udev.extraRules = ''
+    #   ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1f01", RUN+
+    #   ="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1f01 --type option-zerocd"
+    # '';
+    # # Gamecube Controller Adapter
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
+    # # Xiaomi Mi 9 Lite
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9039", MODE="0666"
+    # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666"
   };
   # enable the thunderbolt daemon
   services.hardware.bolt.enable = true;

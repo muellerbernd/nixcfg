@@ -1,58 +1,80 @@
-{ config, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
+let
+  ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
+    subnet=$1
+    ips=$(${pkgs.iproute2}/bin/ip -4 -o addr show scope global | ${pkgs.gawk}/bin/awk '{gsub(/\/.*/,"",$4); print $4}')
+    is_in=false
+    for ip in $ips; do
+        output_grepcidr=$(${pkgs.grepcidr}/bin/grepcidr "$subnet" <(echo "$ip"))
+        if [[ "$output_grepcidr" = "$ip" ]]; then
+            is_in=true
+        fi
+    done
+    [ "$is_in" = true ]
+  '';
+in
 {
-  programs.ssh.knownHosts = {
-    "biltower" = {
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAt7MEJjzVNUPs5KIkE55lw6+Ss6n9EEspuUQJsZm3J";
-    };
-    "eis-machine" = {
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
-    };
-    "eis-machine-vpn" = {
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
-    };
-  };
-  age = {
-    identityPaths = [ "/etc/ssh/ssh_host_rsa_key" "/etc/ssh/ssh_host_ed25519_key" ];
-    secrets = {
-      distributedBuilderKey = {
-        file = "${inputs.self}/secrets/distributedBuilderKey.age";
+  environment.systemPackages = with pkgs; [
+    gawk
+    grepcidr
+    ssh-script
+  ];
+  programs.ssh = {
+    knownHosts = {
+      "biltower" = {
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAt7MEJjzVNUPs5KIkE55lw6+Ss6n9EEspuUQJsZm3J";
+      };
+      "eis-machine" = {
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCyIyCkiDNlU1TM2VhLyLgpZMCLLjWJ1hkPn0vphCzp";
       };
     };
+    extraConfig = ''
+      Host remote-builder
+          ConnectTimeout 3
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 10.200.200.0/24"
+          HostName 10.200.200.28
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 192.168.1.0/24"
+          HostName 192.168.1.28
+      Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 192.168.178.0/24"
+          HostName 192.168.178.142
+      Host *
+          UpdateHostKeys yes
+    '';
   };
 
   # distributedBuilds
   nix = {
     distributedBuilds = true;
     buildMachines = [
+      # {
+      #   hostName = "biltower";
+      #   systems = [ "x86_64-linux" ];
+      #   # protocol = "ssh-ng";
+      #   sshUser = "bernd";
+      #   # sshKey = "/root/.ssh/eis-remote";
+      #   sshKey = config.age.secrets.distributedBuilderKey.path;
+      #   maxJobs = 99;
+      #   speedFactor = 5;
+      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      # }
       {
-        hostName = "biltower";
-        systems = [ "x86_64-linux" ];
-        # protocol = "ssh-ng";
-        sshUser = "bernd";
-        # sshKey = "/root/.ssh/eis-remote";
-        sshKey = config.age.secrets.distributedBuilderKey.path;
-        maxJobs = 99;
-        speedFactor = 5;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      }
-      {
-        hostName = "eis-machine";
-        systems = [ "x86_64-linux" ];
+        hostName = "remote-builder";
+        systems = [ "x86_64-linux" "aarch64-linux" "armv7l-linux" ];
         sshUser = "root";
         sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
         speedFactor = 9;
         supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
       }
-      {
-        hostName = "eis-machine-vpn";
-        systems = [ "x86_64-linux" ];
-        sshUser = "root";
-        sshKey = config.age.secrets.distributedBuilderKey.path;
-        maxJobs = 99;
-        speedFactor = 9;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      }
+      # {
+      #   hostName = "eis-machine-vpn";
+      #   systems = [ "x86_64-linux" ];
+      #   sshUser = "root";
+      #   sshKey = config.age.secrets.distributedBuilderKey.path;
+      #   maxJobs = 99;
+      #   speedFactor = 9;
+      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+      # }
     ];
     extraOptions = ''
       builders-use-substitutes = true

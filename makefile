@@ -34,3 +34,7 @@ system-vm:
 
 balodil:
 	nixos-rebuild build-vm --flake .#balodil
+
+deploy-pi-mcrover:
+	nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.178.160 --flake ".#pi-mcrover"
+

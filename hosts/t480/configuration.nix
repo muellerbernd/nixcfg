@@ -1,10 +1,11 @@
-{ config, pkgs, inputs, hostname, crypt_device, ... }: {
+{ config, lib, pkgs, inputs, hostname, crypt_device, ... }: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # modules
     mixins-distributed-builder-client
+    mixins-workVPN
   ];
   # Bootloader.
   boot = {
@@ -123,6 +124,7 @@
 
   environment.systemPackages = with pkgs; [
     glxinfo
+    icecream
   ];
 
   services.fwupd.enable = true;
@@ -136,6 +138,18 @@
   #     };
   #   };
   # };
+
+  services.icecream.daemon = {
+    enable = true;
+    noRemote = true;
+    openBroadcast = true;
+    openFirewall = true;
+    maxProcesses = 2;
+  };
+
+  systemd.services."icecc-daemon".environment = lib.mkForce {
+    PATH = "/run/current-system/sw/bin/";
+  };
 }
 
 # vim: set ts=2 sw=2:

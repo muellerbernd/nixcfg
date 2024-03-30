@@ -2,18 +2,18 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:ereslibre/nixpkgs/containers-cdi";
-    # nixpkgs.url = "github:aaronmondal/nixpkgs/nvidia-container-toolkit-v1.15.0-rc.1";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-containers-cdi";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-nvidia-ctk";
-    # nixpkgs.url = "git+file:///home/bernd/Desktop/GithubProjects/nixpkgs";
+    # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
+    # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-qemu-static";
+    # nixpkgs.url = "github:muellerbernd/nixpkgs/binfmt-qemu-static";
+    # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 
     # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      # url = "github:nix-community/home-manager/release-23.05";
+      # url = "github:nix-community/home-manager/release-23.11";
       url = "github:nix-community/home-manager";
 
       # We want to use the same set of nixpkgs as our system.
@@ -23,8 +23,16 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+      url = "github:hyprwm/Hyprland";
+      # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprlang = {
+      url = "github:hyprwm/hyprlang";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     waybar = {
@@ -37,99 +45,162 @@
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
-    # openconnect-sso.url = "github:vlaci/openconnect-sso";
-
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
+    walker.url = "github:abenz1267/walker";
+
+    # nil.url = "github:oxalica/nil";
+    nixd.url = "github:nix-community/nixd";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
-    let
-      mkVM = import (./lib/mkvm.nix);
-      mkDefault = (import ./lib/mkdefault.nix);
-      mkISO = (import ./lib/mkiso.nix);
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    home-manager,
+    agenix,
+    nixos-hardware,
+    ...
+  } @ inputs: let
+    mkVM = import ./lib/mkvm.nix;
+    mkDefault = import ./lib/mkdefault.nix;
+    mkISO = import ./lib/mkiso.nix;
 
-      # Overlays is the list of overlays we want to apply from flake inputs.
-      overlays = [
-        # inputs.openconnect-sso.overlay
-        inputs.neovim-nightly.overlay
-        inputs.rofi-music-rs.overlays.default
-        inputs.lsleases.overlays.default
-        inputs.yazi.overlays.default
+    # Overlays is the list of overlays we want to apply from flake inputs.
+    overlays = [
+      inputs.neovim-nightly.overlay
+      inputs.rofi-music-rs.overlays.default
+      inputs.lsleases.overlays.default
+      inputs.nixd.overlays.default
+      # inputs.yazi.overlays.default
 
-        (self: super: {
-          annotator = super.callPackage ./pkgs/annotator
-            { }; # path containing default.nix
-          # lycheeslicer = super.callPackage ./pkgs/lycheeslicer
-          #   { }; # path containing default.nix
-          uvtools =
-            super.callPackage ./pkgs/uvtools { }; # path containing default.nix
-          # chituboxslicer =
-          #   super.callPackage ./pkgs/chitubox { }; # path containing default.nix
-          # webots =
-          #   super.callPackage ./pkgs/webots { }; # path containing default.nix
-          # waybar = super.waybar.overrideAttrs (oldAttrs: {
-          #   mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          # });
-          waybar = inputs.waybar.packages."x86_64-linux".waybar;
+      (final: prev: {
+        annotator =
+          prev.callPackage ./pkgs/annotator
+          {}; # path containing default.nix
+        uvtools =
+          prev.callPackage ./pkgs/uvtools {}; # path containing default.nix
+        # waybar = inputs.waybar.packages."x86_64-linux".waybar;
+        # openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
+        qemu = prev.qemu.override {smbdSupport = true;};
+        icecream = prev.icecream.overrideAttrs (old: rec {
+          version = "1.4";
+          src = prev.fetchFromGitHub {
+            owner = "icecc";
+            repo = old.pname;
+            rev = "cd74801e0fa4e83e3ae254ca1d7fe98642f36b89";
+            sha256 = "sha256-nBdUbWNmTxKpkgFM3qbooNQISItt5eNKtnnzpBGVbd4=";
+          };
+          nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
+        });
+        # rofi-wayland = prev.rofi-wayland.overrideAttrs (old: rec {
+        #   version = "git";
+        #   src = prev.fetchFromGitHub {
+        #     owner = "lbonn";
+        #     repo = "rofi";
+        #     fetchSubmodules = true;
+        #     rev = "be7c088eea13341746a93e6bba8ee442d8a513e1";
+        #     sha256 = "HJCisTRg2I/UAHuiN4uvuVgmWKlsBmJElGBbNLgvqWA=";
+        #   };
+        # });
+        walker = inputs.walker.packages."x86_64-linux".walker;
+      })
+      inputs.hypridle.overlays.default
+      inputs.hyprlang.overlays.default
+    ];
+    lib = nixpkgs.lib;
+  in rec {
+    images = {
+      pi-mcrover =
+        (self.nixosConfigurations.rover.extendModules {
+          modules = [
+            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
+            }
+          ];
         })
-        (final: prev: {
-          # sway = prev.sway.overrideAttrs (old: {
-          #   name = "sway-git";
-          #   version = "git";
-          #   src = prev.fetchFromGitHub {
-          #     owner = "nim65s";
-          #     repo = "sway";
-          #     rev = "issue-7409";
-          #     hash = "sha256-WxnT+le9vneQLFPz2KoBduOI+zfZPhn1fKlaqbPL6/g=";
-          #   };
-          # });
-          # rofi-music-rs =
-          #   inputs.rofi-music-rs.packages."x86_64-linux".rofi_music_rs;
+        .config
+        .system
+        .build
+        .sdImage;
+      pi4 =
+        (self.nixosConfigurations.pi4.extendModules {
+          modules = [
+            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
+            }
+          ];
         })
-      ];
-    in
-    {
-      nixosModules = import ./modules { lib = nixpkgs.lib; };
-      nixosConfigurations.x240 = mkDefault "x240" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-      };
-      nixosConfigurations.ilmpad = mkDefault "t480" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        crypt_device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
-        hostname = "ilmpad";
-      };
-      nixosConfigurations.ammerapad = mkDefault "t480" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        crypt_device = "/dev/disk/by-uuid/496f14bb-9a70-4509-aaac-e898b02f152b";
-        hostname = "ammerapad";
-      };
-      nixosConfigurations.biltower = mkDefault "biltower" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-      };
-      nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        users = [ "bernd" ];
-      };
-      nixosConfigurations.EIS-machine = mkDefault "EIS-machine" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        users = [ "bernd" "student" ];
-      };
-      nixosConfigurations.ISO = mkISO "ISO" {
-        inherit nixpkgs home-manager overlays;
-        system = "x86_64-linux";
-      };
-      nixosConfigurations.balodil = mkVM "balodil" {
-        inherit nixpkgs home-manager overlays agenix inputs;
-        system = "x86_64-linux";
-        users = [ "bernd" ];
-        students = [ "test1" "test2" ];
-      };
+        .config
+        .system
+        .build
+        .sdImage;
     };
+    packages.x86_64-linux.pi-mcrover-image = images.pi-mcrover;
+    packages.aarch64-linux.pi-mcrover-image = images.pi-mcrover;
+    packages.x86_64-linux.pi4-image = images.pi4;
+    packages.aarch64-linux.pi4-image = images.pi4;
+
+    nixosModules = import ./modules {inherit lib;};
+
+    nixosConfigurations.pi-mcrover = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+        ./hosts/pi-mcrover/configuration.nix
+        ./hosts/pi-mcrover/base.nix
+      ];
+    };
+    nixosConfigurations.pi4 = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        # nixos-hardware.nixosModules.raspberry-pi-4
+        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+        ./hosts/pi-mcrover/configuration.nix
+        ./hosts/pi-mcrover/base.nix
+      ];
+    };
+
+    nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
+      inherit nixpkgs home-manager overlays agenix inputs lib;
+      system = "x86_64-linux";
+      users = ["bernd"];
+    };
+    nixosConfigurations.x240 = mkDefault "x240" {
+      inherit nixpkgs home-manager overlays agenix inputs;
+      system = "x86_64-linux";
+    };
+    nixosConfigurations.ilmpad = mkDefault "t480" {
+      inherit nixpkgs home-manager overlays agenix inputs;
+      system = "x86_64-linux";
+      crypt_device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
+      hostname = "ilmpad";
+    };
+    nixosConfigurations.ammerapad = mkDefault "t480" {
+      inherit nixpkgs home-manager overlays agenix inputs;
+      system = "x86_64-linux";
+      crypt_device = "/dev/disk/by-uuid/496f14bb-9a70-4509-aaac-e898b02f152b";
+      hostname = "ammerapad";
+    };
+    nixosConfigurations.biltower = mkDefault "biltower" {
+      inherit nixpkgs home-manager overlays agenix inputs;
+      system = "x86_64-linux";
+    };
+    nixosConfigurations.ISO = mkISO "ISO" {
+      inherit nixpkgs home-manager overlays;
+      system = "x86_64-linux";
+    };
+    nixosConfigurations.balodil = mkVM "balodil" {
+      inherit nixpkgs home-manager overlays agenix inputs;
+      system = "x86_64-linux";
+      users = ["bernd"];
+      students = ["test1" "test2"];
+    };
+  };
 }

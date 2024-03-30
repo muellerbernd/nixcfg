@@ -10,10 +10,13 @@
       pkgs.OVMF.fd}/FV/OVMF.fd \
       "$@"''
     )
+    distrobox
     qemu
-    # distrobox
-    nvidia-podman
-    libnvidia-container
+    # https://github.com/quickemu-project/quickemu
+    quickemu
+    # Enhanced SPICE integration for linux QEMU guest
+    spice-vdagent
+    spice
   ];
 
   virtualisation = {
@@ -40,7 +43,6 @@
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
-      enableNvidia = true;
 
       defaultNetwork.settings = { dns_enabled = true; };
     };
@@ -58,10 +60,12 @@
       export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
     fi
   '';
-  # libnvidia-container does not support cgroups v2
-  # https://github.com/NVIDIA/nvidia-docker/issues/1447
-  # systemd.enableUnifiedCgroupHierarchy = false;
+  virtualisation.containers.cdi.dynamic.nvidia.enable = lib.mkDefault false;
 
+  # https://github.com/NixOS/nixpkgs/pull/160802
+  # nixpkgs.config.allowBroken = true;
+  # nixpkgs.config.allowUnsupportedSystem = true;
+  # boot.binfmt.preferStaticEmulators = true;
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.virtualbox.guest.enable = true;

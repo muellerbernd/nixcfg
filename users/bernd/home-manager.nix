@@ -1,10 +1,15 @@
-{ config, lib, pkgs, inputs, headless ? true, ... }:
-let
-  rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
-    rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
-  '';
-in
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  headless ? true,
+  ...
+}: let
+  rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
+    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun" -show combi -lines 20 -show-icons
+  '';
+in {
   imports = [
     ../../modules/profiles/kanshi.nix
     # ../../modules/profiles/hyprland.nix
@@ -32,6 +37,7 @@ in
       # terminal
       glow
       alacritty
+      foot
       wezterm
       antigen
       starship
@@ -102,13 +108,10 @@ in
       gnome.file-roller
       archiver
       xfce.xfce4-screenshooter
-      grimblast
-      flameshot
       obs-studio
-      grim
+      shotcut
       ntfs3g
       gvfs
-      blender
       prusa-slicer
       # cli helpers
       usbutils
@@ -123,6 +126,7 @@ in
       light
       lm_sensors
       htop
+      nmon
       bottom
       dmidecode
       unzip
@@ -144,9 +148,9 @@ in
       gcc
       gdb
       rustup
-      python311Full
+      python3Full
       go
-      icecream
+      # icecream
       icemon
       # formatter
       yamlfmt
@@ -155,17 +159,21 @@ in
       isort
       clang-tools
       nodePackages.prettier
-      beautysh
-      libxml2 # for xmllint
+      # beautysh
+      # libxml2 # for xmllint
+      shfmt
       # lsp
+      lemminx
       ccls
-      python311Packages.python-lsp-server
-      python311Packages.python-lsp-black
-      python311Packages.pylsp-rope
-      python311Packages.pyls-flake8
+      python3Packages.python-lsp-server
+      python3Packages.python-lsp-black
+      python3Packages.pylsp-rope
+      python3Packages.pyls-flake8
       nodePackages.pyright
       # rnix-lsp
       nil
+      nixd
+      alejandra
       sumneko-lua-language-server
       marksman
       cmake-language-server
@@ -176,11 +184,11 @@ in
       # rust-analyzer
       # haskell
       haskellPackages.haskell-language-server
-      # python packages
-      pkgs.python311Packages.flask
-      pkgs.python311Packages.requests
-      pkgs.python311Packages.pygments
-      pkgs.python311Packages.numpy
+      # # python packages
+      # pkgs.python3Packages.flask
+      # pkgs.python3Packages.requests
+      # pkgs.python3Packages.pygments
+      # pkgs.python3Packages.numpy
       # latex
       texlive.combined.scheme-full
       # texlive.combined.scheme-medium
@@ -189,23 +197,20 @@ in
       firefox
       # media
       spotify
+      spotify-player
       # messenger
       gajim
       teams-for-linux
       # matrix client
-      cinny-desktop
       nheko
-      #
-      thunderbird
       # vpn
-      openconnect_openssl
       networkmanager-openconnect
       # openconnect-sso
       wireshark
       # keyboard stuff
-      qmk
-      qmk_hid
-      qmk-udev-rules
+      # qmk
+      # qmk_hid
+      # qmk-udev-rules
       avrdude
       evtest
       # mesh and pointcloud
@@ -243,8 +248,7 @@ in
       name = "Bernd Müller";
 
       # userChome.css to make it look better
-      userChrome =
-        "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
+      userChrome = "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
@@ -281,9 +285,7 @@ in
       #   # plasma-integration
       # ];
     };
-
   };
-
 
   # enable picom
   # services.picom.enable = true;
@@ -338,8 +340,32 @@ in
 
   xdg = {
     enable = true;
-    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
       General.theme = "Adwaita-dark";
+    };
+    desktopEntries = {
+      nvim = {
+        name = "Neovim";
+        genericName = "Texteditor";
+        exec = "alacritty -e nvim";
+        terminal = false;
+        # categories = ["Application"];
+        mimeType = [
+          "application/xml"
+          "text/x-csrc"
+          "text/plain"
+          "text/x-c++src"
+          "application/x-shellscript"
+          "text/x-tex"
+          "text/x-makefile"
+          "text/x-lua"
+          "text/csv"
+          "application/json"
+          "text/markdown"
+          "text/x-chd"
+          "application/xm"
+        ];
+      };
     };
   };
   # not so fancy pointer
