@@ -53,7 +53,6 @@
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    logind.killUserProcesses = true;
   };
   services.upower.enable = true;
 

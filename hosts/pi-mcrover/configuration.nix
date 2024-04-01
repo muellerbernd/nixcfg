@@ -128,33 +128,6 @@
       openFirewall = lib.mkDefault true;
     };
   };
-  # services.xserver = {
-  #   enable = true;
-  #   xkb.layout = "de";
-  #   xkb.variant = "";
-  # Enable touchpad support (enabled default in most desktopManager).
-  # libinput = { enable = true; };
-
-  # desktopManager = { xterm.enable = false; };
-
-  # desktopManager = {
-  #   xterm.enable = false;
-  #   xfce.enable = true;
-  # };
-  # displayManager.defaultSession = "xfce";
-  # displayManager = { defaultSession = "none+i3"; };
-
-  # windowManager.i3 = {
-  #   enable = true;
-  #   extraPackages = with pkgs; [
-  #     rofi # application launcher most people use
-  #     i3status # gives you the default i3 status bar
-  #     i3lock # default i3 screen locker
-  #     xidlehook
-  #     i3status-rust
-  #   ];
-  # };
-  # };
 
   services = {
     logind.killUserProcesses = false;
@@ -198,13 +171,12 @@
   networking = {
     useDHCP = lib.mkDefault true;
     interfaces."wlan0".useDHCP = true;
-    wireless = {
-      interfaces = ["wlan0"];
-      enable = true;
-      networks = {
-        WirelessSpace.psk = "Free_Net_4_Space";
-      };
-    };
+    # wireless = {
+    #   interfaces = ["wlan0"];
+    #   enable = true;
+    #   # networks = {
+    #   # };
+    # };
   };
 
   users.extraUsers.root.openssh.authorizedKeys.keys = [
