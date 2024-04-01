@@ -134,7 +134,7 @@
   in rec {
     images = {
       pi-mcrover =
-        (self.nixosConfigurations.rover.extendModules {
+        (self.nixosConfigurations.pi-mcrover.extendModules {
           modules = [
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             {
