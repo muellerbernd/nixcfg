@@ -81,7 +81,6 @@
         uvtools =
           prev.callPackage ./pkgs/uvtools {}; # path containing default.nix
         # waybar = inputs.waybar.packages."x86_64-linux".waybar;
-        # openconnect-sso = inputs.openconnect-sso.packages."x86_64-linux".default;
         qemu = prev.qemu.override {smbdSupport = true;};
         icecream = prev.icecream.overrideAttrs (old: rec {
           version = "1.4";
@@ -93,16 +92,6 @@
           };
           nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
         });
-        # rofi-wayland = prev.rofi-wayland.overrideAttrs (old: rec {
-        #   version = "git";
-        #   src = prev.fetchFromGitHub {
-        #     owner = "lbonn";
-        #     repo = "rofi";
-        #     fetchSubmodules = true;
-        #     rev = "be7c088eea13341746a93e6bba8ee442d8a513e1";
-        #     sha256 = "HJCisTRg2I/UAHuiN4uvuVgmWKlsBmJElGBbNLgvqWA=";
-        #   };
-        # });
         walker = inputs.walker.packages."x86_64-linux".walker;
       })
       inputs.hypridle.overlays.default
@@ -114,7 +103,7 @@
       pi-mcrover =
         (self.nixosConfigurations.pi-mcrover.extendModules {
           modules = [
-            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             {
               disabledModules = ["profiles/base.nix"];
               # Disable zstd compression
@@ -160,10 +149,10 @@
     nixosConfigurations.pi4 = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
-        # nixos-hardware.nixosModules.raspberry-pi-4
+        nixos-hardware.nixosModules.raspberry-pi-4
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-        ./hosts/pi-mcrover/configuration.nix
-        ./hosts/pi-mcrover/base.nix
+        # ./hosts/pi-mcrover/configuration.nix
+        # ./hosts/pi-mcrover/base.nix
       ];
     };
 
