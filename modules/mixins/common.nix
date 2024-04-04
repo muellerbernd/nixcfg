@@ -69,10 +69,6 @@
     # gtk settings
     # configure-gtk
     # nix
-    nixpkgs-lint
-    nixpkgs-fmt
-    nixpkgs-review
-    nixfmt
     home-manager
     # nix-serve
     # nix-serve-ng

@@ -198,6 +198,7 @@ in {
       # media
       spotify
       spotify-player
+      sox
       # messenger
       gajim
       teams-for-linux
