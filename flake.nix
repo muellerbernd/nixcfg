@@ -151,8 +151,8 @@
       modules = [
         nixos-hardware.nixosModules.raspberry-pi-4
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-        # ./hosts/pi-mcrover/configuration.nix
-        # ./hosts/pi-mcrover/base.nix
+        ./hosts/pi-mcrover/configuration.nix
+        ./hosts/pi-mcrover/base.nix
       ];
     };
 
