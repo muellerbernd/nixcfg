@@ -89,10 +89,6 @@
     gtk_engines
     gsettings-desktop-schemas
     lxappearance
-    # nix
-    nixpkgs-lint
-    nixpkgs-fmt
-    nixfmt
     #
     cudatoolkit
   ];
