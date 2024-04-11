@@ -23,6 +23,7 @@
     # walker
     swaylock
     wl-clipboard
+    cliphist
     gammastep
     grim
     grimblast
