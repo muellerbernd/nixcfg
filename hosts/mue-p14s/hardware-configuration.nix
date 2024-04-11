@@ -19,7 +19,7 @@
     # "i915.enable_fbc=1"
     # "i915.enable_dc=2"
     "acpi_backlight=native"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=0"
   ];
   boot.initrd.availableKernelModules = [
     "thinkpad_acpi"
