@@ -25,7 +25,7 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
       # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hypridle = {
       url = "github:hyprwm/hypridle";
