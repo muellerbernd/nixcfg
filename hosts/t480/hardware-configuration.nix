@@ -3,17 +3,17 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [
-    "intel_pstate=disable"
-    "psmouse.synaptics_intertouch=0"
-    "i915.modeset=1"
-    "i915.fastboot=1"
-    "i915.enable_guc=2"
-    "i915.enable_psr=1"
-    "i915.enable_fbc=1"
-    "i915.enable_dc=2"
-  ];
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelParams = [
+  #   "intel_pstate=disable"
+  #   "psmouse.synaptics_intertouch=0"
+  #   "i915.modeset=1"
+  #   "i915.fastboot=1"
+  #   "i915.enable_guc=2"
+  #   "i915.enable_psr=1"
+  #   "i915.enable_fbc=1"
+  #   "i915.enable_dc=2"
+  # ];
   boot.initrd.availableKernelModules = [
     "thinkpad_acpi"
     # USB
@@ -35,12 +35,12 @@
   boot.kernelModules = [ "kvm-intel" "acpi_call" ];
   boot.extraModulePackages = [ ];
 
-  boot.extraModprobeConfig = lib.mkMerge [
-    # idle audio card after one second
-    # "options snd_hda_intel power_save=1"
-    # enable wifi power saving (keep uapsd off to maintain low latencies)
-    # "options iwlwifi power_save=1 uapsd_disable=1"
-  ];
+  # boot.extraModprobeConfig = lib.mkMerge [
+  #   # idle audio card after one second
+  #   # "options snd_hda_intel power_save=1"
+  #   # enable wifi power saving (keep uapsd off to maintain low latencies)
+  #   # "options iwlwifi power_save=1 uapsd_disable=1"
+  # ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
