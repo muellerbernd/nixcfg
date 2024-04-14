@@ -37,9 +37,9 @@
 
   boot.extraModprobeConfig = lib.mkMerge [
     # idle audio card after one second
-    "options snd_hda_intel power_save=1"
+    # "options snd_hda_intel power_save=1"
     # enable wifi power saving (keep uapsd off to maintain low latencies)
-    "options iwlwifi power_save=1 uapsd_disable=1"
+    # "options iwlwifi power_save=1 uapsd_disable=1"
   ];
 
   fileSystems."/" = {
@@ -71,7 +71,7 @@
   powerManagement = {
     enable = true;
     # powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
+    # cpuFreqGovernor = lib.mkDefault "ondemand";
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
