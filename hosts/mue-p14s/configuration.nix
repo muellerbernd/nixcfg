@@ -265,7 +265,7 @@
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "uid=bernd"
-      "credentials=${config.age.secrets.workSmbConfig.path}"
+      "credentials=${config.age.secrets.workSmbCredentials.path}"
       "vers=2.0"
     ];
   };
@@ -279,7 +279,7 @@
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "uid=bernd"
-      "credentials=${config.age.secrets.workSmbConfig.path}"
+      "credentials=${config.age.secrets.workSmbCredentials.path}"
       "vers=2.0"
     ];
   };
