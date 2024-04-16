@@ -265,9 +265,8 @@
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "uid=bernd"
-      "credentials=/etc/samba/smb-credentials"
+      "credentials=${config.age.secrets.workSmbConfig.path}"
       "vers=2.0"
-      # "x-systemd.requires=openvpn-myvpn.service"
     ];
   };
   fileSystems."/mnt/ber54988" = {
@@ -280,9 +279,8 @@
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "uid=bernd"
-      "credentials=/etc/samba/smb-credentials"
+      "credentials=${config.age.secrets.workSmbConfig.path}"
       "vers=2.0"
-      # "x-systemd.requires=openvpn-myvpn.service"
     ];
   };
 
