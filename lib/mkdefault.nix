@@ -60,6 +60,9 @@ lib.nixosSystem rec {
         eisVpnP14sConfig = {
           file = "${inputs.self}/secrets/eisVpnP14sConfig.age";
         };
+        eisVpnConfig = {
+          file = "${inputs.self}/secrets/eisVpnConfig.age";
+        };
         workSmbCredentials = {
           file = "${inputs.self}/secrets/workSmbCredentials.age";
         };
