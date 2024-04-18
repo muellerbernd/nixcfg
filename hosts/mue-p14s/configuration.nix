@@ -147,7 +147,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = lib.mkForce true;
+      enable = lib.mkForce false;
       allowedTCPPorts = [
         80
         443
