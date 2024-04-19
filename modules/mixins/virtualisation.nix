@@ -4,6 +4,7 @@
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
+    podman-compose
     (writeShellScriptBin "qemu-system-x86_64-uefi" ''
         qemu-system-x86_64 \
       - bios ${
