@@ -47,9 +47,9 @@
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
-    walker.url = "github:abenz1267/walker";
+    # walker.url = "github:abenz1267/walker";
 
-    # nil.url = "github:oxalica/nil";
+    nil.url = "github:oxalica/nil";
     nixd.url = "github:nix-community/nixd";
   };
 
@@ -92,7 +92,7 @@
           };
           nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
         });
-        walker = inputs.walker.packages."x86_64-linux".walker;
+        # walker = inputs.walker.packages."x86_64-linux".walker;
       })
       inputs.hypridle.overlays.default
       inputs.hyprlang.overlays.default
