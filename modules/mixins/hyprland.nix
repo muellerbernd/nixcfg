@@ -5,17 +5,17 @@
   inputs,
   ...
 }: {
-  # imports = [
-  #   inputs.hyprland.nixosModules.default
-  # ];
+  imports = [
+    inputs.hyprland.nixosModules.default
+  ];
   # enable hyprland window manager
   programs.hyprland = {
     enable = true;
     # Whether to enable XWayland
     xwayland.enable = true;
     # The hyprland package to use
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
