@@ -5,7 +5,7 @@ ifndef HOSTNAME
 endif
 
 switch:
-	nixos-rebuild switch --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace; \
+	nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace
 
 # if [ -n $(dont_use_remote) ]; then \
 #		echo "use remote";\
