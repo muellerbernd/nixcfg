@@ -324,15 +324,15 @@
   };
 
   # specialisation for traveling
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = ["on-the-go"];
-      powerManagement = {
-        enable = true;
-        cpuFreqGovernor = "powersave";
-      };
-    };
-  };
+  # specialisation = {
+  #   on-the-go.configuration = {
+  #     system.nixos.tags = ["on-the-go"];
+  #     powerManagement = {
+  #       enable = true;
+  #       cpuFreqGovernor = "powersave";
+  #     };
+  #   };
+  # };
   # specialisation = {
   #   on-the-go.configuration = {
   #     system.nixos.tags = [ "on-the-go" ];
