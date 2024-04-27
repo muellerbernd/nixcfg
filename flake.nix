@@ -35,6 +35,10 @@
       url = "github:hyprwm/hyprlang";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprpicker = {
+      url = "github:hyprwm/hyprpicker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     waybar = {
       url = "github:alexays/waybar";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,6 +101,7 @@
       })
       inputs.hypridle.overlays.default
       inputs.hyprlang.overlays.default
+      inputs.hyprpicker.overlays.default
     ];
     lib = nixpkgs.lib;
   in rec {
