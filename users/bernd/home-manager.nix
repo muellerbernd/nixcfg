@@ -42,6 +42,7 @@ in {
       antigen
       starship
       tmux
+      zellij
       zoxide
       # better shell history
       w3m
