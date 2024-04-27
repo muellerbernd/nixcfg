@@ -185,10 +185,10 @@ in {
       # rust-analyzer
       # haskell
       haskellPackages.haskell-language-server
-      # # python packages
+      # # python packages I often use systemwide
       # pkgs.python3Packages.flask
       # pkgs.python3Packages.requests
-      # pkgs.python3Packages.pygments
+      pkgs.python3Packages.pygments # needed for my custom markdown to beamer workflow
       # pkgs.python3Packages.numpy
       # latex
       texlive.combined.scheme-full
