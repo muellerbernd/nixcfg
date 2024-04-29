@@ -208,7 +208,6 @@ in {
       nheko
       # vpn
       networkmanager-openconnect
-      # openconnect-sso
       wireshark
       # keyboard stuff
       # qmk
