@@ -25,6 +25,7 @@ in {
       procps
       # editors
       neovim
+      tree-sitter
       #neovim-remote
       vim
       # git
