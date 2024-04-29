@@ -303,24 +303,25 @@
   };
 
   # Configure xserver
+  # services.libinput = {
+  #   enable = true;
+  #   mouse = {
+  #     accelProfile = "flat";
+  #     accelSpeed = "0";
+  #     middleEmulation = false;
+  #   };
+  #   touchpad = {
+  #     accelProfile = "flat";
+  #     accelSpeed = "0.6";
+  #     naturalScrolling = true;
+  #     tapping = true;
+  #   };
+  # };
+
   services.xserver = {
     xkb.layout = "de";
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "0";
-        middleEmulation = false;
-      };
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.6";
-        naturalScrolling = true;
-        tapping = true;
-      };
-    };
   };
 
   # specialisation for traveling
@@ -432,7 +433,7 @@
   systemd.services."icecc-daemon".environment = lib.mkForce {
     PATH = "/run/current-system/sw/bin/";
   };
-  virtualisation.containers.cdi.dynamic.nvidia.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 }
 # vim: set ts=2 sw=2:
 
