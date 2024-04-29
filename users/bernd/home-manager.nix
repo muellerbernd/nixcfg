@@ -226,7 +226,7 @@ in {
       uvtools
       # from custom overlays
       rofi-music-rs
-      lsleases
+      # lsleases
 
       # theming
       lxqt.lxqt-qtplugin

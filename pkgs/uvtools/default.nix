@@ -1,40 +1,44 @@
-{ appimageTools, fetchurl, lib, makeWrapper, icu }:
-let
-
+{
+  appimageTools,
+  fetchurl,
+  lib,
+  makeWrapper,
+  icu,
+}: let
   pname = "uvtools";
-  version = "4.0.6";
+  version = "4.3.2";
 
   src = fetchurl {
-    url =
-      "https://github.com/sn4k3/UVtools/releases/download/v${version}/UVtools_linux-x64_v${version}.AppImage";
-    sha256 = "sha256-2O7031B3wkRjxiTDtF8m+RhtnMlqSv/GzyyLdtHmZMU=";
+    url = "https://github.com/sn4k3/UVtools/releases/download/v${version}/UVtools_linux-x64_v${version}.AppImage";
+    sha256 = "sha256-wTZ2svDYS6keYLb8M0n/V7watKdWpegHJ3ow45FK14o=";
   };
-  appimageContents = appimageTools.extractType2 { inherit pname version src; };
+  appimageContents = appimageTools.extractType2 {inherit pname version src;};
 in
-appimageTools.wrapType2 {
-  inherit pname version src;
-  extraPkgs = pkgs: [ icu ];
+  appimageTools.wrapType2 {
+    inherit pname version src;
+    extraPkgs = pkgs: [icu];
 
-  extraInstallCommands = ''
-    mv $out/bin/{${pname}-${version},${pname}}
-    source "${makeWrapper}/nix-support/setup-hook"
-    wrapProgram $out/bin/${pname} \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+    # extraInstallCommands = ''
+    #   ls
+    #   # mv $out/bin/{${pname}-${version},${pname}}
+    #   mv $out/bin/{${pname}}
+    #   source "${makeWrapper}/nix-support/setup-hook"
+    #   wrapProgram $out/bin/${pname} \
+    #     --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+    # '';
     # install -Dm444 ${appimageContents}/${pname}.desktop -t $out/share/applications/
     # install -Dm444 ${appimageContents}/${pname}.png -t $out/share/pixmaps/
     # substituteInPlace $out/share/applications/${pname}.desktop \
     #   --replace 'Exec=AppRun --no-sandbox' 'Exec=${pname}'
-  '';
 
-  meta = with lib; {
-    description = "";
-    homepage = "";
-    license = with licenses; [ unfree ];
-    maintainers = with maintainers; [ muellerbernd ];
-    platforms = platforms.linux;
-  };
-}
-
+    meta = with lib; {
+      description = "";
+      homepage = "";
+      license = with licenses; [unfree];
+      maintainers = with maintainers; [muellerbernd];
+      platforms = platforms.linux;
+    };
+  }
 # { lib, makeDesktopItem, copyDesktopItems, stdenvNoCC, fetchurl, appimageTools
 # , makeWrapper, icu }:
 #
@@ -92,3 +96,4 @@ appimageTools.wrapType2 {
 #   };
 # }
 #
+
