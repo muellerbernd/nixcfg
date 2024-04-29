@@ -87,6 +87,9 @@
         waybar = inputs.waybar.packages."x86_64-linux".waybar;
         hyprland = inputs.hyprland.packages."x86_64-linux".hyprland;
         qemu = prev.qemu.override {smbdSupport = true;};
+        # networkmanager-openconnect = prev.networkmanager-openconnect.overrideAttrs (old: rec {
+        #   patches = old.patches ++ [./pkgs/networkmanager-openconnect/ip.patch];
+        # });
         icecream = prev.icecream.overrideAttrs (old: rec {
           version = "1.4";
           src = prev.fetchFromGitHub {
