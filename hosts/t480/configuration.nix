@@ -1,4 +1,12 @@
-{ config, lib, pkgs, inputs, hostname, crypt_device, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  hostname,
+  crypt_device,
+  ...
+}: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
@@ -87,44 +95,45 @@
     thinkfan = {
       enable = true;
 
-      sensors = [{
-        type = "tpacpi";
-        query = "/proc/acpi/ibm/thermal";
-      }];
+      sensors = [
+        {
+          type = "tpacpi";
+          query = "/proc/acpi/ibm/thermal";
+        }
+      ];
 
       levels = [
-        [ 0 0 55 ]
-        [ 1 48 60 ]
-        [ 2 50 61 ]
-        [ 3 52 63 ]
-        [ 6 56 65 ]
-        [ 7 60 85 ]
-        [ "level auto" 80 32767 ]
+        [0 0 55]
+        [1 48 60]
+        [2 50 61]
+        [3 52 63]
+        [6 56 65]
+        [7 60 85]
+        ["level auto" 80 32767]
       ];
     };
   };
-  systemd.services.thinkfan.preStart =
-    "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
+  systemd.services.thinkfan.preStart = "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
   # Configure xserver
+  services.libinput = {
+    enable = true;
+    # mouse = {
+    #   accelProfile = "flat";
+    #   accelSpeed = "0";
+    #   middleEmulation = false;
+    # };
+    touchpad = {
+      accelProfile = "flat";
+      accelSpeed = "0.6";
+      naturalScrolling = true;
+      tapping = true;
+    };
+  };
   services.xserver = {
     xkb.layout = "de";
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
-    libinput = {
-      enable = true;
-      # mouse = {
-      #   accelProfile = "flat";
-      #   accelSpeed = "0";
-      #   middleEmulation = false;
-      # };
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.6";
-        naturalScrolling = true;
-        tapping = true;
-      };
-    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -156,5 +165,5 @@
     PATH = "/run/current-system/sw/bin/";
   };
 }
-
 # vim: set ts=2 sw=2:
+
