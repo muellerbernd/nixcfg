@@ -33,7 +33,7 @@
     # libsForQt5.qtwayland
     glxinfo
     kanshi
-    # hyprpaper
+    hyprpaper
     wlr-randr
     wdisplays
     nwg-displays
