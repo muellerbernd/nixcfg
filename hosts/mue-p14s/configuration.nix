@@ -98,7 +98,7 @@
   systemd.services.thinkfan.preStart = "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
   # enable modem manager
-  systemd.services.modem-manager.enable = true;
+  systemd.services.ModemManager.enable = true;
 
   networking.hostName = "mue-p14s"; # Define your hostname.
 
@@ -216,6 +216,8 @@
     turbovnc
     hidapi
     libusb
+    wirelesstools
+    iw
     # openconnect-sso
     # gst_all_1.gstreamer
     # # Common plugins like "filesrc" to combine within e.g. gst-launch
@@ -267,6 +269,7 @@
       create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
       create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
       negate  *             *            *             ${keyctl} negate %k 30 %S
+      create dns_resolver * * /run/current-system/sw/bin/key.dns_resolver %k
     '';
   };
 
