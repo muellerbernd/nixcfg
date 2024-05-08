@@ -21,21 +21,19 @@
   environment.systemPackages = with pkgs; [
     rofi-wayland
     # walker
-    swaylock
     wl-clipboard
     cliphist
     gammastep
     grim
     grimblast
     slurp
-    wayland
+    # wayland
     waybar
-    qt6.qtwayland
-    libsForQt5.qtwayland
+    # qt6.qtwayland
+    # libsForQt5.qtwayland
     glxinfo
     kanshi
     # hyprpaper
-    swaybg
     wlr-randr
     wdisplays
     nwg-displays
@@ -43,8 +41,11 @@
     wl-mirror
     pipectl
     hypridle
-    swayidle
     hyprpicker
+    hyprlock
+    # swaybg
+    # swayidle
+    # swaylock
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
@@ -59,8 +60,8 @@
     # extraPortals = [pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-wlr pkgs.xdg-desktop-portal-gtk];
     # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
-  security.pam.services.swaylock = {};
-  security.pam.services.swaylock.fprintAuth = false;
+  # security.pam.services.swaylock = {};
+  # security.pam.services.swaylock.fprintAuth = false;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
