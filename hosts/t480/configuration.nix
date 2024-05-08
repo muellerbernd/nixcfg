@@ -164,6 +164,18 @@
   systemd.services."icecc-daemon".environment = lib.mkForce {
     PATH = "/run/current-system/sw/bin/";
   };
+
+  # services.prosody = {
+  #   enable = true;
+  #   # configFile = ./ejabberd.yml;
+  #   admins = ["admin@localhost"];
+  #   muc = [
+  #     {
+  #       domain = "conference.localhost";
+  #     }
+  #   ];
+  #   uploadHttp.domain = "localhost";
+  # };
 }
 # vim: set ts=2 sw=2:
 
