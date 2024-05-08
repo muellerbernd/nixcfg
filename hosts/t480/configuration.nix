@@ -74,10 +74,10 @@
       driSupport32Bit = true;
       extraPackages = with pkgs; [
         mesa.drivers
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-        vulkan-tools
+        # vulkan-loader
+        # vulkan-validation-layers
+        # vulkan-extension-layer
+        # vulkan-tools
       ];
     };
     trackpoint = {
@@ -138,7 +138,7 @@
 
   environment.systemPackages = with pkgs; [
     glxinfo
-    icecream
+    # icecream
   ];
 
   services.fwupd.enable = true;
@@ -153,17 +153,17 @@
   #   };
   # };
 
-  services.icecream.daemon = {
-    enable = true;
-    noRemote = true;
-    openBroadcast = true;
-    openFirewall = true;
-    maxProcesses = 2;
-  };
-
-  systemd.services."icecc-daemon".environment = lib.mkForce {
-    PATH = "/run/current-system/sw/bin/";
-  };
+  # services.icecream.daemon = {
+  #   enable = true;
+  #   noRemote = true;
+  #   openBroadcast = true;
+  #   openFirewall = true;
+  #   maxProcesses = 2;
+  # };
+  #
+  # systemd.services."icecc-daemon".environment = lib.mkForce {
+  #   PATH = "/run/current-system/sw/bin/";
+  # };
 
   # services.prosody = {
   #   enable = true;
