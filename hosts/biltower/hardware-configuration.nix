@@ -24,7 +24,7 @@
   ];
   boot.initrd.kernelModules =
     [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=0" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
