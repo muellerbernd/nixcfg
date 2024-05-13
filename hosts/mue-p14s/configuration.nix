@@ -98,7 +98,13 @@
   systemd.services.thinkfan.preStart = "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
 
   # enable modem manager
-  systemd.services.ModemManager.enable = true;
+  # systemd.services.ModemManager.enable = true;
+  # https://github.com/NixOS/nixpkgs/issues/270809
+  systemd.services.ModemManager = {
+    enable = lib.mkForce true;
+    path = [pkgs.libqmi]; # required by fcc-unlock-script of 105b:e0ab
+    wantedBy = ["multi-user.target" "network.target"];
+  };
 
   networking.hostName = "mue-p14s"; # Define your hostname.
 
@@ -218,26 +224,7 @@
     libusb
     wirelesstools
     iw
-    # openconnect-sso
-    # gst_all_1.gstreamer
-    # # Common plugins like "filesrc" to combine within e.g. gst-launch
-    # gst_all_1.gst-plugins-base
-    # # Specialized plugins separated by quality
-    # gst_all_1.gst-plugins-good
-    # gst_all_1.gst-plugins-bad
-    # gst_all_1.gst-plugins-ugly
-    # # Plugins to reuse ffmpeg to play almost every video format
-    # gst_all_1.gst-libav
-    # # Support the Video Audio (Hardware) Acceleration API
-    # gst_all_1.gst-vaapi
   ];
-
-  # environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
-  #   gst-plugins-good
-  #   gst-plugins-bad
-  #   gst-plugins-ugly
-  #   gst-libav
-  # ]);
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
   # The TL;DR is: the kernel calls out to the hard-coded path of
@@ -375,67 +362,26 @@
     ensureDefaultPrinter = "HP_Color_LaserJet_flow_MFP_M880";
   };
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
+  # programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  #   # Add any missing dynamic libraries for unpackaged programs
+  #   # here, NOT in environment.systemPackages
+  # ];
 
-  #   security.pki.certificates = [
-  #     ''-----BEGIN CERTIFICATE-----
-  # MIIG5TCCBM2gAwIBAgIRANpDvROb0li7TdYcrMTz2+AwDQYJKoZIhvcNAQEMBQAw
-  # gYgxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpOZXcgSmVyc2V5MRQwEgYDVQQHEwtK
-  # ZXJzZXkgQ2l0eTEeMBwGA1UEChMVVGhlIFVTRVJUUlVTVCBOZXR3b3JrMS4wLAYD
-  # VQQDEyVVU0VSVHJ1c3QgUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTIw
-  # MDIxODAwMDAwMFoXDTMzMDUwMTIzNTk1OVowRDELMAkGA1UEBhMCTkwxGTAXBgNV
-  # BAoTEEdFQU5UIFZlcmVuaWdpbmcxGjAYBgNVBAMTEUdFQU5UIE9WIFJTQSBDQSA0
-  # MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEApYhi1aEiPsg9ZKRMAw9Q
-  # r8Mthsr6R20VSfFeh7TgwtLQi6RSRLOh4or4EMG/1th8lijv7xnBMVZkTysFiPmT
-  # PiLOfvz+QwO1NwjvgY+Jrs7fSoVA/TQkXzcxu4Tl3WHi+qJmKLJVu/JOuHud6mOp
-  # LWkIbhODSzOxANJ24IGPx9h4OXDyy6/342eE6UPXCtJ8AzeumTG6Dfv5KVx24lCF
-  # TGUzHUB+j+g0lSKg/Sf1OzgCajJV9enmZ/84ydh48wPp6vbWf1H0O3Rd3LhpMSVn
-  # TqFTLKZSbQeLcx/l9DOKZfBCC9ghWxsgTqW9gQ7v3T3aIfSaVC9rnwVxO0VjmDdP
-  # FNbdoxnh0zYwf45nV1QQgpRwZJ93yWedhp4ch1a6Ajwqs+wv4mZzmBSjovtV0mKw
-  # d+CQbSToalEUP4QeJq4Udz5WNmNMI4OYP6cgrnlJ50aa0DZPlJqrKQPGL69KQQz1
-  # 2WgxvhCuVU70y6ZWAPopBa1ykbsttpLxADZre5cH573lIuLHdjx7NjpYIXRx2+QJ
-  # URnX2qx37eZIxYXz8ggM+wXH6RDbU3V2o5DP67hXPHSAbA+p0orjAocpk2osxHKo
-  # NSE3LCjNx8WVdxnXvuQ28tKdaK69knfm3bB7xpdfsNNTPH9ElcjscWZxpeZ5Iij8
-  # lyrCG1z0vSWtSBsgSnUyG/sCAwEAAaOCAYswggGHMB8GA1UdIwQYMBaAFFN5v1qq
-  # K0rPVIDh2JvAnfKyA2bLMB0GA1UdDgQWBBRvHTVJEGwy+lmgnryK6B+VvnF6DDAO
-  # BgNVHQ8BAf8EBAMCAYYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHSUEFjAUBggr
-  # BgEFBQcDAQYIKwYBBQUHAwIwOAYDVR0gBDEwLzAtBgRVHSAAMCUwIwYIKwYBBQUH
-  # AgEWF2h0dHBzOi8vc2VjdGlnby5jb20vQ1BTMFAGA1UdHwRJMEcwRaBDoEGGP2h0
-  # dHA6Ly9jcmwudXNlcnRydXN0LmNvbS9VU0VSVHJ1c3RSU0FDZXJ0aWZpY2F0aW9u
-  # QXV0aG9yaXR5LmNybDB2BggrBgEFBQcBAQRqMGgwPwYIKwYBBQUHMAKGM2h0dHA6
-  # Ly9jcnQudXNlcnRydXN0LmNvbS9VU0VSVHJ1c3RSU0FBZGRUcnVzdENBLmNydDAl
-  # BggrBgEFBQcwAYYZaHR0cDovL29jc3AudXNlcnRydXN0LmNvbTANBgkqhkiG9w0B
-  # AQwFAAOCAgEAUtlC3e0xj/1BMfPhdQhUXeLjb0xp8UE28kzWE5xDzGKbfGgnrT2R
-  # lw5gLIx+/cNVrad//+MrpTppMlxq59AsXYZW3xRasrvkjGfNR3vt/1RAl8iI31lG
-  # hIg6dfIX5N4esLkrQeN8HiyHKH6khm4966IkVVtnxz5CgUPqEYn4eQ+4eeESrWBh
-  # AqXaiv7HRvpsdwLYekAhnrlGpioZ/CJIT2PTTxf+GHM6cuUnNqdUzfvrQgA8kt1/
-  # ASXx2od/M+c8nlJqrGz29lrJveJOSEMX0c/ts02WhsfMhkYa6XujUZLmvR1Eq08r
-  # 48/EZ4l+t5L4wt0DV8VaPbsEBF1EOFpz/YS2H6mSwcFaNJbnYqqJHIvm3PLJHkFm
-  # EoLXRVrQXdCT+3wgBfgU6heCV5CYBz/YkrdWES7tiiT8sVUDqXmVlTsbiRNiyLs2
-  # bmEWWFUl76jViIJog5fongEqN3jLIGTG/mXrJT1UyymIcobnIGrbwwRVz/mpFQo0
-  # vBYIi1k2ThVh0Dx88BbF9YiP84dd8Fkn5wbE6FxXYJ287qfRTgmhePecPc73Yrzt
-  # apdRcsKVGkOpaTIJP/l+lAHRLZxk/dUtyN95G++bOSQqnOCpVPabUGl2E/OEyFrp
-  # Ipwgu2L/WJclvd6g+ZA/iWkLSMcpnFb+uX6QBqvD6+RNxul1FaB5iHY=
-  # -----END CERTIFICATE-----
-  # ''
-  #   ];
+  # services.icecream.daemon = {
+  #   enable = true;
+  #   noRemote = false;
+  #   maxProcesses = 2;
+  #   openBroadcast = true;
+  #   openFirewall = true;
+  #   extraArgs = ["-v"];
+  # };
 
-  services.icecream.daemon = {
-    enable = true;
-    noRemote = false;
-    maxProcesses = 2;
-    openBroadcast = true;
-    openFirewall = true;
-    extraArgs = ["-v"];
-  };
+  # systemd.services."icecc-daemon".environment = lib.mkForce {
+  #   PATH = "/run/current-system/sw/bin/";
+  # };
 
-  systemd.services."icecc-daemon".environment = lib.mkForce {
-    PATH = "/run/current-system/sw/bin/";
-  };
+  # nvidia container toolkit
   hardware.nvidia-container-toolkit.enable = true;
 }
 # vim: set ts=2 sw=2:
