@@ -153,7 +153,7 @@ in {
       python3Full
       go
       # icecream
-      icemon
+      # icemon
       # formatter
       yamlfmt
       stylua
