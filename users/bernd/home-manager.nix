@@ -65,6 +65,7 @@ in {
       chafa
       libsixel
       neofetch
+      tokei
       fzf
       fd
       ripgrep
