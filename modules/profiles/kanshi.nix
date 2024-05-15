@@ -3,8 +3,8 @@
   services.kanshi = {
     enable = true;
     systemdTarget = "hyprland-session.target";
-    extraConfig = "include ~/.config/kanshi/myconfig";
-    # settings = [{include = "~/.config/kanshi/myconfig";}];
+    # extraConfig = "include ~/.config/kanshi/myconfig";
+    settings = [{include = "~/.config/kanshi/myconfig";}];
 
   #   profiles = {
   #     # undocked = {
