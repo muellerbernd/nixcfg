@@ -65,17 +65,39 @@
     "sr_mod"
     # SSD
     "isci"
+
+    # "nvidia"
+    # "nvidia_modeset"
+    # "nvidia_uvm"
+    # "nvidia_drm"
   ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel" "acpi_call"];
   boot.extraModulePackages = [];
 
-  boot.extraModprobeConfig = lib.mkMerge [
-    # idle audio card after one second
-    "options snd_hda_intel power_save=1"
-    # enable wifi power saving (keep uapsd off to maintain low latencies)
-    "options iwlwifi power_save=1 uapsd_disable=1"
-  ];
+  # boot.extraModprobeConfig = lib.mkMerge [
+  #   # idle audio card after one second
+  #   "options snd_hda_intel power_save=1"
+  #   # enable wifi power saving (keep uapsd off to maintain low latencies)
+  #   "options iwlwifi power_save=1 uapsd_disable=1"
+  # ];
+
+  boot.extraModprobeConfig = ''
+    blacklist nouveau
+    options nouveau modeset=0
+  '';
+
+  services.udev.extraRules = ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
+  boot.blacklistedKernelModules = ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset"];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
