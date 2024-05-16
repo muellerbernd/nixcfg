@@ -12,6 +12,7 @@
     # modules
     mixins-distributed-builder-client
     mixins-workVPN
+    # mixins-disable-nvidia
   ];
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
@@ -114,11 +115,14 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        mesa.drivers
-        # libva-utils
-        # vaapiVdpau
-        # libvdpau-va-gl
-        # nvidia-vaapi-driver
+        intel-compute-runtime
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        vaapiVdpau
+        libvdpau-va-gl
+        mesa
+        nvidia-vaapi-driver
+        nv-codec-headers-12
       ];
     };
     trackpoint = {
@@ -135,6 +139,10 @@
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
       powerManagement.finegrained = true;
+      open = true;
+      nvidiaSettings = true;
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.production;
       prime = {
         # enable offload command
         offload = {
@@ -191,6 +199,7 @@
         #   to = 17910;
         # }
       ];
+      # samb discovery
       extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
         iptables -I INPUT -p udp --dport 67 -j ACCEPT";
       allowPing = true;
@@ -266,30 +275,18 @@
   fileSystems."/mnt/EIS" = {
     device = "//ast.intern/EIS";
     fsType = "cifs";
-    options = [
-      "x-systemd.automount"
-      "noauto"
-      "x-systemd.idle-timeout=60"
-      "x-systemd.device-timeout=5s"
-      "x-systemd.mount-timeout=5s"
-      "uid=bernd"
-      "credentials=${config.age.secrets.workSmbCredentials.path}"
-      "vers=2.0"
-    ];
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
   };
   fileSystems."/mnt/ber54988" = {
     device = "//ast.intern/user/home/ber54988";
     fsType = "cifs";
-    options = [
-      "x-systemd.automount"
-      "noauto"
-      "x-systemd.idle-timeout=60"
-      "x-systemd.device-timeout=5s"
-      "x-systemd.mount-timeout=5s"
-      "uid=bernd"
-      "credentials=${config.age.secrets.workSmbCredentials.path}"
-      "vers=2.0"
-    ];
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
   };
 
   # Configure xserver
