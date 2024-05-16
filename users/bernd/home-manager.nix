@@ -121,6 +121,7 @@ in {
       man
       tealdeer
       # cli
+      license-generator
       nmap
       pandoc
       haskellPackages.pandoc-crossref
