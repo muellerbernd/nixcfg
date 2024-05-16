@@ -5,9 +5,9 @@
   inputs,
   ...
 }: {
-  imports = [
-    inputs.hyprland.nixosModules.default
-  ];
+  # imports = [
+  #   inputs.hyprland.nixosModules.default
+  # ];
   # enable hyprland window manager
   programs.hyprland = {
     enable = true;
@@ -17,6 +17,7 @@
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
+  security.pam.services.hyprlock = {};
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
     rofi-wayland

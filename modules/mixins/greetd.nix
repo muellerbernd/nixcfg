@@ -21,6 +21,9 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [
+    greetd.tuigreet
+  ];
   # environment.etc."greetd/environments".text = ''
   #   sway
   #   startx
