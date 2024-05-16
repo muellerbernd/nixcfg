@@ -349,6 +349,22 @@ in {
       General.theme = "Adwaita-dark";
     };
     desktopEntries = {
+      spotify = {
+        genericName = "Music Player";
+        name = "Spotify";
+        exec = "spotify --use-angle=opengl";
+        type = "Application";
+        mimeType = ["x-scheme-handler/spotify"];
+        categories = ["Audio" "Music" "Player" "AudioVideo"];
+        icon="spotify-client";
+      };
+      teams = {
+        name = "Microsoft Teams for Linux";
+        exec = "teams-for-linux --use-angle=opengl";
+        categories = ["Network" "InstantMessaging" "Chat"];
+        icon="teams-for-linux";
+        comment = "Unofficial Microsoft Teams client for Linux";
+      };
       nvim = {
         name = "Neovim";
         genericName = "Texteditor";

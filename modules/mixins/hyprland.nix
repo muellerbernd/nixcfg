@@ -15,6 +15,7 @@
     xwayland.enable = true;
     # The hyprland package to use
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = pkgs.hyprland-debug;
     # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
   security.pam.services.hyprlock = {};

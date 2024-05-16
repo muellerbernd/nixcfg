@@ -26,27 +26,27 @@
       # url = "github:hyprwm/Hyprland";
       # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     hypridle = {
       url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprlock = {
       url = "github:hyprwm/hyprlock";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprlang = {
       url = "github:hyprwm/hyprlang";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprpicker = {
       url = "github:hyprwm/hyprpicker";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     waybar = {
       url = "github:alexays/waybar";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
@@ -80,7 +80,6 @@
       inputs.neovim-nightly.overlay
       inputs.rofi-music-rs.overlays.default
       inputs.lsleases.overlays.default
-      inputs.nixd.overlays.default
       # inputs.yazi.overlays.default
 
       (final: prev: {
@@ -107,11 +106,11 @@
         # walker = inputs.walker.packages."x86_64-linux".walker;
         waybar = inputs.waybar.packages."x86_64-linux".waybar;
       })
-      inputs.hyprland.overlays.default
-      inputs.hypridle.overlays.default
-      inputs.hyprlang.overlays.default
-      inputs.hyprpicker.overlays.default
-      inputs.hyprlock.overlays.default
+      # inputs.hyprland.overlays.default
+      # inputs.hypridle.overlays.default
+      # inputs.hyprlang.overlays.default
+      # inputs.hyprpicker.overlays.default
+      # inputs.hyprlock.overlays.default
     ];
     lib = nixpkgs.lib;
   in rec {

@@ -1,9 +1,14 @@
-{ pkgs
-, lib
-, config
-, ...
-}:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  Hyprland-script = pkgs.writeShellScriptBin "Hyprland-script" ''
+    export TERMINAL=${pkgs.alacritty}/bin/alacritty
+    ${pkgs.hyprland}/bin/Hyprland
+  '';
+in {
   services.greetd = {
     enable = true;
     settings = {
@@ -14,15 +19,17 @@
             --remember \
             --asterisks \
             --user-menu \
-            --cmd ${lib.getExe config.programs.hyprland.package}
-            # --cmd "systemd-cat Hyprland"
+            --cmd Hyprland-script \
         '';
+        # --cmd "systemd-cat Hyprland"
+        # --cmd ${lib.getExe config.programs.hyprland.package}
         # command = "sway";
       };
     };
   };
   environment.systemPackages = with pkgs; [
     greetd.tuigreet
+    Hyprland-script
   ];
   # environment.etc."greetd/environments".text = ''
   #   sway
