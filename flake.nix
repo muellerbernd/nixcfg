@@ -89,9 +89,8 @@
           {}; # path containing default.nix
         uvtools =
           prev.callPackage ./pkgs/uvtools {}; # path containing default.nix
-        waybar = inputs.waybar.packages."x86_64-linux".waybar;
-        hyprland = inputs.hyprland.packages."x86_64-linux".hyprland;
-        qemu = prev.qemu.override {smbdSupport = true;};
+        # hyprland = inputs.hyprland.packages."x86_64-linux".hyprland;
+        # qemu = prev.qemu.override {smbdSupport = true;};
         # networkmanager-openconnect = prev.networkmanager-openconnect.overrideAttrs (old: rec {
         #   patches = old.patches ++ [./pkgs/networkmanager-openconnect/ip.patch];
         # });
@@ -106,7 +105,9 @@
           nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
         });
         # walker = inputs.walker.packages."x86_64-linux".walker;
+        waybar = inputs.waybar.packages."x86_64-linux".waybar;
       })
+      inputs.hyprland.overlays.default
       inputs.hypridle.overlays.default
       inputs.hyprlang.overlays.default
       inputs.hyprpicker.overlays.default
