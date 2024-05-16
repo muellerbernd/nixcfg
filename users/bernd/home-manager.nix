@@ -358,6 +358,7 @@ in {
         categories = ["Audio" "Music" "Player" "AudioVideo"];
         icon="spotify-client";
       };
+      # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
       teams = {
         name = "Microsoft Teams for Linux";
         exec = "teams-for-linux --use-angle=opengl";

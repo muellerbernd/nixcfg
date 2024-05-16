@@ -19,7 +19,7 @@ in {
             --remember \
             --asterisks \
             --user-menu \
-            --cmd Hyprland-script \
+            --cmd Hyprland \
         '';
         # --cmd "systemd-cat Hyprland"
         # --cmd ${lib.getExe config.programs.hyprland.package}
