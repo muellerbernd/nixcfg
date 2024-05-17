@@ -314,7 +314,7 @@
   # specialisation for traveling
   specialisation = {
     on-the-go.configuration = {
-      system.nixos.tags = ["disable-nvidia"];
+      system.nixos.tags = ["on-the-go"];
 
       imports = with inputs.self.nixosModules; [
         mixins-disable-nvidia
