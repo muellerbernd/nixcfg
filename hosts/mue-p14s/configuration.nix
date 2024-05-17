@@ -312,15 +312,19 @@
   };
 
   # specialisation for traveling
-  # specialisation = {
-  #   on-the-go.configuration = {
-  #     system.nixos.tags = ["on-the-go"];
-  #     powerManagement = {
-  #       enable = true;
-  #       cpuFreqGovernor = "powersave";
-  #     };
-  #   };
-  # };
+  specialisation = {
+    on-the-go.configuration = {
+      system.nixos.tags = ["disable-nvidia"];
+
+      imports = with inputs.self.nixosModules; [
+        mixins-disable-nvidia
+      ];
+      powerManagement = {
+        enable = true;
+        cpuFreqGovernor = "powersave";
+      };
+    };
+  };
   # specialisation = {
   #   on-the-go.configuration = {
   #     system.nixos.tags = [ "on-the-go" ];
