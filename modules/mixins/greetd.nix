@@ -19,17 +19,15 @@ in {
             --remember \
             --asterisks \
             --user-menu \
-            --cmd Hyprland \
+            --cmd ${lib.getExe config.programs.hyprland.package}
         '';
         # --cmd "systemd-cat Hyprland"
-        # --cmd ${lib.getExe config.programs.hyprland.package}
         # command = "sway";
       };
     };
   };
   environment.systemPackages = with pkgs; [
     greetd.tuigreet
-    Hyprland-script
   ];
   # environment.etc."greetd/environments".text = ''
   #   sway
