@@ -233,6 +233,7 @@
     libusb
     wirelesstools
     iw
+    cloudcompare
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
