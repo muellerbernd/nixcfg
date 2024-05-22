@@ -360,7 +360,7 @@ in {
       };
       # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
       teams = {
-        name = "Microsoft Teams for Linux";
+        name = "Microsoft Teams for Linux (wayland)";
         exec = "teams-for-linux --use-angle=opengl";
         categories = ["Network" "InstantMessaging" "Chat"];
         icon="teams-for-linux";
