@@ -106,11 +106,11 @@
         # walker = inputs.walker.packages."x86_64-linux".walker;
         waybar = inputs.waybar.packages."x86_64-linux".waybar;
       })
-      inputs.hyprland.overlays.default
-      inputs.hypridle.overlays.default
-      inputs.hyprlang.overlays.default
-      inputs.hyprpicker.overlays.default
-      inputs.hyprlock.overlays.default
+      # inputs.hyprland.overlays.default
+      # inputs.hypridle.overlays.default
+      # inputs.hyprlang.overlays.default
+      # inputs.hyprpicker.overlays.default
+      # inputs.hyprlock.overlays.default
     ];
     lib = nixpkgs.lib;
   in rec {
