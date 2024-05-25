@@ -4,7 +4,8 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-qemu-static";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/binfmt-qemu-static";
@@ -77,7 +78,7 @@
 
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
-      inputs.neovim-nightly.overlay
+      inputs.neovim-nightly.overlays.default
       inputs.rofi-music-rs.overlays.default
       inputs.lsleases.overlays.default
       # inputs.yazi.overlays.default

@@ -70,6 +70,8 @@
       # Only available from driver 515.43.04+
       open = false;
 
+      package = config.boot.kernelPackages.nvidiaPackages.production; # (installs 550)
+
       #Fixes a glitch
       # nvidiaPersistenced = true;
       # Enable the Nvidia settings menu,
@@ -156,20 +158,21 @@
 
   hardware.nvidia-container-toolkit.enable = lib.mkForce true;
 
-  boot.kernelPackages = let
-    version = "6.6.1";
-    suffix = "zen1"; # use "lqx1" for linux_lqx
-  in
-    pkgs.linuxPackagesFor (pkgs.linux_zen.override {
-      inherit version suffix;
-      modDirVersion = lib.versions.pad 3 "${version}-${suffix}";
-      src = pkgs.fetchFromGitHub {
-        owner = "zen-kernel";
-        repo = "zen-kernel";
-        rev = "v${version}-${suffix}";
-        sha256 = "13m820wggf6pkp351w06mdn2lfcwbn08ydwksyxilqb88vmr0lpq";
-      };
-    });
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = let
+  #   version = "6.6.1";
+  #   suffix = "zen1"; # use "lqx1" for linux_lqx
+  # in
+  #   pkgs.linuxPackagesFor (pkgs.linux_zen.override {
+  #     inherit version suffix;
+  #     modDirVersion = lib.versions.pad 3 "${version}-${suffix}";
+  #     src = pkgs.fetchFromGitHub {
+  #       owner = "zen-kernel";
+  #       repo = "zen-kernel";
+  #       rev = "v${version}-${suffix}";
+  #       sha256 = "13m820wggf6pkp351w06mdn2lfcwbn08ydwksyxilqb88vmr0lpq";
+  #     };
+  #   });
 }
 # vim: set ts=2 sw=2:
 
