@@ -116,6 +116,7 @@ in {
       ntfs3g
       gvfs
       prusa-slicer
+      blender
       # cli helpers
       usbutils
       man
@@ -157,6 +158,7 @@ in {
       # icecream
       # icemon
       # formatter
+      taplo # toml toolkit
       yamlfmt
       stylua
       black
@@ -356,14 +358,14 @@ in {
         type = "Application";
         mimeType = ["x-scheme-handler/spotify"];
         categories = ["Audio" "Music" "Player" "AudioVideo"];
-        icon="spotify-client";
+        icon = "spotify-client";
       };
       # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
       teams = {
         name = "Microsoft Teams for Linux (wayland)";
         exec = "teams-for-linux --use-angle=opengl";
         categories = ["Network" "InstantMessaging" "Chat"];
-        icon="teams-for-linux";
+        icon = "teams-for-linux";
         comment = "Unofficial Microsoft Teams client for Linux";
       };
       nvim = {
