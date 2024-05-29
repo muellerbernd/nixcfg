@@ -1,5 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = with inputs.self.nixosModules; [
     # modules
     mixins-greetd
@@ -10,18 +15,17 @@
     mixins-virtualisation
   ];
   # NixOS uses NTFS-3G for NTFS support.
-  boot.supportedFilesystems = [ "ntfs" "cifs" ];
+  boot.supportedFilesystems = ["ntfs" "cifs"];
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -32,8 +36,8 @@
   nix = {
     package = pkgs.nixFlakes;
     settings.auto-optimise-store = true;
-    settings.allowed-users = [ "bernd" "nix-serve" ];
-    settings.trusted-users = [ "@wheel" "root" "nix-ssh" ];
+    settings.allowed-users = ["bernd" "nix-serve"];
+    settings.trusted-users = ["@wheel" "root" "nix-ssh"];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -94,8 +98,7 @@
   # thunar settings
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
-
+    plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
   };
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
@@ -163,14 +166,15 @@
     printing.enable = true;
 
     avahi =
-      if (config.system.nixos.release != "24.05")
-      then {
-        enable = true;
-        nssmdns = true;
-        # for a WiFi printer
-        openFirewall = true;
-      }
-      else {
+      # if (lib.versionAtLeast config.system.nixos.release "24.05")
+      # then {
+      #   enable = true;
+      #   nssmdns = true;
+      #   # for a WiFi printer
+      #   openFirewall = true;
+      # }
+      # else {
+      {
         enable = true;
         nssmdns4 = true;
         # for a WiFi printer
