@@ -5,12 +5,14 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
-  imports = [
+  imports = with inputs.self.nixosModules; [
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    mixins-workVPN
   ];
 
   # Bootloader.
