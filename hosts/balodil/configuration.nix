@@ -1,12 +1,17 @@
-{ config, pkgs, lib, inputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = with inputs.self.nixosModules; [
     ../default.nix
     # modules
-    mixins-distributed-builder-client
   ];
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs" ];
+  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];
   # Bootloader.
   boot = {
     loader = {
@@ -36,7 +41,7 @@
   networking = {
     networkmanager.enable = true;
     firewall = {
-      enable = lib.mkForce true;
+      enable = lib.mkForce false;
       allowedTCPPorts = [
         80
         443
@@ -61,10 +66,11 @@
         4500
         67
       ];
-      allowedUDPPortRanges = [{
-        from = 4000;
-        to = 50000;
-      }
+      allowedUDPPortRanges = [
+        {
+          from = 4000;
+          to = 50000;
+        }
         # # ROS2 needs 7400 + (250 * Domain) + 1
         # # here Domain is 41 or 42
         # {
@@ -72,45 +78,38 @@
         #   to = 17910;
         # }
       ];
-      extraCommands =
-        "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
+      extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
         iptables -I INPUT -p udp --dport 67 -j ACCEPT";
       allowPing = true;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    glxinfo
-    cifs-utils
-    keyutils
-    samba
-    lxqt.lxqt-policykit
-    iperf
-    nmap
-    socat
-    turbovnc
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   # Configure xserver
   services.xserver = {
     xkb.layout = "de";
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "0";
-        middleEmulation = false;
-      };
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.6";
-        naturalScrolling = true;
-        tapping = true;
-      };
+  };
+
+  services.jitsi-meet = {
+    enable = true;
+    hostName = "127.0.0.1";
+    config = {
+      enableWelcomePage = false;
+      prejoinPageEnabled = true;
+      defaultLang = "fi";
+    };
+    interfaceConfig = {
+      SHOW_JITSI_WATERMARK = false;
+      SHOW_WATERMARK_FOR_GUESTS = false;
     };
   };
+  services.jitsi-videobridge.openFirewall = true;
+  security.acme.defaults.email = "me@example.com";
+  security.acme.acceptTerms = true;
 }
 # vim: set ts=2 sw=2:
 
