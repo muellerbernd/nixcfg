@@ -88,6 +88,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    rocmPackages.rocm-smi
     vim
     git
     # gtk
@@ -96,7 +97,6 @@
     gsettings-desktop-schemas
     lxappearance
     #
-    cudatoolkit
   ];
 
   # environment.pathsToLink =
