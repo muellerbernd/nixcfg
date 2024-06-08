@@ -23,7 +23,7 @@
     "isci"
   ];
   boot.initrd.kernelModules =
-    [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "amdgpu"];
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
