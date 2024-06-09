@@ -57,7 +57,6 @@ in {
         sshUser = "nixremote";
         sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
-        speedFactor = 9;
         supportedFeatures = ["nixos-test" "big-parallel" "kvm"];
       }
     ];

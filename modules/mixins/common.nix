@@ -36,8 +36,8 @@
   nix = {
     package = pkgs.nixFlakes;
     settings.auto-optimise-store = true;
-    settings.allowed-users = ["bernd" "nix-serve"];
-    settings.trusted-users = ["@wheel" "root"];
+    settings.allowed-users = ["bernd" "nix-serve" "nixremote"];
+    settings.trusted-users = ["root"];
     gc = {
       automatic = true;
       dates = "weekly";
