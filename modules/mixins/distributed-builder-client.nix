@@ -65,7 +65,7 @@ in {
         hostName = "remote-builder";
         systems = ["x86_64-linux" "aarch64-linux" "armv7l-linux"];
         protocol = "ssh-ng";
-        sshUser = "root";
+        sshUser = "nixremote";
         sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
         speedFactor = 9;
