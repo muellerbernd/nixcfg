@@ -104,19 +104,19 @@
 
   # icecream setup
   services = {
-    icecream = {
-      daemon = {
-        enable = true;
-        # hostname = "daemon-icecream-biltower";
-        openFirewall = true;
-        openBroadcast = true;
-      };
-      scheduler = {
-        enable = true;
-        # netName = "scheduler-icecream-biltower";
-        openFirewall = true;
-      };
-    };
+    # icecream = {
+    #   daemon = {
+    #     enable = true;
+    #     # hostname = "daemon-icecream-biltower";
+    #     openFirewall = true;
+    #     openBroadcast = true;
+    #   };
+    #   scheduler = {
+    #     enable = true;
+    #     # netName = "scheduler-icecream-biltower";
+    #     openFirewall = true;
+    #   };
+    # };
     # nix-serve setup
     nix-serve = {
       enable = true;
@@ -177,6 +177,17 @@
   #       sha256 = "13m820wggf6pkp351w06mdn2lfcwbn08ydwksyxilqb88vmr0lpq";
   #     };
   #   });
+  users.groups.nixremote = {};
+  users.users.nixremote = {
+    group = "nixremote";
+    isNormalUser = true;
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe bernd@muellerbernd.de"
+
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ bernd.mueller@iosb-ast.fraunhofer.de"
+    ];
+  };
 }
 # vim: set ts=2 sw=2:
 
