@@ -50,17 +50,6 @@ in {
   nix = {
     distributedBuilds = true;
     buildMachines = [
-      # {
-      #   hostName = "biltower";
-      #   systems = [ "x86_64-linux" ];
-      #   # protocol = "ssh-ng";
-      #   sshUser = "bernd";
-      #   # sshKey = "/root/.ssh/eis-remote";
-      #   sshKey = config.age.secrets.distributedBuilderKey.path;
-      #   maxJobs = 99;
-      #   speedFactor = 5;
-      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      # }
       {
         hostName = "remote-builder";
         systems = ["x86_64-linux" "aarch64-linux" "armv7l-linux"];
@@ -71,15 +60,6 @@ in {
         speedFactor = 9;
         supportedFeatures = ["nixos-test" "big-parallel" "kvm"];
       }
-      # {
-      #   hostName = "eis-machine-vpn";
-      #   systems = [ "x86_64-linux" ];
-      #   sshUser = "root";
-      #   sshKey = config.age.secrets.distributedBuilderKey.path;
-      #   maxJobs = 99;
-      #   speedFactor = 9;
-      #   supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
-      # }
     ];
     extraOptions = ''
       builders-use-substitutes = true
