@@ -1,5 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: let
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
     subnet=$1
     ips=$(${pkgs.iproute2}/bin/ip -4 -o addr show scope global | ${pkgs.gawk}/bin/awk '{gsub(/\/.*/,"",$4); print $4}')
@@ -12,8 +17,7 @@ let
     done
     [ "$is_in" = true ]
   '';
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     gawk
     grepcidr
@@ -59,12 +63,13 @@ in
       # }
       {
         hostName = "remote-builder";
-        systems = [ "x86_64-linux" "aarch64-linux" "armv7l-linux" ];
+        systems = ["x86_64-linux" "aarch64-linux" "armv7l-linux"];
+        protocol = "ssh-ng";
         sshUser = "root";
         sshKey = config.age.secrets.distributedBuilderKey.path;
         maxJobs = 99;
         speedFactor = 9;
-        supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+        supportedFeatures = ["nixos-test" "big-parallel" "kvm"];
       }
       # {
       #   hostName = "eis-machine-vpn";
