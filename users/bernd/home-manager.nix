@@ -175,10 +175,8 @@ in {
       # python3Packages.python-lsp-black
       # python3Packages.pylsp-rope
       # python3Packages.pyls-flake8
-      nodePackages.pyright
-      # rnix-lsp
+      pyright
       nil
-      nixd
       alejandra
       sumneko-lua-language-server
       marksman

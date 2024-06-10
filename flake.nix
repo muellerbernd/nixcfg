@@ -50,7 +50,10 @@
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
@@ -78,7 +81,7 @@
 
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
-      inputs.neovim-nightly.overlays.default
+      # inputs.neovim-nightly.overlays.default
       inputs.rofi-music-rs.overlays.default
       inputs.lsleases.overlays.default
       # inputs.yazi.overlays.default
