@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   # Set your time zone.
@@ -59,14 +64,13 @@
   programs.zsh.enable = true;
 
   # Enable SSH in the boot process.
-  systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
+  systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
   users.users.root.openssh.authorizedKeys.keys = [
     # bernd ssh
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"
     # work
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
   ];
-
 
   # Provide networkmanager for easy wireless configuration.
   networking.networkmanager.enable = true;
@@ -81,7 +85,6 @@
   # # The VirtualBox guest additions rely on an out-of-tree kernel module
   # # which lags behind kernel releases, potentially causing broken builds.
   # virtualisation.virtualbox.guest.enable = false;
-
 
   system.stateVersion = "23.11";
 }
