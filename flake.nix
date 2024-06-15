@@ -214,6 +214,7 @@
       inherit nixpkgs home-manager overlays agenix inputs;
       system = "x86_64-linux";
       users = ["bernd"];
+      headless = true;
     };
   };
 }
