@@ -50,6 +50,7 @@
     rsync
     git
     tmux
+    util-linux
   ];
 
   # use zsh as default shell
