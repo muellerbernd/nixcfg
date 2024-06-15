@@ -77,6 +77,8 @@
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
   };
+
+  system.stateVersion = "24.11";
 }
 # vim: set ts=2 sw=2:
 
