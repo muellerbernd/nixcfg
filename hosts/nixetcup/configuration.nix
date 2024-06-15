@@ -13,11 +13,13 @@
 
   # Bootloader.
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-      systemd-boot.configurationLimit = 8;
-    };
+    grub.enable = true;
+    grub.device = "/dev/vda";
+    # loader = {
+    #   systemd-boot.enable = true;
+    #   efi.canTouchEfiVariables = true;
+    #   systemd-boot.configurationLimit = 8;
+    # };
   };
 
   system.autoUpgrade = {

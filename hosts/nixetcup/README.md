@@ -57,7 +57,7 @@ Installation
 
 ```bash
 
-nix-shell -p git nixFlakes efibootmgr tmux --extra-experimental-features flakes nix-command
+nix-shell -p git nixFlakes efibootmgr tmux  --experimental-features 'nix-command flakes'
 git clone https://github.com/muellerbernd/nixcfg.git /mnt/etc/nixos
 nixos-install --root /mnt --flake /mnt/etc/nixos#nixetcup
 reboot # if needed

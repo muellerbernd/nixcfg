@@ -6,6 +6,25 @@
 }: {
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
+  # Nix settings, auto cleanup and enable flakes
+  nix = {
+    package = pkgs.nixFlakes;
+    settings.auto-optimise-store = true;
+    settings.allowed-users = ["bernd" "nix-serve" "nixremote"];
+    settings.trusted-users = ["root" "nixremote"];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
+      builders-use-substitutes = true
+    '';
+  };
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
   location.provider = "geoclue2";
