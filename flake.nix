@@ -209,7 +209,8 @@
       system = "x86_64-linux";
     };
     nixosConfigurations.ISO = mkISO "ISO" {
-      inherit nixpkgs home-manager overlays;
+      inherit home-manager overlays;
+      nixpkgs = nixpkgs-stable;
       system = "x86_64-linux";
     };
     nixosConfigurations.balodil = mkVM "balodil" {

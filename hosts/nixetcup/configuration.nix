@@ -91,6 +91,15 @@
   };
 
   system.stateVersion = "24.11";
+
+  users.users.root = {
+    openssh.authorizedKeys.keys = [
+      # private
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"
+      # work
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
+    ];
+  };
 }
 # vim: set ts=2 sw=2:
 
