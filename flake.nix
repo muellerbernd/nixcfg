@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
@@ -211,7 +211,8 @@
       students = ["test1" "test2"];
     };
     nixosConfigurations.nixetcup = mkDefault "nixetcup" {
-      inherit nixpkgs home-manager overlays agenix inputs;
+      inherit home-manager overlays agenix inputs;
+      nixpkgs = nixpkgs-stable;
       system = "x86_64-linux";
       users = ["bernd"];
       headless = true;

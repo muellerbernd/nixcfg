@@ -135,7 +135,7 @@
       cmake-language-server
       texlab
       nodePackages_latest.vscode-langservers-extracted
-      nodePackages_latest.bash-language-server
+      # nodePackages_latest.bash-language-server
       gopls
       # rust-analyzer
       # haskell
