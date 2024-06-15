@@ -17,7 +17,7 @@ wipefs -a /dev/vda
 
 ## Creating Partitions
 
-create boot and LVM root partition
+create boot and root partition
 
 ```bash
 export ROOT_DISK=/dev/vda
@@ -57,7 +57,7 @@ Installation
 
 ```bash
 
-nix-shell -p git nixFlakes efibootmgr tmux --extra-experimental-features flakes --extra-experimental-features nix-command
+nix-shell -p git nixFlakes efibootmgr tmux --extra-experimental-features flakes nix-command
 git clone https://github.com/muellerbernd/nixcfg.git /mnt/etc/nixos
 nixos-install --root /mnt --flake /mnt/etc/nixos#nixetcup
 reboot # if needed
