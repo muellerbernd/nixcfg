@@ -7,12 +7,10 @@
 }: {
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
-    ../default.nix
     # modules
+    mixins-server
   ];
 
-  # needed for https://github.com/nixos/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];
   # Bootloader.
   boot = {
     loader = {
