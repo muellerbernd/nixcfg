@@ -32,28 +32,11 @@ parted -a opt --script "${ROOT_DISK}" \
     name 2 root
 ```
 
-## lvm setup
-
-```bash
-# create physical LVM volume
-pvcreate /dev/vda2
-# create volume group
-vgcreate vg /dev/vda2
-# create swap volume, tip: RAM + 2G
-lvcreate -L 6G -n swap vg
-# create logical root volume
-lvcreate -l '100%FREE' -n root vg
-# show volumes
-lvdisplay
-```
-
 ## format disks
 
 ```bash
 mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/boot
-mkfs.ext4 -L root /dev/vg/root
-mkswap -L swap /dev/vg/swap
-swapon -s
+mkfs.ext4 -L root /dev/disk/by-partlabel/root
 ```
 
 ## mount
@@ -62,16 +45,15 @@ swapon -s
 mount /dev/disk/by-label/root /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
-swapon /dev/vg/swap
 ```
 
 # install
 
 Installation
 
-* install needed packages into nix-shell
-* clone this repo into /mnt/etc/nixos
-* install the provided config via flake
+- install needed packages into nix-shell
+- clone this repo into /mnt/etc/nixos
+- install the provided config via flake
 
 ```bash
 
@@ -79,4 +61,13 @@ nix-shell -p git nixFlakes efibootmgr tmux --extra-experimental-features flakes
 git clone https://github.com/muellerbernd/nixcfg.git /mnt/etc/nixos
 nixos-install --root /mnt --flake /mnt/etc/nixos#nixetcup
 reboot # if needed
+```
+
+# change passwords
+
+chroot into NixOS install and change passwords if needed
+
+```bash
+nixos-enter
+passwd username
 ```
