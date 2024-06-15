@@ -199,6 +199,9 @@ in {
       # browsers
       chromium
       firefox
+      tangram
+      # wiki
+      kiwix
       # media
       spotify
       spotify-player
