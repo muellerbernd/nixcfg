@@ -3,7 +3,7 @@
 - overwrite disk with zeros
 
 ```bash
-dd if=/dev/zero of=/dev/nvme0n1 bs=4096 status=progress
+dd if=/dev/zero of=/dev/vda bs=4096 status=progress
 ```
 
 ## Prep disk
@@ -12,7 +12,7 @@ dd if=/dev/zero of=/dev/nvme0n1 bs=4096 status=progress
 # find your drive
 lsblk
 # wipe drive
-wipefs -a /dev/nvme1n1
+wipefs -a /dev/vda
 ```
 
 ## Creating Partitions
@@ -29,7 +29,6 @@ parted -a opt --script "${ROOT_DISK}" \
     mkpart primary 512MiB 100% \
     set 1 esp on \
     name 1 boot \
-    set 2 lvm on \
     name 2 root
 ```
 
