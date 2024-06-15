@@ -6,6 +6,7 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
+    ./hardware-configuration.nix
     ../default.nix
     # modules
   ];
