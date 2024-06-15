@@ -49,6 +49,7 @@
     vim
     rsync
     git
+    tmux
   ];
 
   # use zsh as default shell
