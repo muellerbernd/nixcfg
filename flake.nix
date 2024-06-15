@@ -20,6 +20,13 @@
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager-stable = {
+      # url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
+
+      # We want to use the same set of nixpkgs as our system.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # predefined hardware stuff
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -71,6 +78,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    home-manager-stable,
     agenix,
     nixos-hardware,
     ...
@@ -211,8 +219,9 @@
       students = ["test1" "test2"];
     };
     nixosConfigurations.nixetcup = mkDefault "nixetcup" {
-      inherit home-manager overlays agenix inputs;
+      inherit overlays agenix inputs;
       nixpkgs = nixpkgs-stable;
+      home-manager = home-manager-stable;
       system = "x86_64-linux";
       users = ["bernd"];
       headless = true;
