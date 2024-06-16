@@ -24,6 +24,10 @@
         enableACME = true;
         forceSSL = true;
       };
+      "jitsi.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+      };
       "upload.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -47,7 +51,7 @@
         extraDomainNames = [
           "upload.muellerbernd.de"
           "conference.muellerbernd.de"
-          "meet.muellerbernd.de"
+          "jitsi.muellerbernd.de"
         ];
       };
     };

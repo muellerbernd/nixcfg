@@ -10,7 +10,7 @@
     ./nginx.nix
     ./jitsi.nix
     # ./xmpp.nix
-    ./prosody.nix
+    # ./prosody.nix
     # modules
     mixins-server
   ];
@@ -45,6 +45,13 @@
       allowedTCPPorts = [
         80
         443
+        # xmpp and
+        5222
+        5223
+        5269
+        5270
+        5280
+        5290
       ];
       allowedUDPPorts = [
         80

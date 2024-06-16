@@ -7,24 +7,24 @@
 }: {
   services.prosody = {
     enable = true;
-    admins = ["webmeister@muellerbernd.de"];
-    virtualHosts."muellerbernd.de" = {
-      domain = "muellerbernd.de";
-      enabled = true;
-    };
-    # xmppComplianceSuite = false;
-    uploadHttp = {
-      domain = "upload.muellerbernd.de";
-    };
-    muc = [
-      {
-        domain = "conference.muellerbernd.de";
-      }
-      {
-        domain = "upload.muellerbernd.de";
-      }
-    ];
-    modules.motd = true;
+    # admins = ["webmeister@muellerbernd.de"];
+    # virtualHosts."muellerbernd.de" = {
+    #   domain = "muellerbernd.de";
+    #   enabled = true;
+    # };
+    xmppComplianceSuite = false;
+    # uploadHttp = {
+    #   domain = "upload.meet.muellerbernd.de";
+    # };
+    # muc = [
+    #   {
+    #     domain = "conference.muellerbernd.de";
+    #   }
+    #   {
+    #     domain = "upload.muellerbernd.de";
+    #   }
+    # ];
+    # modules.motd = true;
     # modules.watchregistrations = true;
     # modules.register = false;
 
