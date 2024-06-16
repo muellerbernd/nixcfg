@@ -7,6 +7,7 @@
 }: {
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
+    ./nginx.nix
     # modules
     mixins-server
   ];
