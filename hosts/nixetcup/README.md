@@ -1,4 +1,6 @@
-### wipe disk
+# Installation
+
+## wipe disk
 
 - overwrite disk with zeros
 
@@ -47,7 +49,7 @@ mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
 ```
 
-# install
+## install
 
 Installation
 
@@ -63,11 +65,20 @@ nixos-install --root /mnt --flake /mnt/etc/nixos#nixetcup
 reboot # if needed
 ```
 
-# change passwords
+## change passwords
 
 chroot into NixOS install and change passwords if needed
 
 ```bash
 nixos-enter
 passwd username
+```
+
+# XMPP setup
+
+- generate DH parameters
+
+```bash
+cd /var/lib/ejabberd
+openssl dhparam -out dhparams.pem 4096
 ```

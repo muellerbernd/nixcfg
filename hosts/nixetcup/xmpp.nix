@@ -9,23 +9,25 @@
 
     hosts = [
       "muellerbernd.de"
+      "meet.muellerbernd.de"
     ];
-    host_config = {
-      "muellerbernd.de" = {
-        sql_type = "pgsql";
-        sql_server = "pgsql-2.net.fem.tu-ilmenau.de";
-        sql_database = "muellerbernd.de_xmpp";
-        sql_username = "muellerbernd.de_xmpp";
-        sql_password = "#DATABASE_PASSWORD#";
-        sql_pool_size = 5;
-      };
-    };
-
-    new_sql_schema = true;
-    default_db = "sql";
+    # host_config = {
+    #   "muellerbernd.de" = {
+    #     sql_type = "pgsql";
+    #     sql_server = "pgsql-2.muellerbernd.de";
+    #     sql_database = "muellerbernd.de_xmpp";
+    #     sql_username = "muellerbernd.de_xmpp";
+    #     sql_password = "#DATABASE_PASSWORD#";
+    #     sql_pool_size = 5;
+    #   };
+    # };
+    #
+    # new_sql_schema = true;
+    # default_db = "sql";
 
     certfiles = [
       "${config.security.acme.certs."muellerbernd.de".directory}/*"
+      "${config.security.acme.certs."meet.muellerbernd.de".directory}/*"
       "${config.security.acme.certs."conference.muellerbernd.de".directory}/*"
     ];
 
@@ -104,14 +106,14 @@
 
     s2s_use_starttls = "required";
 
-    auth_method = "sql";
+    # auth_method = "sql";
+    auth_method = "internal";
     auth_password_format = "scram";
     acl = {
       admin = {
         user = [
-          "clerie@muellerbernd.de"
-          "frainz@muellerbernd.de"
-          "timo_kettenbach@muellerbernd.de"
+          "webmeister@muellerbernd.de"
+          "bernd@muellerbernd.de"
         ];
       };
       local = {
@@ -121,23 +123,6 @@
         ip = [
           "127.0.0.0/8"
           "::1/128"
-        ];
-      };
-      femnet_ips = {
-        # https://wiki.fem.tu-ilmenau.de/technik/routing/vlans_und_subnetze#zusammenfassung_von_ausschliesslich_durch_die_fem_ev_genutzten_subnetzen
-        ip = [
-          "141.24.40.0/25"
-          "141.24.41.0/24"
-          "141.24.42.0/23"
-          "141.24.44.0/25"
-          "141.24.45.0/24"
-          "141.24.46.0/23"
-          "141.24.48.0/21"
-          "2001:638:904:ffc0::/60"
-          "2001:638:904:ffd2::/63"
-          "2001:638:904:ffd4::/62"
-          "2001:638:904:ffd8::/61"
-          "2001:638:904:ffe0::/59"
         ];
       };
     };
@@ -169,7 +154,6 @@
       ];
       registration_network = [
         {allow = "loopback";}
-        {allow = "femnet_ips";}
       ];
     };
 
@@ -356,12 +340,11 @@
         #captcha_protected = true
         password_strength = 64;
         access = "register";
-        ip_access = "registration_network"; # TODO
+        # ip_access = "registration_network"; # TODO
         welcome_message = {
           subject = "Willkommen!";
           body = ''
-            Willkommen auf der XMPP Instanz der FeM,
-            auf https://xmpp.muellerbernd.de findest du genauere Informationen
+            Willkommen auf meiner XMPP Instanz
           '';
         };
       };
@@ -381,7 +364,6 @@
       };
       mod_vcard_xupdate = {};
       mod_version = {
-        # Wollen nicht, dass jemand unser System ausspioniert :P
         show_os = false;
       };
     };

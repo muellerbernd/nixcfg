@@ -9,6 +9,8 @@
     ./hardware-configuration.nix
     ./nginx.nix
     ./jitsi.nix
+    # ./xmpp.nix
+    ./prosody.nix
     # modules
     mixins-server
   ];

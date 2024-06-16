@@ -21,9 +21,6 @@
         domain = "conference.muellerbernd.de";
       }
       {
-        domain = "meet.muellerbernd.de";
-      }
-      {
         domain = "upload.muellerbernd.de";
       }
     ];
@@ -48,11 +45,10 @@
     #   withCommunityModules = ["http_upload"];
     # };
     # extraModules = ["http_upload_external"];
-    # extraConfig = ''
-    #   http_upload_external_base_url = "https://muellerbernd.de/upload/"
-    #   http_upload_external_secret = "mysecret"
-    #   http_upload_external_file_size_limit = 50000000 -- 50 MB
-    # '';
+    # http_upload_external_base_url = "https://muellerbernd.de/upload/"
+    # http_upload_external_secret = "mysecret"
+    # http_upload_external_file_size_limit = 50000000 -- 50 MB
+    extraConfig = builtins.readFile ./prosody.cfg.lua;
   };
-
+  networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 }
