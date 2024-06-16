@@ -11,7 +11,7 @@
     nginx.enable = true;
     jicofo.enable = true;
     jibri.enable = false;
-    prosody.enable = false;
+    prosody.enable = true;
     videobridge.enable = true;
     config = {
       enableWelcomePage = true;
