@@ -19,23 +19,35 @@
       "${domain}" = {
         enableACME = true;
         forceSSL = true;
-      };
-      "meet.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-      };
-      "jitsi.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-      };
-      "upload.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
+        locations."/" = {
+          return = ''200 "nixetcup\n"'';
+          extraConfig = ''
+            types { } default_type "text/plain; charset=utf-8";
+          '';
+        };
       };
       "conference.${domain}" = {
         enableACME = true;
         forceSSL = true;
+        locations."/" = {
+          return = ''200 "nixetcup\n"'';
+          extraConfig = ''
+            types { } default_type "text/plain; charset=utf-8";
+          '';
+        };
       };
+      # "jitsi.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
+      # "xmpp.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
+      # "upload.xmpp.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
     };
   };
 
@@ -49,9 +61,9 @@
         webroot = "/var/lib/acme/acme-challenge/";
         email = "webmeister@muellerbernd.de";
         extraDomainNames = [
-          "upload.muellerbernd.de"
-          "conference.muellerbernd.de"
           "jitsi.muellerbernd.de"
+          "xmpp.muellerbernd.de"
+          "conference.muellerbernd.de"
         ];
       };
     };

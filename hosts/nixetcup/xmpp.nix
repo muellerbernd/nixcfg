@@ -9,7 +9,6 @@
 
     hosts = [
       "muellerbernd.de"
-      "meet.muellerbernd.de"
     ];
     # host_config = {
     #   "muellerbernd.de" = {
@@ -27,7 +26,6 @@
 
     certfiles = [
       "${config.security.acme.certs."muellerbernd.de".directory}/*"
-      "${config.security.acme.certs."meet.muellerbernd.de".directory}/*"
       "${config.security.acme.certs."conference.muellerbernd.de".directory}/*"
     ];
 
@@ -269,9 +267,9 @@
       mod_fail2ban = {};
       mod_http_api = {};
       mod_http_upload = {
-        put_url = "https://upload.xmpp.muellerbernd.de";
-        external_secret = "#UPLOAD_SECRET#";
-        max_size = 52428800;
+        # put_url = "https://upload.xmpp.muellerbernd.de";
+        # external_secret = "#UPLOAD_SECRET#";
+        # max_size = 52428800;
       };
 
       mod_last = {};
@@ -307,12 +305,12 @@
       };
       mod_privacy = {};
       mod_private = {};
-      mod_proxy65 = {
-        # Bytestream Proxy
-        max_connections = 5;
-        ip = "::";
-        port = 5290;
-      };
+      # mod_proxy65 = {
+      #   # Bytestream Proxy
+      #   max_connections = 5;
+      #   ip = "::";
+      #   port = 5290;
+      # };
       mod_pubsub = {
         access_createnode = "pubsub_createnode";
         plugins = [
