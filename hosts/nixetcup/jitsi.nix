@@ -11,7 +11,7 @@
     nginx.enable = true;
     jicofo.enable = true;
     jibri.enable = false;
-    prosody.enable = true;
+    prosody.enable = false;
     videobridge.enable = true;
     config = {
       enableWelcomePage = true;
@@ -27,10 +27,10 @@
       useNewBandwidthAllocationStrategy = true;
       requireDisplayName = true;
     };
-    #   interfaceConfig = {
-    #     SHOW_JITSI_WATERMARK = true;
-    #     SHOW_WATERMARK_FOR_GUESTS = false;
-    #   };
+    interfaceConfig = {
+      SHOW_JITSI_WATERMARK = true;
+      SHOW_WATERMARK_FOR_GUESTS = false;
+    };
   };
   services.jitsi-videobridge.openFirewall = true;
 }
