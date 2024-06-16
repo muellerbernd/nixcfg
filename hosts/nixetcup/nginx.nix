@@ -16,6 +16,10 @@
     virtualHosts = let
       domain = "muellerbernd.de";
     in {
+      "${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+      };
       "meet.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -32,4 +36,20 @@
   };
 
   systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
+
+  security.acme = {
+    defaults.email = "webmeister@muellerbernd.de";
+    acceptTerms = true;
+    certs = {
+      "muellerbernd.de" = {
+        webroot = "/var/lib/acme/acme-challenge/";
+        email = "webmeister@muellerbernd.de";
+        extraDomainNames = [
+          "upload.muellerbernd.de"
+          "conference.muellerbernd.de"
+          "meet.muellerbernd.de"
+        ];
+      };
+    };
+  };
 }

@@ -8,6 +8,7 @@
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
     ./nginx.nix
+    ./jitsi.nix
     # modules
     mixins-server
   ];
@@ -39,45 +40,15 @@
     networkmanager.enable = true;
     firewall = {
       enable = lib.mkForce true;
-      #   allowedTCPPorts = [
-      #     80
-      #     443
-      #     8080
-      #     5000
-      #     445 # samba
-      #     137
-      #     138
-      #     139
-      #     8000
-      #     5901
-      #   ];
-      #   allowedUDPPorts = [
-      #     80
-      #     443
-      #     8080
-      #     5000
-      #     445 # samba
-      #     137
-      #     138
-      #     139
-      #     4500
-      #     67
-      #   ];
-      #   allowedUDPPortRanges = [
-      #     {
-      #       from = 4000;
-      #       to = 50000;
-      #     }
-      #     # # ROS2 needs 7400 + (250 * Domain) + 1
-      #     # # here Domain is 41 or 42
-      #     # {
-      #     #   from = 17650;
-      #     #   to = 17910;
-      #     # }
-      #   ];
-      #   extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
-      #     iptables -I INPUT -p udp --dport 67 -j ACCEPT";
-      #   allowPing = true;
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        80
+        443
+      ];
+      allowPing = true;
     };
   };
 
