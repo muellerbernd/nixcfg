@@ -317,11 +317,11 @@
           nvidiaBusId = "PCI:3:0:0";
         };
       };
+      # Load nvidia driver for Xorg and Wayland
+      services.xserver.videoDrivers = ["nvidia"];
+      # nvidia container toolkit
+      hardware.nvidia-container-toolkit.enable = true;
     };
-    # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = ["nvidia"];
-    # nvidia container toolkit
-    hardware.nvidia-container-toolkit.enable = true;
   };
   # specialisation = {
   #   on-the-go.configuration = {
