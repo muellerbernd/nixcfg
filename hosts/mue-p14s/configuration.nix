@@ -9,10 +9,12 @@
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # printers
+    ./printers.nix
     # modules
     mixins-distributed-builder-client
     mixins-workVPN
-    # mixins-disable-nvidia
+    mixins-disable-nvidia
   ];
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
@@ -118,212 +120,207 @@
         intel-compute-runtime
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        vaapiVdpau
-        libvdpau-va-gl
+        # vaapiVdpau
+        # libvdpau-va-gl
+        # nvidia-vaapi-driver
+        # nv-codec-headers-12
         mesa
-        nvidia-vaapi-driver
-        nv-codec-headers-12
       ];
     };
     trackpoint = {
       enable = true;
       sensitivity = 255;
     };
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    nvidia = {
-      # open = true;
-      # fix screen tearing in sync mode
-      modesetting.enable = false;
-      # fix suspend/resume screen corruption in sync mode
-      powerManagement.enable = false;
-      # Fine-grained power management. Turns off GPU when not in use.
-      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = true;
-      open = true;
-      nvidiaSettings = true;
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-      prime = {
-        # enable offload command
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        # Make sure to use the correct Bus ID values for your system!
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:3:0:0";
-      };
-    };
-  };
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
 
-  networking = {
-    networkmanager.enable = true;
-    firewall = {
-      enable = lib.mkForce false;
-      allowedTCPPorts = [
-        80
-        443
-        8080
-        5000
-        445 # samba
-        137
-        138
-        139
-        8000
-        5901
-      ];
-      allowedUDPPorts = [
-        80
-        443
-        8080
-        5000
-        445 # samba
-        137
-        138
-        139
-        4500
-        67
-        51820 # wireguard
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 4000;
-          to = 50000;
-        }
-        # # ROS2 needs 7400 + (250 * Domain) + 1
-        # # here Domain is 41 or 42
-        # {
-        #   from = 17650;
-        #   to = 17910;
-        # }
-      ];
-      # samb discovery
-      extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
+    networking = {
+      networkmanager.enable = true;
+      firewall = {
+        enable = lib.mkForce false;
+        allowedTCPPorts = [
+          80
+          443
+          8080
+          5000
+          445 # samba
+          137
+          138
+          139
+          8000
+          5901
+        ];
+        allowedUDPPorts = [
+          80
+          443
+          8080
+          5000
+          445 # samba
+          137
+          138
+          139
+          4500
+          67
+          51820 # wireguard
+        ];
+        allowedUDPPortRanges = [
+          {
+            from = 4000;
+            to = 50000;
+          }
+          # # ROS2 needs 7400 + (250 * Domain) + 1
+          # # here Domain is 41 or 42
+          # {
+          #   from = 17650;
+          #   to = 17910;
+          # }
+        ];
+        # samb discovery
+        extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns\n
         iptables -I INPUT -p udp --dport 67 -j ACCEPT";
-      allowPing = true;
-    };
-  };
-
-  services = {
-    # Enable the OpenSSH daemon.
-    openssh = {
-      enable = true;
-      settings.X11Forwarding = true;
-      # require public key authentication for better security
-      settings.PasswordAuthentication = true;
-      settings.KbdInteractiveAuthentication = false;
-      settings.PermitRootLogin = "yes";
-      openFirewall = true;
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    glxinfo
-    cifs-utils
-    keyutils
-    samba
-    lxqt.lxqt-policykit
-    iperf
-    nmap
-    socat
-    turbovnc
-    hidapi
-    libusb
-    wirelesstools
-    iw
-    cloudcompare
-  ];
-
-  # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
-  # The TL;DR is: the kernel calls out to the hard-coded path of
-  # /sbin/request-key as part of its CIFS auth process, which of course does
-  # not exist on NixOS due to the usage of Nix store paths.
-  system.activationScripts.symlink-requestkey = ''
-    if [ ! -d /sbin ]; then
-      mkdir /sbin
-    fi
-    ln -sfn /run/current-system/sw/bin/request-key /sbin/request-key
-  '';
-  # request-key expects a configuration file under /etc
-  environment.etc."request-key.conf" = lib.mkForce {
-    text = let
-      upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
-      keyctl = "${pkgs.keyutils}/bin/keyctl";
-    in ''
-      #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
-      # -t is required for DFS share servers...
-      create  cifs.spnego   *            *             ${upcall} -t %k
-      create  dns_resolver  *            *             ${upcall} %k
-      # Everything below this point is essentially the default configuration,
-      # modified minimally to work under NixOS. Notably, it provides debug
-      # logging.
-      create  user          debug:*      negate        ${keyctl} negate %k 30 %S
-      create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
-      create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
-      create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
-      create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
-      create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
-      negate  *             *            *             ${keyctl} negate %k 30 %S
-      create dns_resolver * * /run/current-system/sw/bin/key.dns_resolver %k
-    '';
-  };
-
-  services.samba = {openFirewall = true;};
-  services.gvfs.enable = true;
-  # For mount.cifs, required unless domain name resolution is not needed.
-  fileSystems."/mnt/EIS" = {
-    device = "//ast.intern/EIS";
-    fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
-    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
-  };
-  fileSystems."/mnt/ber54988" = {
-    device = "//ast.intern/user/home/ber54988";
-    fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
-    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
-  };
-
-  # Configure xserver
-  # services.libinput = {
-  #   enable = true;
-  #   mouse = {
-  #     accelProfile = "flat";
-  #     accelSpeed = "0";
-  #     middleEmulation = false;
-  #   };
-  #   touchpad = {
-  #     accelProfile = "flat";
-  #     accelSpeed = "0.6";
-  #     naturalScrolling = true;
-  #     tapping = true;
-  #   };
-  # };
-
-  services.xserver = {
-    xkb.layout = "de";
-    xkb.variant = "";
-    #xkbOptions = "ctrl:nocaps";
-  };
-
-  # specialisation for traveling
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = ["on-the-go"];
-
-      imports = with inputs.self.nixosModules; [
-        mixins-disable-nvidia
-      ];
-      powerManagement = {
-        enable = true;
-        cpuFreqGovernor = "powersave";
+        allowPing = true;
       };
+    };
+
+    services = {
+      # Enable the OpenSSH daemon.
+      openssh = {
+        enable = true;
+        settings.X11Forwarding = true;
+        # require public key authentication for better security
+        settings.PasswordAuthentication = true;
+        settings.KbdInteractiveAuthentication = false;
+        settings.PermitRootLogin = "yes";
+        openFirewall = true;
+      };
+    };
+
+    environment.systemPackages = with pkgs; [
+      glxinfo
+      cifs-utils
+      keyutils
+      samba
+      lxqt.lxqt-policykit
+      iperf
+      nmap
+      socat
+      turbovnc
+      hidapi
+      libusb
+      wirelesstools
+      iw
+      cloudcompare
+    ];
+
+    # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
+    # The TL;DR is: the kernel calls out to the hard-coded path of
+    # /sbin/request-key as part of its CIFS auth process, which of course does
+    # not exist on NixOS due to the usage of Nix store paths.
+    system.activationScripts.symlink-requestkey = ''
+      if [ ! -d /sbin ]; then
+        mkdir /sbin
+      fi
+      ln -sfn /run/current-system/sw/bin/request-key /sbin/request-key
+    '';
+    # request-key expects a configuration file under /etc
+    environment.etc."request-key.conf" = lib.mkForce {
+      text = let
+        upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
+        keyctl = "${pkgs.keyutils}/bin/keyctl";
+      in ''
+        #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
+        # -t is required for DFS share servers...
+        create  cifs.spnego   *            *             ${upcall} -t %k
+        create  dns_resolver  *            *             ${upcall} %k
+        # Everything below this point is essentially the default configuration,
+        # modified minimally to work under NixOS. Notably, it provides debug
+        # logging.
+        create  user          debug:*      negate        ${keyctl} negate %k 30 %S
+        create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
+        create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
+        create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
+        negate  *             *            *             ${keyctl} negate %k 30 %S
+        create dns_resolver * * /run/current-system/sw/bin/key.dns_resolver %k
+      '';
+    };
+
+    services.samba = {openFirewall = true;};
+    services.gvfs.enable = true;
+    # For mount.cifs, required unless domain name resolution is not needed.
+    fileSystems."/mnt/EIS" = {
+      device = "//ast.intern/EIS";
+      fsType = "cifs";
+      options = let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+      in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+    };
+    fileSystems."/mnt/ber54988" = {
+      device = "//ast.intern/user/home/ber54988";
+      fsType = "cifs";
+      options = let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+      in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+    };
+
+    # Configure xserver
+    # services.libinput = {
+    #   enable = true;
+    #   mouse = {
+    #     accelProfile = "flat";
+    #     accelSpeed = "0";
+    #     middleEmulation = false;
+    #   };
+    #   touchpad = {
+    #     accelProfile = "flat";
+    #     accelSpeed = "0.6";
+    #     naturalScrolling = true;
+    #     tapping = true;
+    #   };
+    # };
+
+    services.xserver = {
+      xkb.layout = "de";
+      xkb.variant = "";
+      #xkbOptions = "ctrl:nocaps";
+    };
+
+    # specialisation for traveling
+    specialisation = {
+      use-nvidia.configuration = {
+        system.nixos.tags = ["use-nvidia"];
+
+        # Optionally, you may need to select the appropriate driver version for your specific GPU.
+        nvidia = {
+          # open = true;
+          # fix screen tearing in sync mode
+          modesetting.enable = false;
+          # fix suspend/resume screen corruption in sync mode
+          powerManagement.enable = false;
+          # Fine-grained power management. Turns off GPU when not in use.
+          # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+          powerManagement.finegrained = true;
+          open = true;
+          nvidiaSettings = true;
+          # Optionally, you may need to select the appropriate driver version for your specific GPU.
+          package = config.boot.kernelPackages.nvidiaPackages.production;
+          prime = {
+            # enable offload command
+            offload = {
+              enable = true;
+              enableOffloadCmd = true;
+            };
+            # Make sure to use the correct Bus ID values for your system!
+            intelBusId = "PCI:0:2:0";
+            nvidiaBusId = "PCI:3:0:0";
+          };
+        };
+      };
+      # Load nvidia driver for Xorg and Wayland
+      services.xserver.videoDrivers = ["nvidia"];
+      # nvidia container toolkit
+      hardware.nvidia-container-toolkit.enable = true;
     };
   };
   # specialisation = {
@@ -345,25 +342,6 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
   '';
 
-  services.printing.drivers = [
-    (pkgs.writeTextDir "share/cups/model/mfp_m880.ppd" (builtins.readFile ./HP_Color_LaserJet_flow_MFP_M880.ppd))
-  ];
-  hardware.printers = {
-    ensurePrinters = [
-      {
-        name = "HP_Color_LaserJet_flow_MFP_M880";
-        location = "Work";
-        deviceUri = "http://10.87.13.17:631/ipp";
-        model = "mfp_m880.ppd";
-        ppdOptions = {
-          PageSize = "A4";
-          Duplex = "DuplexNoTumble";
-        };
-      }
-    ];
-    ensureDefaultPrinter = "HP_Color_LaserJet_flow_MFP_M880";
-  };
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # Add any missing dynamic libraries for unpackaged programs
@@ -382,9 +360,6 @@
   # systemd.services."icecc-daemon".environment = lib.mkForce {
   #   PATH = "/run/current-system/sw/bin/";
   # };
-
-  # nvidia container toolkit
-  hardware.nvidia-container-toolkit.enable = true;
 }
 # vim: set ts=2 sw=2:
 
