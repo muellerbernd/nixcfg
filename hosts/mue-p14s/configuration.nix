@@ -24,7 +24,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      systemd-boot.configurationLimit = 8;
+      systemd-boot.configurationLimit = 3;
     };
     # luks
     initrd.luks.devices = {
@@ -292,35 +292,37 @@
     use-nvidia.configuration = {
       system.nixos.tags = ["use-nvidia"];
 
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      nvidia = {
-        # open = true;
-        # fix screen tearing in sync mode
-        modesetting.enable = false;
-        # fix suspend/resume screen corruption in sync mode
-        powerManagement.enable = false;
-        # Fine-grained power management. Turns off GPU when not in use.
-        # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-        powerManagement.finegrained = true;
-        open = true;
-        nvidiaSettings = true;
+      hardware = {
+        nvidia-container-toolkit.enable = true;
         # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        package = config.boot.kernelPackages.nvidiaPackages.production;
-        prime = {
-          # enable offload command
-          offload = {
-            enable = true;
-            enableOffloadCmd = true;
+        nvidia = {
+          # open = true;
+          # fix screen tearing in sync mode
+          modesetting.enable = false;
+          # fix suspend/resume screen corruption in sync mode
+          powerManagement.enable = false;
+          # Fine-grained power management. Turns off GPU when not in use.
+          # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+          powerManagement.finegrained = true;
+          open = true;
+          nvidiaSettings = true;
+          # Optionally, you may need to select the appropriate driver version for your specific GPU.
+          package = config.boot.kernelPackages.nvidiaPackages.production;
+          prime = {
+            # enable offload command
+            offload = {
+              enable = true;
+              enableOffloadCmd = true;
+            };
+            # Make sure to use the correct Bus ID values for your system!
+            intelBusId = "PCI:0:2:0";
+            nvidiaBusId = "PCI:3:0:0";
           };
-          # Make sure to use the correct Bus ID values for your system!
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:3:0:0";
         };
       };
       # Load nvidia driver for Xorg and Wayland
       services.xserver.videoDrivers = ["nvidia"];
       # nvidia container toolkit
-      hardware.nvidia-container-toolkit.enable = true;
     };
   };
   # specialisation = {
