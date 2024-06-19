@@ -40,7 +40,15 @@
       #   enableACME = true;
       #   forceSSL = true;
       # };
+      # "auth.jitsi.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
       # "xmpp.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
+      # "proxy.${domain}" = {
       #   enableACME = true;
       #   forceSSL = true;
       # };
@@ -54,12 +62,12 @@
   systemd.services.nginx.serviceConfig.ProtectHome = "read-only";
 
   security.acme = {
-    defaults.email = "webmeister@muellerbernd.de";
+    defaults.email = "bernd@muellerbernd.de";
     acceptTerms = true;
     certs = {
       "muellerbernd.de" = {
         webroot = "/var/lib/acme/acme-challenge/";
-        email = "webmeister@muellerbernd.de";
+        email = "bernd@muellerbernd.de";
         extraDomainNames = [
           "jitsi.muellerbernd.de"
           "xmpp.muellerbernd.de"

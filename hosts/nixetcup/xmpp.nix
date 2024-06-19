@@ -110,7 +110,6 @@
     acl = {
       admin = {
         user = [
-          "webmeister@muellerbernd.de"
           "bernd@muellerbernd.de"
         ];
       };
@@ -267,9 +266,9 @@
       mod_fail2ban = {};
       mod_http_api = {};
       mod_http_upload = {
-        # put_url = "https://upload.xmpp.muellerbernd.de";
-        # external_secret = "#UPLOAD_SECRET#";
-        # max_size = 52428800;
+        put_url = "https://upload.xmpp.muellerbernd.de";
+        external_secret = "#UPLOAD_SECRET#";
+        max_size = 52428800;
       };
 
       mod_last = {};
