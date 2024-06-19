@@ -7,12 +7,18 @@
 }: {
   services.prosody = {
     enable = true;
+    allowRegistration = true;
+    virtualHosts."jitsi.muellerbernd.de" = {
+      extraConfig = ''
+        authentication = "internal_hashed"
+      '';
+    };
     # admins = ["webmeister@muellerbernd.de"];
     # virtualHosts."muellerbernd.de" = {
     #   domain = "muellerbernd.de";
     #   enabled = true;
     # };
-    xmppComplianceSuite = false;
+    # xmppComplianceSuite = false;
     # uploadHttp = {
     #   domain = "upload.meet.muellerbernd.de";
     # };
@@ -48,7 +54,7 @@
     # http_upload_external_base_url = "https://muellerbernd.de/upload/"
     # http_upload_external_secret = "mysecret"
     # http_upload_external_file_size_limit = 50000000 -- 50 MB
-    extraConfig = builtins.readFile ./prosody.cfg.lua;
+    # extraConfig = builtins.readFile ./prosody.cfg.lua;
   };
   networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 }

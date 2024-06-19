@@ -10,7 +10,7 @@
     ./nginx.nix
     ./jitsi.nix
     # ./xmpp.nix
-    # ./prosody.nix
+    ./prosody.nix
     # modules
     mixins-server
   ];
