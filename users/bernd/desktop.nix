@@ -118,9 +118,10 @@ in {
         "xpinstall.signatures.required" = false;
         "extensions.update.enabled" = false;
 
-        # "font.name.monospace.x-western" = "IBM Plex Mono";
-        # "font.name.sans-serif.x-western" = "IBM Plex Sans";
-        # "font.name.serif.x-western" = "IBM Plex Serif";
+        "font.name.monospace.x-western" = "Hack Nerd Font";
+        "font.name.sans-serif.x-western" = "Hack Nerd Font";
+        "font.name.serif.x-western" = "Hack Nerd Font";
+        "font.size" = 13;
 
         # "browser.display.background_color" = thm.bg;
         # "browser.display.foreground_color" = thm.fg;
