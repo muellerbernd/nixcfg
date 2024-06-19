@@ -36,10 +36,10 @@
           '';
         };
       };
-      # "jitsi.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
+      "jitsi.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+      };
       # "auth.jitsi.${domain}" = {
       #   enableACME = true;
       #   forceSSL = true;
@@ -52,10 +52,30 @@
       #   enableACME = true;
       #   forceSSL = true;
       # };
-      # "upload.xmpp.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
+      "upload.xmpp.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations = {
+          "/" = {
+            # http://nginx.org/en/docs/http/ngx_http_core_module.html#alias
+            # root = "/var/lib/prosody/http_upload";
+            proxyPass = "http://127.0.0.1:5050/upload/";
+            proxyWebsockets = true; # needed if you need to use WebSocket
+            extraConfig = ''
+              if ( $request_method = OPTIONS ) {
+                add_header Access-Control-Allow-Origin '*';
+                add_header Access-Control-Allow-Methods 'PUT, GET, OPTIONS, HEAD';
+                add_header Access-Control-Allow-Headers 'Authorization, Content-Type';
+                add_header Access-Control-Allow-Credentials 'true';
+                add_header Content-Length 0;
+                add_header Content-Type text/plain;
+                return 200;
+              }
+              proxy_request_buffering off;
+            '';
+          };
+        };
+      };
     };
   };
 

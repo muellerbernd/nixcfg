@@ -45,7 +45,7 @@
       allowedTCPPorts = [
         80
         443
-        # xmpp and
+        # xmpp and jitsi
         5222
         5223
         5269

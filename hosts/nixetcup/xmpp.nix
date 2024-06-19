@@ -3,12 +3,13 @@
   config,
   ...
 }: let
+  domain = "muellerbernd.de";
   ejabberd_cfg = {
     loglevel = 4;
     hide_sensitive_log_data = true;
 
     hosts = [
-      "muellerbernd.de"
+      "${domain}"
     ];
     # host_config = {
     #   "muellerbernd.de" = {
@@ -25,8 +26,8 @@
     # default_db = "sql";
 
     certfiles = [
-      "${config.security.acme.certs."muellerbernd.de".directory}/*"
-      "${config.security.acme.certs."conference.muellerbernd.de".directory}/*"
+      "${config.security.acme.certs."${domain}".directory}/*"
+      "${config.security.acme.certs."conference.${domain}".directory}/*"
     ];
 
     define_macro = {
@@ -110,7 +111,7 @@
     acl = {
       admin = {
         user = [
-          "bernd@muellerbernd.de"
+          "bernd@${domain}"
         ];
       };
       local = {
@@ -244,21 +245,21 @@
             modules = "all";
             name = "abuse-addresses";
             urls = [
-              "https://xmpp.muellerbernd.de"
+              "https://xmpp.${domain}"
             ];
           }
           {
             modules = "all";
             name = "support-addresses";
             urls = [
-              "https://xmpp.muellerbernd.de"
+              "https://xmpp.${domain}"
             ];
           }
           {
             modules = "all";
             name = "admin-addresses";
             urls = [
-              "https://xmpp.muellerbernd.de"
+              "https://xmpp.${domain}"
             ];
           }
         ];
@@ -266,8 +267,8 @@
       mod_fail2ban = {};
       mod_http_api = {};
       mod_http_upload = {
-        put_url = "https://upload.xmpp.muellerbernd.de";
-        external_secret = "#UPLOAD_SECRET#";
+        put_url = "https://upload.xmpp.${domain}";
+        external_secret = "@UPLOAD_SECRET@";
         max_size = 52428800;
       };
 
@@ -367,9 +368,8 @@
   };
 
   configFile = pkgs.writeText "ejabberd.yml" (builtins.toJSON ejabberd_cfg);
-
-  databasePasswordFile = "/var/src/secrets/ejabberd-database-password";
-  uploadSecretFile = "/var/src/secrets/upload-secret";
+  # databasePasswordFile = "/var/src/secrets/ejabberd-database-password";
+  # uploadSecretFile = "/var/src/secrets/upload-secret";
 in {
   services.ejabberd = {
     enable = true;
@@ -387,15 +387,39 @@ in {
     preStart = ''
       cp ${configFile} /run/ejabberd/ejabberd.yml
       chmod u+rw /run/ejabberd/ejabberd.yml
-      ls -al /run/ejabberd/
-      ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
-      ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
     '';
   };
 
+  # system.activationScripts."ejabberd" = ''
+  #   secret=$(cat "${config.age.secrets.nixetcupSecret.path}")
+  #   configFile=/run/ejabberd/ejabberd.yml
+  #   ${pkgs.gnused}/bin/sed -i "s#@UPLOAD_SECRET@#$secret#" "$configFile"
+  # '';
+  # ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
+  # ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
+
+  services.prosody-filer = {
+    enable = true;
+    settings = {
+      ### IP address and port to listen to, e.g. "[::]:5050"
+      listenport = "127.0.0.1:5050";
+      ### Secret (must match the one in prosody.conf.lua!)
+      secret = "@UPLOAD_SECRET@";
+      ### Where to store the uploaded files
+      storeDir = "/var/www/${domain}/upload/";
+      ### Subdirectory for HTTP upload / download requests (usually "upload/")
+      uploadSubDir = "upload/";
+    };
+  };
+  # systemd.services.prosody-filer = {
+  #   preStart = ''
+  #     ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" ${pkgs.prosody-filer}
+  #   '';
+  # };
+
   # Notify ejabberd of new certs
-  security.acme.certs."muellerbernd.de".reloadServices = ["ejabberd.service"];
-  security.acme.certs."conference.muellerbernd.de".reloadServices = ["ejabberd.service"];
+  security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
+  security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
 
   networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 }
