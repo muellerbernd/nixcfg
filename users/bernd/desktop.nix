@@ -67,7 +67,6 @@ in {
       sox
       # messenger
       gajim
-      dino
       teams-for-linux
       # matrix client
       nheko
