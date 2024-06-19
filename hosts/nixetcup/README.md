@@ -82,3 +82,8 @@ passwd username
 cd /var/lib/ejabberd
 openssl dhparam -out dhparams.pem 4096
 ```
+
+
+## Prosody filer
+
+- the defined upload directory needs to be owned by the user `prosody-filer`
