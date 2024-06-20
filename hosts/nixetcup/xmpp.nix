@@ -144,9 +144,9 @@
       pubsub_createnode = [
         {allow = "local";}
       ];
-      register = [
-        "allow"
-      ];
+      # register = [
+      #   "allow"
+      # ];
       trusted_network = [
         {allow = "loopback";}
       ];
