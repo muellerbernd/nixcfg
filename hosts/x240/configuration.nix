@@ -27,11 +27,15 @@
     #   "i915.enable_dc=2"
     # ];
     # luks
-    initrd.luks.devices = {
-      crypt = {
-        device = "/dev/sda2";
-        preLVM = true;
+    initrd = {
+      luks.devices = {
+        crypt = {
+          device = "/dev/sda2";
+          preLVM = true;
+          crypttabExtraOpts = ["fido2-device=auto"];
+        };
       };
+      systemd.enable = true;
     };
   };
 
