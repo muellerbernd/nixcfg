@@ -192,7 +192,7 @@
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666"
   };
   # enable the thunderbolt daemon
-  services.hardware.bolt.enable = true;
+  # services.hardware.bolt.enable = true;
   # ignore laptop lid
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitch = "ignore";
