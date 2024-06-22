@@ -1,8 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../default.nix
     # Include the results of the hardware scan.
@@ -64,21 +67,22 @@
     xkb.layout = "de";
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
-    libinput = {
-      enable = true;
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "0";
-        middleEmulation = false;
-      };
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = true;
-        tapping = true;
-      };
+  };
+
+  services.libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+      accelSpeed = "0";
+      middleEmulation = false;
+    };
+    touchpad = {
+      accelProfile = "flat";
+      accelSpeed = "0.5";
+      naturalScrolling = true;
+      tapping = true;
     };
   };
 }
-
 # vim: set ts=2 sw=2:
+
