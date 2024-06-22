@@ -113,6 +113,8 @@ in {
         "browser.urlbar.placeholderName" = "Google";
         "browser.search.region" = "US";
 
+        "browser.link.open_newwindow" = "3";
+
         "browser.uidensity" = 1;
         "browser.search.openintab" = true;
         "xpinstall.signatures.required" = false;
