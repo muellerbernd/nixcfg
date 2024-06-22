@@ -37,15 +37,17 @@
   # boot.kernelPackages = pkgs.linuxPackages_6_4;
   # boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "5.2")
   #   pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.kernelParams = [
-    # "intel_pstate=disable"
-    # "psmouse.synaptics_intertouch=0"
-    # "i915.modeset=1"
-    # "i915.fastboot=1"
+    "intel_pstate=disable"
+    "psmouse.synaptics_intertouch=0"
+    "i915.modeset=1"
+    "i915.fastboot=1"
     "i915.enable_guc=2"
-    # "i915.enable_psr=1"
-    # "i915.enable_fbc=1"
-    # "i915.enable_dc=2"
+    "i915.enable_psr=1"
+    "i915.enable_fbc=1"
+    "i915.enable_dc=2"
     "acpi_backlight=native"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
@@ -75,12 +77,12 @@
   boot.kernelModules = ["kvm-intel" "acpi_call"];
   boot.extraModulePackages = [];
 
-  # boot.extraModprobeConfig = lib.mkMerge [
-  #   # idle audio card after one second
-  #   "options snd_hda_intel power_save=1"
-  #   # enable wifi power saving (keep uapsd off to maintain low latencies)
-  #   "options iwlwifi power_save=1 uapsd_disable=1"
-  # ];
+  boot.extraModprobeConfig = lib.mkMerge [
+    # idle audio card after one second
+    "options snd_hda_intel power_save=1"
+    # enable wifi power saving (keep uapsd off to maintain low latencies)
+    "options iwlwifi power_save=1 uapsd_disable=1"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
