@@ -32,10 +32,10 @@
         crypt = {
           device = "/dev/nvme0n1p2";
           preLVM = true;
-          crypttabExtraOpts = ["fido2-device=auto"];
+          # crypttabExtraOpts = ["fido2-device=auto"];
         };
       };
-      systemd.enable = true;
+      # systemd.enable = true;
     };
   };
 
