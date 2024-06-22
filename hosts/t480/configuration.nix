@@ -176,6 +176,11 @@
   #   ];
   #   uploadHttp.domain = "localhost";
   # };
+
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+  };
 }
 # vim: set ts=2 sw=2:
 
