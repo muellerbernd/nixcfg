@@ -60,9 +60,9 @@
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    devmon.enable = true;
-    gvfs.enable = true;
-    udisks2.enable = true;
+    # devmon.enable = true;
+    # gvfs.enable = true;
+    # udisks2.enable = true;
   };
   services.upower.enable = true;
 
@@ -144,40 +144,6 @@
   ];
 
   services.fwupd.enable = true;
-
-  # specialisation = {
-  #   on-the-go.configuration = {
-  #     system.nixos.tags = [ "on-the-go" ];
-  #     powerManagement = {
-  #       enable = true;
-  #       cpuFreqGovernor = "powersave";
-  #     };
-  #   };
-  # };
-
-  # services.icecream.daemon = {
-  #   enable = true;
-  #   noRemote = true;
-  #   openBroadcast = true;
-  #   openFirewall = true;
-  #   maxProcesses = 2;
-  # };
-  #
-  # systemd.services."icecc-daemon".environment = lib.mkForce {
-  #   PATH = "/run/current-system/sw/bin/";
-  # };
-
-  # services.prosody = {
-  #   enable = true;
-  #   # configFile = ./ejabberd.yml;
-  #   admins = ["admin@localhost"];
-  #   muc = [
-  #     {
-  #       domain = "conference.localhost";
-  #     }
-  #   ];
-  #   uploadHttp.domain = "localhost";
-  # };
 }
 # vim: set ts=2 sw=2:
 
