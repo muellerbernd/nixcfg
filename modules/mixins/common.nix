@@ -203,6 +203,11 @@
   '';
 
   security.polkit.enable = true;
+
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+  };
   # environment.shellInit = ''
   #   [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true
   # '';
