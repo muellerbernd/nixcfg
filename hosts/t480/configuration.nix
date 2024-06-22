@@ -70,10 +70,8 @@
   networking.hostName = hostname; # Define your hostname.
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         mesa.drivers
         # vulkan-loader

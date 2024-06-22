@@ -27,11 +27,15 @@
       systemd-boot.configurationLimit = 3;
     };
     # luks
-    initrd.luks.devices = {
-      crypt = {
-        device = "/dev/nvme0n1p2";
-        preLVM = true;
+    initrd = {
+      luks.devices = {
+        crypt = {
+          device = "/dev/nvme0n1p2";
+          preLVM = true;
+          crypttabExtraOpts = ["fido2-device=auto"];
+        };
       };
+      systemd.enable = true;
     };
   };
 

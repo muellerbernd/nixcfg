@@ -8,6 +8,7 @@
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelParams = [
     # "intel_pstate=disable"
     "psmouse.synaptics_intertouch=0"
@@ -17,6 +18,8 @@
     # "i915.enable_psr=1"
     # "i915.enable_fbc=1"
     # "i915.enable_dc=2"
+    "usb-storage.quirks=1ea8:fc25:u"
+    "usbcore.quirks=1ea8:fc25:u"
   ];
   boot.initrd.availableKernelModules = [
     "thinkpad_acpi"
