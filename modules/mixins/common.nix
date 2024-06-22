@@ -124,7 +124,7 @@
   programs.tmux.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = false;
   hardware = {
     enableAllFirmware = true;
     opengl.enable = true;
@@ -142,7 +142,7 @@
         # };
       };
     };
-    keyboard.qmk.enable = true;
+    # keyboard.qmk.enable = true;
     # enable usb-modeswitch (e.g. usb umts sticks)
     usb-modeswitch.enable = true;
   };
@@ -192,7 +192,7 @@
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="2717", ATTRS{idProduct}=="ff40", MODE="0666"
   };
   # enable the thunderbolt daemon
-  # services.hardware.bolt.enable = true;
+  services.hardware.bolt.enable = true;
   # ignore laptop lid
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitch = "ignore";

@@ -60,9 +60,9 @@
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    # devmon.enable = true;
-    # gvfs.enable = true;
-    # udisks2.enable = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
   };
   services.upower.enable = true;
 
