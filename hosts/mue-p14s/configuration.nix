@@ -116,10 +116,8 @@
   networking.hostName = "mue-p14s"; # Define your hostname.
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
