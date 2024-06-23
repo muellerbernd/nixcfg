@@ -81,6 +81,7 @@
     samba
     turbovnc
     remmina
+    libfido2
   ];
 
   # Allow unfree packages
@@ -181,10 +182,9 @@
         openFirewall = true;
       };
 
-    # udev.extraRules = ''
-    #   ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1f01", RUN+
-    #   ="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1f01 --type option-zerocd"
-    # '';
+    udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev", ATTRS{idVendor}=="1050"
+    '';
     # # Gamecube Controller Adapter
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
     # # Xiaomi Mi 9 Lite
@@ -207,6 +207,8 @@
   security.pam.services = {
     login.u2fAuth = true;
     sudo.u2fAuth = true;
+    greetd.u2fAuth = true;
+    hyprlock.u2fAuth = true;
   };
   # environment.shellInit = ''
   #   [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true

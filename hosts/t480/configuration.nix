@@ -17,6 +17,7 @@
   ];
   # Bootloader.
   boot = {
+    consoleLogLevel = 3;
     kernelParams = [
       "i915.modeset=1"
       "i915.fastboot=1"
@@ -26,9 +27,10 @@
       "i915.enable_dc=2"
     ];
     loader = {
+      timeout = 2;
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      systemd-boot.configurationLimit = 8;
+      systemd-boot.configurationLimit = 4;
     };
     # luks
     initrd = {
@@ -45,7 +47,7 @@
         #   allowDiscards = true;
         # };
       };
-      # systemd.enable = true;
+      systemd.enable = true;
     };
   };
 

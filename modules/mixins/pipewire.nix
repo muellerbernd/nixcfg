@@ -1,5 +1,12 @@
-{ config, pkgs, lib, inputs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  # Enable sound with pipewire.
+  hardware.pulseaudio.enable = false;
   # rtkit is optional but recommended
   security.rtkit.enable = true;
 
@@ -8,6 +15,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
   # environment.etc = {
   #   "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
@@ -22,4 +30,8 @@
   # hardware.pulseaudio.enable = true;
   # hardware.pulseaudio.support32Bit = true; ## If compatibility with 32-bit applications is desired.
   #
+  environment.systemPackages = with pkgs; [
+    pamixer
+    pavucontrol
+  ];
 }
