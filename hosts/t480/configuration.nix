@@ -37,7 +37,7 @@
           # device = "/dev/nvme1n1p2";
           device = crypt_device;
           preLVM = true;
-          crypttabExtraOpts = ["fido2-device=auto"];
+          # crypttabExtraOpts = ["fido2-device=auto"];
         };
         # data = {
         #   device = "/dev/nvme0n1p1";
@@ -45,7 +45,7 @@
         #   allowDiscards = true;
         # };
       };
-      systemd.enable = true;
+      # systemd.enable = true;
     };
   };
 
