@@ -9,37 +9,42 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelParams = [
-    # "intel_pstate=disable"
-    "psmouse.synaptics_intertouch=0"
-    # "i915.modeset=1"
-    # "i915.fastboot=1"
-    # "i915.enable_guc=2"
-    # "i915.enable_psr=1"
-    # "i915.enable_fbc=1"
-    # "i915.enable_dc=2"
-    "usb-storage.quirks=1ea8:fc25:u"
-    "usbcore.quirks=1ea8:fc25:u"
-  ];
-  boot.initrd.availableKernelModules = [
-    "thinkpad_acpi"
-    # USB
-    "ehci_pci"
-    "xhci_pci"
-    "usb_storage"
-    "usbhid"
-    # Keyboard
-    "hid_generic"
-    # Disks
-    "nvme"
-    "ahci"
-    "sd_mod"
-    "sr_mod"
-    # SSD
-    "isci"
-  ];
+  # boot.kernelParams = [
+  #   # "intel_pstate=disable"
+  #   # "psmouse.synaptics_intertouch=0"
+  #   # "i915.modeset=1"
+  #   # "i915.fastboot=1"
+  #   # "i915.enable_guc=2"
+  #   # "i915.enable_psr=1"
+  #   # "i915.enable_fbc=1"
+  #   # "i915.enable_dc=2"
+  #   "intremap=nosid"
+  #   "intel_iommu=off"
+  # ];
+  # boot.initrd.availableKernelModules = [
+  #   # "thinkpad_acpi"
+  #   # USB
+  #   "ahci"
+  #   "ehci_pci"
+  #   "xhci_pci"
+  #   "usb_storage"
+  #   "usbhid"
+  #   # Keyboard
+  #   "hid_generic"
+  #   # Disks
+  #   "nvme"
+  #   "ahci"
+  #   "sd_mod"
+  #   "sr_mod"
+  #   # SSD
+  #   "isci"
+  #   #
+  #   "aesni_intel"
+  #   "cryptd"
+  # ];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "sr_mod" "usb_storage"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "acpi_call"];
+  boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   # boot.extraModprobeConfig = lib.mkMerge [
