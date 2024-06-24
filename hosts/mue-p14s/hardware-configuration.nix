@@ -73,8 +73,29 @@
     # "nvidia_uvm"
     # "nvidia_drm"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "acpi_call"];
+  boot.initrd.kernelModules = [
+    "usb_storage"
+    "usbhid"
+  ];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+    "thinkpad_acpi"
+    # # USB
+    "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
+  ];
   boot.extraModulePackages = [];
 
   boot.extraModprobeConfig = lib.mkMerge [
