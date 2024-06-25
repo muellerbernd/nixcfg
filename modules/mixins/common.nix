@@ -183,8 +183,11 @@
       };
 
     udev.extraRules = ''
-      # Thethis Key by Shenzhen Excelsecu Data Technology Co., Ltd.
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="f025", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+      ACTION!="add|change", GOTO="u2f_end"
+      # Key-ID FIDO U2F
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
+      LABEL="u2f_end"
+
     '';
     # # Gamecube Controller Adapter
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
