@@ -77,12 +77,12 @@
   boot.kernelModules = ["kvm-intel" "acpi_call"];
   boot.extraModulePackages = [];
 
-  boot.extraModprobeConfig = lib.mkMerge [
-    # idle audio card after one second
-    "options snd_hda_intel power_save=1"
-    # enable wifi power saving (keep uapsd off to maintain low latencies)
-    "options iwlwifi power_save=1 uapsd_disable=1"
-  ];
+  # boot.extraModprobeConfig = lib.mkMerge [
+  #   # idle audio card after one second
+  #   "options snd_hda_intel power_save=1"
+  #   # enable wifi power saving (keep uapsd off to maintain low latencies)
+  #   "options iwlwifi power_save=1 uapsd_disable=1"
+  # ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
