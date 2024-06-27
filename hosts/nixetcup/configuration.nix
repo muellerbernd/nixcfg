@@ -8,7 +8,7 @@
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
     ./nginx.nix
-    # ./jitsi.nix
+    ./jitsi.nix
     ./xmpp.nix
     # ./prosody.nix
     # modules

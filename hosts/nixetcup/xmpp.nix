@@ -78,14 +78,14 @@
         max_stanza_size = 524288;
       }
       {
-        port = 5270;
+        port = 15270;
         ip = "::";
         module = "ejabberd_s2s_in";
         tls = true;
         max_stanza_size = 524288;
       }
       {
-        port = 5280;
+        port = 15280;
         ip = "::";
         module = "ejabberd_http";
         tls = true;

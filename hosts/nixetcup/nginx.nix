@@ -14,9 +14,9 @@
     recommendedProxySettings = true;
     resolver.addresses = ["8.8.8.8"];
     virtualHosts = let
-      domain = "xmpp.muellerbernd.de";
+      domain = "muellerbernd.de";
     in {
-      "${domain}" = {
+      "xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
@@ -26,7 +26,7 @@
           '';
         };
       };
-      "conference.${domain}" = {
+      "conference.xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
@@ -52,7 +52,7 @@
       #   enableACME = true;
       #   forceSSL = true;
       # };
-      "upload.${domain}" = {
+      "upload.xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations = {
@@ -89,7 +89,7 @@
         webroot = "/var/lib/acme/acme-challenge/";
         email = "bernd@muellerbernd.de";
         extraDomainNames = [
-          # "jitsi.muellerbernd.de"
+          "jitsi.muellerbernd.de"
           "upload.xmpp.muellerbernd.de"
           "conference.xmpp.muellerbernd.de"
         ];
