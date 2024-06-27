@@ -40,6 +40,7 @@
       antigen
       starship
       tmux
+      screen
       zellij
       zoxide
       # better shell history
