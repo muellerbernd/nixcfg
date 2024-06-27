@@ -115,6 +115,12 @@
 
   networking.hostName = "mue-p14s"; # Define your hostname.
 
+  # networking.usePredictableInterfaceNames = false;
+  systemd.network.links."10-wlan" = {
+    matchConfig.PermanentMACAddress = "a0:29:42:6b:6c:05";
+    linkConfig.Name = "wlan0";
+  };
+
   hardware = {
     graphics = {
       enable = true;
