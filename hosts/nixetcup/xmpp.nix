@@ -51,7 +51,8 @@
 
     listen = [
       {
-        port = 5222;
+        # port = 5222;
+        port = 15222;
         ip = "::";
         module = "ejabberd_c2s";
         starttls_required = true;
@@ -60,7 +61,8 @@
         access = "c2s";
       }
       {
-        port = 5223;
+        # port = 5223;
+        port = 15223;
         ip = "::";
         module = "ejabberd_c2s";
         tls = true;
@@ -69,7 +71,8 @@
         access = "c2s";
       }
       {
-        port = 5269;
+        # port = 5269;
+        port = 15269;
         ip = "::";
         module = "ejabberd_s2s_in";
         max_stanza_size = 524288;
@@ -421,5 +424,15 @@ in {
   security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
   security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
 
-  networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
+  networking.firewall.allowedTCPPorts = [
+    5222
+    5223
+    5269
+    5270
+    5280
+    5290
+    15222
+    15223
+    15269
+  ];
 }
