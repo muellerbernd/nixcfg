@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  domain = "muellerbernd.de";
+  domain = "xmpp.muellerbernd.de";
   ejabberd_cfg = {
     loglevel = 4;
     hide_sensitive_log_data = true;
@@ -144,9 +144,9 @@
       pubsub_createnode = [
         {allow = "local";}
       ];
-      # register = [
-      #   "allow"
-      # ];
+      register = [
+        "allow"
+      ];
       trusted_network = [
         {allow = "loopback";}
       ];
@@ -267,7 +267,7 @@
       mod_fail2ban = {};
       mod_http_api = {};
       mod_http_upload = {
-        put_url = "https://upload.xmpp.${domain}";
+        put_url = "https://upload.${domain}";
         external_secret = "@UPLOAD_SECRET@";
         max_size = 52428800;
       };
