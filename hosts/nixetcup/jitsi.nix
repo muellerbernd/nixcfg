@@ -11,10 +11,10 @@ in {
     enable = true;
     hostName = jitsi_fqdn;
     nginx.enable = true;
-    jicofo.enable = false;
+    jicofo.enable = true;
     jibri.enable = false;
     prosody.enable = true;
-    videobridge.enable = false;
+    videobridge.enable = true;
     config = {
       disableShowMoreStats = false;
       startWithAudioMuted = true;
