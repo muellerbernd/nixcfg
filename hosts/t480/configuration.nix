@@ -47,7 +47,7 @@
         #   allowDiscards = true;
         # };
       };
-      systemd.enable = true;
+      # systemd.enable = true;
     };
   };
 
