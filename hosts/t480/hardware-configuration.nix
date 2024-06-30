@@ -42,7 +42,7 @@
   #   "aesni_intel"
   #   "cryptd"
   # ];
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "sr_mod" "usb_storage"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "sr_mod" "usb_storage" "xhci_hcd"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
