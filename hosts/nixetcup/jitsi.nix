@@ -14,14 +14,14 @@ in {
     jicofo.enable = true;
     jibri.enable = false;
     prosody.enable = true;
-    # videobridge.enable = true;
+    videobridge.enable = true;
     config = {
       disableShowMoreStats = false;
       startWithAudioMuted = true;
       startWithVideoMuted = true;
       # startAudioOnly = true;
-      enableLayerSuspension = false;
-      liveStreamingEnabled = false;
+      # enableLayerSuspension = false;
+      # liveStreamingEnabled = false;
       useNewBandwidthAllocationStrategy = true;
       requireDisplayName = true;
       defaultLang = "en";

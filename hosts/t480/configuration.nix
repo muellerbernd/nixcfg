@@ -34,6 +34,8 @@
     };
     # luks
     initrd = {
+      # systemd.enable = true; # initrd uses systemd
+      # luks.fido2Support = false; # because systemd
       luks.devices = {
         crypt = {
           # device = "/dev/nvme1n1p2";
@@ -47,7 +49,6 @@
         #   allowDiscards = true;
         # };
       };
-      systemd.enable = true;
     };
   };
 

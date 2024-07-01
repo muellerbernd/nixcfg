@@ -40,6 +40,7 @@
       antigen
       starship
       tmux
+      screen
       zellij
       zoxide
       # better shell history
@@ -113,6 +114,8 @@
       rustup
       python3Full
       go
+      typst
+      typst-lsp
       # icecream
       # icemon
       # formatter
@@ -135,7 +138,7 @@
       cmake-language-server
       texlab
       nodePackages_latest.vscode-langservers-extracted
-      # nodePackages_latest.bash-language-server
+      nodePackages_latest.bash-language-server
       gopls
       # rust-analyzer
       # haskell

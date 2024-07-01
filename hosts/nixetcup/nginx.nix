@@ -16,7 +16,7 @@
     virtualHosts = let
       domain = "muellerbernd.de";
     in {
-      "${domain}" = {
+      "xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
@@ -26,7 +26,7 @@
           '';
         };
       };
-      "conference.${domain}" = {
+      "conference.xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
@@ -36,10 +36,10 @@
           '';
         };
       };
-      "jitsi.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-      };
+      # "jitsi.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
       # "auth.jitsi.${domain}" = {
       #   enableACME = true;
       #   forceSSL = true;
@@ -85,13 +85,13 @@
     defaults.email = "bernd@muellerbernd.de";
     acceptTerms = true;
     certs = {
-      "muellerbernd.de" = {
+      "xmpp.muellerbernd.de" = {
         webroot = "/var/lib/acme/acme-challenge/";
         email = "bernd@muellerbernd.de";
         extraDomainNames = [
           "jitsi.muellerbernd.de"
-          "xmpp.muellerbernd.de"
-          "conference.muellerbernd.de"
+          "upload.xmpp.muellerbernd.de"
+          "conference.xmpp.muellerbernd.de"
         ];
       };
     };
