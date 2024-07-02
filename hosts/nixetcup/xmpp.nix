@@ -277,11 +277,11 @@
 
       mod_last = {};
       mod_mam = {
-        db_type = "sql";
         assume_mam_usage = true;
         default = "always";
       };
       mod_muc = {
+        history_size = 200;
         access = [
           "allow"
         ];
