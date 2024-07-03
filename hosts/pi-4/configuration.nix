@@ -19,7 +19,7 @@
   # Add a user 'default' to the system
   users = {
     users.pi = {
-      password = "default";
+      initialPassword = "pi";
       isNormalUser = true;
       extraGroups = ["wheel"];
       openssh.authorizedKeys.keys = [
@@ -54,6 +54,15 @@
 
   # Use the latest kernel
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+
+  # Enable networking
+  networking = {
+    networkmanager.enable = true;
+  };
+
+  # use zsh as default shell
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   # default to stateVersion for current lock
   system.stateVersion = config.system.nixos.version;
