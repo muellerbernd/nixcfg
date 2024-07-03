@@ -2,16 +2,10 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/master";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/develop-qemu-static";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/binfmt-qemu-static";
     # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
-
-    # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       # url = "github:nix-community/home-manager/release-23.11";
@@ -148,7 +142,7 @@
 
     nixosModules = import ./modules {inherit lib;};
 
-    nixosConfigurations.pi4 = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.pi4 = nixpkgs-stable.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         nixos-hardware.nixosModules.raspberry-pi-4
