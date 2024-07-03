@@ -2,8 +2,17 @@
   pkgs,
   lib,
   config,
+  modulesPath,
   ...
 }: {
+  imports = [
+    # Import the minimal profile from Nixpkgs which makes the ISO image a
+    # little smaller
+    "${modulesPath}/profiles/minimal.nix"
+
+    # Import the ./wireless.nix file which sets up the WiFi
+  ];
+
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
   location.provider = "geoclue2";
@@ -31,21 +40,6 @@
   sound.enable = true;
   hardware = {
     enableAllFirmware = true;
-    opengl.enable = true;
-    bluetooth = {
-      enable = false; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-      settings = {
-        # General = {
-        #   # Restricts all controllers to the specified transport. Default value
-        #   # is "dual", i.e. both BR/EDR and LE enabled (when supported by the HW).
-        #   # Possible values: "dual", "bredr", "le"
-        #   ControllerMode = "dual";
-        #   Enable = "Source,Sink,Media,Socket";
-        #   Experimental = true;
-        # };
-      };
-    };
     # enable usb-modeswitch (e.g. usb umts sticks)
     usb-modeswitch.enable = true;
   };
@@ -85,11 +79,10 @@
 
   # users
   users = {
-    users.rover = {
-      initialPassword = "rover";
+    users.pi = {
+      initialPassword = "pi";
       isNormalUser = true;
       extraGroups = [
-        "adbusers"
         "wheel"
         "disk"
         "libvirtd"
@@ -120,7 +113,6 @@
   services = {
     openssh = {
       enable = lib.mkDefault true;
-      settings.X11Forwarding = lib.mkDefault true;
       # require public key authentication for better security
       settings.PasswordAuthentication = lib.mkDefault false;
       settings.KbdInteractiveAuthentication = lib.mkDefault false;
@@ -128,6 +120,8 @@
       openFirewall = lib.mkDefault true;
     };
   };
+
+  # services.displayManager.defaultSession = "xfce";
   services.xserver = {
     enable = true;
     xkb.layout = "de";
@@ -137,11 +131,10 @@
 
     # desktopManager = { xterm.enable = false; };
 
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-    };
-    displayManager.defaultSession = "xfce";
+    # desktopManager = {
+    #   xterm.enable = false;
+    #   xfce.enable = true;
+    # };
     # displayManager = { defaultSession = "none+i3"; };
 
     # windowManager.i3 = {
@@ -159,23 +152,6 @@
   services = {
     logind.killUserProcesses = false;
     gnome.gnome-keyring.enable = true;
-    # Enable the OpenSSH daemon.
-
-    avahi =
-      if (config.system.nixos.release != "24.05")
-      then {
-        enable = true;
-        nssmdns = true;
-        # for a WiFi printer
-        openFirewall = true;
-      }
-      else {
-        enable = true;
-        nssmdns4 = true;
-        # for a WiFi printer
-        openFirewall = true;
-      };
-
     # udev.extraRules = ''
     #   ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="12d1", ATTRS{idProduct}=="1f01", RUN+
     #   ="/lib/udev/usb_modeswitch --vendor 0x12d1 --product 0x1f01 --type option-zerocd"
@@ -189,10 +165,7 @@
 
   # networking
   networking.hostName = "pi4";
-  networking = {
-    interfaces.useDHCP = true;
-    interfaces."wlan0".useDHCP = true;
-  };
+
   users.extraUsers.root.openssh.authorizedKeys.keys = [
     # bernd ssh
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"

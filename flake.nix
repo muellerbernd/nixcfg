@@ -127,21 +127,6 @@
     lib = nixpkgs.lib;
   in rec {
     images = {
-      pi-mcrover =
-        (self.nixosConfigurations.pi-mcrover.extendModules {
-          modules = [
-            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-            {
-              disabledModules = ["profiles/base.nix"];
-              # Disable zstd compression
-              sdImage.compressImage = false;
-            }
-          ];
-        })
-        .config
-        .system
-        .build
-        .sdImage;
       pi4 =
         (self.nixosConfigurations.pi4.extendModules {
           modules = [
@@ -149,7 +134,7 @@
             {
               disabledModules = ["profiles/base.nix"];
               # Disable zstd compression
-              sdImage.compressImage = false;
+              # sdImage.compressImage = false;
             }
           ];
         })
@@ -158,28 +143,18 @@
         .build
         .sdImage;
     };
-    packages.x86_64-linux.pi-mcrover-image = images.pi-mcrover;
-    packages.aarch64-linux.pi-mcrover-image = images.pi-mcrover;
-    packages.x86_64-linux.pi4-image = images.pi4;
-    packages.aarch64-linux.pi4-image = images.pi4;
+    packages.x86_64-linux.pi4-sdImage = self.packages.aarch64-linux.pi4-sdImage;
+    packages.aarch64-linux.pi4-sdImage = images.pi4;
 
     nixosModules = import ./modules {inherit lib;};
 
-    nixosConfigurations.pi-mcrover = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-        ./hosts/pi-mcrover/configuration.nix
-        ./hosts/pi-mcrover/base.nix
-      ];
-    };
     nixosConfigurations.pi4 = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
         nixos-hardware.nixosModules.raspberry-pi-4
-        "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-        ./hosts/pi-mcrover/configuration.nix
-        ./hosts/pi-mcrover/base.nix
+        # "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+        ./hosts/pi-4/configuration.nix
+        ./hosts/pi-4/pi-requirements.nix
       ];
     };
 
