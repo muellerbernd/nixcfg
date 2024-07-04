@@ -189,8 +189,8 @@
       students = ["test1" "test2"];
     };
     nixosConfigurations.nixetcup = mkDefault "nixetcup" {
-      inherit overlays agenix inputs;
-      nixpkgs = nixpkgs-stable;
+      inherit nixpkgs overlays agenix inputs;
+      # nixpkgs = nixpkgs-stable;
       home-manager = home-manager-stable;
       system = "x86_64-linux";
       users = ["bernd"];
