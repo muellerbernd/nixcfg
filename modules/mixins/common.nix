@@ -143,7 +143,7 @@
         # };
       };
     };
-    # keyboard.qmk.enable = true;
+    keyboard.qmk.enable = true;
     # enable usb-modeswitch (e.g. usb umts sticks)
     usb-modeswitch.enable = true;
   };
