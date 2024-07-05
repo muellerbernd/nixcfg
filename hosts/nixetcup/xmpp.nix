@@ -8,6 +8,8 @@
     loglevel = 4;
     hide_sensitive_log_data = true;
 
+    use_cache = true;
+
     hosts = [
       "${domain}"
     ];
@@ -277,8 +279,10 @@
 
       mod_last = {};
       mod_mam = {
+        # db_type = "sql";
         assume_mam_usage = true;
         default = "always";
+        cache_missed = true;
       };
       mod_muc = {
         history_size = 200;
@@ -300,6 +304,7 @@
       mod_muc_admin = {};
       mod_offline = {
         access_max_user_messages = "max_user_offline_messages";
+        store_groupchat = true;
       };
       mod_ping = {};
       mod_pres_counter = {
@@ -308,12 +313,12 @@
       };
       mod_privacy = {};
       mod_private = {};
-      # mod_proxy65 = {
-      #   # Bytestream Proxy
-      #   max_connections = 5;
-      #   ip = "::";
-      #   port = 5290;
-      # };
+      mod_proxy65 = {
+        # Bytestream Proxy
+        max_connections = 5;
+        ip = "::";
+        port = 5290;
+      };
       mod_pubsub = {
         access_createnode = "pubsub_createnode";
         plugins = [
@@ -358,7 +363,8 @@
       mod_shared_roster = {};
       mod_sic = {};
       mod_stream_mgmt = {
-        resend_on_timeout = "if_offline";
+        # resend_on_timeout = "if_offline";
+        resend_on_timeout = "true";
       };
       mod_vcard = {
         search = false;
