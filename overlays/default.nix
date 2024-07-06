@@ -1,7 +1,44 @@
 inputs: {
   # Overlays for personal pkgs (callPackage)
-  additions = final: _: import ../packages { pkgs = final; };
+  additions = final: _: import ../pkgs { pkgs = final; };
 
+    # Overlays is the list of overlays we want to apply from flake inputs.
+    # overlays = [
+    #   # inputs.neovim-nightly.overlays.default
+    #   inputs.rofi-music-rs.overlays.default
+    #   inputs.lsleases.overlays.default
+    #   # inputs.yazi.overlays.default
+    #
+    #   (final: prev: {
+    #     annotator =
+    #       prev.callPackage ./pkgs/annotator
+    #       {}; # path containing default.nix
+    #     uvtools =
+    #       prev.callPackage ./pkgs/uvtools {}; # path containing default.nix
+    #     # hyprland = inputs.hyprland.packages."x86_64-linux".hyprland;
+    #     # qemu = prev.qemu.override {smbdSupport = true;};
+    #     # networkmanager-openconnect = prev.networkmanager-openconnect.overrideAttrs (old: rec {
+    #     #   patches = old.patches ++ [./pkgs/networkmanager-openconnect/ip.patch];
+    #     # });
+    #     icecream = prev.icecream.overrideAttrs (old: rec {
+    #       version = "1.4";
+    #       src = prev.fetchFromGitHub {
+    #         owner = "icecc";
+    #         repo = old.pname;
+    #         rev = "cd74801e0fa4e83e3ae254ca1d7fe98642f36b89";
+    #         sha256 = "sha256-nBdUbWNmTxKpkgFM3qbooNQISItt5eNKtnnzpBGVbd4=";
+    #       };
+    #       nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
+    #     });
+    #     # walker = inputs.walker.packages."x86_64-linux".walker;
+    #     waybar = inputs.waybar.packages."x86_64-linux".waybar;
+    #   })
+    #   # inputs.hyprland.overlays.default
+    #   # inputs.hypridle.overlays.default
+    #   # inputs.hyprlang.overlays.default
+    #   # inputs.hyprpicker.overlays.default
+    #   # inputs.hyprlock.overlays.default
+    # ];
   # Overlays for various pkgs (e.g. broken / too old)
   # modifications = final: prev: {
   #   stable = import inputs.nixpkgs-stable {
