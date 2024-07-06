@@ -32,7 +32,7 @@ in {
       # bluetooth
       blueman
       # apps
-      gnome.simple-scan
+      simple-scan
       xclip
       redshift
       gparted
@@ -43,7 +43,7 @@ in {
       pavucontrol
       xfce.thunar
       xfce.thunar-volman
-      gnome.file-roller
+      file-roller
       archiver
       xfce.xfce4-screenshooter
       obs-studio
@@ -162,15 +162,15 @@ in {
     font.name = "Cantarell 10";
     theme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
     iconTheme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
     cursorTheme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;

@@ -9,9 +9,9 @@ name: {
   hostname ? "",
   crypt_device ? "",
   students ? [],
-  lib ? nixpkgs.lib,
   headless ? false,
 }: let
+  inherit (inputs.nixpkgs) lib;
   user_folder_names =
     lib.attrNames
     (lib.filterAttrs (n: v: v == "directory")

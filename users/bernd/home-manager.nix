@@ -71,9 +71,9 @@
       ripgrep-all
       # tools
       stow
-      gnome.gnome-keyring
-      gnome.seahorse
-      gnome.adwaita-icon-theme
+      gnome-keyring
+      seahorse
+      adwaita-icon-theme
       lxde.lxsession
       gnupg
       # cli helpers

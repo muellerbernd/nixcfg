@@ -24,44 +24,42 @@
     # predefined hardware stuff
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprlang = {
-      url = "github:hyprwm/hyprlang";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprpicker = {
-      url = "github:hyprwm/hyprpicker";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland = {
+    #   # url = "github:hyprwm/Hyprland";
+    #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+    #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # hypridle = {
+    #   url = "github:hyprwm/hypridle";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # hyprlock = {
+    #   url = "github:hyprwm/hyprlock";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # hyprlang = {
+    #   url = "github:hyprwm/hyprlang";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # hyprpicker = {
+    #   url = "github:hyprwm/hyprpicker";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
     waybar = {
       url = "github:alexays/waybar";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # joshuto.url = "github:kamiyaa/joshuto";
     yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
-    # walker.url = "github:abenz1267/walker";
 
     nil.url = "github:oxalica/nil";
     nixd.url = "github:nix-community/nixd";
@@ -80,6 +78,8 @@
     mkVM = import ./lib/mkvm.nix;
     mkDefault = import ./lib/mkdefault.nix;
     mkISO = import ./lib/mkiso.nix;
+    # mylib = import ./lib {inherit inputs;};
+    # inherit (mylib) mkDefault forAllSystems;
 
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
@@ -99,7 +99,7 @@
         # networkmanager-openconnect = prev.networkmanager-openconnect.overrideAttrs (old: rec {
         #   patches = old.patches ++ [./pkgs/networkmanager-openconnect/ip.patch];
         # });
-        icecream = prev.icecream.overrideAttrs (old: rec {
+        icecream = prev.icecream.overrideAttrs (old: {
           version = "1.4";
           src = prev.fetchFromGitHub {
             owner = "icecc";
@@ -118,7 +118,7 @@
       # inputs.hyprpicker.overlays.default
       # inputs.hyprlock.overlays.default
     ];
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
   in rec {
     images = {
       pi4 =
@@ -146,14 +146,13 @@
       system = "aarch64-linux";
       modules = [
         nixos-hardware.nixosModules.raspberry-pi-4
-        # "${nixpkgs}/nixos/modules/profiles/minimal.nix"
         ./hosts/pi-4/configuration.nix
         ./hosts/pi-4/pi-requirements.nix
       ];
     };
 
     nixosConfigurations.mue-p14s = mkDefault "mue-p14s" {
-      inherit nixpkgs home-manager overlays agenix inputs lib;
+      inherit nixpkgs home-manager overlays agenix inputs;
       system = "x86_64-linux";
       users = ["bernd"];
     };
