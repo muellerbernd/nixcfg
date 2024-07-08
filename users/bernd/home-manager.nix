@@ -116,7 +116,7 @@
       go
       typst
       typst-lsp
-      typstfmt
+      typstyle
       # icecream
       # icemon
       # formatter
