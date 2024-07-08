@@ -104,43 +104,65 @@ in {
       # userChome.css to make it look better
       userChrome = "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
       settings = {
+        "browser.startup.homepage" = "https://searx.aicampground.com";
+        "browser.search.defaultenginename" = "Searx";
+        "browser.search.order.1" = "Searx";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-
         "extensions.autoDisableScopes" = 0;
-
-        "browser.search.defaultenginename" = "Google";
-        "browser.search.selectedEngine" = "Google";
-        "browser.urlbar.placeholderName" = "Google";
-        "browser.search.region" = "US";
-
         "browser.link.open_newwindow" = "3";
-
         "browser.uidensity" = 1;
         "browser.search.openintab" = true;
+        "browser.toolbars.bookmarks.visibility" = "always";
         "xpinstall.signatures.required" = false;
         "extensions.update.enabled" = false;
-
         "font.name.monospace.x-western" = "Hack Nerd Font";
         "font.name.sans-serif.x-western" = "Hack Nerd Font";
         "font.name.serif.x-western" = "Hack Nerd Font";
         "font.size" = 13;
-
-        # "browser.display.background_color" = thm.bg;
-        # "browser.display.foreground_color" = thm.fg;
-        # "browser.display.document_color_use" = 2;
-        # "browser.anchor_color" = thm.fg;
-        # "browser.visited_color" = thm.blue;
         "browser.display.use_document_fonts" = true;
         "pdfjs.disabled" = true;
         "media.videocontrols.picture-in-picture.enabled" = true;
       };
-      # extensions = with pkgs.nur.rycee.firefox-addons; [
-      #   # torswitch
-      #   # close-other-windows
-      #   # adsum-notabs
-      #   ublock-origin
-      #   # plasma-integration
-      # ];
+      search = {
+        force = true;
+        default = "Searx";
+        order = ["Searx" "Google"];
+        engines = {
+          "Nix Packages" = {
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "type";
+                    value = "packages";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+            definedAliases = ["@np"];
+          };
+          "NixOS Wiki" = {
+            urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+            iconUpdateURL = "https://nixos.wiki/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = ["@nw"];
+          };
+          "Searx" = {
+            urls = [{template = "https://searx.aicampground.com/?q={searchTerms}";}];
+            # iconUpdateURL = "https://nixos.wiki/favicon.png";
+            updateInterval = 24 * 60 * 60 * 1000; # every day
+            definedAliases = ["@searx"];
+          };
+          "Bing".metaData.hidden = true;
+          "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
+        };
+      };
     };
   };
 
