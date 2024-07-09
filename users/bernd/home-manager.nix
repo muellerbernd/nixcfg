@@ -20,6 +20,7 @@
     homeDirectory = "/home/bernd";
     packages = with pkgs; [
       procps
+      lsof
       # editors
       neovim
       tree-sitter
