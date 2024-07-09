@@ -36,7 +36,6 @@
       glow
       alacritty
       foot
-      wezterm
       antigen
       starship
       tmux
