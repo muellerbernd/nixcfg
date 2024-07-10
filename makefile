@@ -4,6 +4,8 @@ ifndef HOSTNAME
 	$(error Hostname unknown)
 endif
 
+build:
+	nixos-rebuild build --option eval-cache false --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace
 switch:
 	nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake ".#${HOSTNAME}" -L --show-trace
 

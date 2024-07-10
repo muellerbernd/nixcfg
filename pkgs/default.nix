@@ -1,7 +1,6 @@
-{pkgs ? null}: {
-  annotator =
-    pkgs.callPackage ./pkgs/annotator
-    {}; # path containing default.nix
-  uvtools =
-    pkgs.callPackage ./pkgs/uvtools {}; # path containing default.nix
+# Custom packages, that can be defined similarly to ones from nixpkgs
+# You can build them using 'nix build .#example'
+{pkgs ? import <nixpkgs> {}, ...}: {
+  uvtools = pkgs.callPackage ./uvtools {};
+  annotator = pkgs.callPackage ./annotator {};
 }

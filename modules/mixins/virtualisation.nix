@@ -1,15 +1,22 @@
-{ config, pkgs, lib, inputs, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
     podman-compose
-    (writeShellScriptBin "qemu-system-x86_64-uefi" ''
-        qemu-system-x86_64 \
-      - bios ${
-      pkgs.OVMF.fd}/FV/OVMF.fd \
-      "$@"''
+    (
+      writeShellScriptBin "qemu-system-x86_64-uefi" ''
+          qemu-system-x86_64 \
+        - bios ${
+          pkgs.OVMF.fd
+        }/FV/OVMF.fd \
+        "$@"''
     )
     distrobox
     qemu
@@ -45,7 +52,7 @@
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
 
-      defaultNetwork.settings = { dns_enabled = true; };
+      defaultNetwork.settings = {dns_enabled = true;};
     };
     # docker = {
     #   enable = true;

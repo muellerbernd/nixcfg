@@ -27,7 +27,7 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    qemu = prev.qemu.override {smbdSupport = true;};
+    # qemu = prev.qemu.override {smbdSupport = true;};
     icecream = prev.icecream.overrideAttrs (old: {
       version = "1.4";
       src = prev.fetchFromGitHub {
@@ -58,4 +58,3 @@
   #   };
   # };
 }
-

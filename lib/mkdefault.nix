@@ -3,9 +3,9 @@ name: {
   home-manager,
   system,
   users ? ["bernd"],
-  overlays,
   agenix,
   inputs,
+  outputs,
   hostname ? "",
   crypt_device ? "",
   students ? [],
@@ -48,7 +48,35 @@ in
         # Apply our overlays. Overlays are keyed by system type so we have
         # to go through and apply our system type. We do this first so
         # the overlays are available globally.
-        {nixpkgs.overlays = overlays;}
+        {
+          nixpkgs = {
+            # You can add overlays here
+            overlays = [
+              inputs.neovim-nightly.overlays.default
+              inputs.lsleases.overlays.default
+              inputs.rofi-music-rs.overlays.default
+              # Add overlays your own flake exports (from overlays and pkgs dir):
+              outputs.overlays.additions
+              outputs.overlays.modifications
+              # outputs.overlays.stable-packages
+
+              # You can also add overlays exported from other flakes:
+              # neovim-nightly-overlay.overlays.default
+
+              # Or define it inline, for example:
+              # (final: prev: {
+              #   hi = final.hello.overrideAttrs (oldAttrs: {
+              #     patches = [ ./change-hello-to-hi.patch ];
+              #   });
+              # })
+            ];
+            # Configure your nixpkgs instance
+            config = {
+              # Disable if you don't want unfree packages
+              allowUnfree = true;
+            };
+          };
+        }
 
         ../hosts/${name}/configuration.nix
 
@@ -100,7 +128,7 @@ in
       ]
       ++ user_cfgs
       ++ student_user_cfgs;
-    specialArgs = {inherit inputs hostname crypt_device;};
+    specialArgs = {inherit inputs outputs hostname crypt_device;};
   }
 # vim: set ts=2 sw=2:
 

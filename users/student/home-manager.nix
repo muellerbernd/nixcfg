@@ -1,6 +1,11 @@
-{ config, lib, pkgs, inputs, headless ? true, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  headless ? true,
+  ...
+}: {
   home = {
     username = "student";
     homeDirectory = "/home/student";
@@ -196,7 +201,7 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {enable = true;};
 
   # enable picom
   # services.picom.enable = true;
@@ -212,3 +217,4 @@
   home.stateVersion = "23.11";
 }
 # vim: set ts=2 sw=2:
+

@@ -1,7 +1,4 @@
-{ pkgs
-, ...
-}:
-{
+{pkgs, ...}: {
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
   location.provider = "geoclue2";

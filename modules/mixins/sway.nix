@@ -1,5 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   sway-run = pkgs.writeShellScriptBin "sway-run" ''
     export MOZ_ENABLE_WAYLAND = "1"
     export MOZ_USE_XINPUT2 = "1"
@@ -11,8 +16,7 @@ let
     export XDG_CURRENT_DESKTOP = "sway"
     ${pkgs.sway}/bin/sway
   '';
-in
-{
+in {
   # enable sway window manager
   programs.sway = {
     enable = true;
@@ -58,9 +62,9 @@ in
     enable = true;
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
-  security.pam.services.swaylock = { };
+  security.pam.services.swaylock = {};
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

@@ -13,8 +13,7 @@ let
   };
   allUsers = builtins.attrValues users;
   allSystems = builtins.attrValues systems;
-in
-{
+in {
   # "secret1.age".publicKeys = [ user1 system1 ];
   # "secret2.age".publicKeys = users ++ systems;
   # "distributedBuilderKey.age".publicKeys = allUsers ++ [ systems.t480ilmpad systems.mue-p14s systems.t480ammera ];

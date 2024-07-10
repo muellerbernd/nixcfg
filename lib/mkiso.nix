@@ -1,5 +1,7 @@
-name:
-{ nixpkgs, home-manager, system, users ? [ "bernd" ], overlays }:
+name: {
+  nixpkgs,
+  system,
+}:
 nixpkgs.lib.nixosSystem rec {
   inherit system;
 
@@ -33,3 +35,4 @@ nixpkgs.lib.nixosSystem rec {
   ];
 }
 # vim: set ts=2 sw=2:
+

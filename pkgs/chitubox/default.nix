@@ -1,7 +1,26 @@
-{ lib, pkgs, stdenv, fetchurl, autoPatchelfHook, libglvnd, libgcrypt, libdrm
-, zlib, glib, fontconfig, freetype, xorg, libxkbcommon, libpulseaudio
-, libsForQt5, alsa-lib, gst_all_1, pkg-config, wrapGAppsHook, qt6 }:
-
+{
+  lib,
+  pkgs,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+  libglvnd,
+  libgcrypt,
+  libdrm,
+  zlib,
+  glib,
+  fontconfig,
+  freetype,
+  xorg,
+  libxkbcommon,
+  libpulseaudio,
+  libsForQt5,
+  alsa-lib,
+  gst_all_1,
+  pkg-config,
+  wrapGAppsHook,
+  qt6,
+}:
 stdenv.mkDerivation rec {
   pname = "chitubox";
 
@@ -13,8 +32,7 @@ stdenv.mkDerivation rec {
   #   sha256 = "0di0d3hg7jy2c63isdv50c3qsff9vk2x0305jjdqy8xpy62mh9dq";
   # };
   src = fetchurl {
-    url =
-      "https://sac.chitubox.com/software/download.do?softwareId=17839&softwareVersionId=v${version}&fileName=CHITUBOX_V${version}.tar.gz";
+    url = "https://sac.chitubox.com/software/download.do?softwareId=17839&softwareVersionId=v${version}&fileName=CHITUBOX_V${version}.tar.gz";
     hash = "sha256-mNEMfuzRSKBo5tGITWrwg68caLx8Zjz+CaSnbt35Nis=";
   };
 
@@ -28,8 +46,7 @@ stdenv.mkDerivation rec {
 
   # QT_QPA_PLATFORM_PLUGIN_PATH =
   #   "${qt6.qtbase.bin}/lib/qt-${qt6.qtbase.version}/plugins/platforms";
-  nativeBuildInputs =
-    [ autoPatchelfHook libsForQt5.qt5.wrapQtAppsHook pkg-config wrapGAppsHook ];
+  nativeBuildInputs = [autoPatchelfHook libsForQt5.qt5.wrapQtAppsHook pkg-config wrapGAppsHook];
 
   buildInputs = [
     stdenv.cc.cc.lib
@@ -110,8 +127,7 @@ stdenv.mkDerivation rec {
     '';
 
   meta = {
-    description =
-      "A Revolutionary Tool to Change 3D Printing Processes within One Click";
+    description = "A Revolutionary Tool to Change 3D Printing Processes within One Click";
     homepage = "https://www.chitubox.com";
     license = {
       fullName = "ChiTuBox EULA";

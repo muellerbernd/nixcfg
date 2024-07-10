@@ -1,5 +1,4 @@
-{ pkgs }:
-let
+{pkgs}: let
   pname = "anyconnect";
   version = "0.0.0";
 
@@ -78,53 +77,54 @@ let
         # ls
         # install -Dm644 AnyConnectLocalPolicy.xml "$out/opt/cisco/anyconnect/AnyConnectLocalPolicy.xml"
       '';
-
   };
 in
-(pkgs.buildFHSUserEnv {
-  name = "cisco-secure-client";
-  targetPkgs = pkgs: (with pkgs; [
-    anyconnect
-    gtk3
-    at-spi2-atk
-    glib
-    glibc
-    pango
-    gdk-pixbuf
-    cairo
-    libxml2
-    atk
-    at-spi2-atk
-    at-spi2-core
-    boost
-    cairo
-    fakeroot
-    gdk-pixbuf
-    glib
-    gtk3
-    libsoup
-    libxml2
-    libgcc
-    pango
-    ps
-    systemd
-    webkitgtk
-    zlib
-  ] ++ (with pkgs.xorg; [
-    libX11
-    libXcursor
-    libXrandr
-  ]));
-  multiPkgs = pkgs: (with pkgs; [
-  ]);
-  runScript = "zsh";
-
-}).env
+  (pkgs.buildFHSUserEnv {
+    name = "cisco-secure-client";
+    targetPkgs = pkgs: (with pkgs;
+      [
+        anyconnect
+        gtk3
+        at-spi2-atk
+        glib
+        glibc
+        pango
+        gdk-pixbuf
+        cairo
+        libxml2
+        atk
+        at-spi2-atk
+        at-spi2-core
+        boost
+        cairo
+        fakeroot
+        gdk-pixbuf
+        glib
+        gtk3
+        libsoup
+        libxml2
+        libgcc
+        pango
+        ps
+        systemd
+        webkitgtk
+        zlib
+      ]
+      ++ (with pkgs.xorg; [
+        libX11
+        libXcursor
+        libXrandr
+      ]));
+    multiPkgs = pkgs: (with pkgs; [
+      ]);
+    runScript = "zsh";
+  })
+  .env
 # pkgs.mkShell {
 #   buildInputs =
 #     [
 #       anyconnect
 #     ];
 # }
-
 # vim: set ts=2 sw=2:
+

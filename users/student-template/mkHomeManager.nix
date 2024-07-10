@@ -1,8 +1,10 @@
-{ pkgs, name,  ... }:
-let
-  username = name;
-in
 {
+  pkgs,
+  name,
+  ...
+}: let
+  username = name;
+in {
   home = {
     username = username;
     homeDirectory = "/home/${username}";
@@ -37,7 +39,7 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {enable = true;};
 
   # enable picom
   # services.picom.enable = true;
@@ -53,3 +55,4 @@ in
   home.stateVersion = "23.11";
 }
 # vim: set ts=2 sw=2:
+

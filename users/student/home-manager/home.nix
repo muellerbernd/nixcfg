@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "student";
@@ -244,7 +246,7 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {enable = true;};
 
   services.mpris-proxy.enable = true;
 

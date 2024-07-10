@@ -101,13 +101,12 @@
       settings.PermitRootLogin = lib.mkDefault "yes";
       openFirewall = lib.mkDefault true;
     };
-    avahi =
-      {
-        enable = true;
-        nssmdns4 = true;
-        # for a WiFi printer
-        openFirewall = true;
-      };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      # for a WiFi printer
+      openFirewall = true;
+    };
   };
   security.polkit.enable = true;
 }

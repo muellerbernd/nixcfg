@@ -10,17 +10,17 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelParams = [
-  #   # "intel_pstate=disable"
+    #   # "intel_pstate=disable"
     "psmouse.synaptics_intertouch=0"
     "usbcore.autosuspend=-1"
-  #   # "i915.modeset=1"
-  #   # "i915.fastboot=1"
-  #   # "i915.enable_guc=2"
-  #   # "i915.enable_psr=1"
-  #   # "i915.enable_fbc=1"
-  #   # "i915.enable_dc=2"
-  #   "intremap=nosid"
-  #   "intel_iommu=off"
+    #   # "i915.modeset=1"
+    #   # "i915.fastboot=1"
+    #   # "i915.enable_guc=2"
+    #   # "i915.enable_psr=1"
+    #   # "i915.enable_fbc=1"
+    #   # "i915.enable_dc=2"
+    #   "intremap=nosid"
+    #   "intel_iommu=off"
   ];
   # boot.initrd.availableKernelModules = [
   #   # "thinkpad_acpi"
