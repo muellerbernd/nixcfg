@@ -84,6 +84,13 @@
     libfido2
   ];
 
+  environment.extraInit = ''
+    # Do not want this in the environment. NixOS always sets it and does not
+    # provide any option not to, so I must unset it myself via the
+    # environment.extraInit option.
+    unset -v SSH_ASKPASS
+  '';
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -112,7 +119,7 @@
     defaultEditor = true;
   };
   programs.zsh.enable = true;
-
+  programs.git.enable = true;
   programs.light.enable = true;
 
   programs.gnupg.agent = {
