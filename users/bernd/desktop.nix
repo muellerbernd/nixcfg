@@ -50,7 +50,7 @@ in {
       shotcut
       ntfs3g
       gvfs
-      blender
+      # blender
       # 3d printing and modeling
       meshlab
       # cloudcompare
@@ -58,9 +58,9 @@ in {
       # browsers
       chromium
       firefox
-      tangram
+      # tangram
       # wiki
-      kiwix
+      # kiwix
       # media
       spotify
       spotify-player

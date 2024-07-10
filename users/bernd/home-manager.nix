@@ -47,7 +47,6 @@
       w3m
       atuin
       ranger
-      ueberzugpp
       mupdf
       poppler_utils
       exiftool
@@ -62,7 +61,6 @@
       timg
       chafa
       libsixel
-      neofetch
       tokei
       fzf
       fd
@@ -112,7 +110,7 @@
       gcc
       gdb
       rustup
-      python3Full
+      python3
       go
       typst
       typst-lsp
