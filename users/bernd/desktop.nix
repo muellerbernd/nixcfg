@@ -70,6 +70,8 @@ in {
       teams-for-linux
       # matrix client
       nheko
+      # email
+      thunderbird
       # vpn
       networkmanager-openconnect
       openconnect
