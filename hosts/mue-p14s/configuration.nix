@@ -350,6 +350,8 @@
     KERNEL=="ttyACM1", MODE:="666"
     KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
+
+    SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A4WN1BDG", SYMLINK+="leica", MODE="666", RUN+="${pkgs.coreutils}/bin/stty -F /dev/leica cs8 115200/bin/setserial /dev/serial2crayler low_latency"
   '';
 
   programs.nix-ld.enable = true;
