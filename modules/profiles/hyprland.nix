@@ -133,10 +133,8 @@
       };
 
       "$mod" = "SUPER";
-      "$movemouse" = "sh -c 'eval `xdotool getactivewindow getwindowgeometry --shell`; xdotool mousemove $((X+WIDTH-80)) $((Y+120))'";
       "$terminal" = "wezterm";
       "$menu" = "${rofi-script}/bin/rofi-script";
-      # "$menu" = "wofi --show drun";
       "$locker" = "~/scripts/lock_sway.sh";
 
       bind = [
@@ -150,7 +148,7 @@
         "$mod, J, togglesplit" # dwindle
         "$mod, D, exec, $menu"
         "$mod, Escape, exec, $locker"
-        "$mod SHIFT, E, exec, sh ~/scripts/check-dotfiles.sh && ~/.config/rofi/scripts/powermenu/run.sh"
+        # "$mod SHIFT, E, exec, sh ~/scripts/check-dotfiles.sh && ~/.config/rofi/scripts/powermenu/run.sh"
 
         "$mod, Space, togglefloating"
         # scratchpad
@@ -198,28 +196,27 @@
         # "ALTSHIFT,K,resizeactive,0 -150"
         # "ALTSHIFT,L,resizeactive,150 0"
 
-        ",XF86AudioRaiseVolume,exec,~/scripts/controlVolumePipewire.py up"
-        ",XF86AudioLowerVolume,exec,~/scripts/controlVolumePipewire.py down"
-        ",XF86AudioMute,exec,exec,~/scripts/controlVolumePipewire.py mute"
-
-        ",XF86MonBrightnessUp,exec,light -A 1 && sh ~/scripts/notifyBrightness.sh"
-        ",XF86MonBrightnessDown,exec,light -U 1 && sh ~/scripts/notifyBrightness.sh"
+        # ",XF86AudioRaiseVolume,exec,~/scripts/controlVolumePipewire.py up"
+        # ",XF86AudioLowerVolume,exec,~/scripts/controlVolumePipewire.py down"
+        # ",XF86AudioMute,exec,exec,~/scripts/controlVolumePipewire.py mute"
+        #
+        # ",XF86MonBrightnessUp,exec,light -A 1 && sh ~/scripts/notifyBrightness.sh"
+        # ",XF86MonBrightnessDown,exec,light -U 1 && sh ~/scripts/notifyBrightness.sh"
       ];
       exec-once = [
-        ''
-          exec swayidle -w \
-              timeout 300 'notify-send -u critical -t 9000 "Locking Screen in 10 seconds"' \
-              timeout 310 '~/scripts/lock_sway.sh' \
-              idlehint 310 \
-              timeout 500 'swaymsg "output * dpms off"'\
-              resume 'swaymsg "output * dpms on"'
-        ''
+        # ''
+        #   exec swayidle -w \
+        #       timeout 300 'notify-send -u critical -t 9000 "Locking Screen in 10 seconds"' \
+        #       timeout 310 '~/scripts/lock_sway.sh' \
+        #       idlehint 310 \
+        #       timeout 500 'swaymsg "output * dpms off"'\
+        #       resume 'swaymsg "output * dpms on"'
+        # ''
         "nm-applet --indicator"
         "waybar"
         "blueman-applet"
         "dunst"
-        "xbindkeys"
-        "~/scripts/check-dotfiles.sh"
+        # "~/scripts/check-dotfiles.sh"
       ];
     };
   };
