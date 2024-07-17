@@ -26,6 +26,8 @@
       "storage"
       "users"
       "tty"
+      "dialout"
+      "uucp"
     ];
     openssh.authorizedKeys.keys = [
       # bernd smartphone key:
