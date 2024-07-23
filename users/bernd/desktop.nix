@@ -262,6 +262,12 @@ in {
       };
     };
   };
+  # services.gammastep = {
+  #   enable = true;
+  #   provider = "manual";
+  #   latitude = 50.68;
+  #   longitude = 10.93;
+  # };
   # not so fancy pointer
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
   # fancy pointer
