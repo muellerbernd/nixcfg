@@ -19,8 +19,9 @@ in {
             --remember \
             --asterisks \
             --user-menu \
-            --cmd ${lib.getExe config.programs.hyprland.package}
+            --cmd niri-session
         '';
+        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions:niri-session --remember --remember-user-session";
         # --cmd "systemd-cat Hyprland"
         # command = "sway";
       };
@@ -29,10 +30,10 @@ in {
   environment.systemPackages = with pkgs; [
     greetd.tuigreet
   ];
-  environment.etc."greetd/environments".text = ''
-    niri-session
-    startx
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   niri-session
+  #   startx
+  # '';
   # greetd display manager
   # services.greetd =
   #   let
