@@ -29,11 +29,10 @@ in {
   environment.systemPackages = with pkgs; [
     greetd.tuigreet
   ];
-  # environment.etc."greetd/environments".text = ''
-  #   sway
-  #   startx
-  #   startxfce4
-  # '';
+  environment.etc."greetd/environments".text = ''
+    niri-session
+    startx
+  '';
   # greetd display manager
   # services.greetd =
   #   let
