@@ -17,6 +17,7 @@ in {
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
             --time \
             --remember \
+            --remember-user-session \
             --asterisks \
             --user-menu \
             --cmd niri-session
