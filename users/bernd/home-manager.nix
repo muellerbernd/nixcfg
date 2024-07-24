@@ -43,6 +43,7 @@
       screen
       zellij
       zoxide
+      eza
       # better shell history
       w3m
       atuin
