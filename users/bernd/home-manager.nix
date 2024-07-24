@@ -23,6 +23,8 @@
       lsof
       # editors
       neovim
+      # package manager for lua
+      luajitPackages.luarocks
       tree-sitter
       #neovim-remote
       vim
