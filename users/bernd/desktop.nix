@@ -69,7 +69,7 @@ in {
       gajim
       teams-for-linux
       # matrix client
-      nheko
+      fluffychat
       # email
       thunderbird
       # vpn
