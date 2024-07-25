@@ -221,6 +221,30 @@
     greetd.u2fAuth = true;
     hyprlock.u2fAuth = true;
   };
+
+  systemd.services.toggleLaptopKeyboard = let
+    toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
+      pipe=/tmp/laptopKeyboardState
+      target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+      [ -p "$pipe" ] || mkfifo -m 0666 "$pipe" || exit 1
+      while :; do
+          while read -r val; do
+              if [ "$val" ]; then
+                  echo "$val" > $target
+              fi
+          done <"$pipe"
+      done
+    '';
+  in {
+    enable = true;
+    wantedBy = ["multi-user.target"];
+    description = ".";
+    serviceConfig = {
+      ExecStart = ''${toggleLaptopKeyboardScript}/bin/toggleLaptopKeyboardScript'';
+      # and the command to execute
+      # ExecStop = ''${pkgs.screen}/bin/screen -S irc -X quit'';
+    };
+  };
   # environment.shellInit = ''
   #   [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true
   # '';
