@@ -222,6 +222,7 @@
     hyprlock.u2fAuth = true;
   };
 
+  # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
   systemd.services.toggleLaptopKeyboard = let
     toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
       pipe=/tmp/laptopKeyboardState
