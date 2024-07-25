@@ -20,7 +20,7 @@ in {
             --remember-user-session \
             --asterisks \
             --user-menu \
-            --cmd niri-session
+            --cmd ${lib.getExe config.programs.hyprland.package}
         '';
         # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions:niri-session --remember --remember-user-session";
         # --cmd "systemd-cat Hyprland"
