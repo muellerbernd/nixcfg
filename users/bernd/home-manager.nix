@@ -39,6 +39,7 @@
       glow
       alacritty
       foot
+      contour
       antigen
       starship
       tmux
@@ -71,6 +72,7 @@
       file
       ripgrep-all
       # tools
+      imagemagick
       stow
       gnome-keyring
       seahorse
