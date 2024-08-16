@@ -118,7 +118,7 @@
       python3
       go
       typst
-      typst-lsp
+      # typst-lsp
       typstyle
       # icecream
       # icemon

@@ -85,10 +85,6 @@
       enable = true;
       extraPackages = with pkgs; [
         mesa
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-        vulkan-tools
       ];
     };
     trackpoint = {
