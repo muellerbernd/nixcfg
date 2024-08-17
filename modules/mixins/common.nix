@@ -249,4 +249,9 @@
   # environment.shellInit = ''
   #   [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true
   # '';
+
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 }
