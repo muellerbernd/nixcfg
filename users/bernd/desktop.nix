@@ -29,6 +29,7 @@ in {
       keepassxc
       # network
       networkmanagerapplet
+      wireshark
       # bluetooth
       blueman
       # apps
@@ -75,8 +76,8 @@ in {
       # vpn
       networkmanager-openconnect
       openconnect
-      wireshark
-
+      # mullvad vpn
+      mullvad-vpn
       # theming
       lxqt.lxqt-qtplugin
       libsForQt5.qtstyleplugin-kvantum
