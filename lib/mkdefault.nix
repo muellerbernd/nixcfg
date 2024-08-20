@@ -52,7 +52,7 @@ in
           nixpkgs = {
             # You can add overlays here
             overlays = [
-              inputs.neovim-nightly.overlays.default
+              # inputs.neovim-nightly.overlays.default
               inputs.lsleases.overlays.default
               inputs.rofi-music-rs.overlays.default
               # Add overlays your own flake exports (from overlays and pkgs dir):
