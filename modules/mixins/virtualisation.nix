@@ -21,7 +21,7 @@
     distrobox
     qemu
     # https://github.com/quickemu-project/quickemu
-    # quickemu
+    quickemu
     # Enhanced SPICE integration for linux QEMU guest
     spice-vdagent
     spice
