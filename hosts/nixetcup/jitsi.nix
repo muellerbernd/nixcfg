@@ -33,4 +33,8 @@ in {
   };
   services.jitsi-videobridge.openFirewall = true;
   networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "jitsi-meet-1.0.8043"
+  ];
 }
