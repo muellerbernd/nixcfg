@@ -159,6 +159,8 @@
       # keyboard stuff
       avrdude
       evtest
+      # nix stuff
+      statix
     ];
   };
 
