@@ -68,7 +68,7 @@ in {
       sox
       # messenger
       gajim
-      teams-for-linux
+      # teams-for-linux # broken
       # matrix client
       nheko
       # email
@@ -231,14 +231,14 @@ in {
         categories = ["Audio" "Music" "Player" "AudioVideo"];
         icon = "spotify-client";
       };
-      # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
-      teams = {
-        name = "Microsoft Teams for Linux (wayland)";
-        exec = "teams-for-linux --use-angle=opengl";
-        categories = ["Network" "InstantMessaging" "Chat"];
-        icon = "teams-for-linux";
-        comment = "Unofficial Microsoft Teams client for Linux";
-      };
+      # # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
+      # teams = {
+      #   name = "Microsoft Teams for Linux (wayland)";
+      #   exec = "teams-for-linux --use-angle=opengl";
+      #   categories = ["Network" "InstantMessaging" "Chat"];
+      #   icon = "teams-for-linux";
+      #   comment = "Unofficial Microsoft Teams client for Linux";
+      # };
       nvim = {
         name = "Neovim";
         genericName = "Texteditor";

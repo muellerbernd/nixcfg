@@ -146,6 +146,11 @@
   environment.systemPackages = with pkgs; [
     glxinfo
     # icecream
+    # cups-filters
+    # cups-bjnp
+    # cnijfilter2
+    # gutenprintBin
+    # canon-cups-ufr2
   ];
 
   services.fwupd.enable = true;
