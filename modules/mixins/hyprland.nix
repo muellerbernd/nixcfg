@@ -17,6 +17,9 @@
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     # package = pkgs.hyprland-debug;
     # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   security.pam.services.hyprlock = {};
   programs.xwayland.enable = true;
@@ -36,15 +39,16 @@
     glxinfo
     kanshi
     hyprpaper
-    wlr-randr
-    wdisplays
-    nwg-displays
-    nwg-look
+    # wlr-randr
+    # wdisplays
+    # nwg-displays
+    # nwg-look
     wl-mirror
     pipectl
     hypridle
     hyprpicker
     hyprlock
+    shikane
     # swaybg
     # swayidle
     # swaylock

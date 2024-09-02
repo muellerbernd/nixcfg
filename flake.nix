@@ -3,8 +3,9 @@
 
   inputs = {
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/master";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
     # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 
     home-manager = {
@@ -19,19 +20,19 @@
       url = "github:nix-community/home-manager/release-24.05";
 
       # We want to use the same set of nixpkgs as our system.
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
     # predefined hardware stuff
     nixos-hardware.url = "github:nixos/nixos-hardware";
     #
     systems.url = "github:nix-systems/default-linux";
 
-    # hyprland = {
-    #   # url = "github:hyprwm/Hyprland";
-    #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-    #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    hyprland = {
+      # url = "github:hyprwm/Hyprland";
+      # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hypridle = {
     #   url = "github:hyprwm/hypridle";
     #   # inputs.nixpkgs.follows = "nixpkgs";

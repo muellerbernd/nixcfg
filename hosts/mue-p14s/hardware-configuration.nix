@@ -37,7 +37,7 @@
   # boot.kernelPackages = pkgs.linuxPackages_6_4;
   # boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "5.2")
   #   pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelParams = [
     "intel_pstate=disable"

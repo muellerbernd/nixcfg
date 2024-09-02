@@ -38,15 +38,15 @@
       };
       nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
     });
-    pcl = prev.pcl.overrideAttrs (old: {
-      version = "1.14.1";
-      src = prev.fetchFromGitHub {
-        owner = "PointCloudLibrary";
-        repo = old.pname;
-        rev = "pcl-1.14.1";
-        sha256 = "sha256-vu5pG4/FE8GCJfd8OZbgRguGJMMZr9PEEdbxUsuV/5Q=";
-      };
-    });
+    # pcl = prev.pcl.overrideAttrs (old: {
+    #   version = "1.14.1";
+    #   src = prev.fetchFromGitHub {
+    #     owner = "PointCloudLibrary";
+    #     repo = old.pname;
+    #     rev = "pcl-1.14.1";
+    #     sha256 = "sha256-vu5pG4/FE8GCJfd8OZbgRguGJMMZr9PEEdbxUsuV/5Q=";
+    #   };
+    # });
   };
 
   # # When applied, the unstable nixpkgs set (declared in the flake inputs) will
