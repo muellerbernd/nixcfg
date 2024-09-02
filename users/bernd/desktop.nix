@@ -69,6 +69,7 @@ in {
       # messenger
       gajim
       # teams-for-linux # broken
+      stable.teams-for-linux
       # matrix client
       nheko
       # email
