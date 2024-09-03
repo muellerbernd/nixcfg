@@ -250,10 +250,10 @@
   #   [ -n "$DISPLAY" ] && xhost +si:localuser:$USER || true
   # '';
 
-  services.mullvad-vpn = {
-    enable = true;
-    package = pkgs.mullvad-vpn;
-  };
+  # services.mullvad-vpn = {
+  #   enable = true;
+  #   package = pkgs.mullvad-vpn;
+  # };
 
   nixpkgs.config.permittedInsecurePackages = [
     "olm-3.2.16"
