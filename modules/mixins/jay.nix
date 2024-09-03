@@ -35,9 +35,7 @@
     # swaybg
     # swayidle
     # swaylock
-    inputs.niri.packages.${pkgs.system}.default
-    wev
-    cage
+    jay
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
