@@ -35,7 +35,8 @@
     # swaybg
     # swayidle
     # swaylock
-    inputs.niri.packages.${pkgs.system}.default
+    # inputs.niri.packages.${pkgs.system}.default
+    niri
     wev
     cage
   ];

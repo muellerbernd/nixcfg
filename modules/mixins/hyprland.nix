@@ -14,6 +14,10 @@
     # Whether to enable XWayland
     xwayland.enable = true;
     # The hyprland package to use
+    # package = pkgs.hyprland.override {
+    #   # or inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+    #   debug = true;
+    # };
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     # package = pkgs.hyprland-debug;
     # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;

@@ -11,6 +11,7 @@
     # mixins-i3
     mixins-hyprland
     mixins-niri
+    mixins-jay
     # mixins-sway
   ];
 
