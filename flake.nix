@@ -38,6 +38,7 @@
     # };
     niri = {
       url = "github:YaLTeR/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # hypridle = {
     #   url = "github:hyprwm/hypridle";
@@ -60,18 +61,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    yazi.url = "github:sxyazi/yazi";
+    # neovim-nightly = {
+    #   url = "github:nix-community/neovim-nightly-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # yazi.url = "github:sxyazi/yazi";
     agenix.url = "github:ryantm/agenix";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
 
-    nil.url = "github:oxalica/nil";
-    nixd.url = "github:nix-community/nixd";
+    # nixd.url = "github:nix-community/nixd";
   };
 
   outputs = {
