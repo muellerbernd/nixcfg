@@ -37,9 +37,6 @@
       nodejs
       # terminal
       glow
-      alacritty
-      foot
-      contour
       antigen
       starship
       tmux
@@ -60,7 +57,7 @@
       ffmpegthumbnailer
       unar
       jq
-      joshuto
+      # joshuto
       imgcat
       timg
       chafa
@@ -135,7 +132,7 @@
       lemminx
       ccls
       pyright
-      nil
+      # nil
       nixd
       alejandra
       sumneko-lua-language-server

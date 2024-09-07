@@ -11,6 +11,10 @@
 in {
   home = {
     packages = with pkgs; [
+      # terminals
+      alacritty
+      foot
+      contour
       # notifications
       dunst
       libnotify
