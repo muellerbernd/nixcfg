@@ -43,6 +43,7 @@
     glxinfo
     kanshi
     hyprpaper
+    hyprshade
     # wlr-randr
     # wdisplays
     # nwg-displays
