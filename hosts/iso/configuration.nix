@@ -4,19 +4,16 @@
   lib,
   ...
 }: {
+  # Needed for https://github.com/NixOS/nixpkgs/issues/58959
+  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs"];
+
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
     package = pkgs.nixFlakes;
-    settings.auto-optimise-store = true;
-    settings.allowed-users = ["bernd" "nix-serve" "nixremote"];
-    settings.trusted-users = ["root" "nixremote"];
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
+    settings.allowed-users = [];
+    settings.trusted-users = ["root"];
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -82,7 +79,12 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    autosuggestions.enable = true;
+  };
 
   # Enable SSH in the boot process.
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
