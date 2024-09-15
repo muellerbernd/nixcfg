@@ -135,6 +135,7 @@
       # nil
       nixd
       alejandra
+      nixpkgs-fmt
       sumneko-lua-language-server
       marksman
       cmake-language-server
