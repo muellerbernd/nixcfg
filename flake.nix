@@ -158,7 +158,6 @@
       };
       # custom ISO
       ISO = mkISO "ISO" {
-        inherit home-manager;
         nixpkgs = nixpkgs-stable;
         system = "x86_64-linux";
       };
