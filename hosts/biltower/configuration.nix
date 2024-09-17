@@ -44,7 +44,7 @@
   # '';
 
   hardware = {
-    graphics = {
+    opengl = {
       enable = true;
       extraPackages = with pkgs; [
         # libva-utils

@@ -81,7 +81,7 @@
   networking.hostName = hostname; # Define your hostname.
 
   hardware = {
-    graphics = {
+    opengl = {
       enable = true;
       extraPackages = with pkgs; [
         mesa
