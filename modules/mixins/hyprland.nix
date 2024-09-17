@@ -37,23 +37,23 @@
     grimblast
     slurp
     # wayland
-    waybar
+    unstable.waybar
     qt6.qtwayland
     libsForQt5.qtwayland
     glxinfo
-    kanshi
-    hyprpaper
-    hyprshade
+    unstable.kanshi
+    unstable.hyprpaper
+    unstable.hyprshade
     # wlr-randr
     # wdisplays
     # nwg-displays
     # nwg-look
     wl-mirror
     pipectl
-    hypridle
-    hyprpicker
-    hyprlock
-    shikane
+    unstable.hypridle
+    unstable.hyprpicker
+    unstable.hyprlock
+    unstable.shikane
     # swaybg
     # swayidle
     # swaylock

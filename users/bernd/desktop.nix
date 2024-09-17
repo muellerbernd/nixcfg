@@ -48,7 +48,7 @@ in {
       pavucontrol
       xfce.thunar
       xfce.thunar-volman
-      file-roller
+      gnome.file-roller
       archiver
       xfce.xfce4-screenshooter
       obs-studio
@@ -59,7 +59,7 @@ in {
       # 3d printing and modeling
       meshlab
       # cloudcompare
-      prusa-slicer
+      unstable.prusa-slicer
       # browsers
       chromium
       firefox
@@ -73,7 +73,7 @@ in {
       # messenger
       gajim
       # teams-for-linux # broken
-      stable.teams-for-linux
+      teams-for-linux
       # matrix client
       nheko
       # email

@@ -122,7 +122,7 @@
   };
 
   hardware = {
-    graphics = {
+    opengl = {
       enable = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
@@ -298,43 +298,43 @@
   };
 
   # specialisation for traveling
-  specialisation = {
-    use-nvidia.configuration = {
-      system.nixos.tags = ["use-nvidia"];
-
-      hardware = {
-        nvidia-container-toolkit.enable = true;
-        # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        nvidia = {
-          # open = true;
-          # fix screen tearing in sync mode
-          modesetting.enable = false;
-          # fix suspend/resume screen corruption in sync mode
-          powerManagement.enable = false;
-          # Fine-grained power management. Turns off GPU when not in use.
-          # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-          powerManagement.finegrained = true;
-          open = true;
-          nvidiaSettings = true;
-          # Optionally, you may need to select the appropriate driver version for your specific GPU.
-          package = config.boot.kernelPackages.nvidiaPackages.production;
-          prime = {
-            # enable offload command
-            offload = {
-              enable = true;
-              enableOffloadCmd = true;
-            };
-            # Make sure to use the correct Bus ID values for your system!
-            intelBusId = "PCI:0:2:0";
-            nvidiaBusId = "PCI:3:0:0";
-          };
-        };
-      };
-      # Load nvidia driver for Xorg and Wayland
-      services.xserver.videoDrivers = ["nvidia"];
-      # nvidia container toolkit
-    };
-  };
+  # specialisation = {
+  #   use-nvidia.configuration = {
+  #     system.nixos.tags = ["use-nvidia"];
+  #
+  #     hardware = {
+  #       nvidia-container-toolkit.enable = true;
+  #       # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  #       nvidia = {
+  #         # open = true;
+  #         # fix screen tearing in sync mode
+  #         modesetting.enable = false;
+  #         # fix suspend/resume screen corruption in sync mode
+  #         powerManagement.enable = false;
+  #         # Fine-grained power management. Turns off GPU when not in use.
+  #         # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+  #         powerManagement.finegrained = true;
+  #         open = true;
+  #         nvidiaSettings = true;
+  #         # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  #         package = config.boot.kernelPackages.nvidiaPackages.production;
+  #         prime = {
+  #           # enable offload command
+  #           offload = {
+  #             enable = true;
+  #             enableOffloadCmd = true;
+  #           };
+  #           # Make sure to use the correct Bus ID values for your system!
+  #           intelBusId = "PCI:0:2:0";
+  #           nvidiaBusId = "PCI:3:0:0";
+  #         };
+  #       };
+  #     };
+  #     # Load nvidia driver for Xorg and Wayland
+  #     services.xserver.videoDrivers = ["nvidia"];
+  #     # nvidia container toolkit
+  #   };
+  # };
   # specialisation = {
   #   on-the-go.configuration = {
   #     system.nixos.tags = [ "on-the-go" ];
@@ -374,6 +374,10 @@
   # systemd.services."icecc-daemon".environment = lib.mkForce {
   #   PATH = "/run/current-system/sw/bin/";
   # };
+  boot.kernel.sysctl."net.core.rmem_default" = 26214400;
+  boot.kernel.sysctl."net.core.rmem_max" = 26214400;
+  boot.kernel.sysctl."net.core.wmem_default" = 26214400;
+  boot.kernel.sysctl."net.core.wmem_max" = 26214400;
 }
 # vim: set ts=2 sw=2:
 

@@ -2,25 +2,25 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05-small";
     # nixpkgs.url = "github:nixos/nixpkgs/master";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
     # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 
-    home-manager = {
+    home-manager-unstable = {
       # url = "github:nix-community/home-manager/release-23.11";
       url = "github:nix-community/home-manager";
 
       # We want to use the same set of nixpkgs as our system.
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    home-manager-stable = {
+    home-manager = {
       # url = "github:nix-community/home-manager/release-23.11";
       url = "github:nix-community/home-manager/release-24.05";
 
       # We want to use the same set of nixpkgs as our system.
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     # predefined hardware stuff
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -36,10 +36,10 @@
     #   url = "https://github.com/hyprwm/Hyprland";
     #   submodules = true;
     # };
-    niri = {
-      url = "github:YaLTeR/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # niri = {
+    #   url = "github:YaLTeR/niri";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # hypridle = {
     #   url = "github:hyprwm/hypridle";
     #   # inputs.nixpkgs.follows = "nixpkgs";
@@ -56,10 +56,10 @@
     #   url = "github:hyprwm/hyprpicker";
     #   # inputs.nixpkgs.follows = "nixpkgs";
     # };
-    waybar = {
-      url = "github:alexays/waybar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # waybar = {
+    #   url = "github:alexays/waybar";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # neovim-nightly = {
     #   url = "github:nix-community/neovim-nightly-overlay";
@@ -77,9 +77,9 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
+    nixpkgs-unstable,
     home-manager,
-    home-manager-stable,
+    home-manager-unstable,
     systems,
     agenix,
     nixos-hardware,
@@ -104,7 +104,7 @@
       pi4 =
         (self.nixosConfigurations.pi4.extendModules {
           modules = [
-            "${nixpkgs-stable}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             {
               disabledModules = ["profiles/base.nix"];
               # Disable zstd compression
@@ -158,7 +158,7 @@
       };
       # custom ISO
       ISO = mkISO "ISO" {
-        nixpkgs = nixpkgs-stable;
+        nixpkgs = nixpkgs;
         system = "x86_64-linux";
       };
       # test VM
@@ -178,7 +178,7 @@
         headless = true;
       };
       # raspberry-pi-4
-      pi4 = nixpkgs-stable.lib.nixosSystem {
+      pi4 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4

@@ -135,7 +135,7 @@
   # sound.enable = false;
   hardware = {
     enableAllFirmware = true;
-    graphics.enable = true;
+    # graphics.enable = true;
     bluetooth = {
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
