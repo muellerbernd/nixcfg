@@ -71,7 +71,7 @@ in {
       spotify-player
       sox
       # messenger
-      gajim
+      unstable.gajim
       # teams-for-linux # broken
       teams-for-linux
       # matrix client
