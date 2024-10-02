@@ -67,7 +67,7 @@
         # STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    throttled.enable = false;
+    throttled.enable = true;
     upower.enable = true;
     fwupd.enable = true;
   };
@@ -219,6 +219,7 @@
     cloudcompare
     tio
     setserial
+    throttled
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
