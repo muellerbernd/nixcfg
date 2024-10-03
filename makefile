@@ -41,5 +41,4 @@ nixetcup:
 	 nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@45.136.31.59 --flake ".#nixetcup" --show-trace
 
 deploy-pi-mcrover:
-	nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.178.160 --flake ".#pi-mcrover"
-
+	nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.178.160 --flake ".#pi-rover"
