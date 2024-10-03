@@ -59,7 +59,7 @@ in {
       # 3d printing and modeling
       meshlab
       # cloudcompare
-      unstable.prusa-slicer
+      prusa-slicer
       # browsers
       chromium
       firefox
