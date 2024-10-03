@@ -14,7 +14,7 @@
   # Enable ssh
   services.openssh.enable = true;
 
-  networking.hostName = "pi4";
+  networking.hostName = "pi-rover";
 
   # Add a user 'default' to the system
   users = {
@@ -49,9 +49,6 @@
   # This causes an overlay which causes a lot of rebuilding
   environment.noXlibs = lib.mkForce false;
 
-  # Enable GPU acceleration
-  hardware.opengl.enable = true;
-
   # Use the latest kernel
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
@@ -66,4 +63,7 @@
 
   # default to stateVersion for current lock
   system.stateVersion = config.system.nixos.version;
+
+  boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "vc4" "bcm2835_dma" "i2c_bcm2835" ];
+  hardware.enableRedistributableFirmware = true;
 }

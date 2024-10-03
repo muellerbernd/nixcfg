@@ -108,7 +108,22 @@
             {
               disabledModules = ["profiles/base.nix"];
               # Disable zstd compression
-              # sdImage.compressImage = false;
+              sdImage.compressImage = false;
+            }
+          ];
+        })
+        .config
+        .system
+        .build
+        .sdImage;
+      pi-rover =
+        (self.nixosConfigurations.pi-rover.extendModules {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
             }
           ];
         })
@@ -182,8 +197,19 @@
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
+          "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
           ./hosts/pi-4/configuration.nix
           ./hosts/pi-4/pi-requirements.nix
+        ];
+      };
+      pi-rover = inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        system = "aarch64-linux";
+        modules = [
+          inputs.nixos-hardware.nixosModules.raspberry-pi-3
+          "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          ./hosts/pi-rover/configuration.nix
+          ./hosts/pi-rover/pi-requirements.nix
         ];
       };
     };
