@@ -55,6 +55,7 @@
     unstable.hyprpicker
     unstable.hyprlock
     unstable.shikane
+    fuzzel
     # swaybg
     # swayidle
     # swaylock
