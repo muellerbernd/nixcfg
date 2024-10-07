@@ -14,7 +14,6 @@ in {
       # terminals
       alacritty
       foot
-      contour
       # notifications
       dunst
       libnotify
