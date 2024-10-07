@@ -79,11 +79,24 @@
     enable = true;
     defaultEditor = true;
   };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
     autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "history"
+        "rust"
+        "screen"
+        "aliases"
+      ];
+    };
   };
 
   # Enable SSH in the boot process.
@@ -98,16 +111,6 @@
   # Provide networkmanager for easy wireless configuration.
   networking.networkmanager.enable = true;
   networking.wireless.enable = lib.mkImageMediaOverride false;
-
-  # # VM guest additions to improve host-guest interaction
-  # services.spice-vdagentd.enable = true;
-  # services.qemuGuest.enable = true;
-  # virtualisation.vmware.guest.enable = pkgs.stdenv.hostPlatform.isx86;
-  # virtualisation.hypervGuest.enable = true;
-  # services.xe-guest-utilities.enable = pkgs.stdenv.hostPlatform.isx86;
-  # # The VirtualBox guest additions rely on an out-of-tree kernel module
-  # # which lags behind kernel releases, potentially causing broken builds.
-  # virtualisation.virtualbox.guest.enable = false;
 
   system.stateVersion = "23.11";
 }

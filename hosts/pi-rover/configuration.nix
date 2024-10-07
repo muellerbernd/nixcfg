@@ -58,12 +58,30 @@
   };
 
   # use zsh as default shell
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "history"
+        "rust"
+        "screen"
+        "aliases"
+      ];
+    };
+  };
+
   users.defaultUserShell = pkgs.zsh;
 
   # default to stateVersion for current lock
   system.stateVersion = config.system.nixos.version;
 
-  boot.initrd.availableKernelModules = [ "usbhid" "usb_storage" "vc4" "bcm2835_dma" "i2c_bcm2835" ];
+  boot.initrd.availableKernelModules = ["usbhid" "usb_storage" "vc4" "bcm2835_dma" "i2c_bcm2835"];
   hardware.enableRedistributableFirmware = true;
 }
