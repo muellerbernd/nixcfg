@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05-small";
     # nixpkgs.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
@@ -27,15 +27,15 @@
     #
     systems.url = "github:nix-systems/default-linux";
 
-    hyprland = {
-      # url = "github:hyprwm/Hyprland";
-      # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-      # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-    };
+    # hyprland = {
+    #   # url = "github:hyprwm/Hyprland";
+    #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
+    #   # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    #   type = "git";
+    #   url = "https://github.com/hyprwm/Hyprland";
+    #   submodules = true;
+    # };
     # niri = {
     #   url = "github:YaLTeR/niri";
     #   inputs.nixpkgs.follows = "nixpkgs";
