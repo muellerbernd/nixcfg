@@ -375,10 +375,10 @@
   # systemd.services."icecc-daemon".environment = lib.mkForce {
   #   PATH = "/run/current-system/sw/bin/";
   # };
-  boot.kernel.sysctl."net.core.rmem_default" = 26214400;
-  boot.kernel.sysctl."net.core.rmem_max" = 26214400;
-  boot.kernel.sysctl."net.core.wmem_default" = 26214400;
-  boot.kernel.sysctl."net.core.wmem_max" = 26214400;
+  # Increase the maximum receive buffer size for network packets
+  boot.kernel.sysctl."net.core.rmem_max" = 2147483647; # 2 GiB, default is 208 KiB
+  boot.kernel.sysctl."net.ipv4.ipfrag_time" = 3; # in seconds, default is 30 s
+  boot.kernel.sysctl."net.ipv4.ipfrag_high_thresh" = 134217728; # 128 MiB, default is 256 KiB
 }
 # vim: set ts=2 sw=2:
 
