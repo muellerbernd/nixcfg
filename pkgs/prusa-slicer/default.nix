@@ -3,6 +3,7 @@
   lib,
   binutils,
   fetchFromGitHub,
+  fetchpatch,
   cmake,
   pkg-config,
   wrapGAppsHook3,
@@ -16,6 +17,7 @@
   expat,
   glew,
   glib,
+  glib-networking,
   gmp,
   gtk3,
   hicolor-icon-theme,
@@ -68,10 +70,22 @@
     if wxGTK-override == null
     then wxGTK-prusa
     else wxGTK-override;
+
+  patches = [
+    (fetchpatch {
+      url = "https://raw.githubusercontent.com/gentoo/gentoo/master/media-gfx/prusaslicer/files/prusaslicer-2.8.0-missing-includes.patch";
+      hash = "sha256-/R9jv9zSP1lDW6IltZ8V06xyLdxfaYrk3zD6JRFUxHg=";
+    })
+    (fetchpatch {
+      url = "https://raw.githubusercontent.com/gentoo/gentoo/master/media-gfx/prusaslicer/files/prusaslicer-2.8.0-fixed-linking.patch";
+      hash = "sha256-G1JNdVH+goBelag9aX0NctHFVqtoYFnqjwK/43FVgvM=";
+    })
+  ];
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "prusa-slicer";
     version = "2.8.0";
+    inherit patches;
 
     src = fetchFromGitHub {
       owner = "prusa3d";
@@ -98,6 +112,7 @@ in
         expat
         glew
         glib
+        glib-networking
         gmp
         gtk3
         hicolor-icon-theme
@@ -120,7 +135,7 @@ in
       ++ lib.optionals withSystemd [
         systemd
       ]
-      ++ lib.optionals stdenv.isDarwin [
+      ++ lib.optionals stdenv.hostPlatform.isDarwin [
         darwin.apple_sdk_11_0.frameworks.CoreWLAN
       ];
 
@@ -181,6 +196,8 @@ in
     preFixup = ''
       gappsWrapperArgs+=(
         --prefix LD_LIBRARY_PATH : "$out/lib"
+        # Otherwise crashes the application for many people (see #293854, #328235)
+        --unset __GLX_VENDOR_LIBRARY_NAME
       )
     '';
 
@@ -196,7 +213,6 @@ in
       runHook postCheck
     '';
 
-    patches = [./openssl.patch];
     meta = with lib;
       {
         description = "G-code generator for 3D printer";
@@ -205,7 +221,7 @@ in
         maintainers = with maintainers; [moredread tweber tmarkus];
         platforms = platforms.unix;
       }
-      // lib.optionalAttrs (stdenv.isDarwin) {
+      // lib.optionalAttrs (stdenv.hostPlatform.isDarwin) {
         mainProgram = "PrusaSlicer";
       };
   })
