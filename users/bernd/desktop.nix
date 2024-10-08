@@ -61,7 +61,7 @@ in {
       prusa-slicer
       # browsers
       chromium
-      firefox
+      unstable.firefox
       # tangram
       # wiki
       # kiwix
