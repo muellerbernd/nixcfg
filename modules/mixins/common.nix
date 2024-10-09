@@ -52,24 +52,17 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xorg.xhost
     # gtk
     gtk-engine-murrine
     gtk_engines
     gsettings-desktop-schemas
-    lxappearance
     playerctl
     xfce.thunar
     xfce.thunar-volman
-    xorg.xmodmap
-    xorg.xev
     #
     gnupg
     pam_gnupg
     bc
-    xbindkeys
-    xsel
-    xdotool
     # gtk settings
     # configure-gtk
     # nix

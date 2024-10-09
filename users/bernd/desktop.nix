@@ -62,6 +62,7 @@ in {
       # browsers
       chromium
       unstable.firefox
+      luakit
       # tangram
       # wiki
       # kiwix

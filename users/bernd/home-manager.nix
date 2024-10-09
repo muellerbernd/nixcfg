@@ -43,13 +43,14 @@
       zellij
       zoxide
       eza
+      bat
       # better shell history
-      w3m
       atuin
+      # pdf
       mupdf
       poppler_utils
+      #
       exiftool
-      bat
       trash-cli
       unstable.yazi
       ffmpegthumbnailer
@@ -58,7 +59,6 @@
       # joshuto
       imgcat
       timg
-      chafa
       libsixel
       tokei
       fzf
@@ -81,8 +81,6 @@
       # cli
       license-generator
       nmap
-      pandoc
-      haskellPackages.pandoc-crossref
       curl
       wget
       light
@@ -92,7 +90,6 @@
       bottom
       dmidecode
       unzip
-      arandr
       scrot
       ffmpeg
       killall
@@ -103,6 +100,9 @@
       bc
       # env
       direnv
+      # pandoc
+      pandoc
+      haskellPackages.pandoc-crossref
       # programming
       ghc
       gnumake
@@ -113,8 +113,6 @@
       python3
       go
       typst
-      # typst-lsp # broken
-      typstyle
       # icecream
       # icemon
       # formatter
@@ -126,14 +124,15 @@
       clang-tools
       nodePackages.prettier
       shfmt
+      typstyle
+      alejandra
+      nixpkgs-fmt
       # lsp
+      # typst-lsp # broken
       lemminx
       ccls
       pyright
-      # nil
       nixd
-      alejandra
-      nixpkgs-fmt
       sumneko-lua-language-server
       marksman
       cmake-language-server
