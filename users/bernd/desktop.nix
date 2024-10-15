@@ -75,7 +75,7 @@ in {
       # teams-for-linux # broken
       teams-for-linux
       # matrix client
-      nheko
+      element-desktop
       # email
       thunderbird
       # vpn
