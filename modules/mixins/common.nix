@@ -75,6 +75,7 @@
     turbovnc
     remmina
     libfido2
+    xorg.xhost
   ];
 
   environment.extraInit = ''

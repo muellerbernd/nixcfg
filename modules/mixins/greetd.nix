@@ -30,8 +30,8 @@ in {
   };
   environment.etc."greetd/environments".text = ''
     Hyprland
-    bash
     niri-session
+    dbus-run-session river
   '';
   environment.systemPackages = with pkgs; [
     greetd.tuigreet

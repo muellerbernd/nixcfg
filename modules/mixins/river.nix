@@ -5,7 +5,6 @@
   inputs,
   ...
 }: {
-  # enable hyprland window manager
   security.pam.services.hyprlock = {};
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
@@ -22,7 +21,6 @@
     qt6.qtwayland
     libsForQt5.qtwayland
     glxinfo
-    kanshi
     hyprpaper
     wlr-randr
     wdisplays
@@ -35,8 +33,11 @@
     # swaybg
     # swayidle
     # swaylock
-    fuzzel
-    river
+    unstable.fuzzel
+    unstable.river
+    unstable.ristate
+    unstable.yambar
+    unstable.shikane
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
@@ -48,8 +49,7 @@
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk];
-    # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [pkgs.xdg-desktop-portal-wlr];
   };
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
