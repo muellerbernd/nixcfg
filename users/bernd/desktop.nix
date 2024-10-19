@@ -274,6 +274,11 @@ in {
   #   latitude = 50.68;
   #   longitude = 10.93;
   # };
+
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
   # not so fancy pointer
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
   # fancy pointer

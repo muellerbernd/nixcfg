@@ -42,6 +42,9 @@
         5280
         3478
         1883
+        # syncthing
+        8384
+        22000
       ];
       allowedUDPPorts = [
         80
@@ -52,9 +55,6 @@
         137
         138
         139
-        # anyconnect?
-        500
-        4500
         51820 # wireguard
         # xmpp
         5222
@@ -64,6 +64,9 @@
         5280
         3478
         1883
+        # syncthing
+        8384
+        22000
       ];
       allowedUDPPortRanges = lib.mkDefault [
         {
