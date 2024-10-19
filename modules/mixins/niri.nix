@@ -7,7 +7,7 @@
 }: {
   # enable hyprland window manager
   security.pam.services.hyprlock = {};
-  programs.xwayland.enable = true;
+  # programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
     rofi-wayland
     # walker
@@ -49,12 +49,12 @@
   # The portal interfaces include APIs for file access, opening URIs,
   # printing and others.
   services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk];
-    # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   # gtk portal needed to make gtk apps happy
+  #   extraPortals = [pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk];
+  #   # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+  # };
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
