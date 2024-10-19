@@ -10,45 +10,50 @@
     export XDG_SESSION_TYPE=wayland
     export XDG_CURRENT_DESKTOP=river
     timestamp=$(date +%F-%R)
-    exec dbus-run-session ${pkgs.unstable.river}/bin/river
+    exec river
   '';
-in{
+in {
   security.pam.services.hyprlock = {};
-  programs.xwayland.enable = true;
-  environment.systemPackages = with pkgs; [
-    rofi-wayland
-    # walker
-    wl-clipboard
-    cliphist
-    gammastep
-    grim
-    grimblast
-    slurp
-    # wayland
-    waybar
-    qt6.qtwayland
-    libsForQt5.qtwayland
-    glxinfo
-    hyprpaper
-    wlr-randr
-    wdisplays
-    nwg-displays
-    nwg-look
-    wl-mirror
-    pipectl
-    hypridle
-    hyprlock
-    # swaybg
-    # swayidle
-    # swaylock
-    unstable.fuzzel
-    unstable.river
-    unstable.ristate
-    unstable.yambar
-    unstable.shikane
-    unstable.dinit
-    river-script
-  ];
+  # programs.xwayland.enable = true;
+  programs.river = {
+    enable = true;
+    xwayland.enable = true;
+    # package = pkgs.unstable.river;
+    extraPackages = with pkgs; [
+      wl-clipboard
+      cliphist
+      gammastep
+      grim
+      grimblast
+      slurp
+      # wayland
+      unstable.waybar
+      qt6.qtwayland
+      libsForQt5.qtwayland
+      glxinfo
+      hyprpaper
+      wlr-randr
+      wdisplays
+      nwg-displays
+      nwg-look
+      wl-mirror
+      pipectl
+      hypridle
+      hyprlock
+      # swaybg
+      # swayidle
+      # swaylock
+      unstable.fuzzel
+      ristate
+      unstable.yambar
+      unstable.shikane
+      unstable.dinit
+      unstable.lswt
+      unstable.mako
+      river-script
+    ];
+  };
+
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
   # (org.freedesktop.portal.Desktop) and object path
@@ -56,15 +61,19 @@ in{
   # The portal interfaces include APIs for file access, opening URIs,
   # printing and others.
   services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   # gtk portal needed to make gtk apps happy
+  #   # configPackages = [pkgs.xdg-desktop-portal-wlr];
+  # };
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # nixpkgs.config.chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --use-angle=vulkan --use-cmd-decoder=passthrough";
+  services.seatd = {
+    enable = true;
+  };
+
 }

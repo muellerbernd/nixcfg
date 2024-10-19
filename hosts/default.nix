@@ -9,9 +9,9 @@
     # modules
     mixins-common
     # mixins-i3
-    mixins-hyprland
-    mixins-niri
-    mixins-jay
+    # mixins-hyprland
+    # mixins-niri
+    # mixins-jay
     mixins-river
     # mixins-sway
   ];
