@@ -4,7 +4,15 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  river-script = pkgs.writeShellScriptBin "river-script" ''
+    export MOZ_ENABLE_WAYLAND=1
+    export XDG_SESSION_TYPE=wayland
+    export XDG_CURRENT_DESKTOP=river
+    timestamp=$(date +%F-%R)
+    exec dbus-run-session ${pkgs.unstable.river}/bin/river
+  '';
+in{
   security.pam.services.hyprlock = {};
   programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
@@ -38,6 +46,8 @@
     unstable.ristate
     unstable.yambar
     unstable.shikane
+    unstable.dinit
+    river-script
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
