@@ -56,6 +56,7 @@
     unstable.hyprlock
     unstable.shikane
     fuzzel
+    mako
     # swaybg
     # swayidle
     # swaylock

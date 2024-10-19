@@ -37,6 +37,7 @@
     # swaylock
     jay
     fuzzel
+    mako
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
