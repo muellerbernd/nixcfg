@@ -49,6 +49,7 @@
       keep-derivations = true
       builders-use-substitutes = true
     '';
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
   environment.systemPackages = with pkgs; [
