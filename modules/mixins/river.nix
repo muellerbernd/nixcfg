@@ -10,19 +10,28 @@
     export XDG_SESSION_TYPE=wayland
     export XDG_CURRENT_DESKTOP=river
     timestamp=$(date +%F-%R)
-    exec river -log-level debug > /tmp/river-$timestamp.log 2>&1
+    # exec river -log-level debug > /tmp/river-$timestamp.log 2>&1
+    exec river
   '';
 in {
   security.pam.services.hyprlock = {};
-  # programs.xwayland.enable = true;
+  programs.xwayland.enable = true;
   programs.river = {
     enable = true;
     xwayland.enable = true;
     # package = pkgs.unstable.river;
     extraPackages = with pkgs; [
+      wlsunset
+      wl-gammactl
       wl-clipboard
+      wl-clip-persist
+      wlr-randr
+      wdisplays
+      wl-mirror
+      wayvnc
+      wlopm
+
       cliphist
-      gammastep
       grim
       grimblast
       slurp
@@ -31,20 +40,26 @@ in {
       qt6.qtwayland
       libsForQt5.qtwayland
       glxinfo
-      hyprpaper
-      wlr-randr
-      wdisplays
       nwg-displays
       nwg-look
-      wl-mirror
       pipectl
+      hyprpaper
       hypridle
       hyprlock
+      # xwayland
+      xwayland
       # swaybg
       # swayidle
       # swaylock
-      unstable.fuzzel
+      # river
+      stacktile
+      rivercarro
       ristate
+      # gamma adjustment
+      gammastep
+      wlsunset
+      # other
+      unstable.fuzzel
       unstable.shikane
       unstable.dinit
       unstable.lswt
