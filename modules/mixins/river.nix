@@ -10,7 +10,7 @@
     export XDG_SESSION_TYPE=wayland
     export XDG_CURRENT_DESKTOP=river
     timestamp=$(date +%F-%R)
-    exec river
+    exec river -log-level debug > /tmp/river-$timestamp.log 2>&1
   '';
 in {
   security.pam.services.hyprlock = {};
@@ -45,7 +45,6 @@ in {
       # swaylock
       unstable.fuzzel
       ristate
-      unstable.yambar
       unstable.shikane
       unstable.dinit
       unstable.lswt
@@ -61,12 +60,20 @@ in {
   # The portal interfaces include APIs for file access, opening URIs,
   # printing and others.
   services.dbus.enable = true;
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   # gtk portal needed to make gtk apps happy
-  #   # configPackages = [pkgs.xdg-desktop-portal-wlr];
-  # };
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        default = [
+          "wlr"
+          "gtk"
+        ];
+      };
+    };
+    #   wlr.enable = true;
+    #   # gtk portal needed to make gtk apps happy
+    #   # configPackages = [pkgs.xdg-desktop-portal-wlr];
+  };
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
@@ -75,5 +82,4 @@ in {
   services.seatd = {
     enable = true;
   };
-
 }
