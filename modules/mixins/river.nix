@@ -15,7 +15,8 @@
   '';
 in {
   security.pam.services.hyprlock = {};
-  programs.xwayland.enable = true;
+  security.pam.services.swaylock = {};
+  # programs.xwayland.enable = true;
   programs.river = {
     enable = true;
     xwayland.enable = true;
@@ -43,14 +44,15 @@ in {
       nwg-displays
       nwg-look
       pipectl
-      hyprpaper
-      hypridle
-      hyprlock
+      #
+      # unstable.hyprpaper
+      # unstable.hypridle
+      # unstable.hyprlock
       # xwayland
       xwayland
-      # swaybg
-      # swayidle
-      # swaylock
+      swaybg
+      swayidle
+      swaylock
       # river
       stacktile
       rivercarro
