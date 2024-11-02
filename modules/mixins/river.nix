@@ -52,6 +52,7 @@ in {
       xwayland
       swaybg
       swayidle
+      sway-audio-idle-inhibit
       swaylock
       # river
       stacktile
