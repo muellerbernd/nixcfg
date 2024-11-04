@@ -52,7 +52,7 @@
       #
       exiftool
       trash-cli
-      unstable.yazi
+      yazi
       ffmpegthumbnailer
       unar
       jq
