@@ -128,10 +128,11 @@
       alejandra
       nixpkgs-fmt
       # lsp
-      # typst-lsp # broken
+      typst-lsp
       lemminx
       ccls
       pyright
+      pylyzer
       nixd
       sumneko-lua-language-server
       marksman
