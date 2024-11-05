@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # nixpkgs.url = "github:nixos/nixpkgs/master";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
     # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 

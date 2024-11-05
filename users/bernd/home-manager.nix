@@ -52,7 +52,7 @@
       #
       exiftool
       trash-cli
-      yazi
+      unstable.yazi
       ffmpegthumbnailer
       unar
       jq
@@ -127,8 +127,9 @@
       typstyle
       alejandra
       nixpkgs-fmt
+      nixfmt-rfc-style
       # lsp
-      typst-lsp
+      typst-lsp # broken
       lemminx
       ccls
       pyright
