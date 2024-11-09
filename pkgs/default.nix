@@ -4,5 +4,4 @@
   uvtools = pkgs.callPackage ./uvtools {};
   annotator = pkgs.callPackage ./annotator {};
   prusa-slicer = pkgs.callPackage ./prusa-slicer {};
-  # hyprland = pkgs.callPackage ./hyprland {};
 }
