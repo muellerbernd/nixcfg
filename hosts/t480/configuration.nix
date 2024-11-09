@@ -109,15 +109,15 @@
         }
       ];
 
-      levels = [
-        [0 0 55]
-        [1 48 60]
-        [2 50 61]
-        [3 52 63]
-        [6 56 65]
-        [7 60 85]
-        ["level auto" 80 32767]
-      ];
+      # levels = [
+      #   [0 0 55]
+      #   [1 48 60]
+      #   [2 50 61]
+      #   [3 52 63]
+      #   [6 56 65]
+      #   [7 60 85]
+      #   ["level auto" 80 32767]
+      # ];
     };
   };
   systemd.services.thinkfan.preStart = "/run/current-system/sw/bin/modprobe  -r thinkpad_acpi && /run/current-system/sw/bin/modprobe thinkpad_acpi";
