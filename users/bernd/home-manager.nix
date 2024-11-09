@@ -106,6 +106,7 @@
       # programming
       ghc
       gnumake
+      just
       cmake
       gcc
       gdb
