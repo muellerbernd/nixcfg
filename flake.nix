@@ -27,51 +27,15 @@
     #
     systems.url = "github:nix-systems/default-linux";
 
-    # hyprland = {
-    #   # url = "github:hyprwm/Hyprland";
-    #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-    #   # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    #   type = "git";
-    #   url = "https://github.com/hyprwm/Hyprland";
-    #   submodules = true;
-    # };
-    # niri = {
-    #   url = "github:YaLTeR/niri";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hypridle = {
-    #   url = "github:hyprwm/hypridle";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprlock = {
-    #   url = "github:hyprwm/hyprlock";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprlang = {
-    #   url = "github:hyprwm/hyprlang";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprpicker = {
-    #   url = "github:hyprwm/hyprpicker";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # waybar = {
-    #   url = "github:alexays/waybar";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # neovim-nightly = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    # yazi.url = "github:sxyazi/yazi";
+
     agenix.url = "github:ryantm/agenix";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
-
-    # nixd.url = "github:nix-community/nixd";
   };
 
   outputs = {
@@ -171,13 +135,15 @@
         inherit nixpkgs home-manager agenix inputs outputs;
         system = "x86_64-linux";
       };
-      # custom ISO
-      ISO = mkISO "ISO" {
-        nixpkgs = nixpkgs;
+      ISO = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+          ./hosts/iso/configuration.nix
+        ];
       };
       # test VM
-      balodil = mkVM "balodil" {
+      balodil = mkDefault "balodil" {
         inherit nixpkgs home-manager agenix inputs outputs;
         system = "x86_64-linux";
         users = ["bernd"];
@@ -186,8 +152,6 @@
       # VM
       nixetcup = mkDefault "nixetcup" {
         inherit nixpkgs home-manager agenix inputs outputs;
-        # nixpkgs = nixpkgs-stable;
-        # home-manager = home-manager-stable;
         system = "x86_64-linux";
         users = ["bernd"];
         headless = true;
@@ -202,6 +166,7 @@
           ./hosts/pi-4/pi-requirements.nix
         ];
       };
+      # raspberry-pi-3 rover
       pi-rover = inputs.nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         system = "aarch64-linux";
