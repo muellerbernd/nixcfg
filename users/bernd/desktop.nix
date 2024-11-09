@@ -112,9 +112,12 @@ in {
       # userChome.css to make it look better
       userChrome = "\n      /* hides the native tabs */\n#TabsToolbar {\n  visibility: collapse;\n}\n\n                ";
       settings = {
-        "browser.startup.homepage" = "https://searx.aicampground.com";
-        "browser.search.defaultenginename" = "Searx";
-        "browser.search.order.1" = "Searx";
+        # "browser.startup.homepage" = "https://searx.aicampground.com";
+        # "browser.search.defaultenginename" = "Searx";
+        # "browser.search.order.1" = "Searx";
+        "browser.startup.homepage" = "https://duckduckgo.com";
+        "browser.search.defaultenginename" = "DuckDuckGo";
+        "browser.search.order.1" = "DuckDuckGo";
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "extensions.autoDisableScopes" = 0;
         "browser.link.open_newwindow" = "3";
@@ -133,8 +136,8 @@ in {
       };
       search = {
         force = true;
-        default = "Searx";
-        order = ["Searx" "Google"];
+        default = "DuckDuckGo";
+        order = ["Searx" "Google" "DuckDuckGo"];
         engines = {
           "Nix Packages" = {
             urls = [
