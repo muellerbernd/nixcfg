@@ -22,7 +22,7 @@ in {
             --user-menu \
             --cmd river-script
         '';
-            # --cmd ${lib.getExe config.programs.hyprland.package}
+        # --cmd ${lib.getExe config.programs.hyprland.package}
         # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions:${config.services.displayManager.sessionData.desktops}/share/wayland-sessions:niri-session --remember --remember-user-session";
         # --cmd "systemd-cat Hyprland"
         # command = "sway";

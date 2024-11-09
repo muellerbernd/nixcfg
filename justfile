@@ -48,21 +48,21 @@ iso:
   nix build .#nixosConfigurations.ISO.config.system.build.isoImage --show-trace
 
 # build the setup for the current host as VM
-[group('Main')]
+[group('VM')]
 system-vm:
   nixos-rebuild build-vm --flake .#${HOSTNAME}
 
-# Activate the configuration
-[group('Main')]
+# build balodil test VM
+[group('VM')]
 balodil:
   nixos-rebuild build-vm --flake .#balodil
 
-# Activate the configuration
-[group('Main')]
+# build VM nixetcup
+[group('VM')]
 nixetcup:
    nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@45.136.31.59 --flake ".#nixetcup" --show-trace
 
-# Activate the configuration
+# build and deploy config for pi-mcrover
 [group('Main')]
 deploy-pi-mcrover:
   nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.178.160 --flake ".#pi-rover"

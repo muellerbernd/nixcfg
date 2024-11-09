@@ -50,9 +50,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    mkVM = import ./lib/mkvm.nix;
     mkDefault = import ./lib/mkdefault.nix;
-    mkISO = import ./lib/mkiso.nix;
     lib = nixpkgs.lib // home-manager.lib;
     forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
     pkgsFor = lib.genAttrs (import systems) (
