@@ -96,6 +96,25 @@
 
   # programs
 
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "history"
+        "rust"
+        "screen"
+        "aliases"
+      ];
+    };
+  };
+
   # use zsh as default shell
   users.defaultUserShell = pkgs.zsh;
 
@@ -114,7 +133,6 @@
     enable = true;
     defaultEditor = true;
   };
-  programs.zsh.enable = true;
   programs.git.enable = true;
   programs.light.enable = true;
 
