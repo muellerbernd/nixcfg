@@ -6,7 +6,7 @@
   ...
 }: let
   rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
-    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun" -show combi -lines 20 -show-icons
+    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
   '';
 in {
   home = {
