@@ -8,7 +8,8 @@
 }: {
   imports =
     if (!headless)
-    then [./desktop.nix ../../modules/profiles/kanshi.nix]
+    # then [./desktop.nix ../../modules/profiles/kanshi.nix]
+    then [./desktop.nix]
     else [];
 
   # imports = with inputs.self.nixosModules; [

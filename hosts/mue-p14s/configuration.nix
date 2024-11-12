@@ -379,6 +379,15 @@
   boot.kernel.sysctl."net.core.wmem_max" = 16777216;
   boot.kernel.sysctl."net.core.rmem_default" = 4129920;
   boot.kernel.sysctl."net.core.wmem_default" = 4129920;
+
+  services.chrony = {
+    enable = true;
+    extraConfig = ''
+      # Configure as server (specify network IP)
+      local stratum 10
+      allow 10.100.0.0/24
+    '';
+  };
 }
 # vim: set ts=2 sw=2:
 
