@@ -25,7 +25,7 @@
       # nerdfonts
       iosevka
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       source-code-pro
       ttf_bitstream_vera

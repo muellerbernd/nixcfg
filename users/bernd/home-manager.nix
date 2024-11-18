@@ -23,7 +23,7 @@
       procps
       lsof
       # editors
-      unstable.neovim
+      neovim
       # package manager for lua
       luajitPackages.luarocks
       tree-sitter
@@ -53,7 +53,7 @@
       #
       exiftool
       trash-cli
-      unstable.yazi
+      yazi
       ffmpegthumbnailer
       unar
       jq
@@ -70,9 +70,9 @@
       # tools
       imagemagick
       stow
-      gnome.gnome-keyring
-      gnome.seahorse
-      gnome.adwaita-icon-theme
+      gnome-keyring
+      seahorse
+      adwaita-icon-theme
       lxde.lxsession
       gnupg
       # cli helpers
@@ -174,7 +174,8 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "24.05";
+  # home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 }
 # vim: set ts=2 sw=2:
 

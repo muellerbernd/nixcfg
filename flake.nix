@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     # nixpkgs.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
     # nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
@@ -16,8 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
-      # url = "github:nix-community/home-manager/release-23.11";
-      url = "github:nix-community/home-manager/release-24.05";
+      # url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
 
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";

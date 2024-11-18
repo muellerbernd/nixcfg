@@ -47,7 +47,7 @@ in {
       pavucontrol
       xfce.thunar
       xfce.thunar-volman
-      gnome.file-roller
+      file-roller
       archiver
       xfce.xfce4-screenshooter
       obs-studio
@@ -61,7 +61,7 @@ in {
       prusa-slicer
       # browsers
       chromium
-      unstable.firefox
+      # firefox
       luakit
       # tangram
       # wiki
@@ -71,7 +71,7 @@ in {
       spotify-player
       sox
       # messenger
-      unstable.gajim
+      gajim
       # teams-for-linux # broken
       teams-for-linux
       # matrix client

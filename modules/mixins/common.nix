@@ -34,7 +34,6 @@
   };
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    package = pkgs.nixFlakes;
     settings.auto-optimise-store = true;
     settings.allowed-users = ["bernd" "nix-serve" "nixremote"];
     settings.trusted-users = ["root" "nixremote"];

@@ -100,6 +100,7 @@
 
   # for cross compilation of arm
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv7l-linux"];
+  boot.binfmt.preferStaticEmulators = true;
 
   hardware.enableRedistributableFirmware = true;
 

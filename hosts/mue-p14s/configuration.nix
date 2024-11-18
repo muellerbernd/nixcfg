@@ -122,7 +122,7 @@
   };
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
@@ -213,7 +213,7 @@
     socat
     turbovnc
     hidapi
-    libusb
+    libusb1
     wirelesstools
     iw
     cloudcompare

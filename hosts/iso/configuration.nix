@@ -11,7 +11,6 @@
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    package = pkgs.nixFlakes;
     settings.allowed-users = [];
     settings.trusted-users = ["root"];
     extraOptions = ''
