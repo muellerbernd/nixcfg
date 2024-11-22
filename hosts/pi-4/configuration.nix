@@ -50,7 +50,7 @@
   environment.noXlibs = lib.mkForce false;
 
   # Enable GPU acceleration
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # Use the latest kernel
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
