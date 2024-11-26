@@ -153,8 +153,9 @@
       pkgs.python3Packages.pygments # needed for my custom markdown to beamer workflow
       # pkgs.python3Packages.numpy
       # latex
-      # texlive.combined.scheme-full
-      texlive.combined.scheme-medium
+      texlive.combined.scheme-full
+      # texlive.combined.scheme-medium
+      # texlivePackages.adjustbox
       # keyboard stuff
       avrdude
       evtest
