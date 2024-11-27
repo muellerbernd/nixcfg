@@ -85,11 +85,11 @@ in
 
         home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
+          # home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.bernd = import ../users/bernd/home-manager.nix;
           home-manager.extraSpecialArgs = {
-            inherit inputs headless;
+            inherit inputs outputs headless;
           };
         }
 

@@ -185,5 +185,18 @@
         ];
       };
     };
+
+    # Standalone home-manager configuration entrypoint
+    # Available through 'home-manager --flake .#your-username@your-hostname'
+    homeConfigurations.bernd = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      modules = [
+        ./users/bernd/home-manager.nix
+      ];
+      extraSpecialArgs = {
+        inherit inputs outputs;
+        headless = false;
+      };
+    };
   };
 }
