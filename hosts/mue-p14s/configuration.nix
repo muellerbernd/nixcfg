@@ -220,6 +220,8 @@
     tio
     setserial
     throttled
+    drawio
+    pandoc-drawio-filter
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
