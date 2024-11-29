@@ -42,6 +42,7 @@
     };
 
     agenix.url = "github:ryantm/agenix";
+    disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";

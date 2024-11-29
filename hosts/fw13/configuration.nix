@@ -9,9 +9,10 @@
     ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # modules
+    # my modules
     mixins-distributed-builder-client
     mixins-workVPN
+    # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
   # Bootloader.
