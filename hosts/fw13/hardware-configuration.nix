@@ -9,12 +9,12 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  fileSystems = {
-    "/".options = ["compress=zstd"];
-    "/home".options = ["compress=zstd"];
-    "/nix".options = ["compress=zstd" "noatime"];
-    "/swap".options = ["noatime"];
-  };
+  # fileSystems = {
+  #   "/".options = ["compress=zstd"];
+  #   "/home".options = ["compress=zstd"];
+  #   "/nix".options = ["compress=zstd" "noatime"];
+  #   "/swap".options = ["noatime"];
+  # };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
