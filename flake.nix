@@ -138,6 +138,10 @@
         crypt_device = "/dev/disk/by-uuid/38cfcbfc-ae82-4232-b4c8-c486f18a82b8";
         hostname = "ammerapad";
       };
+      fw13 = mkDefault "fw13" {
+        inherit nixpkgs home-manager agenix inputs outputs;
+        system = "x86_64-linux";
+      };
       biltower = mkDefault "biltower" {
         inherit nixpkgs home-manager agenix inputs outputs;
         system = "x86_64-linux";
