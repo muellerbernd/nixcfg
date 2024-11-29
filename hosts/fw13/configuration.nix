@@ -31,7 +31,8 @@
       # luks.fido2Support = false; # because systemd
       luks.devices = {
         crypt = {
-          device = "/dev/nvme0n1p2";
+          # device = "/dev/nvme0n1p2";
+          device = "/dev/disk/by-label/disk-main-luks";
           # preLVM = true;
           # crypttabExtraOpts = ["fido2-device=auto" "token-timeout=5"];
         };
