@@ -10,13 +10,15 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    # device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    device = "/dev/disk/by-partlabel/disk-main-luks";
     fsType = "btrfs";
     options = ["subvol=@" "compress=zstd:1" "noatime"];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    # device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    device = "/dev/disk/by-partlabel/disk-main-luks";
     fsType = "btrfs";
     options = ["subvol=@nix" "compress=zstd:1" "noatime"];
   };
@@ -28,13 +30,15 @@
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    # device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    device = "/dev/disk/by-partlabel/disk-main-luks";
     fsType = "btrfs";
     options = ["subvol=@home" "compress=zstd:1" "noatime"];
   };
 
   fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    # device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+    device = "/dev/disk/by-partlabel/disk-main-luks";
     fsType = "btrfs";
     options = ["noatime"];
   };

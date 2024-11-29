@@ -2,9 +2,10 @@
 
 ```bash
 git clone https://github.com/muellerbernd/nixcfg.git
-cd nixcfg/hosts/fw13
-
+# delete, setup and mount
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko hosts/fw13/disko-config.nix
+# only mount
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount hosts/fw13/disko-config.nix
 ```
 
 # install nixos
