@@ -1,18 +1,21 @@
 # Drive setup via disko
 
 ```bash
-git clone https://github.com/muellerbernd/nixcfg.git
+cd /tmp
+curl https://raw.githubusercontent.com/muellerbernd/nixcfg/refs/heads/main/hosts/fw13/disk-config.nix -o /tmp/disk-config.nix
+
 # delete, setup and mount
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko hosts/fw13/disko-config.nix
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /tmp/disk-config.nix
 # only mount
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount hosts/fw13/disko-config.nix
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount /tmp/disk-config.nix
 ```
 
 # install nixos
 
 ```bash
+git clone https://github.com/muellerbernd/nixcfg.git /mnt/etc/nixos
 nix-shell -p git nixFlakes efibootmgr tmux
-nixos-install --root /mnt --flake .#fw13
+nixos-install --root /mnt --flake /mnt/etc/nixos#fw13
 nixos-enter
 # do some setup
 exit
