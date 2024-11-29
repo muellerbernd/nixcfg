@@ -14,8 +14,6 @@
     mixins-workVPN
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-
-    ./disko.nix
   ];
   # Bootloader.
   boot = {
