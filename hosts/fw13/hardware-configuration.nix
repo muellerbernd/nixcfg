@@ -9,17 +9,12 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/root";
-    fsType = "ext4";
+  fileSystems = {
+    "/".options = ["compress=zstd"];
+    "/home".options = ["compress=zstd"];
+    "/nix".options = ["compress=zstd" "noatime"];
+    "/swap".options = ["noatime"];
   };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
-  };
-
-  swapDevices = [{device = "/dev/disk/by-label/swap";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

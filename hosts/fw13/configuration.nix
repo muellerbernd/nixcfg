@@ -14,6 +14,8 @@
     mixins-workVPN
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+
+    ./disko.nix
   ];
   # Bootloader.
   boot = {
@@ -30,8 +32,8 @@
       # luks.fido2Support = false; # because systemd
       luks.devices = {
         crypt = {
-          device = "/dev/nvme1n1p2";
-          preLVM = true;
+          device = "/dev/nvme0n1p2";
+          # preLVM = true;
           # crypttabExtraOpts = ["fido2-device=auto" "token-timeout=5"];
         };
       };
