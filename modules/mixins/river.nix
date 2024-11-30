@@ -35,7 +35,7 @@ in {
       grimblast
       slurp
       # wayland
-      unstable.waybar
+      waybar
       qt6.qtwayland
       libsForQt5.qtwayland
       glxinfo
@@ -43,9 +43,9 @@ in {
       nwg-look
       pipectl
       #
-      # unstable.hyprpaper
-      # unstable.hypridle
-      # unstable.hyprlock
+      hyprpaper
+      hypridle
+      hyprlock
       # xwayland
       xwayland
       swaybg
@@ -60,11 +60,11 @@ in {
       gammastep
       wlsunset
       # other
-      unstable.fuzzel
-      unstable.shikane
-      unstable.dinit
-      unstable.lswt
-      unstable.mako
+      fuzzel
+      shikane
+      dinit
+      lswt
+      mako
       river-script
     ];
   };
@@ -93,6 +93,7 @@ in {
   # security.pam.services.hyprlock = {};
   # security.pam.services.swaylock = {};
   security.pam.services.swaylock.fprintAuth = true;
+  security.pam.services.hyprlock.fprintAuth = true;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

@@ -27,15 +27,15 @@
         i3status-rust
       ];
     };
-    environment.systemPackages = with pkgs; [
-      xorg.xmodmap
-      xorg.xev
-      lxappearance
-      xorg.xhost
-      xbindkeys
-      xsel
-      xdotool
-      arandr
-    ];
   };
+  environment.systemPackages = with pkgs; [
+    xorg.xmodmap
+    xorg.xev
+    lxappearance
+    xorg.xhost
+    xbindkeys
+    xsel
+    xdotool
+    arandr
+  ];
 }

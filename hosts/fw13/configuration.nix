@@ -114,6 +114,14 @@
 
   # Install the driver
   services.fprintd.enable = true;
+
+  # Automatically set the regulatory domain for
+  # the wireless network card
+  hardware.wirelessRegulatoryDatabase = true;
+
+  # Disable light sensors and accelerometers as
+  # they are not used and consume extra battery
+  hardware.sensor.iio.enable = false;
 }
 # vim: set ts=2 sw=2:
 
