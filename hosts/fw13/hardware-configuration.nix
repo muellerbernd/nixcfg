@@ -12,16 +12,17 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelParams = [
-    "rtc_cmos.use_acpi_alarm=1"
-    "amdgpu.sg_display=0"
-    "acpi_osi=\"!Windows 2020\""
+  # Linux kernel: two options, with the second one being useful
+  # when there are problems with the latest kernel and thus there
+  # is a need to pin the installation to a specific version
+  # --> Install the latest kernel from the NixOS channel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # --> Install a specific kernel version from the NixOS channel
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
 
-    # "nvme.noacpi=1" # maybe causing crashes upon waking?
+  # Add kernel parameters to better support suspend (i.e., "sleep" feature)
+  boot.kernelParams = ["mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y"];
 
-    # NOTE(oninstall):
-    "resume_offset=3421665"
-  ];
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="US"
   '';
