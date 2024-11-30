@@ -12,6 +12,20 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  boot.kernelParams = [
+    "rtc_cmos.use_acpi_alarm=1"
+    "amdgpu.sg_display=0"
+    "acpi_osi=\"!Windows 2020\""
+
+    # "nvme.noacpi=1" # maybe causing crashes upon waking?
+
+    # NOTE(oninstall):
+    "resume_offset=3421665"
+  ];
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="US"
+  '';
+
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
@@ -48,7 +62,7 @@
     options = ["subvol=nix" "compress=zstd" "noatime"];
   };
 
-  swapDevices = [];
+  swapDevices = [{device = "/.swapvol/swapfile";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
