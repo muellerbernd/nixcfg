@@ -16,18 +16,44 @@
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
   # --> Install the latest kernel from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   # --> Install a specific kernel version from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10);
+  # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_11);
 
   # Add kernel parameters to better support suspend (i.e., "sleep" feature)
-  boot.kernelParams = ["mem_sleep_default=s2idle" "acpi_osi=\"!Windows 2020\"" "amdgpu.sg_display=0" "amdgpu.sg_display=0" "mt7921e.disable_aspm=y"];
+  boot.kernelParams = [
+    "mem_sleep_default=s2idle"
+    "acpi_osi=\"!Windows 2020\""
+    "amdgpu.sg_display=0"
+    "mt7921e.disable_aspm=y"
+
+    "resume_offset=19932416"
+  ];
 
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="US"
   '';
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
+  # enable btrfs support
+  boot.supportedFilesystems = ["btrfs"];
+
+  # boot.initrd.systemd.enable = true;
+  boot.initrd.availableKernelModules = [
+    "thunderbolt"
+    # USB
+    "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
+  ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
@@ -43,7 +69,7 @@
   fileSystems."/.swapvol" = {
     device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
     fsType = "btrfs";
-    options = ["subvol=swap"];
+    options = ["subvol=swap" "noatime"];
   };
 
   fileSystems."/boot" = {
@@ -64,6 +90,7 @@
   };
 
   swapDevices = [{device = "/.swapvol/swapfile";}];
+  boot.resumeDevice = "/dev/dm-0"; # the unlocked drive mapping
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

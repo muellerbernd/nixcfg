@@ -123,6 +123,8 @@
   # Disable light sensors and accelerometers as
   # they are not used and consume extra battery
   hardware.sensor.iio.enable = false;
+
+  hardware.framework.amd-7040.preventWakeOnAC = true;
 }
 # vim: set ts=2 sw=2:
 
