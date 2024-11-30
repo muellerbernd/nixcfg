@@ -14,8 +14,6 @@
     exec river
   '';
 in {
-  security.pam.services.hyprlock = {};
-  security.pam.services.swaylock = {};
   # programs.xwayland.enable = true;
   programs.river = {
     enable = true;
@@ -92,8 +90,9 @@ in {
     #   # gtk portal needed to make gtk apps happy
     #   # configPackages = [pkgs.xdg-desktop-portal-wlr];
   };
+  # security.pam.services.hyprlock = {};
   # security.pam.services.swaylock = {};
-  # security.pam.services.swaylock.fprintAuth = false;
+  security.pam.services.swaylock.fprintAuth = true;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

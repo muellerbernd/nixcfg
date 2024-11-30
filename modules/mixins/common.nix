@@ -221,6 +221,8 @@
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitch = "ignore";
   services.logind.extraConfig = ''
+    # want to be able to listen to music while laptop closed
+    LidSwitchIgnoreInhibited=no
     HandleLidSwitch=ignore
     # don’t shutdown when power button is short-pressed
     HandlePowerKey=ignore

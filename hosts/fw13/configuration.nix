@@ -72,6 +72,15 @@
   ];
 
   services.fwupd.enable = true;
+  # we need fwupd 1.9.7 to downgrade the fingerprint sensor firmware
+  services.fwupd.package =
+    (import (builtins.fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/bb2009ca185d97813e75736c2b8d1d8bb81bde05.tar.gz";
+        sha256 = "sha256:003qcrsq5g5lggfrpq31gcvj82lb065xvr7bpfa8ddsw8x4dnysk";
+      }) {
+        inherit (pkgs) system;
+      })
+    .fwupd;
 
   systemd.services.toggleLaptopKeyboard = lib.mkForce {
     enable = true;
@@ -96,6 +105,15 @@
       # ExecStop = ''${pkgs.screen}/bin/screen -S irc -X quit'';
     };
   };
+
+  # Start the driver at boot
+  systemd.services.fprintd = {
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "simple";
+  };
+
+  # Install the driver
+  services.fprintd.enable = true;
 }
 # vim: set ts=2 sw=2:
 
