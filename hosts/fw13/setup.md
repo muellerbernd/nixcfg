@@ -1,7 +1,6 @@
 # Drive setup via disko
 
 ```bash
-cd /tmp
 curl https://raw.githubusercontent.com/muellerbernd/nixcfg/refs/heads/main/hosts/fw13/disk-config.nix -o /tmp/disk-config.nix
 
 # delete, setup and mount
