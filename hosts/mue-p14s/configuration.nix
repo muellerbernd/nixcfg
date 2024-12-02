@@ -222,7 +222,9 @@
     throttled
     drawio
     pandoc-drawio-filter
+    teamviewer
   ];
+  services.teamviewer.enable = true;
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
   # The TL;DR is: the kernel calls out to the hard-coded path of
