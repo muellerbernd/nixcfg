@@ -114,7 +114,35 @@
   # };
   #
   # # Install the driver
-  services.fprintd.enable = false;
+  services.fprintd.enable = true;
+
+  security.pam.services.login.fprintAuth = true;
+  # similarly to how other distributions handle the fingerprinting login
+  # security.pam.services.login-fingerprint = lib.mkIf (config.services.fprintd.enable) {
+  #   text = ''
+  #     auth       required                    pam_securetty.so
+  #     auth       requisite                   pam_nologin.so
+  #     auth       include                     system-local-login
+  #     account    include                     system-local-login
+  #     session    include                     system-local-login
+  #     password   include                     system-local-login
+  #
+  #     auth       required                    pam_shells.so
+  #     auth       requisite                   pam_nologin.so
+  #     auth       requisite                   pam_faillock.so      preauth
+  #     auth       required                    ${pkgs.fprintd}/lib/security/pam_fprintd.so
+  #     auth       optional                    pam_permit.so
+  #     auth       required                    pam_env.so
+  #     auth       optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so
+  #
+  #     account    include                     login
+  #
+  #     password   required                    pam_deny.so
+  #
+  #     session    include                     login
+  #     session    optional                    ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start
+  #   '';
+  # };
 
   # Automatically set the regulatory domain for
   # the wireless network card
