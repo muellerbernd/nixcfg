@@ -92,8 +92,8 @@ in {
   };
   # security.pam.services.hyprlock = {};
   # security.pam.services.swaylock = {};
-  security.pam.services.swaylock.fprintAuth = true;
-  security.pam.services.hyprlock.fprintAuth = true;
+  # security.pam.services.swaylock.fprintAuth = true;
+  # security.pam.services.hyprlock.fprintAuth = true;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
