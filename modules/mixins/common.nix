@@ -7,6 +7,7 @@
 }: {
   imports = with inputs.self.nixosModules; [
     # modules
+    # mixins-ly
     mixins-greetd
     mixins-pipewire
     # mixins-lightdm
@@ -17,21 +18,21 @@
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = ["ntfs" "cifs"];
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
+  # systemd = {
+  # user.services.polkit-gnome-authentication-agent-1 = {
+  #   description = "polkit-gnome-authentication-agent-1";
+  #   wantedBy = ["graphical-session.target"];
+  #   wants = ["graphical-session.target"];
+  #   after = ["graphical-session.target"];
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #     Restart = "on-failure";
+  #     RestartSec = 1;
+  #     TimeoutStopSec = 10;
+  #   };
+  # };
+  # };
   # Nix settings, auto cleanup and enable flakes
   nix = {
     settings.auto-optimise-store = true;
@@ -232,9 +233,9 @@
 
   security.pam.services = {
     login.u2fAuth = true;
-    sudo.u2fAuth = true;
-    greetd.u2fAuth = true;
-    hyprlock.u2fAuth = true;
+    # sudo.u2fAuth = true;
+    # greetd.u2fAuth = true;
+    # hyprlock.u2fAuth = true;
   };
 
   # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
@@ -274,4 +275,13 @@
     "olm-3.2.16"
     "electron-29.4.6"
   ];
+  # services.xserver.displayManager.ly = {
+  #   enable = false;
+  #   defaultUser = "bernd";
+  #   package = pkgs.myPackages.ly;
+  #   extraConfig = ''
+  #     animate = true
+  #     animation = 0
+  #   '';
+  # };
 }
