@@ -234,8 +234,9 @@
   security.pam.services = {
     login.u2fAuth = true;
     # sudo.u2fAuth = true;
-    # greetd.u2fAuth = true;
-    # hyprlock.u2fAuth = true;
+    greetd.u2fAuth = true;
+    hyprlock.u2fAuth = true;
+    swaylock.u2fAuth = true;
   };
 
   # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
