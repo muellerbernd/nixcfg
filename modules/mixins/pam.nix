@@ -30,7 +30,6 @@
     enable = true;
     settings = {
       cue = true;
-      # authfile = config.age.secrets.fidoKeys.path;
     };
     control = "sufficient";
   };
@@ -52,6 +51,7 @@
     libfido2
   ];
 
+  # taken from here https://www.reddit.com/r/NixOS/comments/16oiazf/swaylock_fprintd_fingerprint_reader_issues/
   security.pam.services.swaylock = {
     text = ''
       auth sufficient pam_unix.so try_first_pass likeauth nullok
@@ -59,4 +59,12 @@
       auth include login
     '';
   };
+
+  # security.pam.services.ly = {
+  #   text = ''
+  #     auth sufficient pam_unix.so try_first_pass likeauth nullok
+  #     auth sufficient pam_fprintd.so
+  #     auth include login
+  #   '';
+  # };
 }

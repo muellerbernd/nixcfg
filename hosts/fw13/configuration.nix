@@ -116,8 +116,10 @@
   # # Install the driver
   services.fprintd.enable = true;
 
-  # similarly to how other distributions handle the fingerprinting login
-  # security.pam.services.login-fingerprint = lib.mkIf (config.services.fprintd.enable) {
+  # security.pam.services.ly.fprintAuth = false;
+
+  # # similarly to how other distributions handle the fingerprinting login
+  # security.pam.services.ly = lib.mkIf (config.services.fprintd.enable) {
   #   text = ''
   #     auth       required                    pam_securetty.so
   #     auth       requisite                   pam_nologin.so
