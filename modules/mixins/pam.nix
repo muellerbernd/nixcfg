@@ -42,15 +42,13 @@
   # '';
 
   services.udev.extraRules = ''
-    ACTION!="add|change", GOTO="u2f_end"
+    ACTION!="add|change", GOTO="u2f_thetis_end"
     # Key-ID FIDO U2F
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
-    LABEL="u2f_end"
+    LABEL="u2f_thetis_end"
   '';
 
   environment.systemPackages = with pkgs; [
-    yubikey-manager
-    # fido2-manage
     libfido2
   ];
 }
