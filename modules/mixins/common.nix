@@ -7,7 +7,7 @@
 }: {
   imports = with inputs.self.nixosModules; [
     # modules
-    # mixins-ly
+    mixins-ly
     # mixins-greetd
     mixins-pipewire
     # mixins-lightdm
@@ -15,6 +15,7 @@
     mixins-fonts
     mixins-virtualisation
     mixins-nix-settings
+    mixins-pam
   ];
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = ["ntfs" "cifs"];
@@ -195,19 +196,6 @@
     HandlePowerKey=ignore
   '';
 
-  security.polkit.enable = true;
-
-  security.pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
-    # greetd.u2fAuth = true;
-    # ly.u2fAuth = true;
-    # hyprlock.u2fAuth = true;
-    # swaylock.u2fAuth = true;
-  };
-
-  security.pam.u2f.enable = true;
-  security.pam.u2f.control = "sufficient";
   # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
   systemd.services.toggleLaptopKeyboard = lib.mkDefault {
     enable = true;
@@ -240,6 +228,5 @@
   #   enable = true;
   #   package = pkgs.mullvad-vpn;
   # };
-
-  services.displayManager.ly.enable = true;
+  security.polkit.enable = true;
 }
