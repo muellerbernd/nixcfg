@@ -27,10 +27,10 @@
   # };
 
   security.pam.u2f = {
-    enable = false;
+    enable = true;
     settings = {
       cue = true;
-      authfile = config.age.secrets.fidoKeys.path;
+      # authfile = config.age.secrets.fidoKeys.path;
     };
     control = "sufficient";
   };
