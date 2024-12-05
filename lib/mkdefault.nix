@@ -115,6 +115,9 @@ in
             workSmbCredentials = {
               file = "${inputs.self}/secrets/workSmbCredentials.age";
             };
+            fidoKeys = {
+              file = "${inputs.self}/secrets/fidoKeys.age";
+            };
           };
         }
 

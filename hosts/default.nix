@@ -8,9 +8,9 @@
   imports = with inputs.self.nixosModules; [
     # modules
     mixins-common
-    mixins-i3
+    # mixins-i3
     # mixins-hyprland
-    # mixins-niri
+    mixins-niri
     # mixins-jay
     mixins-river
     # mixins-sway

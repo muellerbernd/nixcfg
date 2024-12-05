@@ -20,21 +20,22 @@
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = ["ntfs" "cifs"];
 
-  # systemd = {
-  # user.services.polkit-gnome-authentication-agent-1 = {
-  #   description = "polkit-gnome-authentication-agent-1";
-  #   wantedBy = ["graphical-session.target"];
-  #   wants = ["graphical-session.target"];
-  #   after = ["graphical-session.target"];
-  #   serviceConfig = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #     Restart = "on-failure";
-  #     RestartSec = 1;
-  #     TimeoutStopSec = 10;
-  #   };
-  # };
-  # };
+  security.polkit.enable = true;
+  systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+  };
 
   environment.systemPackages = with pkgs; [
     # gtk
@@ -42,8 +43,7 @@
     gtk_engines
     gsettings-desktop-schemas
     playerctl
-    xfce.thunar
-    xfce.thunar-volman
+    pcmanfm
     #
     gnupg
     pam_gnupg
@@ -57,7 +57,6 @@
     inputs.agenix.packages.${system}.default
     wireguard-tools
     samba
-    turbovnc
     remmina
     libfido2
     xorg.xhost
@@ -96,10 +95,10 @@
   users.defaultUserShell = pkgs.zsh;
 
   # thunar settings
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
-  };
+  # programs.thunar = {
+  #   enable = true;
+  #   plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
+  # };
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
 
@@ -171,12 +170,6 @@
       openFirewall = true;
     };
 
-    udev.extraRules = ''
-      ACTION!="add|change", GOTO="u2f_end"
-      # Key-ID FIDO U2F
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
-      LABEL="u2f_end"
-    '';
     # # Gamecube Controller Adapter
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
     # # Xiaomi Mi 9 Lite
@@ -228,5 +221,4 @@
   #   enable = true;
   #   package = pkgs.mullvad-vpn;
   # };
-  security.polkit.enable = true;
 }

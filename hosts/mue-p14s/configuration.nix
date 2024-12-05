@@ -211,7 +211,7 @@
     iperf
     nmap
     socat
-    turbovnc
+    # turbovnc
     hidapi
     libusb1
     wirelesstools
@@ -294,11 +294,11 @@
   #   };
   # };
 
-  services.xserver = {
-    xkb.layout = "de";
-    xkb.variant = "";
-    #xkbOptions = "ctrl:nocaps";
-  };
+  # services.xserver = {
+  #   xkb.layout = "de";
+  #   xkb.variant = "";
+  #   #xkbOptions = "ctrl:nocaps";
+  # };
 
   # specialisation for traveling
   # specialisation = {
@@ -359,11 +359,11 @@
     SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A4WN1BDG", SYMLINK+="leica", MODE="666", RUN+="${pkgs.coreutils}/bin/stty -F /dev/leica cs8 115200 ${pkgs.setserial}/bin/setserial /dev/leica low_latency"
   '';
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # Add any missing dynamic libraries for unpackaged programs
-    # here, NOT in environment.systemPackages
-  ];
+  # programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  #   # Add any missing dynamic libraries for unpackaged programs
+  #   # here, NOT in environment.systemPackages
+  # ];
 
   # services.icecream.daemon = {
   #   enable = true;
@@ -382,14 +382,14 @@
   boot.kernel.sysctl."net.core.rmem_default" = 4129920;
   boot.kernel.sysctl."net.core.wmem_default" = 4129920;
 
-  services.chrony = {
-    enable = true;
-    extraConfig = ''
-      # Configure as server (specify network IP)
-      local stratum 10
-      allow 10.100.0.0/24
-    '';
-  };
+  # services.chrony = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     # Configure as server (specify network IP)
+  #     local stratum 10
+  #     allow 10.100.0.0/24
+  #   '';
+  # };
 }
 # vim: set ts=2 sw=2:
 

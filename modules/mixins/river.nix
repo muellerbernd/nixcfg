@@ -43,9 +43,9 @@ in {
       nwg-look
       pipectl
       #
-      hyprpaper
-      hypridle
-      hyprlock
+      # hyprpaper
+      # hypridle
+      # hyprlock
       # xwayland
       xwayland
       swaybg
@@ -81,8 +81,8 @@ in {
     config = {
       common = {
         default = [
-          "wlr"
           "gtk"
+          "wlr"
         ];
       };
     };
@@ -96,8 +96,4 @@ in {
   # security.pam.services.hyprlock.fprintAuth = true;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  services.seatd = {
-    enable = true;
-  };
 }
