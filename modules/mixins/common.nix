@@ -8,7 +8,7 @@
   imports = with inputs.self.nixosModules; [
     # modules
     # mixins-ly
-    mixins-greetd
+    # mixins-greetd
     mixins-pipewire
     # mixins-lightdm
     mixins-locale
@@ -203,13 +203,13 @@
         openFirewall = true;
       };
 
-    udev.extraRules = ''
-      ACTION!="add|change", GOTO="u2f_end"
-      # Key-ID FIDO U2F
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
-      LABEL="u2f_end"
-
-    '';
+    # udev.extraRules = ''
+    #   ACTION!="add|change", GOTO="u2f_end"
+    #   # Key-ID FIDO U2F
+    #   KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
+    #   LABEL="u2f_end"
+    #
+    # '';
     # # Gamecube Controller Adapter
     # SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="057e", ATTRS{idProduct}=="0337", MODE="0666"
     # # Xiaomi Mi 9 Lite
@@ -233,12 +233,15 @@
 
   security.pam.services = {
     login.u2fAuth = true;
-    # sudo.u2fAuth = true;
-    greetd.u2fAuth = true;
-    hyprlock.u2fAuth = true;
-    swaylock.u2fAuth = true;
+    sudo.u2fAuth = true;
+    # greetd.u2fAuth = true;
+    # ly.u2fAuth = true;
+    # hyprlock.u2fAuth = true;
+    # swaylock.u2fAuth = true;
   };
 
+  security.pam.u2f.enable = true;
+  security.pam.u2f.control = "sufficient";
   # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
   systemd.services.toggleLaptopKeyboard = lib.mkDefault {
     enable = true;
@@ -276,13 +279,6 @@
     "olm-3.2.16"
     "electron-29.4.6"
   ];
-  # services.xserver.displayManager.ly = {
-  #   enable = false;
-  #   defaultUser = "bernd";
-  #   package = pkgs.myPackages.ly;
-  #   extraConfig = ''
-  #     animate = true
-  #     animation = 0
-  #   '';
-  # };
+
+  services.displayManager.ly.enable = true;
 }

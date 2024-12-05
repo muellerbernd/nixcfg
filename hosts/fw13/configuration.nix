@@ -108,13 +108,13 @@
   };
 
   # Start the driver at boot
-  systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
-    serviceConfig.Type = "simple";
-  };
+  # systemd.services.fprintd = {
+  #   wantedBy = ["multi-user.target"];
+  #   serviceConfig.Type = "simple";
+  # };
 
   # # Install the driver
-  services.fprintd.enable = true;
+  services.fprintd.enable = false;
 
   # similarly to how other distributions handle the fingerprinting login
   # security.pam.services.login-fingerprint = lib.mkIf (config.services.fprintd.enable) {
