@@ -5,14 +5,18 @@
   ...
 }: {
   security.pam.services = {
-    login.u2fAuth = true;
-    sudo.u2fAuth = true;
-    # greetd.u2fAuth = true;
-    # ly.u2fAuth = true;
-    swaylock.u2fAuth = true;
+    login = {
+      u2fAuth = true;
+      enableGnomeKeyring = true;
+    };
+    # sudo.u2fAuth = true;
+    swaylock = {
+      u2fAuth = true;
+      enableGnomeKeyring = true;
+    };
   };
-  security.pam.services.swaylock = {};
-  security.pam.services.swaylock.fprintAuth = false;
+  # security.pam.services.swaylock = {};
+  # security.pam.services.swaylock.fprintAuth = false;
 
   # security.pam.services.swaylock = {
   #   u2fAuth = true;
@@ -23,7 +27,7 @@
   # };
 
   security.pam.u2f = {
-    enable = true;
+    enable = false;
     settings = {
       cue = true;
       authfile = config.age.secrets.fidoKeys.path;
@@ -43,4 +47,10 @@
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1ea8", ATTRS{idProduct}=="fc25", TAG+="uaccess"
     LABEL="u2f_end"
   '';
+
+  environment.systemPackages = with pkgs; [
+    yubikey-manager
+    # fido2-manage
+    libfido2
+  ];
 }

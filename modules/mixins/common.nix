@@ -58,7 +58,6 @@
     wireguard-tools
     samba
     remmina
-    libfido2
     xorg.xhost
     lxqt.lxqt-policykit
   ];
