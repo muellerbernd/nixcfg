@@ -84,16 +84,15 @@ in {
           "gtk"
           "wlr"
         ];
+        "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+        "org.freedesktop.impl.portal.Inhibit" = ["none"];
       };
     };
-    #   wlr.enable = true;
+    wlr.enable = true;
     #   # gtk portal needed to make gtk apps happy
     #   # configPackages = [pkgs.xdg-desktop-portal-wlr];
   };
-  # security.pam.services.hyprlock = {};
-  # security.pam.services.swaylock = {};
-  # security.pam.services.swaylock.fprintAuth = true;
-  # security.pam.services.hyprlock.fprintAuth = true;
   # As of NixOS 22.05 ("Quokka"), you can enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable NIXOS_OZONE_WL=1
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
