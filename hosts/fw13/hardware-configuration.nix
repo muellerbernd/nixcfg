@@ -16,7 +16,7 @@
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
   # --> Install the latest kernel from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # --> Install a specific kernel version from the NixOS channel
   # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_11);
 
@@ -30,9 +30,9 @@
     "resume_offset=19932416"
   ];
 
-  boot.extraModprobeConfig = ''
-    options cfg80211 ieee80211_regdom="US"
-  '';
+  # boot.extraModprobeConfig = ''
+  #   options cfg80211 ieee80211_regdom="US"
+  # '';
 
   # enable btrfs support
   boot.supportedFilesystems = ["btrfs"];
