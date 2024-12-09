@@ -191,6 +191,8 @@
       evtest
       # nix stuff
       statix
+      #
+      sshfs
     ];
   };
 
