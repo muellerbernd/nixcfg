@@ -161,7 +161,7 @@
       nixpkgs-fmt
       nixfmt-rfc-style
       # lsp
-      typst-lsp # broken
+      tinymist
       lemminx
       ccls
       pyright
