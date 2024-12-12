@@ -186,6 +186,7 @@
       texlive.combined.scheme-full
       # texlive.combined.scheme-medium
       # texlivePackages.adjustbox
+      texlivePackages.pdfpagediff
       # keyboard stuff
       avrdude
       evtest
