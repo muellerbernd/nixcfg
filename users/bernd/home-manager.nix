@@ -129,6 +129,8 @@
       ncdu
       lsd
       bc
+      #
+      ghostscript
       # env
       direnv
       # pandoc
