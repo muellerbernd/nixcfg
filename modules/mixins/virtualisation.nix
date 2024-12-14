@@ -5,9 +5,6 @@
   inputs,
   ...
 }: {
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
   environment.systemPackages = with pkgs; [
     podman-compose
     (
@@ -88,4 +85,10 @@
       graphics = false;
     };
   };
+
+  # virt-manager
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["bernd"];
+  virtualisation.spiceUSBRedirection.enable = true;
 }
