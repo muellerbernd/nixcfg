@@ -35,6 +35,8 @@ in {
     extraConfig = ''
       Host remote-builder
           ConnectTimeout 3
+          StrictHostKeyChecking no
+          UserKnownHostsFile=/dev/null
       Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 10.200.200.0/24"
           HostName 10.200.200.28
       Match originalhost remote-builder exec "${ssh-script}/bin/ssh-script 192.168.1.0/24"
