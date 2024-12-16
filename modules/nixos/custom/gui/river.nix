@@ -60,6 +60,7 @@ in {
       gammastep
       wlsunset
       # other
+      rofi-wayland
       fuzzel
       shikane
       dinit
