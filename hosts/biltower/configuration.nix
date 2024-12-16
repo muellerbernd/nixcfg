@@ -9,11 +9,18 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
-    ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    mixins-workVPN
+    # modules
+    customSystem
   ];
+
+  custom.system = {
+    gui.enable = true;
+    # distributedBuilder.enable = true;
+    workVPN.enable = true;
+    # bootMessage.enable = false;
+  };
 
   # Bootloader.
   boot = {

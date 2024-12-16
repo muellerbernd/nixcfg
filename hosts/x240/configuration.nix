@@ -4,13 +4,23 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
-  imports = [
-    ../default.nix
-    # Include the results of the hardware scan.
+  imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
+    # modules
+    customSystem
   ];
+
+  custom.system = {
+    gui.enable = true;
+    distributedBuilder.enable = true;
+    workVPN.enable = true;
+    bootMessage.enable = false;
+    disableNvidia.enable = false;
+  };
+
   # Bootloader.
   boot = {
     loader = {

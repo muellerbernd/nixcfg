@@ -46,9 +46,6 @@
     trusted-users = ["root" "@wheel"];
   };
 
-  # This causes an overlay which causes a lot of rebuilding
-  environment.noXlibs = lib.mkForce false;
-
   # Enable GPU acceleration
   hardware.graphics.enable = true;
 

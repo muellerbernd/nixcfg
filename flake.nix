@@ -115,7 +115,7 @@
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
 
-    nixosModules = import ./modules {inherit lib;};
+    nixosModules = import ./modules/nixos;
 
     nixosConfigurations = {
       mue-p14s = mkDefault "mue-p14s" {

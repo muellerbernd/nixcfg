@@ -5,6 +5,7 @@
   inputs,
   ...
 }: let
+  cfg = config.custom.system.bootMessage;
   boot-message = pkgs.writeShellApplication {
     name = "boot-message";
     text = let
@@ -21,5 +22,10 @@
     ];
   };
 in {
-  boot.initrd.preDeviceCommands = lib.getExe boot-message;
+  options.custom.system.bootMessage = {
+    enable = lib.mkEnableOption "bootMessage";
+  };
+  config = lib.mkIf cfg.enable {
+    boot.initrd.preDeviceCommands = lib.getExe boot-message;
+  };
 }

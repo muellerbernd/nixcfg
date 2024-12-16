@@ -6,18 +6,21 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
-    ../default.nix
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     # my modules
-    mixins-distributed-builder-client
-    mixins-workVPN
+    customSystem
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-
-    # inputs.disko.nixosModules.disko
-    # ./disk-config.nix
+    ./hardware-configuration.nix
   ];
+
+  custom.system = {
+    # development.enable = true;
+    gui.enable = true;
+    distributedBuilder.enable = true;
+    workVPN.enable = true;
+    bootMessage.enable = true;
+  };
+
   # Bootloader.
   boot = {
     consoleLogLevel = 3;
