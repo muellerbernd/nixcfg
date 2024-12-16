@@ -1,0 +1,3 @@
+{
+  customSystem = import ./custom;
+}
