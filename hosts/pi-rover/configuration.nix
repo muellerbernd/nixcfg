@@ -46,9 +46,6 @@
     trusted-users = ["root" "@wheel"];
   };
 
-  # This causes an overlay which causes a lot of rebuilding
-  environment.noXlibs = lib.mkForce false;
-
   # Use the latest kernel
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 

@@ -12,8 +12,16 @@
     ./xmpp.nix
     # ./prosody.nix
     # modules
-    mixins-server
+    customSystem
   ];
+
+  custom.system = {
+    gui.enable = false;
+    distributedBuilder.enable = false;
+    workVPN.enable = false;
+    bootMessage.enable = false;
+    disableNvidia.enable = false;
+  };
 
   # Bootloader.
   boot = {
@@ -70,8 +78,6 @@
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
   };
-
-  system.stateVersion = "24.11";
 
   users.users.root = {
     openssh.authorizedKeys.keys = [

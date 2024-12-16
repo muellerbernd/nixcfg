@@ -8,13 +8,19 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
-    ../default.nix
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # modules
-    mixins-distributed-builder-client
-    mixins-workVPN
+    customSystem
   ];
+
+  custom.system = {
+    gui.enable = true;
+    distributedBuilder.enable = true;
+    workVPN.enable = true;
+    bootMessage.enable = true;
+    disableNvidia.enable = false;
+  };
+
   # Bootloader.
   boot = {
     consoleLogLevel = 3;

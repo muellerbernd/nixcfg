@@ -6,16 +6,20 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
-    ../default.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # printers
     ./printers.nix
     # modules
-    mixins-distributed-builder-client
-    mixins-workVPN
-    mixins-disable-nvidia
+    customSystem
   ];
+
+  custom.system = {
+    gui.enable = true;
+    distributedBuilder.enable = true;
+    workVPN.enable = true;
+    bootMessage.enable = true;
+    disableNvidia.enable = true;
+  };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
   boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];

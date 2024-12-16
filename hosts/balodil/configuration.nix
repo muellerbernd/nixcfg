@@ -6,9 +6,17 @@
   ...
 }: {
   imports = with inputs.self.nixosModules; [
-    ../default.nix
     # modules
+    customSystem
   ];
+
+  custom.system = {
+    # development.enable = true;
+    gui.enable = true;
+    distributedBuilder.enable = true;
+    # workVPN.enable = false;
+    # bootMessage.enable = false;
+  };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
   # boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];
@@ -24,8 +32,6 @@
   hardware = {
     graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         mesa.drivers
       ];
