@@ -16,6 +16,8 @@
     mixins-virtualisation
     mixins-nix-settings
     mixins-pam
+
+    mixins-boot-message
   ];
   # NixOS uses NTFS-3G for NTFS support.
   boot.supportedFilesystems = ["ntfs" "cifs"];
