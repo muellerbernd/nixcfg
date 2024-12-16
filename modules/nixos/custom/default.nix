@@ -20,6 +20,7 @@ in {
     ./gui/default.nix
     ./distributed-builder-client.nix
     ./workVPN.nix
+    ./disable-nvidia.nix
   ];
 
   options.custom.system = {
