@@ -13,6 +13,7 @@
         If found, please contact:
         Bernd Mueller:
         bernd@muellerbernd.de
+        xmpp:bernd@muellerbernd.de
         @muellerbernd:matrix.org
       '';
     in ''echo -e ${message} | boxes --design weave | lolcat --seed 38 --force'';
