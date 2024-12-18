@@ -44,7 +44,7 @@ in {
       pipectl
       #
       # hyprpaper
-      # hypridle
+      hypridle
       # hyprlock
       # xwayland
       xwayland
