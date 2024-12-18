@@ -51,9 +51,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
-    home-manager-unstable,
     systems,
     agenix,
     nixos-hardware,
