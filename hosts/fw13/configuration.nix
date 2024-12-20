@@ -159,6 +159,7 @@
   hardware.sensor.iio.enable = false;
 
   hardware.framework.amd-7040.preventWakeOnAC = true;
+  networking.networkmanager.wifi.powersave = false;
 }
 # vim: set ts=2 sw=2:
 

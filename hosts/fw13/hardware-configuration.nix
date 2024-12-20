@@ -25,14 +25,14 @@
     "mem_sleep_default=s2idle"
     "acpi_osi=\"!Windows 2020\""
     "amdgpu.sg_display=0"
-    "mt7921e.disable_aspm=y"
+    # "mt7921e.disable_aspm=y"
 
     "resume_offset=19932416"
   ];
 
-  # boot.extraModprobeConfig = ''
-  #   options cfg80211 ieee80211_regdom="US"
-  # '';
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="DE"
+  '';
 
   # enable btrfs support
   boot.supportedFilesystems = ["btrfs"];

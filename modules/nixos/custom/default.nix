@@ -71,6 +71,7 @@ in {
       xorg.xhost
       lxqt.lxqt-policykit
       pciutils
+      iw
     ];
 
     environment.extraInit = ''
