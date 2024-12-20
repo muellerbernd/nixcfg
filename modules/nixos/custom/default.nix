@@ -70,6 +70,7 @@ in {
       remmina
       xorg.xhost
       lxqt.lxqt-policykit
+      pciutils
     ];
 
     environment.extraInit = ''
