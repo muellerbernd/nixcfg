@@ -36,7 +36,7 @@
       luks.devices = {
         crypt = {
           # device = "/dev/nvme1n1p2";
-          device = "/dev/disk/by-uuid/188ea543-478e-411d-a7ec-72cb008b2a17";
+          device = "/dev/disk/by-uuid/9e6fed15-813e-4163-89f2-c983d1d399e3";
           preLVM = true;
           # crypttabExtraOpts = ["fido2-device=auto" "token-timeout=5"];
         };
