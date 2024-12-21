@@ -63,13 +63,17 @@
                 inherit mountOptions;
                 mountpoint = "/nix";
               };
-              # "/persist" = {
-              #   inherit mountOptions;
-              #   mountpoint = "/persist";
-              # };
+              "/persist" = {
+                inherit mountOptions;
+                mountpoint = "/persist";
+              };
               "/log" = {
                 inherit mountOptions;
                 mountpoint = "/var/log";
+              };
+              "/snapshots" = {
+                inherit mountOptions;
+                mountpoint = "/snapshots";
               };
               "/home" = {
                 inherit mountOptions;
