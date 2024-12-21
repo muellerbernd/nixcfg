@@ -30,23 +30,23 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 4;
     };
-    # initrd = {
-    #   # systemd.enable = true; # initrd uses systemd
-    #   # luks.fido2Support = false; # because systemd
-    #   luks.devices = {
-    #     crypt = {
-    #       # device = "/dev/nvme1n1p2";
-    #       device = "/dev/disk/by-uuid/188ea543-478e-411d-a7ec-72cb008b2a17";
-    #       preLVM = true;
-    #       # crypttabExtraOpts = ["fido2-device=auto" "token-timeout=5"];
-    #     };
-    #     # data = {
-    #     #   device = "/dev/nvme0n1p1";
-    #     #   keyFile = "/keyfile";
-    #     #   allowDiscards = true;
-    #     # };
-    #   };
-    # };
+    initrd = {
+      # systemd.enable = true; # initrd uses systemd
+      # luks.fido2Support = false; # because systemd
+      luks.devices = {
+        crypt = {
+          # device = "/dev/nvme1n1p2";
+          device = "/dev/disk/by-uuid/188ea543-478e-411d-a7ec-72cb008b2a17";
+          preLVM = true;
+          # crypttabExtraOpts = ["fido2-device=auto" "token-timeout=5"];
+        };
+        # data = {
+        #   device = "/dev/nvme0n1p1";
+        #   keyFile = "/keyfile";
+        #   allowDiscards = true;
+        # };
+      };
+    };
   };
 
   services = {
