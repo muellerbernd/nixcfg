@@ -17,6 +17,14 @@
                 mountOptions = ["umask=0077"];
               };
             };
+            swap = {
+              size = "50G";
+              content = {
+                type = "swap";
+                discardPolicy = "both";
+                resumeDevice = true; # resume from hiberation from this device
+              };
+            };
             luks = {
               size = "100%";
               content = {
@@ -45,10 +53,10 @@
                       mountpoint = "/nix";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
-                    "/swap" = {
-                      mountpoint = "/.swapvol";
-                      swap.swapfile.size = "40G";
-                    };
+                    # "/swap" = {
+                    #   mountpoint = "/.swapvol";
+                    #   swap.swapfile.size = "40G";
+                    # };
                   };
                 };
               };

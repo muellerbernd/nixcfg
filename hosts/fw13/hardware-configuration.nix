@@ -66,11 +66,11 @@
 
   boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/9b02bdd8-8021-4ec4-860e-0376d32297b0";
 
-  fileSystems."/.swapvol" = {
-    device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
-    fsType = "btrfs";
-    options = ["subvol=swap" "noatime"];
-  };
+  # fileSystems."/.swapvol" = {
+  #   device = "/dev/disk/by-uuid/3be84151-2951-4578-ad90-04386464eb59";
+  #   fsType = "btrfs";
+  #   options = ["subvol=swap" "noatime"];
+  # };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/B18C-AEE8";
@@ -89,8 +89,8 @@
     options = ["subvol=nix" "compress=zstd" "noatime"];
   };
 
-  swapDevices = [{device = "/.swapvol/swapfile";}];
-  boot.resumeDevice = "/dev/dm-0"; # the unlocked drive mapping
+  # swapDevices = [{device = "/.swapvol/swapfile";}];
+  # boot.resumeDevice = "/dev/dm-0"; # the unlocked drive mapping
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
