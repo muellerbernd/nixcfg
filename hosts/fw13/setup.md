@@ -13,7 +13,7 @@ nix --experimental-features "nix-command flakes" run github:nix-community/disko/
 
 ```bash
 git clone https://github.com/muellerbernd/nixcfg.git /mnt/etc/nixos
-nix-shell -p git nixFlakes efibootmgr tmux
+nix-shell -p git nixVersions.stable efibootmgr tmux
 nixos-install --root /mnt --flake /mnt/etc/nixos#fw13
 nixos-enter
 # do some setup

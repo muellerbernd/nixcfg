@@ -18,6 +18,15 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
+   # enable btrfs support
+  boot.supportedFilesystems = ["btrfs"];
+
+  # Linux kernel: two options, with the second one being useful
+  # when there are problems with the latest kernel and thus there
+  # is a need to pin the installation to a specific version
+  # --> Install the latest kernel from the NixOS channel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
     fsType = "btrfs";
