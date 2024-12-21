@@ -163,7 +163,7 @@
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="DE"
   '';
-  boot.initrd.systemd.enable = true;
+  # boot.initrd.systemd.enable = true;
 }
 # vim: set ts=2 sw=2:
 
