@@ -18,7 +18,7 @@
     gui.enable = true;
     distributedBuilder.enable = true;
     workVPN.enable = true;
-    bootMessage.enable = true;
+    bootMessage.enable = false;
   };
 
   # Bootloader.

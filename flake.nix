@@ -110,6 +110,7 @@
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forEachSystem (pkgs: pkgs.alejandra);
+    # formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
 
