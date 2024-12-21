@@ -28,43 +28,43 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
+    device = "/dev/disk/by-uuid/1908ec14-2f6c-4ab4-b901-bcea71537b25";
     fsType = "btrfs";
     options = ["subvol=root" "compress=zstd" "noatime"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/B659-2EDE";
+    device = "/dev/disk/by-uuid/37A0-1025";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
+    device = "/dev/disk/by-uuid/1908ec14-2f6c-4ab4-b901-bcea71537b25";
     fsType = "btrfs";
     options = ["subvol=home" "compress=zstd" "noatime"];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
+    device = "/dev/disk/by-uuid/1908ec14-2f6c-4ab4-b901-bcea71537b25";
     fsType = "btrfs";
     options = ["subvol=nix" "compress=zstd" "noatime"];
   };
 
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
-    fsType = "btrfs";
-    options = ["subvol=persist" "compress=zstd" "noatime"];
-  };
+  # fileSystems."/persist" = {
+  #   device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
+  #   fsType = "btrfs";
+  #   options = ["subvol=persist" "compress=zstd" "noatime"];
+  # };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/afe76582-8a70-41d4-8dcf-776bf3ce3004";
+    device = "/dev/disk/by-uuid/1908ec14-2f6c-4ab4-b901-bcea71537b25";
     fsType = "btrfs";
     options = ["subvol=log" "compress=zstd" "noatime"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/0867cf4f-9248-41ad-b674-d818f16593ea";}
+    {device = "/dev/disk/by-uuid/8b641095-e207-40c1-b4b9-53ed1226ab29";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
