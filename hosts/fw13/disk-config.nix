@@ -55,6 +55,10 @@
                 "discard"
               ];
             in {
+              "/root" = {
+                inherit mountOptions;
+                mountpoint = "/";
+              };
               "/nix" = {
                 inherit mountOptions;
                 mountpoint = "/nix";
@@ -76,12 +80,12 @@
         };
       };
     };
-    nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "defaults"
-        "mode=755"
-      ];
-    };
+    # nodev."/" = {
+    #   fsType = "tmpfs";
+    #   mountOptions = [
+    #     "defaults"
+    #     "mode=755"
+    #   ];
+    # };
   };
 }
