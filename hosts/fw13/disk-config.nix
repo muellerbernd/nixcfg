@@ -1,69 +1,87 @@
 {lib, ...}: {
   disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = lib.mkDefault "/dev/nvme0n1";
-        content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              size = "512M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
-              };
+    disk.main = {
+      type = "disk";
+      device = lib.mkDefault "/dev/nvme0n1";
+      content = {
+        type = "gpt";
+        partitions = {
+          ESP = {
+            size = "512M";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = ["defaults"];
             };
-            swap = {
-              size = "50G";
+          };
+          luks = {
+            size = "100%";
+            content = {
+              type = "luks";
+              name = "crypted";
+              settings.allowDiscards = true;
               content = {
-                type = "swap";
-                discardPolicy = "both";
-                resumeDevice = true; # resume from hiberation from this device
-              };
-            };
-            luks = {
-              size = "100%";
-              content = {
-                type = "luks";
-                name = "crypted";
-                # disable settings.keyFile if you want to use interactive password entry
-                #passwordFile = "/tmp/secret.key"; # Interactive
-                settings = {
-                  allowDiscards = true;
-                  # keyFile = "/tmp/secret.key";
-                };
-                # additionalKeyFiles = ["/tmp/additionalSecret.key"];
-                content = {
-                  type = "btrfs";
-                  extraArgs = ["-f"];
-                  subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "/home" = {
-                      mountpoint = "/home";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = ["compress=zstd" "noatime"];
-                    };
-                    # "/swap" = {
-                    #   mountpoint = "/.swapvol";
-                    #   swap.swapfile.size = "40G";
-                    # };
-                  };
-                };
+                type = "lvm_pv";
+                vg = "pool";
               };
             };
           };
         };
       };
+    };
+    lvm_vg.pool = {
+      type = "lvm_vg";
+      lvs = {
+        swap = {
+          size = "50G";
+          content.type = "swap";
+        };
+        persist = {
+          # Uses different format for specifying size
+          # Based on `lvcreate` arguments
+          size = "100%FREE";
+          content = {
+            type = "btrfs";
+            extraArgs = ["-f"]; # Override existing partition
+            # Subvolumes must set a mountpoint in order to be mounted
+            # unless its parent is mounted
+            subvolumes = let
+              mountOptions = [
+                "compress=zstd"
+                "noatime"
+                "nodiratime"
+                "discard"
+              ];
+            in {
+              "/nix" = {
+                inherit mountOptions;
+                mountpoint = "/nix";
+              };
+              "/persist" = {
+                inherit mountOptions;
+                mountpoint = "/persist";
+              };
+              "/log" = {
+                inherit mountOptions;
+                mountpoint = "/var/log";
+              };
+              "/home" = {
+                inherit mountOptions;
+                mountpoint = "/home";
+              };
+            };
+          };
+        };
+      };
+    };
+    nodev."/" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "defaults"
+        "mode=755"
+      ];
     };
   };
 }
