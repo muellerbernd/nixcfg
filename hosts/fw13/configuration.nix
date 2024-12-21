@@ -160,6 +160,9 @@
 
   hardware.framework.amd-7040.preventWakeOnAC = true;
   networking.networkmanager.wifi.powersave = false;
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="DE"
+  '';
 }
 # vim: set ts=2 sw=2:
 
