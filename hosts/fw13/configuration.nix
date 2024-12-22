@@ -14,11 +14,10 @@
   ];
 
   custom.system = {
-    # development.enable = true;
     gui.enable = true;
     distributedBuilder.enable = true;
     workVPN.enable = true;
-    bootMessage.enable = false;
+    bootMessage.enable = true;
   };
 
   # Bootloader.
