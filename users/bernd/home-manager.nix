@@ -16,7 +16,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # inputs.neovim-nightly.overlays.default
+      # inputs.neovim-nightly-overlay.overlays.default
       inputs.lsleases.overlays.default
       inputs.rofi-music-rs.overlays.default
       # Add overlays your own flake exports (from overlays and pkgs dir):
@@ -164,6 +164,7 @@
       nixfmt-rfc-style
       # lsp
       typst-lsp
+      tinymist
       lemminx
       ccls
       pyright

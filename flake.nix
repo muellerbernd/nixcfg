@@ -27,10 +27,10 @@
     #
     systems.url = "github:nix-systems/default-linux";
 
-    # neovim-nightly = {
-    #   url = "github:nix-community/neovim-nightly-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hyprland = {
     #   # url = "github:hyprwm/Hyprland";
     #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
