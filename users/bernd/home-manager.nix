@@ -53,7 +53,7 @@
       procps
       lsof
       # editors
-      neovim
+      unstable.neovim
       # package manager for lua
       luajitPackages.luarocks
       tree-sitter
