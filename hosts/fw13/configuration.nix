@@ -180,6 +180,13 @@
     options cfg80211 ieee80211_regdom="DE"
   '';
   # boot.initrd.systemd.enable = true;
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    python312
+  ];
 }
 # vim: set ts=2 sw=2:
 
