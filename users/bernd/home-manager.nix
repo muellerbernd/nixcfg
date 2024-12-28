@@ -203,6 +203,17 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+      starship init fish | source
+      atuin init fish | source
+      zoxide init fish | source
+    '';
+
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
