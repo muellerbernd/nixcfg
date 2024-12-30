@@ -89,8 +89,6 @@ in {
       libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
-      # flipper zero
-      qFlipper
 
       # custom packages
       annotator
