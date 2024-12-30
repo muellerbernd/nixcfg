@@ -21,6 +21,7 @@ in {
     ./distributed-builder-client.nix
     ./workVPN.nix
     ./disable-nvidia.nix
+    ./flipperzero.nix
   ];
 
   options.custom.system = {

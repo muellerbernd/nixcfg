@@ -18,6 +18,7 @@
     distributedBuilder.enable = true;
     workVPN.enable = true;
     bootMessage.enable = true;
+    flipperzero.enable = true;
   };
 
   # Bootloader.
