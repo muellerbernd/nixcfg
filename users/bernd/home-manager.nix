@@ -65,6 +65,8 @@
       vcstool
       yarn
       nodejs
+      # terminal emulator
+      unstable.ghostty
       # terminal
       glow
       antigen
