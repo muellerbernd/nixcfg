@@ -65,10 +65,7 @@
       vcstool
       yarn
       nodejs
-      # terminal emulator
-      unstable.ghostty
       # terminal
-      glow
       antigen
       starship
       tmux
@@ -187,14 +184,6 @@
       # pkgs.python3Packages.requests
       pkgs.python3Packages.pygments # needed for my custom markdown to beamer workflow
       # pkgs.python3Packages.numpy
-      # latex
-      texlive.combined.scheme-full
-      # texlive.combined.scheme-medium
-      # texlivePackages.adjustbox
-      texlivePackages.pdfpagediff
-      # keyboard stuff
-      avrdude
-      evtest
       # nix stuff
       statix
       #

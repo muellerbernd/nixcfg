@@ -7,10 +7,10 @@
   cfg = config.custom.system.gui;
 in {
   imports = [
-    ./ly.nix
     ./pipewire.nix
     ./river.nix
   ];
+
   options.custom.system.gui = {
     enable = lib.mkEnableOption "gui";
   };
@@ -21,5 +21,7 @@ in {
     # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     xdg.portal.enable = true;
+    services.displayManager.ly.enable = true;
+    programs.river.enable = true;
   };
 }

@@ -16,7 +16,7 @@
 in {
   # programs.xwayland.enable = true;
   programs.river = {
-    enable = true;
+    enable = lib.mkDefault false;
     xwayland.enable = true;
     # package = pkgs.unstable.river;
     extraPackages = with pkgs; [

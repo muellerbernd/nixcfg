@@ -11,6 +11,14 @@
 in {
   home = {
     packages = with pkgs; [
+      # latex
+      texlive.combined.scheme-full
+      # texlive.combined.scheme-medium
+      # texlivePackages.adjustbox
+      texlivePackages.pdfpagediff
+      # keyboard stuff
+      avrdude
+      evtest
       # terminals
       alacritty
       foot
@@ -76,6 +84,7 @@ in {
       teams-for-linux
       # matrix client
       element-desktop
+      fractal
       # email
       thunderbird
       # vpn
