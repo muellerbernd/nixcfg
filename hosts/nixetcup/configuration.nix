@@ -10,6 +10,7 @@
     ./nginx.nix
     ./jitsi.nix
     ./xmpp.nix
+    # ./matrix.nix
     # ./prosody.nix
     # modules
     customSystem
@@ -48,6 +49,7 @@
 
   networking = {
     networkmanager.enable = true;
+    enableIPv6 = true;
     firewall = {
       enable = lib.mkForce true;
       allowedTCPPorts = [

@@ -36,22 +36,6 @@
           '';
         };
       };
-      # "jitsi.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
-      # "auth.jitsi.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
-      # "xmpp.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
-      # "proxy.${domain}" = {
-      #   enableACME = true;
-      #   forceSSL = true;
-      # };
       "upload.xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
