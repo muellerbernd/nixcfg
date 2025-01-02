@@ -159,7 +159,6 @@
       shfmt
       typstyle
       alejandra
-      nixpkgs-fmt
       nixfmt-rfc-style
       # lsp
       typst-lsp
