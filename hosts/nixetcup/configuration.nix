@@ -10,7 +10,7 @@
     ./nginx.nix
     ./jitsi.nix
     ./xmpp.nix
-    # ./matrix.nix
+    ./matrix.nix
     # ./prosody.nix
     # modules
     customSystem

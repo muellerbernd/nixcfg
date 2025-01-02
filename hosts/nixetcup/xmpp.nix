@@ -302,6 +302,7 @@
         };
       };
       mod_muc_admin = {};
+      mod_muc_occupantid = {};
       mod_offline = {
         access_max_user_messages = "max_user_offline_messages";
         store_groupchat = true;
