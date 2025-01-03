@@ -51,6 +51,7 @@ iso:
 [group('VM')]
 system-vm:
   nixos-rebuild build-vm --flake .#${HOSTNAME}
+  # nixos-rebuild build-vm-with-bootloader --flake .#${HOSTNAME}
 
 # build balodil test VM
 [group('VM')]

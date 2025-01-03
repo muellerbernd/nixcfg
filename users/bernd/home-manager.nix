@@ -201,7 +201,6 @@
       atuin init fish | source
       zoxide init fish | source
     '';
-
   };
 
   # This value determines the Home Manager release that your
