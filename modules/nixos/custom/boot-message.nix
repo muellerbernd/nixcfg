@@ -13,10 +13,11 @@
         If found, please contact:
         Bernd Mueller:
         bernd@muellerbernd.de
-        xmpp:bernd@muellerbernd.de
+        xmpp:bernd@xmpp.muellerbernd.de
         @muellerbernd:matrix.org
       '';
-    in ''echo -e ${message} | boxes --design weave | lolcat --seed 38 --force'';
+    # in ''echo -e ${message} | boxes --design weave | lolcat --seed 42 --force'';
+    in ''echo -e ${message} | boxes -a jl | lolcat --seed 42 --force'';
     runtimeInputs = [
       pkgs.lolcat
       pkgs.boxes
