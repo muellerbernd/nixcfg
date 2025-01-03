@@ -269,6 +269,7 @@ in {
           139
           51820 # wireguard
           4500 # wireguard
+          55091 # wireguard
           # xmpp
           5222
           5223
