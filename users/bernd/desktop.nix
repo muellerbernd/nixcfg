@@ -67,6 +67,7 @@ in {
       meshlab
       # cloudcompare
       prusa-slicer
+      blender
       # browsers
       chromium
       # firefox
