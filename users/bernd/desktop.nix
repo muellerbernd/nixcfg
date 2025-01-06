@@ -62,11 +62,11 @@ in {
       shotcut
       ntfs3g
       gvfs
-      # blender
       # 3d printing and modeling
       meshlab
       # cloudcompare
       prusa-slicer
+      # blender
       blender
       # browsers
       chromium
