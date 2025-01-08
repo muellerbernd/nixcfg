@@ -160,6 +160,7 @@
       typstyle
       alejandra
       nixfmt-rfc-style
+      fish-lsp
       # lsp
       typst-lsp
       tinymist
