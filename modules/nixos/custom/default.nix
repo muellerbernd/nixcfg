@@ -84,6 +84,9 @@ in {
 
     # programs
 
+    programs.fish = {
+      enable = true;
+    };
     programs.zsh = {
       enable = true;
       enableCompletion = true;
