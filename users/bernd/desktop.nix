@@ -30,6 +30,7 @@ in {
       gimp
       graphicsmagick
       inkscape
+      xfce.ristretto
       # pdf
       zathura
       okular
