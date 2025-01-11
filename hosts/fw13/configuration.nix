@@ -188,6 +188,9 @@
     # here, NOT in environment.systemPackages
     python312
   ];
+
+  services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+
 }
 # vim: set ts=2 sw=2:
 
