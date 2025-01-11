@@ -22,6 +22,7 @@ in {
     ./workVPN.nix
     ./disable-nvidia.nix
     ./flipperzero.nix
+    ./wine.nix
   ];
 
   options.custom.system = {

@@ -19,6 +19,7 @@
     workVPN.enable = true;
     bootMessage.enable = true;
     flipperzero.enable = true;
+    wine.enable = true;
   };
 
   # Bootloader.
