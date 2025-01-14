@@ -227,6 +227,9 @@
     drawio
     pandoc-drawio-filter
     nomachine-client
+
+    can-utils
+    savvycan
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved

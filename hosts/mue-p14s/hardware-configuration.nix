@@ -72,6 +72,11 @@
     # "nvidia_modeset"
     # "nvidia_uvm"
     # "nvidia_drm"
+    # can stuff
+    "can"
+    "vcan"
+    "slcan"
+    "peak_usb"
   ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel" "acpi_call"];
