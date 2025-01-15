@@ -56,7 +56,6 @@ in {
       xfce.thunar
       xfce.thunar-volman
       file-roller
-      archiver
       xfce.xfce4-screenshooter
       obs-studio
       shotcut

@@ -14,7 +14,8 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = false;
+    pulse.enable = true;
+    jack.enable = true;
     wireplumber.enable = true;
   };
   services.pipewire.wireplumber.extraConfig = {
@@ -79,12 +80,10 @@
     #   };
     # };
   };
-  # hardware.pulseaudio.enable = true;
-  # hardware.pulseaudio.support32Bit = true; ## If compatibility with 32-bit applications is desired.
-  #
   environment.systemPackages = with pkgs; [
     pamixer
-    # pavucontrol
-    pwvucontrol
+    pavucontrol
+    bluez # Bluetooth support
+    bluez-tools # Bluetooth tools
   ];
 }
