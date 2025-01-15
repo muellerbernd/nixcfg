@@ -40,16 +40,16 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelParams = [
-    "intel_pstate=disable"
-    "psmouse.synaptics_intertouch=0"
-    "i915.modeset=1"
-    "i915.fastboot=1"
-    "i915.enable_guc=2"
-    "i915.enable_psr=1"
-    "i915.enable_fbc=1"
-    "i915.enable_dc=2"
-    "acpi_backlight=native"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    # "intel_pstate=disable"
+    # "psmouse.synaptics_intertouch=0"
+    # "i915.modeset=1"
+    # "i915.fastboot=1"
+    # "i915.enable_guc=2"
+    # "i915.enable_psr=1"
+    # "i915.enable_fbc=1"
+    # "i915.enable_dc=2"
+    # "acpi_backlight=native"
+    # "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
   boot.initrd.availableKernelModules = [
     "thinkpad_acpi"

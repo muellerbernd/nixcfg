@@ -10,6 +10,8 @@
     ./hardware-configuration.nix
     ./printers.nix
     # modules
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p14s-intel-gen3
+
     customSystem
   ];
 
@@ -18,7 +20,7 @@
     distributedBuilder.enable = true;
     workVPN.enable = true;
     bootMessage.enable = true;
-    disableNvidia.enable = true;
+    disableNvidia.enable = false;
   };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
@@ -271,6 +273,14 @@
   # For mount.cifs, required unless domain name resolution is not needed.
   fileSystems."/mnt/EIS" = {
     device = "//ast.intern/EIS";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+  };
+  fileSystems."/mnt/AST" = {
+    device = "//ast.intern/AST";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
