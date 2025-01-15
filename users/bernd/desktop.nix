@@ -53,7 +53,6 @@ in {
       libreoffice
       vlc
       nextcloud-client
-      pavucontrol
       xfce.thunar
       xfce.thunar-volman
       file-roller
