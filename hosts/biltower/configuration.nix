@@ -20,6 +20,7 @@
     # distributedBuilder.enable = true;
     workVPN.enable = true;
     # bootMessage.enable = false;
+    virtualisation.enable = true;
   };
 
   # Bootloader.

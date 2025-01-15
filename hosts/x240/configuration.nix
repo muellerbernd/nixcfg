@@ -18,7 +18,7 @@
     distributedBuilder.enable = true;
     workVPN.enable = true;
     bootMessage.enable = false;
-    disableNvidia.enable = false;
+    virtualisation.enable = true;
   };
 
   # Bootloader.

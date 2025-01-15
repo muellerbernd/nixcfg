@@ -20,6 +20,7 @@
     bootMessage.enable = true;
     flipperzero.enable = true;
     wine.enable = true;
+    virtualisation.enable = true;
   };
 
   # Bootloader.
@@ -191,7 +192,6 @@
   ];
 
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
-
 }
 # vim: set ts=2 sw=2:
 

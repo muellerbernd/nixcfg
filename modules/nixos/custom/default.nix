@@ -12,7 +12,6 @@ in {
     # modules
     ./locale.nix
     ./fonts.nix
-    ./virtualisation.nix
     ./nix-settings.nix
     ./pam.nix
 
@@ -23,6 +22,7 @@ in {
     ./disable-nvidia.nix
     ./flipperzero.nix
     ./wine.nix
+    ./virtualisation.nix
   ];
 
   options.custom.system = {

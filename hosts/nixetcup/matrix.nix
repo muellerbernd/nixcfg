@@ -4,7 +4,6 @@
   ...
 }: let
   fqdn = "matrix.muellerbernd.de";
-
   baseUrl = "https://${fqdn}";
   clientConfig."m.homeserver".base_url = baseUrl;
   serverConfig."m.server" = "${fqdn}:443";
@@ -71,10 +70,6 @@ in {
   services.matrix-synapse = {
     enable = true;
     settings.server_name = fqdn;
-    # The public base URL value must match the `base_url` value set in `clientConfig` above.
-    # The default value here is based on `server_name`, so if your `server_name` is different
-    # from the value of `fqdn` above, you will likely run into some mismatched domain names
-    # in client applications.
     settings.public_baseurl = baseUrl;
     settings.listeners = [
       {
@@ -91,12 +86,16 @@ in {
         ];
       }
     ];
-    settings.enable_metrics = true;
-    settings.database.name = "psycopg2";
-    settings.database.args = {
-      user = "matrix-synapse";
-      password = "XXX";
-    };
+    settings.enable_registration = true;
+    # settings.macaroon_secret_key = "secret";
+    # settings.registration_shared_secret = "test";
+    # settings.enable_registration_captcha = true;
+    # recaptcha_public_key = "<your public key>";
+    # recaptcha_private_key = "<your private key>";
+    # settings.database.name = "psycopg2";
+    # settings.database.args = {
+    #   user = "matrix-synapse";
+    # };
   };
 
   security.acme = {
@@ -111,16 +110,17 @@ in {
   };
 
   services.postgresql.enable = true;
-  # services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
-  #   CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'XXX';
-  #   CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-  #     TEMPLATE template0
-  #     LC_COLLATE = "C"
-  #     LC_CTYPE = "C";
-  # '';
+  services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
+    CREATE ROLE "matrix-synapse";
+    CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
+      TEMPLATE template0
+      LC_COLLATE = "C"
+      LC_CTYPE = "C";
+  '';
 
   networking.firewall.allowedTCPPorts = [
     443
     80
+    8448
   ];
 }

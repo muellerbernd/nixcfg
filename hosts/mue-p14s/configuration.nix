@@ -21,6 +21,7 @@
     workVPN.enable = true;
     bootMessage.enable = true;
     disableNvidia.enable = false;
+    virtualisation.enable = true;
   };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
