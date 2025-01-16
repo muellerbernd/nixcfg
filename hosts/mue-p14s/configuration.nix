@@ -369,13 +369,19 @@
   # };
 
   # udev rules for rtls and co2monitor
-  services.udev.extraRules = ''
+  services.udev.extraRules = let
+    peak_usb_setup = pkgs.writeShellScriptBin "peak_usb_setup" ''
+      ${pkgs.iproute2}/bin/ip link set can0 up type can bitrate 250000
+    '';
+  in ''
     KERNEL=="ttyACM0", MODE:="666"
     KERNEL=="ttyACM1", MODE:="666"
     KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
 
     SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A4WN1BDG", SYMLINK+="leica", MODE="666", RUN+="${pkgs.coreutils}/bin/stty -F /dev/leica cs8 115200 ${pkgs.setserial}/bin/setserial /dev/leica low_latency"
+
+    SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup"
   '';
 
   # programs.nix-ld.enable = true;
