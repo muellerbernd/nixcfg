@@ -52,6 +52,8 @@ in {
       swayidle
       sway-audio-idle-inhibit
       swaylock
+      #
+      wl-mirror
       # river
       stacktile
       rivercarro
