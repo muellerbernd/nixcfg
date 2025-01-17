@@ -35,7 +35,6 @@ in {
       zathura
       okular
       pdfarranger
-
       xdotool
       # security
       keepassxc
@@ -50,9 +49,13 @@ in {
       redshift
       gparted
       filezilla
+      # office
       libreoffice
-      vlc
+      # audio
+      sox
+      # filesync
       nextcloud-client
+      #
       xfce.thunar
       xfce.thunar-volman
       file-roller
@@ -69,22 +72,20 @@ in {
       blender
       # browsers
       chromium
-      # firefox
       luakit
-      # tangram
       # wiki
       # kiwix
       # media
       spotify
       spotify-player
-      sox
+      vlc
+      tauon
       # messenger
       gajim
-      # teams-for-linux # broken
-      teams-for-linux
       # matrix client
       element-desktop
       fractal
+      teams-for-linux
       # email
       thunderbird
       # vpn
@@ -92,6 +93,10 @@ in {
       openconnect
       # mullvad vpn
       mullvad-vpn
+      # downloader
+      yt-dlg
+      ytmdl
+      yt-dlp
       # theming
       lxqt.lxqt-qtplugin
       libsForQt5.qtstyleplugin-kvantum

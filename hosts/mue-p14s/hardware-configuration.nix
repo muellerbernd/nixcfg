@@ -87,7 +87,7 @@
     # "options snd_hda_intel power_save=1"
     # enable wifi power saving (keep uapsd off to maintain low latencies)
     # "options iwlwifi power_save=1 uapsd_disable=1"
-    "options snd-hda-intel model=auto"
+    # "options snd-hda-intel model=auto"
   ];
 
   fileSystems."/" = {
