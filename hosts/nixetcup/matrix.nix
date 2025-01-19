@@ -108,12 +108,14 @@ in {
     extraConfigFiles = [
       config.age.secrets.matrix-registration.path
     ];
+    # settings.enable_registration = true;
+    # settings.enable_registration_captcha = true;
     settings.listeners = [
       {
         port = 8008;
         # bind_addresses = ["::1"];
         # bind_addresses = ["127.0.0.1"];
-        bind_addresses = [ "::" "0.0.0.0" ];
+        bind_addresses = ["::" "0.0.0.0"];
         type = "http";
         tls = false;
         x_forwarded = true;
@@ -130,4 +132,7 @@ in {
       }
     ];
   };
+  environment.systemPackages = with pkgs; [
+    synapse-admin
+  ];
 }
