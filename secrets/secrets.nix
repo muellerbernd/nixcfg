@@ -26,4 +26,5 @@ in {
   "eisVpnConfig.age".publicKeys = allUsers ++ allSystems;
   "workSmbCredentials.age".publicKeys = allUsers ++ allSystems;
   "matrix-registration.age".publicKeys = allUsers ++ allSystems;
+  "matterbridge.age".publicKeys = allUsers ++ allSystems;
 }

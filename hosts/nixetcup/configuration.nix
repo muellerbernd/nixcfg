@@ -11,6 +11,7 @@
     ./jitsi.nix
     ./xmpp.nix
     ./matrix.nix
+    ./matterbridge.nix
     # ./prosody.nix
     # modules
     customSystem
