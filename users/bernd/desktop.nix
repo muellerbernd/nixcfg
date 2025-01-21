@@ -103,6 +103,8 @@ in {
       libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
+      #
+      virt-viewer
 
       # custom packages
       annotator
