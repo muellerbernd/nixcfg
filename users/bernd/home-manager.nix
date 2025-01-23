@@ -92,6 +92,7 @@
       libsixel
       tokei
       fzf
+      television
       fd
       ripgrep
       file
