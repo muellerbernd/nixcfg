@@ -31,7 +31,7 @@ build:
 # switch the configuration for current host
 [group('Main')]
 switch:
-  nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace
+  nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace --upgrade
 
 # rebuild for current host in test mode
 [group('Main')]
