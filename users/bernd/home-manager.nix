@@ -62,6 +62,7 @@
       git
       git-lfs
       lazygit
+      lazydocker
       vcstool
       yarn
       nodejs
