@@ -3,10 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    # nixpkgs.url = "github:nixos/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    # nixpkgs.url = "github:muellerbernd/nixpkgs/fix-thinkfan";
-    # nixpkgs.url = "git+file:///home/bernd/git/nixpkgs";
 
     home-manager-unstable = {
       # url = "github:nix-community/home-manager/release-23.11";
@@ -27,22 +24,18 @@
     #
     systems.url = "github:nix-systems/default-linux";
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # hyprland = {
-    #   # url = "github:hyprwm/Hyprland";
-    #   # url = "github:muellerbernd/Hyprland/develop-movewindoworgroup";
-    #   # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    #   # inputs.nixpkgs.follows = "nixpkgs";
-    #   type = "git";
-    #   url = "https://github.com/hyprwm/Hyprland";
-    #   submodules = true;
+    # neovim-nightly-overlay = {
+    #   url = "github:nix-community/neovim-nightly-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    agenix.url = "github:ryantm/agenix";
-    disko.url = "github:nix-community/disko";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
