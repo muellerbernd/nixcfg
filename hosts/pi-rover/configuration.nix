@@ -59,25 +59,6 @@
     networkmanager.enable = true;
   };
 
-  # use zsh as default shell
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-
-    ohMyZsh = {
-      enable = true;
-      theme = "robbyrussell";
-      plugins = [
-        "git"
-        "history"
-        "rust"
-        "screen"
-        "aliases"
-      ];
-    };
-  };
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -86,4 +67,74 @@
 
   boot.initrd.availableKernelModules = ["usbhid" "usb_storage" "vc4" "bcm2835_dma" "i2c_bcm2835"];
   hardware.enableRedistributableFirmware = true;
+
+  users.users.ros = {
+    isNormalUser = true;
+    description = "ros";
+    extraGroups = [
+      "adbusers"
+      "wheel"
+      "disk"
+      "libvirtd"
+      "docker"
+      "audio"
+      "video"
+      "input"
+      "systemd-journal"
+      "networkmanager"
+      "network"
+      "davfs2"
+      "sudo"
+      "adm"
+      "lp"
+      "storage"
+      "users"
+      "tty"
+      "dialout"
+      "uucp"
+    ];
+    openssh.authorizedKeys.keys = [
+      # bernd ssh
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"
+      # work
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
+    ];
+    initialPassword = "ros";
+  };
+  environment.systemPackages = with pkgs; [
+    git
+    vcstool
+    neovim
+  ];
+
+  services.avahi = {
+    enable = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+    openFirewall = true;
+  };
+  programs = {
+    tmux.enable = true;
+    git.enable = true;
+    direnv.enable = true;
+  };
+  # use zsh as default shell
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # ohMyZsh = {
+    #   enable = true;
+    #   theme = "robbyrussell";
+    #   plugins = [
+    #     "git"
+    #     "history"
+    #   ];
+    # };
+  };
 }
