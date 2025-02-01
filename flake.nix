@@ -177,6 +177,15 @@
         modules = [
           inputs.nixos-hardware.nixosModules.raspberry-pi-3
           "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          # agenix.nixosModules.age
+          agenix.nixosModules.default
+          {
+            age.secrets = {
+              distributedBuilderKey = {
+                file = "${inputs.self}/secrets/distributedBuilderKey.age";
+              };
+            };
+          }
           ./hosts/pi-rover/configuration.nix
           ./hosts/pi-rover/pi-requirements.nix
         ];

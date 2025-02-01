@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   modulesPath,
   ...
 }: {
@@ -10,6 +11,10 @@
   #   # little smaller
   #   "${modulesPath}/profiles/minimal.nix"
   # ];
+  imports = with inputs.self.nixosModules; [
+    # my modules
+    ./distributed-builder.nix
+  ];
 
   # Enable ssh
   services.openssh.enable = true;

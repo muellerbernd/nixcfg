@@ -66,4 +66,4 @@ nixetcup:
 # build and deploy config for pi-mcrover
 [group('Main')]
 deploy-pi-mcrover:
-  nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.178.160 --flake ".#pi-rover"
+  nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@192.168.1.116 --flake ".#pi-rover"
