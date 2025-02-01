@@ -72,7 +72,6 @@
     isNormalUser = true;
     description = "ros";
     extraGroups = [
-      "adbusers"
       "wheel"
       "disk"
       "libvirtd"
@@ -105,6 +104,7 @@
     git
     vcstool
     neovim
+    htop
   ];
 
   services.avahi = {
