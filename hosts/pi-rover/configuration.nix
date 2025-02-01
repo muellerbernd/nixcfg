@@ -13,7 +13,7 @@
   # ];
   imports = with inputs.self.nixosModules; [
     # my modules
-    ./distributed-builder.nix
+    # ./distributed-builder.nix
   ];
 
   # Enable ssh
@@ -48,7 +48,7 @@
   # Enable flakes
   nix.settings = {
     experimental-features = lib.mkDefault "nix-command flakes";
-    trusted-users = ["root" "@wheel"];
+    trusted-users = ["root" "@wheel" "nixremote" "ros"];
   };
 
   # Use the latest kernel
