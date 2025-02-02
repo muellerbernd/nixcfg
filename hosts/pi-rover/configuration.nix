@@ -13,7 +13,7 @@
   # ];
   imports = with inputs.self.nixosModules; [
     # my modules
-    # ./distributed-builder.nix
+    ./distributed-builder.nix
   ];
 
   # Enable ssh
