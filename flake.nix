@@ -165,7 +165,7 @@
         system = "aarch64-linux";
         modules = [
           nixos-hardware.nixosModules.raspberry-pi-4
-          "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
           ./hosts/pi-4/configuration.nix
           ./hosts/pi-4/pi-requirements.nix
         ];
