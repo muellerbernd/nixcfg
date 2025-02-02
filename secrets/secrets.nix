@@ -8,6 +8,7 @@ let
     nixetcup = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ26gpu5goRDBoFe/2+yKxP4MlUVkbB46CVh719pfrs3";
     fw13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkZszXXIt+xvGwWi6yp+m6yga92eBf7JXUHwFNOQJwx";
     rover = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAx9ti665hiwHgTelMMrpE5zVrvVxNgVS/xJCyQ869hc";
+    pi4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICFTiNGfPl54IVKTl3k3+lbdQKGv7P/dkXYN/Hx/WWCI";
   };
   users = {
     bernd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe";
