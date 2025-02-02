@@ -14,6 +14,7 @@
   imports = with inputs.self.nixosModules; [
     # my modules
     ./distributed-builder.nix
+    ./pi-requirements.nix
   ];
 
   # Enable ssh
@@ -51,9 +52,6 @@
     trusted-users = ["root" "@wheel" "nixremote"];
   };
 
-  # Use the latest kernel
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-
   # Enable networking
   networking = {
     networkmanager.enable = true;
@@ -64,15 +62,33 @@
   # default to stateVersion for current lock
   system.stateVersion = config.system.nixos.version;
 
-  boot.initrd.availableKernelModules = ["usbhid" "usb_storage" "vc4" "bcm2835_dma" "i2c_bcm2835"];
+  # boot.initrd.availableKernelModules = [
+  #   "usbhid"
+  #   "usb_storage"
+  #   "vc4"
+  #   "bcm2835_dma"
+  #   "i2c_bcm2835"
+  # ];
   hardware.enableRedistributableFirmware = true;
 
   environment.systemPackages = with pkgs; [
+    starship
+    antigen
+    zoxide
+    atuin
     git
     vcstool
     neovim
     vim
     htop
+    libraspberrypi
+    raspberrypi-eeprom
+    lm_sensors
+    i2c-tools
+  ];
+
+  hardware.firmware = with pkgs; [
+    raspberrypiWirelessFirmware
   ];
 
   services.avahi = {
@@ -88,5 +104,9 @@
     tmux.enable = true;
     git.enable = true;
     direnv.enable = true;
+  };
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
   };
 }

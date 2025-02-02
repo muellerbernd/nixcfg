@@ -176,7 +176,7 @@
         system = "aarch64-linux";
         modules = [
           inputs.nixos-hardware.nixosModules.raspberry-pi-3
-          "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
           # agenix.nixosModules.age
           agenix.nixosModules.default
           {
@@ -187,7 +187,6 @@
             };
           }
           ./hosts/pi-rover/configuration.nix
-          ./hosts/pi-rover/pi-requirements.nix
         ];
       };
     };
