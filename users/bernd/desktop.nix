@@ -103,9 +103,10 @@ in {
       libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
-      #
+      # vm remote
       virt-viewer
-
+      # fido
+      fido2-manage
       # custom packages
       annotator
       uvtools
