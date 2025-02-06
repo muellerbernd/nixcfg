@@ -68,8 +68,8 @@ in {
       meshlab
       # cloudcompare
       prusa-slicer
-      # blender
       blender
+      freecad
       # browsers
       chromium
       luakit
