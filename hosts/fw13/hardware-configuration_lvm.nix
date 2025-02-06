@@ -21,7 +21,7 @@
   # when there are problems with the latest kernel and thus there
   # is a need to pin the installation to a specific version
   # --> Install the latest kernel from the NixOS channel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9e6fed15-813e-4163-89f2-c983d1d399e3";
