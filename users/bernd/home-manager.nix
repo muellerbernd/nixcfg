@@ -164,7 +164,6 @@
       nixfmt-rfc-style
       fish-lsp
       # lsp
-      typst-lsp
       tinymist
       lemminx
       ccls
