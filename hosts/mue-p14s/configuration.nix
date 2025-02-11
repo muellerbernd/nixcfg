@@ -233,6 +233,8 @@
 
     can-utils
     savvycan
+    # at command tool
+    atinout
   ];
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
