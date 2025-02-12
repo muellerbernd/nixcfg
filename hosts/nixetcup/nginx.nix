@@ -16,13 +16,12 @@
     resolver.addresses = ["8.8.8.8"];
     virtualHosts = let
       domain = "muellerbernd.de";
-      dataDir = "/var/www/${domain}";
     in {
       "blog.${domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-          root = "${dataDir}/blog";
+          root = "/var/www/blog.${domain}";
           extraConfig = ''
             autoindex on;
             add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
