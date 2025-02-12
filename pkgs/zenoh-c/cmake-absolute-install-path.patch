@@ -1,0 +1,14 @@
+diff --git a/install/zenohc.pc.in b/install/zenohc.pc.in
+index c756cc7..1b7299f 100644
+--- a/install/zenohc.pc.in
++++ b/install/zenohc.pc.in
+@@ -4,5 +4,5 @@ Name: @PROJECT_NAME@
+ Description: @CMAKE_PROJECT_DESCRIPTION@
+ URL: @CMAKE_PROJECT_HOMEPAGE_URL@
+ Version: @PROJECT_VERSION@
+-Cflags: -I${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+-Libs: -L${prefix}/@CMAKE_INSTALL_LIBDIR@ -l@LIBNAME@
+\ No newline at end of file
++Cflags: -I@CMAKE_INSTALL_FULL_INCLUDEDIR@
++Libs: -L@CMAKE_INSTALL_FULL_LIBDIR@ -l@LIBNAME@
+\ No newline at end of file
