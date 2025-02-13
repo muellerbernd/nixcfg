@@ -30,6 +30,7 @@
     enable = true;
     settings = {
       cue = true;
+      interactive = true;
     };
     control = "sufficient";
   };
@@ -52,21 +53,21 @@
   ];
 
   # taken from here https://www.reddit.com/r/NixOS/comments/16oiazf/swaylock_fprintd_fingerprint_reader_issues/
-  security.pam.services.swaylock = {
-    text = ''
-      auth sufficient pam_unix.so try_first_pass likeauth nullok
-      auth sufficient pam_fprintd.so
-      auth include login
-    '';
-  };
-  # taken from here https://www.reddit.com/r/NixOS/comments/16oiazf/swaylock_fprintd_fingerprint_reader_issues/
-  security.pam.services.hyprlock = {
-    text = ''
-      auth sufficient pam_unix.so try_first_pass likeauth nullok
-      auth sufficient pam_fprintd.so
-      auth include login
-    '';
-  };
+  # security.pam.services.swaylock = {
+  #   text = ''
+  #     auth sufficient pam_unix.so try_first_pass likeauth nullok
+  #     auth sufficient pam_fprintd.so
+  #     auth include login
+  #   '';
+  # };
+  # # taken from here https://www.reddit.com/r/NixOS/comments/16oiazf/swaylock_fprintd_fingerprint_reader_issues/
+  # security.pam.services.hyprlock = {
+  #   text = ''
+  #     auth sufficient pam_unix.so try_first_pass likeauth nullok
+  #     auth sufficient pam_fprintd.so
+  #     auth include login
+  #   '';
+  # };
 
   # security.pam.services.ly = {
   #   text = ''
