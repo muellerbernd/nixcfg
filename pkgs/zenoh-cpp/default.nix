@@ -87,7 +87,7 @@ in
       #   url = "https://github.com/eclipse-zenoh/zenoh-c/commit/e90b3ffe1c3bee9a99a743913233eaa88b2d92c6.patch";
       #   hash = "sha256-JjG2tNU9NWna7lKyoQPTwM0NrXDDH0SjRDK+YoRJZUU=";
       # })
-      # ./cmake-absolute-install-path.patch
+      ./cmake-absolute-install-path.patch
     ];
 
     # cmakeFlags = [
