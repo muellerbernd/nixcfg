@@ -76,16 +76,17 @@ in {
       # wiki
       # kiwix
       # media
-      spotify
-      spotify-player
+      # spotify
+      # spotify-player
       vlc
-      tauon
+      strawberry
       cantata
       # messenger
       gajim
       # matrix client
       element-desktop
       fractal
+      #
       teams-for-linux
       # email
       thunderbird
