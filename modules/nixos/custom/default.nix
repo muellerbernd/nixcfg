@@ -14,6 +14,7 @@ in {
     ./fonts.nix
     ./nix-settings.nix
     ./pam.nix
+    ./mpd.nix
 
     ./boot-message.nix
     ./gui/default.nix
