@@ -326,25 +326,25 @@ in {
   #     "sha256-BvVE9qupMjw7JRqFUj1J0a4ys6kc9fOLBPx2bGaapTk="
   #     "Fuchsia-Pop";
   # Services
-  services.mpd = {
-    enable = true;
-    musicDirectory = "/home/bernd/Music";
-    # extraConfig = ''
-    #   # bind_to_address "127.0.0.1"
-    #   # port "6600"
-    #   # must specify one or more outputs in order to play audio!
-    #   # (e.g. ALSA, PulseAudio, PipeWire), see next sections
-    #   audio_output {
-    #     type "pipewire"
-    #     name "My PipeWire Output"
-    #   }
-    #
-    #   auto_update "yes"
-    # '';
-    #
-    # # Optional:
-    # network.listenAddress = "any"; # if you want to allow non-localhost connections
-    # network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
-  };
-  services.mpd-mpris.enable = true;
+  # services.mpd = {
+  #   enable = true;
+  #   musicDirectory = "/home/bernd/Music";
+  #   # extraConfig = ''
+  #   #   # bind_to_address "127.0.0.1"
+  #   #   # port "6600"
+  #   #   # must specify one or more outputs in order to play audio!
+  #   #   # (e.g. ALSA, PulseAudio, PipeWire), see next sections
+  #   #   audio_output {
+  #   #     type "pipewire"
+  #   #     name "My PipeWire Output"
+  #   #   }
+  #   #
+  #   #   auto_update "yes"
+  #   # '';
+  #   #
+  #   # # Optional:
+  #   # network.listenAddress = "any"; # if you want to allow non-localhost connections
+  #   # network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+  # };
+  # services.mpd-mpris.enable = true;
 }
