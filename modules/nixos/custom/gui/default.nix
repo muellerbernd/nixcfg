@@ -9,6 +9,7 @@ in {
   imports = [
     ./pipewire.nix
     ./river.nix
+    # ./niri.nix
   ];
 
   options.custom.system.gui = {
