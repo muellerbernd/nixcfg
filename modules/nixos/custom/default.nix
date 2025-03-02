@@ -95,15 +95,17 @@ in {
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
 
-      ohMyZsh = {
-        enable = true;
-        theme = "robbyrussell";
-        plugins = [
-          "git"
-          "history"
-          "aliases"
-        ];
-      };
+      # ohMyZsh = {
+      #   enable = true;
+      #   theme = "robbyrussell";
+      #   plugins = [
+      #     "git"
+      #     "history"
+      #     "rust"
+      #     "screen"
+      #     "aliases"
+      #   ];
+      # };
     };
 
     # use zsh as default shell
