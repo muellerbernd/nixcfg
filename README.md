@@ -1,4 +1,4 @@
-# my NixOS configs
+# my ❄️  Nix configs
 
 ## Build and test ISO
 
