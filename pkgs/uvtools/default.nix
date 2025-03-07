@@ -6,11 +6,11 @@
   icu,
 }: let
   pname = "uvtools";
-  version = "4.3.2";
+  version = "5.0.7";
 
   src = fetchurl {
     url = "https://github.com/sn4k3/UVtools/releases/download/v${version}/UVtools_linux-x64_v${version}.AppImage";
-    sha256 = "sha256-wTZ2svDYS6keYLb8M0n/V7watKdWpegHJ3ow45FK14o=";
+    sha256 = "sha256-dS+wKTl12s0SkbrDXICVYGeBt9bx1fz/HFfNFuZYIXg=";
   };
   appimageContents = appimageTools.extractType2 {inherit pname version src;};
 in
