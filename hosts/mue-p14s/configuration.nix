@@ -229,7 +229,8 @@
     throttled
     drawio
     pandoc-drawio-filter
-    # nomachine-client
+    # distributed compiling
+    icemon
 
     can-utils
     savvycan
@@ -392,18 +393,18 @@
   #   # here, NOT in environment.systemPackages
   # ];
 
-  # services.icecream.daemon = {
-  #   enable = true;
-  #   noRemote = false;
-  #   maxProcesses = 2;
-  #   openBroadcast = true;
-  #   openFirewall = true;
-  #   extraArgs = ["-v"];
-  # };
+  services.icecream.daemon = {
+    enable = true;
+    noRemote = false;
+    maxProcesses = 2;
+    openBroadcast = true;
+    openFirewall = true;
+    extraArgs = ["-v"];
+  };
 
-  # systemd.services."icecc-daemon".environment = lib.mkForce {
-  #   PATH = "/run/current-system/sw/bin/";
-  # };
+  systemd.services."icecc-daemon".environment = lib.mkForce {
+    PATH = "/run/current-system/sw/bin/";
+  };
   boot.kernel.sysctl."net.core.rmem_max" = 16777216;
   boot.kernel.sysctl."net.core.wmem_max" = 16777216;
   boot.kernel.sysctl."net.core.rmem_default" = 4129920;
