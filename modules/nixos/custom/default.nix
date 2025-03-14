@@ -202,6 +202,7 @@ in {
           # syncthing
           8384
           22000
+          7447
         ];
         allowedUDPPorts = [
           53
