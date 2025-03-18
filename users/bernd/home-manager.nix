@@ -168,7 +168,7 @@
       tinymist
       lemminx
       ccls
-      # pyright
+      pyright
       python3Packages.python-lsp-server
       python3Packages.python-lsp-ruff
       python3Packages.pylsp-mypy
