@@ -53,7 +53,8 @@
       procps
       lsof
       # editors
-      unstable.neovim
+      # unstable.neovim
+      neovim
       # package manager for lua
       luajitPackages.luarocks
       tree-sitter
@@ -167,7 +168,11 @@
       tinymist
       lemminx
       ccls
-      pyright
+      # pyright
+      python3Packages.python-lsp-server
+      python3Packages.python-lsp-ruff
+      python3Packages.pylsp-mypy
+      python3Packages.pylsp-rope
       pylyzer
       nixd
       sumneko-lua-language-server
