@@ -10,50 +10,52 @@
     enable = lib.mkDefault false;
   };
   environment.systemPackages = with pkgs; [
-      wlsunset
-      wl-gammactl
-      wl-clipboard
-      wl-clip-persist
-      wlr-randr
-      wdisplays
-      wl-mirror
-      wayvnc
-      wlopm
+    wlsunset
+    wl-gammactl
+    wl-clipboard
+    wl-clip-persist
+    wlr-randr
+    wdisplays
+    wl-mirror
+    wayvnc
+    wlopm
 
-      cliphist
-      grim
-      grimblast
-      slurp
-      # wayland
-      waybar
-      qt6.qtwayland
-      libsForQt5.qtwayland
-      glxinfo
-      nwg-displays
-      nwg-look
-      pipectl
-      #
-      # hyprpaper
-      hypridle
-      # hyprlock
-      # xwayland
-      xwayland
-      swaybg
-      swayidle
-      sway-audio-idle-inhibit
-      swaylock
-      #
-      wl-mirror
-      # gamma adjustment
-      gammastep
-      wlsunset
-      # other
-      rofi-wayland
-      fuzzel
-      shikane
-      dinit
-      lswt
-      mako
+    cliphist
+    grim
+    grimblast
+    slurp
+    # wayland
+    waybar
+    qt6.qtwayland
+    libsForQt5.qtwayland
+    glxinfo
+    nwg-displays
+    nwg-look
+    pipectl
+    #
+    # hyprpaper
+    hypridle
+    # hyprlock
+    # xwayland
+    xwayland
+    swaybg
+    swayidle
+    sway-audio-idle-inhibit
+    swaylock
+    #
+    wl-mirror
+    # gamma adjustment
+    gammastep
+    wlsunset
+    # other
+    rofi-wayland
+    fuzzel
+    shikane
+    dinit
+    lswt
+    mako
+    #
+    xwayland-satellite
   ];
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name
