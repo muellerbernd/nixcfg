@@ -131,6 +131,8 @@
       ncdu
       lsd
       bc
+      # nix cli helpers
+      manix
       #
       ghostscript
       # env
