@@ -9,7 +9,7 @@ in {
   imports = [
     ./pipewire.nix
     ./river.nix
-    # ./niri.nix
+    ./niri.nix
   ];
 
   options.custom.system.gui = {
@@ -21,9 +21,9 @@ in {
     ## VSCode tends to break often with this
     # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    xdg.portal.enable = true;
     services.displayManager.ly.enable = true;
     programs.river.enable = true;
+    programs.niri.enable = true;
     hardware = {
       enableAllFirmware = true;
       # graphics.enable = true;

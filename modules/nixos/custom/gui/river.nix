@@ -80,7 +80,7 @@ in {
   # printing and others.
   services.dbus.enable = true;
   xdg.portal = {
-    enable = true;
+    enable = lib.mkForce true;
     config = {
       common = {
         default = [
