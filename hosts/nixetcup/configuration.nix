@@ -72,8 +72,8 @@
     };
   };
 
-  # environment.systemPackages = with pkgs; [
-  # ];
+  environment.systemPackages = with pkgs; [
+  ];
 
   # Configure xserver
   services.xserver = {
@@ -90,6 +90,8 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
     ];
   };
+
+  services.qemuGuest.enable = true;
 }
 # vim: set ts=2 sw=2:
 
