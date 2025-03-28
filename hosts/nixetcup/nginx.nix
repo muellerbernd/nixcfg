@@ -13,7 +13,7 @@
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
     recommendedProxySettings = true;
-    resolver.addresses = ["8.8.8.8"];
+    # resolver.addresses = ["8.8.8.8"];
     virtualHosts = let
       domain = "muellerbernd.de";
     in {
