@@ -11,17 +11,15 @@ in {
     enable = true;
     hostName = jitsi_fqdn;
     prosody.lockdown = true;
-    jibri.enable = true;
-    videobridge.enable = true;
-    config = {
-      enableWelcomePage = false;
-      prejoinPageEnabled = true;
-      defaultLang = "en";
-    };
-    interfaceConfig = {
-      SHOW_JITSI_WATERMARK = false;
-      SHOW_WATERMARK_FOR_GUESTS = false;
-    };
+    # config = {
+    #   enableWelcomePage = false;
+    #   prejoinPageEnabled = true;
+    #   defaultLang = "en";
+    # };
+    # interfaceConfig = {
+    #   SHOW_JITSI_WATERMARK = false;
+    #   SHOW_WATERMARK_FOR_GUESTS = false;
+    # };
   };
   services.jitsi-videobridge = {
     enable = true;
