@@ -16,22 +16,39 @@ in {
     prosody.enable = true;
     videobridge.enable = true;
     config = {
-      disableShowMoreStats = false;
-      startWithAudioMuted = true;
-      startWithVideoMuted = true;
-      # startAudioOnly = true;
-      # enableLayerSuspension = false;
-      # liveStreamingEnabled = false;
-      useNewBandwidthAllocationStrategy = true;
-      requireDisplayName = true;
-      defaultLang = "en";
+      p2p.enabled = false;
+      startAudioOnly = true;
+      openBridgeChannel = "websocket";
     };
-    interfaceConfig = {
-      SHOW_JITSI_WATERMARK = true;
-      SHOW_WATERMARK_FOR_GUESTS = false;
+    # config = {
+    #   disableShowMoreStats = false;
+    #   startWithAudioMuted = true;
+    #   startWithVideoMuted = true;
+    #   # startAudioOnly = true;
+    #   # enableLayerSuspension = false;
+    #   # liveStreamingEnabled = false;
+    #   useNewBandwidthAllocationStrategy = true;
+    #   requireDisplayName = true;
+    #   defaultLang = "en";
+    # };
+    # interfaceConfig = {
+    #   SHOW_JITSI_WATERMARK = true;
+    #   SHOW_WATERMARK_FOR_GUESTS = false;
+    # };
+  };
+  services.jitsi-videobridge = {
+    openFirewall = true;
+    colibriRestApi = true;
+    config.videobridge = {
+      ice = {
+        tcp.port = 7777;
+      };
+      stats.transports = [
+        {type = "muc";}
+        {type = "colibri";}
+      ];
     };
   };
-  services.jitsi-videobridge.openFirewall = true;
   networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 
   nixpkgs.config.permittedInsecurePackages = [
