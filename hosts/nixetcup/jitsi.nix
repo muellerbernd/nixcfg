@@ -12,7 +12,6 @@ in {
     hostName = jitsi_fqdn;
     nginx.enable = true;
     jicofo.enable = true;
-    jibri.enable = false;
     prosody.enable = true;
     videobridge.enable = true;
     config = {
@@ -49,6 +48,12 @@ in {
       ];
     };
   };
+  systemd.services = lib.genAttrs ["jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" "prosody"] (_: {
+    serviceConfig = {
+      Slice = "communications.slice";
+    };
+  });
+  boot.kernel.sysctl."net.core.rmem_max" = lib.mkForce 10485760;
   networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 
   nixpkgs.config.permittedInsecurePackages = [
