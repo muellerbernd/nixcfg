@@ -74,7 +74,7 @@
         STOP_CHARGE_THRESH_BAT0 = "95";
       };
     };
-    # throttled.enable = true;
+    throttled.enable = true;
     upower.enable = true;
     fwupd.enable = true;
   };
