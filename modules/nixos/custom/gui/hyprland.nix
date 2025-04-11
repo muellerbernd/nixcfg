@@ -19,7 +19,7 @@
     #   debug = true;
     # };
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # package = pkgs.hyprland-debug;
+    package = pkgs.unstable.hyprland;
     # portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
@@ -38,7 +38,7 @@
     grimblast
     slurp
     # wayland
-    unstable.waybar
+    waybar
     qt6.qtwayland
     libsForQt5.qtwayland
     glxinfo

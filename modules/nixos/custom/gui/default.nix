@@ -10,7 +10,7 @@ in {
     ./pipewire.nix
     ./river.nix
     ./niri.nix
-    ./hyprland.nix
+    # ./hyprland.nix
   ];
 
   options.custom.system.gui = {
