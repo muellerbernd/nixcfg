@@ -258,6 +258,16 @@ in {
         categories = ["Audio" "Music" "Player" "AudioVideo"];
         icon = "spotify-client";
       };
+      element-desktop-work = {
+        categories = ["Network" "InstantMessaging" "Chat"];
+        comment = "A feature-rich client for Matrix.org";
+        exec = "element-desktop %u --profile work";
+        genericName = "Matrix Client";
+        icon = "element";
+        mimeType = ["x-scheme-handler/element"];
+        name = "Element-Work";
+        type = "Application";
+      };
       # # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
       # teams = {
       #   name = "Microsoft Teams for Linux (wayland)";
@@ -272,6 +282,7 @@ in {
         exec = "alacritty -e nvim";
         terminal = false;
         # categories = ["Application"];
+        icon = "neovim";
         mimeType = [
           "application/xml"
           "text/x-csrc"
