@@ -49,6 +49,8 @@ in {
       redshift
       gparted
       filezilla
+      #
+      dbeaver-bin
       # office
       libreoffice
       # audio
