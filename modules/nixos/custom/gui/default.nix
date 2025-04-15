@@ -10,7 +10,6 @@ in {
     ./pipewire.nix
     ./river.nix
     ./niri.nix
-    # ./hyprland.nix
   ];
 
   options.custom.system.gui = {
@@ -18,6 +17,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      # gtk
+      gtk-engine-murrine
+      gtk_engines
+      gsettings-desktop-schemas
+      playerctl
+      pcmanfm
+      #
+      remmina
+      xorg.xhost
+      lxqt.lxqt-policykit
+    ];
     ## Force Chromium based apps to render using wayland
     ## VSCode tends to break often with this
     # environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -25,6 +36,8 @@ in {
     services.displayManager.ly.enable = true;
     programs.river.enable = true;
     programs.niri.enable = true;
+    services.pipewire.enable = true;
+
     hardware = {
       enableAllFirmware = true;
       # graphics.enable = true;

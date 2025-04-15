@@ -51,28 +51,13 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      # gtk
-      gtk-engine-murrine
-      gtk_engines
-      gsettings-desktop-schemas
-      playerctl
-      pcmanfm
-      #
       gnupg
       pam_gnupg
       bc
-      # gtk settings
-      # configure-gtk
-      # nix
       home-manager
-      # nix-serve
-      # nix-serve-ng
       inputs.agenix.packages.${system}.default
       wireguard-tools
       samba
-      remmina
-      xorg.xhost
-      lxqt.lxqt-policykit
       pciutils
       iw
     ];
