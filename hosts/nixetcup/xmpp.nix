@@ -53,6 +53,34 @@
 
     listen = [
       {
+        # STUN+TURN TCP
+        # note that the full port range should be forwarded ("not NAT'd")
+        # `use_turn=true` enables both TURN *and* STUN
+        port = 3478;
+        module = "ejabberd_stun";
+        transport = "tcp";
+        use_turn = true;
+        turn_ipv4_address = "45.136.31.59";
+      }
+      {
+        # STUN+TURN UDP
+        port = 3478;
+        module = "ejabberd_stun";
+        transport = "udp";
+        use_turn = true;
+        turn_ipv4_address = "45.136.31.59";
+      }
+      {
+        # STUN+TURN TLS over TCP
+        port = 5349;
+        module = "ejabberd_stun";
+        transport = "tcp";
+        tls = true;
+        # certfile = "/var/lib/acme/uninsane.org/full.pem";
+        use_turn = true;
+        turn_ipv4_address = "45.136.31.59";
+      }
+      {
         # port = 5222;
         port = 15222;
         ip = "::";
@@ -435,6 +463,9 @@ in {
     5478
   ];
   networking.firewall.allowedTCPPorts = [
+    3478
+    5478
+    #
     5222
     5223
     5269
