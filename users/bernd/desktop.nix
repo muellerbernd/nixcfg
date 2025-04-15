@@ -31,6 +31,9 @@ in {
       graphicsmagick
       inkscape
       xfce.ristretto
+      # pandoc
+      pandoc
+      haskellPackages.pandoc-crossref
       # pdf
       zathura
       okular
