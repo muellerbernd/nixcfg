@@ -23,6 +23,9 @@
     workVPN.enable = false;
     bootMessage.enable = false;
     disableNvidia.enable = false;
+    flipperzero.enable = false;
+    wine.enable = false;
+    virtualisation.enable = false;
   };
 
   # Bootloader.

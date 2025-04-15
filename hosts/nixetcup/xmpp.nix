@@ -431,6 +431,9 @@ in {
   security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
   security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
 
+  networking.firewall.allowedUDPPorts = [
+    5478
+  ];
   networking.firewall.allowedTCPPorts = [
     5222
     5223
