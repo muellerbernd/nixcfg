@@ -137,9 +137,6 @@
       ghostscript
       # env
       direnv
-      # pandoc
-      pandoc
-      haskellPackages.pandoc-crossref
       # programming
       ghc
       gnumake
