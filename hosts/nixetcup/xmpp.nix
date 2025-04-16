@@ -230,6 +230,21 @@
           "!start"
         ];
       };
+      "webadmin" = {
+        from = ["ejabberd_web_admin"];
+        who = [
+          {
+            access = [
+              {
+                allow = [
+                  {acl = "admin";}
+                ];
+              }
+            ];
+          }
+        ];
+        what = ["*"];
+      };
       "public commands" = {
         who = [
           {ip = "127.0.0.1/8";}
