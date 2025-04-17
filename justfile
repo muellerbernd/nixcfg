@@ -24,13 +24,14 @@ check:
   nix flake check
 
 # build the configuration for current host
-[group('Main')]
-build:
-  nixos-rebuild build --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace
+# build:
+[group('Main'), positional-arguments]
+@build *args='':
+  nixos-rebuild build --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L "$@" --show-trace
 
 # switch the configuration for current host
-[group('Main')]
-switch:
+[group('Main'), positional-arguments]
+@switch *args='':
   nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace --upgrade
 
 # rebuild for current host in test mode
