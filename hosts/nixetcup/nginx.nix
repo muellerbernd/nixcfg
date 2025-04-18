@@ -73,6 +73,8 @@
         };
       };
       "cloud.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
         locations = {
           "/" = {
             extraConfig = ''
@@ -107,6 +109,7 @@
           "upload.xmpp.muellerbernd.de"
           "conference.xmpp.muellerbernd.de"
           "blog.muellerbernd.de"
+          "cloud.muellerbernd.de"
         ];
       };
     };
