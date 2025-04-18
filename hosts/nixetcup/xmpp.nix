@@ -76,7 +76,6 @@
         module = "ejabberd_stun";
         transport = "tcp";
         tls = true;
-        # certfile = "/var/lib/acme/uninsane.org/full.pem";
         use_turn = true;
         turn_ipv4_address = "45.136.31.59";
       }
@@ -287,6 +286,10 @@
       mod_client_state = {};
       mod_configure = {};
       ## mod_delegation = {}   # for xep0356
+      # fallback for when DNS-based STUN discovery is unsupported.
+      # - see: <https://xmpp.org/extensions/xep-0215.html>
+      # docs: <https://docs.ejabberd.im/admin/configuration/modules/#mod-stun-disco>
+      mod_stun_disco = {};
       mod_disco = {
         server_info = [
           {
