@@ -58,10 +58,16 @@ in {
       peers = [
         # List of allowed peers.
         {
-          # mue-p14s
+          # fw13
           publicKey = "pNU1XtqscR6Ohns6aOZeJcI+lg7I4wpoHmVEmAZgpgU=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = ["10.200.100.2/32"];
+        }
+        {
+          # woodserver
+          publicKey = "yRjzHqZFxW3WYeI2hP3wt4EmpZpmWS9gUrqiSBa0WUU=";
+          # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
+          allowedIPs = ["10.200.100.3/32"];
         }
       ];
     };
