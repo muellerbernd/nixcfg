@@ -12,6 +12,7 @@
     ./xmpp.nix
     ./matrix.nix
     ./matterbridge.nix
+    ./wireguard-server.nix
     # ./prosody.nix
     # modules
     customSystem

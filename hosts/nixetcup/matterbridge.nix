@@ -11,7 +11,7 @@
   };
   services.matterbridge = {
     enable = true;
-    configPath= config.age.secrets.matterbridgeConfig.path;
+    configPath = config.age.secrets.matterbridgeConfig.path;
     user = "matterbridge";
   };
 }

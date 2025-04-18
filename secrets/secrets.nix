@@ -29,4 +29,5 @@ in {
   "workSmbCredentials.age".publicKeys = allUsers ++ allSystems;
   "matrix-registration.age".publicKeys = allUsers ++ allSystems;
   "matterbridge.age".publicKeys = allUsers ++ allSystems;
+  "wgServerPrivKey.age".publicKeys = allUsers ++ allSystems;
 }
