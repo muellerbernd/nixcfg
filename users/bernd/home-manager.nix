@@ -24,6 +24,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
+      inputs.eis-nix-configs.overlays.additions
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
       # inputs.hyprland.overlays.default
@@ -201,12 +202,12 @@
 
   # programs.fish = {
   #   enable = true;
-    # interactiveShellInit = ''
-    #   set fish_greeting # Disable greeting
-    #   starship init fish | source
-    #   atuin init fish | source
-    #   zoxide init fish | source
-    # '';
+  # interactiveShellInit = ''
+  #   set fish_greeting # Disable greeting
+  #   starship init fish | source
+  #   atuin init fish | source
+  #   zoxide init fish | source
+  # '';
   # };
 
   # This value determines the Home Manager release that your

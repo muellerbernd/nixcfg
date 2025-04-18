@@ -36,8 +36,8 @@
     };
 
     eis-nix-configs = {
-      # url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
-      url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
+      url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
+      # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

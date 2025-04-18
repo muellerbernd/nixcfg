@@ -128,14 +128,17 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1744928225,
-        "narHash": "sha256-pio/ylgpnjHZvKzmwRJ2lPnsEqcSx2yQkDKfZgKmiEs=",
-        "path": "/home/bernd/work/fhg/eisil/software/eis-nix-configs/",
-        "type": "path"
+        "lastModified": 1744993774,
+        "narHash": "sha256-rk249ZSFTrOVHvW8XhmohRkSYHst1zVMHOwC85TiG2c=",
+        "ref": "refs/heads/main",
+        "rev": "011e0470d931968863cc3be991f166d286149a7e",
+        "revCount": 450,
+        "type": "git",
+        "url": "ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git"
       },
       "original": {
-        "path": "/home/bernd/work/fhg/eisil/software/eis-nix-configs/",
-        "type": "path"
+        "type": "git",
+        "url": "ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git"
       }
     },
     "flake-compat": {
