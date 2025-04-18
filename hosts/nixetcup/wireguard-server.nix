@@ -5,8 +5,12 @@
   lib,
   ...
 }: let
-  interface-name="ens3";
-in{
+  interface-name = "ens3";
+in {
+  age.secrets.wgServerPrivKey = {
+    file = ../../secrets/wgServerPrivKey.age;
+  };
+
   networking.firewall = {
     enable = lib.mkDefault true;
     allowedUDPPorts = [
@@ -63,4 +67,3 @@ in{
     };
   };
 }
-
