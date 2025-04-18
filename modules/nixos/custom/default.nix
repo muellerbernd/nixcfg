@@ -60,6 +60,7 @@ in {
       samba
       pciutils
       iw
+      nix-output-monitor
     ];
 
     environment.extraInit = ''

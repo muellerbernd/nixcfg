@@ -3,18 +3,15 @@
   stdenv,
   fetchpatch,
   fetchFromGitHub,
-
   # nativeBuildInputs
   cmake,
   rustPlatform,
   rustc,
   cargo,
-
   # flags
   enableSharedMemory ? true,
   enableUnstableApi ? true,
 }:
-
 stdenv.mkDerivation rec {
   pname = "zenoh-c";
   version = "1.2.1";

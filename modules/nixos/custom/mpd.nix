@@ -6,7 +6,7 @@
   ...
 }: {
   # services.mpd = {
-    # enable = true;
+  # enable = true;
   #   user = "bernd";
   #   network = {
   #     listenAddress = "any";

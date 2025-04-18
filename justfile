@@ -23,16 +23,17 @@ lint:
 check:
   nix flake check
 
+default-arg := ''
+
 # build the configuration for current host
-# build:
-[group('Main'), positional-arguments]
-@build *args='':
-  nixos-rebuild build --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L "$@" --show-trace
+[group('Main')]
+build args=default-arg:
+  nixos-rebuild build --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L {{args}} --show-trace
 
 # switch the configuration for current host
-[group('Main'), positional-arguments]
-@switch *args='':
-  nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L --show-trace --upgrade
+[group('Main')]
+switch args=default-arg:
+  nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L {{args}} --show-trace --upgrade
 
 # rebuild for current host in test mode
 [group('Main')]

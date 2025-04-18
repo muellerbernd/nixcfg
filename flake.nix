@@ -35,6 +35,12 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    eis-nix-configs = {
+      # url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
+      url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
