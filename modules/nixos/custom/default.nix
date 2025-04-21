@@ -214,6 +214,7 @@ in {
           # syncthing
           8384
           22000
+          21027
         ];
         # allowedUDPPortRanges = lib.mkDefault [
         #   {
