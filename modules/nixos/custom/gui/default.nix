@@ -25,7 +25,9 @@ in {
       playerctl
       pcmanfm
       #
-      remmina
+      unstable.remmina
+      unstable.x2goclient
+      unstable.freerdp
       xorg.xhost
       lxqt.lxqt-policykit
     ];
