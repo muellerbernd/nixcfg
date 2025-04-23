@@ -234,6 +234,8 @@
 
     can-utils
     savvycan
+    #
+    qgis
     # at command tool
     atinout
   ];
