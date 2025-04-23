@@ -29,7 +29,7 @@ in {
       feh
       gimp
       graphicsmagick
-      inkscape
+      inkscape-with-extensions
       xfce.ristretto
       # pandoc
       pandoc
