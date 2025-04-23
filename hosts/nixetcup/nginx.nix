@@ -92,6 +92,26 @@
           };
         };
       };
+      "git.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations = {
+          "/" = {
+            extraConfig = ''
+              # autoindex on;
+              # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_http_version  1.1;
+              proxy_cache_bypass  $http_upgrade;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header Host $host;
+              proxy_set_header X-Forwarded-Host $host;
+              proxy_pass http://10.200.100.3:3000;
+            '';
+          };
+        };
+      };
     };
   };
 
@@ -110,6 +130,7 @@
           "conference.xmpp.muellerbernd.de"
           "blog.muellerbernd.de"
           "cloud.muellerbernd.de"
+          "git.muellerbernd.de"
         ];
       };
     };
