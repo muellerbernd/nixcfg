@@ -13,6 +13,7 @@
     ./matrix.nix
     ./matterbridge.nix
     ./wireguard-server.nix
+    ./mailserver.nix
     # ./prosody.nix
     # modules
     customSystem

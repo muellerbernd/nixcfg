@@ -41,6 +41,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
