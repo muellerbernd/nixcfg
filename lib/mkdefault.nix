@@ -96,12 +96,6 @@ in
             distributedBuilderKey = {
               file = "${inputs.self}/secrets/distributedBuilderKey.age";
             };
-            workVpnP14sConfig = {
-              file = "${inputs.self}/secrets/workVpnP14sConfig.age";
-            };
-            workVpnConfig = {
-              file = "${inputs.self}/secrets/workVpnConfig.age";
-            };
             eisVpnP14sConfig = {
               file = "${inputs.self}/secrets/eisVpnP14sConfig.age";
             };

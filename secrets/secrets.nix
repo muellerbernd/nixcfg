@@ -21,9 +21,6 @@ in {
   # "secret2.age".publicKeys = users ++ systems;
   # "distributedBuilderKey.age".publicKeys = allUsers ++ [ systems.t480ilmpad systems.mue-p14s systems.t480ammera ];
   "distributedBuilderKey.age".publicKeys = allUsers ++ allSystems;
-  # "workVpnP14sKey.age".publicKeys = allUsers ++ [ systems.t480ilmpad systems.mue-p14s systems.t480ammera ];
-  "workVpnConfig.age".publicKeys = allUsers ++ allSystems;
-  "workVpnP14sConfig.age".publicKeys = allUsers ++ allSystems;
   "eisVpnP14sConfig.age".publicKeys = allUsers ++ allSystems;
   "eisVpnConfig.age".publicKeys = allUsers ++ allSystems;
   "workSmbCredentials.age".publicKeys = allUsers ++ allSystems;

@@ -12,16 +12,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking.wg-quick.interfaces = {
-      "wgEIS" =
-        if config.networking.hostName == "mue-p14s"
-        then {
-          configFile = config.age.secrets.workVpnP14sConfig.path;
-          autostart = false;
-        }
-        else {
-          configFile = config.age.secrets.workVpnConfig.path;
-          autostart = false;
-        };
       "wgEIS-mirror" =
         if config.networking.hostName == "mue-p14s"
         then {
