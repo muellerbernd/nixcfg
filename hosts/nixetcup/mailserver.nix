@@ -24,7 +24,10 @@ in {
     loginAccounts = {
       "bernd@${domain}" = {
         hashedPasswordFile = config.age.secrets.berndMail.path;
-        aliases = ["postmaster@${domain}"];
+        aliases = [
+          "postmaster@${domain}"
+          "github@${domain}"
+        ];
       };
     };
 
