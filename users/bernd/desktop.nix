@@ -161,7 +161,11 @@ in {
       search = {
         force = true;
         default = "DuckDuckGo";
-        order = ["Searx" "Google" "DuckDuckGo"];
+        order = [
+          "Searx"
+          "Google"
+          "DuckDuckGo"
+        ];
         engines = {
           "Nix Packages" = {
             urls = [
@@ -260,7 +264,12 @@ in {
         exec = "spotify --use-angle=opengl";
         type = "Application";
         mimeType = ["x-scheme-handler/spotify"];
-        categories = ["Audio" "Music" "Player" "AudioVideo"];
+        categories = [
+          "Audio"
+          "Music"
+          "Player"
+          "AudioVideo"
+        ];
         icon = "spotify-client";
       };
       # # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8

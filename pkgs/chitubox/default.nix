@@ -46,7 +46,12 @@ stdenv.mkDerivation rec {
 
   # QT_QPA_PLATFORM_PLUGIN_PATH =
   #   "${qt6.qtbase.bin}/lib/qt-${qt6.qtbase.version}/plugins/platforms";
-  nativeBuildInputs = [autoPatchelfHook libsForQt5.qt5.wrapQtAppsHook pkg-config wrapGAppsHook];
+  nativeBuildInputs = [
+    autoPatchelfHook
+    libsForQt5.qt5.wrapQtAppsHook
+    pkg-config
+    wrapGAppsHook
+  ];
 
   buildInputs = [
     stdenv.cc.cc.lib

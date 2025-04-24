@@ -2,8 +2,15 @@
   # Nix settings, auto cleanup and enable flakes
   nix = {
     settings.auto-optimise-store = true;
-    settings.allowed-users = ["bernd" "nix-serve" "nixremote"];
-    settings.trusted-users = ["root" "nixremote"];
+    settings.allowed-users = [
+      "bernd"
+      "nix-serve"
+      "nixremote"
+    ];
+    settings.trusted-users = [
+      "root"
+      "nixremote"
+    ];
     gc = {
       automatic = true;
       dates = "weekly";

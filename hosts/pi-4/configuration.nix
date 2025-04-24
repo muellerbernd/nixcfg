@@ -31,7 +31,10 @@
     users.pi = {
       initialPassword = "pi";
       isNormalUser = true;
-      extraGroups = ["wheel" "gpio"];
+      extraGroups = [
+        "wheel"
+        "gpio"
+      ];
       openssh.authorizedKeys.keys = [
         # bernd ssh
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"
@@ -53,7 +56,10 @@
   # Enable flakes
   nix.settings = {
     experimental-features = lib.mkDefault "nix-command flakes";
-    trusted-users = ["root" "@wheel"];
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
   };
 
   # Enable GPU acceleration

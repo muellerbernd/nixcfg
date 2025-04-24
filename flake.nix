@@ -118,6 +118,8 @@
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
 
+    devShells = forEachSystem (pkgs: import ./shell.nix {inherit inputs pkgs;});
+
     nixosModules = import ./modules/nixos;
 
     nixosConfigurations = {

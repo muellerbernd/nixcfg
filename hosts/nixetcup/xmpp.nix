@@ -424,76 +424,77 @@
   };
 
   configFile = pkgs.writeText "ejabberd.yml" (builtins.toJSON ejabberd_cfg);
+in
   # databasePasswordFile = "/var/src/secrets/ejabberd-database-password";
   # uploadSecretFile = "/var/src/secrets/upload-secret";
-in {
-  services.ejabberd = {
-    enable = true;
-    package = pkgs.ejabberd.override {withPgsql = true;};
-    configFile = "/run/ejabberd/ejabberd.yml";
-    imagemagick = true;
-    # Allow access to TLS certs
-    group = "nginx";
-  };
-
-  systemd.services.ejabberd = {
-    serviceConfig = {
-      RuntimeDirectory = "ejabberd";
+  {
+    services.ejabberd = {
+      enable = true;
+      package = pkgs.ejabberd.override {withPgsql = true;};
+      configFile = "/run/ejabberd/ejabberd.yml";
+      imagemagick = true;
+      # Allow access to TLS certs
+      group = "nginx";
     };
-    preStart = ''
-      cp ${configFile} /run/ejabberd/ejabberd.yml
-      chmod u+rw /run/ejabberd/ejabberd.yml
-    '';
-  };
 
-  # system.activationScripts."ejabberd" = ''
-  #   secret=$(cat "${config.age.secrets.nixetcupSecret.path}")
-  #   configFile=/run/ejabberd/ejabberd.yml
-  #   ${pkgs.gnused}/bin/sed -i "s#@UPLOAD_SECRET@#$secret#" "$configFile"
-  # '';
-  # ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
-  # ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
-
-  services.prosody-filer = {
-    enable = true;
-    settings = {
-      ### IP address and port to listen to, e.g. "[::]:5050"
-      listenport = "127.0.0.1:5050";
-      ### Secret (must match the one in prosody.conf.lua!)
-      secret = "@UPLOAD_SECRET@";
-      ### Where to store the uploaded files
-      storeDir = "/var/www/${domain}/upload/";
-      ### Subdirectory for HTTP upload / download requests (usually "upload/")
-      uploadSubDir = "upload/";
+    systemd.services.ejabberd = {
+      serviceConfig = {
+        RuntimeDirectory = "ejabberd";
+      };
+      preStart = ''
+        cp ${configFile} /run/ejabberd/ejabberd.yml
+        chmod u+rw /run/ejabberd/ejabberd.yml
+      '';
     };
-  };
-  # systemd.services.prosody-filer = {
-  #   preStart = ''
-  #     ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" ${pkgs.prosody-filer}
-  #   '';
-  # };
 
-  # Notify ejabberd of new certs
-  security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
-  security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
+    # system.activationScripts."ejabberd" = ''
+    #   secret=$(cat "${config.age.secrets.nixetcupSecret.path}")
+    #   configFile=/run/ejabberd/ejabberd.yml
+    #   ${pkgs.gnused}/bin/sed -i "s#@UPLOAD_SECRET@#$secret#" "$configFile"
+    # '';
+    # ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
+    # ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
 
-  networking.firewall.allowedUDPPorts = [
-    5478
-  ];
-  networking.firewall.allowedTCPPorts = [
-    3478
-    5478
-    #
-    5222
-    5223
-    5269
-    5270
-    5280
-    5290
-    15222
-    15223
-    15269
-    15270
-    15280
-  ];
-}
+    services.prosody-filer = {
+      enable = true;
+      settings = {
+        ### IP address and port to listen to, e.g. "[::]:5050"
+        listenport = "127.0.0.1:5050";
+        ### Secret (must match the one in prosody.conf.lua!)
+        secret = "@UPLOAD_SECRET@";
+        ### Where to store the uploaded files
+        storeDir = "/var/www/${domain}/upload/";
+        ### Subdirectory for HTTP upload / download requests (usually "upload/")
+        uploadSubDir = "upload/";
+      };
+    };
+    # systemd.services.prosody-filer = {
+    #   preStart = ''
+    #     ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" ${pkgs.prosody-filer}
+    #   '';
+    # };
+
+    # Notify ejabberd of new certs
+    security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
+    security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
+
+    networking.firewall.allowedUDPPorts = [
+      5478
+    ];
+    networking.firewall.allowedTCPPorts = [
+      3478
+      5478
+      #
+      5222
+      5223
+      5269
+      5270
+      5280
+      5290
+      15222
+      15223
+      15269
+      15270
+      15280
+    ];
+  }

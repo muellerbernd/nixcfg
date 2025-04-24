@@ -12,7 +12,13 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usb_storage"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = ["dm-snapshot"];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
@@ -29,43 +35,70 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd" "noatime"];
+    options = [
+      "subvol=root"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/1ED2-6830";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd" "noatime"];
+    options = [
+      "subvol=home"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=persist" "compress=zstd" "noatime"];
+    options = [
+      "subvol=persist"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/snapshots" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=snapshots" "compress=zstd" "noatime"];
+    options = [
+      "subvol=snapshots"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
     fsType = "btrfs";
-    options = ["subvol=log" "compress=zstd" "noatime"];
+    options = [
+      "subvol=log"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   swapDevices = [

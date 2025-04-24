@@ -39,7 +39,10 @@
     "isci"
   ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "acpi_call"];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+  ];
   boot.extraModulePackages = [];
 
   boot.extraModprobeConfig = lib.mkMerge [
@@ -78,8 +81,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # New ThinkPads have a different TrackPoint manufacturer/name.
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
 }

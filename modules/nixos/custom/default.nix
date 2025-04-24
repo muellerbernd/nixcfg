@@ -31,7 +31,10 @@ in {
 
   config = {
     # NixOS uses NTFS-3G for NTFS support.
-    boot.supportedFilesystems = ["ntfs" "cifs"];
+    boot.supportedFilesystems = [
+      "ntfs"
+      "cifs"
+    ];
 
     security.polkit.enable = true;
     systemd = {
@@ -246,7 +249,10 @@ in {
     };
 
     # for cross compilation of arm
-    boot.binfmt.emulatedSystems = ["aarch64-linux" "armv7l-linux"];
+    boot.binfmt.emulatedSystems = [
+      "aarch64-linux"
+      "armv7l-linux"
+    ];
     boot.binfmt.preferStaticEmulators = true;
 
     hardware.enableRedistributableFirmware = true;

@@ -43,9 +43,20 @@
   #   "aesni_intel"
   #   "cryptd"
   # ];
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "sr_mod" "usb_storage" "xhci_hcd"];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "sr_mod"
+    "usb_storage"
+    "xhci_hcd"
+  ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = lib.mkBefore ["kvm-intel" "xhci_hcd"];
+  boot.kernelModules = lib.mkBefore [
+    "kvm-intel"
+    "xhci_hcd"
+  ];
   boot.extraModulePackages = [];
 
   # boot.extraModprobeConfig = lib.mkMerge [
@@ -94,8 +105,7 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # New ThinkPads have a different TrackPoint manufacturer/name.
   hardware.trackpoint.device = "TPPS/2 Elan TrackPoint";
 }

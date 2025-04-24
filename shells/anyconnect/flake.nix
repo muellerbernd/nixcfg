@@ -10,19 +10,21 @@
     flake-utils,
     ...
   }:
-    flake-utils.lib.eachDefaultSystem
-    (system: let
-      # pkgs = nixpkgs.outputs.legacyPackages.${system};
-      pkgs = import nixpkgs {inherit system;};
-      # rofi-music-rs = pkgs.callPackage ./rofi-music.nix {
-      #   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration AppKit;
-      # };
-    in {
-      # packages.rofi-music-rs = rofi-music-rs;
-      # packages.default = rofi-music-rs;
+    flake-utils.lib.eachDefaultSystem (
+      system: let
+        # pkgs = nixpkgs.outputs.legacyPackages.${system};
+        pkgs = import nixpkgs {inherit system;};
+      in
+        # rofi-music-rs = pkgs.callPackage ./rofi-music.nix {
+        #   inherit (pkgs.darwin.apple_sdk.frameworks) Security SystemConfiguration AppKit;
+        # };
+        {
+          # packages.rofi-music-rs = rofi-music-rs;
+          # packages.default = rofi-music-rs;
 
-      devShells.default = import ./shell.nix {inherit pkgs;};
-    })
+          devShells.default = import ./shell.nix {inherit pkgs;};
+        }
+    )
     // {
       # overlays.default = final: prev: {
       #   inherit (self.packages.${final.system}) rofi-music-rs;

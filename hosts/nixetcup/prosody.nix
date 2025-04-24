@@ -56,5 +56,12 @@
     # http_upload_external_file_size_limit = 50000000 -- 50 MB
     # extraConfig = builtins.readFile ./prosody.cfg.lua;
   };
-  networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
+  networking.firewall.allowedTCPPorts = [
+    5222
+    5223
+    5269
+    5270
+    5280
+    5290
+  ];
 }

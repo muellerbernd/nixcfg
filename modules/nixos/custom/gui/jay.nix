@@ -49,7 +49,11 @@
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
-    extraPortals = [pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
     # extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
   # security.pam.services.swaylock = {};

@@ -246,7 +246,9 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox = {enable = true;};
+  programs.firefox = {
+    enable = true;
+  };
 
   services.mpris-proxy.enable = true;
 

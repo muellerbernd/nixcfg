@@ -140,7 +140,9 @@
     };
   };
 
-  zramSwap = {enable = false;};
+  zramSwap = {
+    enable = false;
+  };
 
   users.users.root = {
     openssh.authorizedKeys.keys = [

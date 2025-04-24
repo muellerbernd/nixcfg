@@ -61,12 +61,20 @@ in {
       buildMachines = [
         {
           hostName = "remote-builder";
-          systems = ["x86_64-linux" "aarch64-linux" "armv7l-linux"];
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+            "armv7l-linux"
+          ];
           protocol = "ssh-ng";
           sshUser = "nixremote";
           sshKey = config.age.secrets.distributedBuilderKey.path;
           maxJobs = 99;
-          supportedFeatures = ["nixos-test" "big-parallel" "kvm"];
+          supportedFeatures = [
+            "nixos-test"
+            "big-parallel"
+            "kvm"
+          ];
         }
       ];
       extraOptions = ''

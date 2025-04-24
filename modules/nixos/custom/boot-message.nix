@@ -16,8 +16,9 @@
         xmpp:bernd@xmpp.muellerbernd.de
         @muellerbernd:matrix.org
       '';
+    in
       # in ''echo -e ${message} | boxes --design weave | lolcat --seed 42 --force'';
-    in ''echo -e ${message} | boxes -a jl | lolcat --seed 42 --force'';
+      ''echo -e ${message} | boxes -a jl | lolcat --seed 42 --force'';
     runtimeInputs = [
       pkgs.lolcat
       pkgs.boxes

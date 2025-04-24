@@ -10,20 +10,21 @@
     flake-utils,
     ...
   }:
-    flake-utils.lib.eachDefaultSystem
-    (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      devShells.default = pkgs.mkShell {
-        name = "Conda devShell";
+    flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        devShells.default = pkgs.mkShell {
+          name = "Conda devShell";
 
-        buildInputs = with pkgs; [
-          conda
-        ];
+          buildInputs = with pkgs; [
+            conda
+          ];
 
-        shellHook = "";
-      };
-    })
+          shellHook = "";
+        };
+      }
+    )
     // {
       # overlays.default = final: prev: {
       #   inherit (self.packages.${final.system}) rofi-music-rs;

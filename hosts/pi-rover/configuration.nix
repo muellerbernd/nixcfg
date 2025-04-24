@@ -27,7 +27,14 @@
     users.pi = {
       initialPassword = "pi";
       isNormalUser = true;
-      extraGroups = ["wheel" "gpio" "networkmanager" "dialout" "i2c" "tty"];
+      extraGroups = [
+        "wheel"
+        "gpio"
+        "networkmanager"
+        "dialout"
+        "i2c"
+        "tty"
+      ];
       openssh.authorizedKeys.keys = [
         # bernd ssh
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"
@@ -49,7 +56,11 @@
   # Enable flakes
   nix.settings = {
     experimental-features = lib.mkDefault "nix-command flakes";
-    trusted-users = ["root" "@wheel" "nixremote"];
+    trusted-users = [
+      "root"
+      "@wheel"
+      "nixremote"
+    ];
   };
 
   # Enable networking

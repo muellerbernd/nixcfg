@@ -15,7 +15,10 @@
   '';
 in {
   networking.domain = "matrix.muellerbernd.de";
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.postgresql.enable = true;
   services.postgresql.initialScript = pkgs.writeText "synapse-init.sql" ''
@@ -115,7 +118,10 @@ in {
         port = 8008;
         # bind_addresses = ["::1"];
         # bind_addresses = ["127.0.0.1"];
-        bind_addresses = ["::" "0.0.0.0"];
+        bind_addresses = [
+          "::"
+          "0.0.0.0"
+        ];
         type = "http";
         tls = false;
         x_forwarded = true;

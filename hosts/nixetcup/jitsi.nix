@@ -26,7 +26,10 @@ in {
     openFirewall = true;
   };
 
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
   # services.jitsi-meet = {
   #   enable = true;
   #   hostName = jitsi_fqdn;

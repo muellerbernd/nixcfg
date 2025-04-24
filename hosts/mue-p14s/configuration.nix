@@ -25,7 +25,16 @@
   };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "nfs"];
+  boot.supportedFilesystems = lib.mkForce [
+    "btrfs"
+    "reiserfs"
+    "vfat"
+    "f2fs"
+    "xfs"
+    "ntfs"
+    "cifs"
+    "nfs"
+  ];
   # Bootloader.
   boot = {
     loader = {
@@ -99,13 +108,41 @@
       ];
 
       levels = [
-        [0 0 50]
-        [1 45 60]
-        [2 50 61]
-        [3 52 63]
-        [6 56 65]
-        [7 60 85]
-        ["level auto" 80 32767]
+        [
+          0
+          0
+          50
+        ]
+        [
+          1
+          45
+          60
+        ]
+        [
+          2
+          50
+          61
+        ]
+        [
+          3
+          52
+          63
+        ]
+        [
+          6
+          56
+          65
+        ]
+        [
+          7
+          60
+          85
+        ]
+        [
+          "level auto"
+          80
+          32767
+        ]
       ];
     };
   };
@@ -117,7 +154,10 @@
   systemd.services.ModemManager = {
     enable = lib.mkForce true;
     path = [pkgs.libqmi]; # required by fcc-unlock-script of 105b:e0ab
-    wantedBy = ["multi-user.target" "network.target"];
+    wantedBy = [
+      "multi-user.target"
+      "network.target"
+    ];
   };
 
   networking.hostName = "mue-p14s"; # Define your hostname.
@@ -274,7 +314,9 @@
     '';
   };
 
-  services.samba = {openFirewall = true;};
+  services.samba = {
+    openFirewall = true;
+  };
   services.gvfs.enable = true;
   # For mount.cifs, required unless domain name resolution is not needed.
   fileSystems."/mnt/EIS" = {

@@ -29,7 +29,11 @@ stdenv.mkDerivation rec {
   # postPatch = ''
   # '';
 
-  nativeBuildInputs = [meson ninja wrapGAppsHook];
+  nativeBuildInputs = [
+    meson
+    ninja
+    wrapGAppsHook
+  ];
   #
   buildInputs = [
     vala
@@ -44,7 +48,10 @@ stdenv.mkDerivation rec {
     desktop-file-utils
     gsettings-desktop-schemas
   ];
-  propagatedBuildInputs = [glib gsettings-desktop-schemas];
+  propagatedBuildInputs = [
+    glib
+    gsettings-desktop-schemas
+  ];
 
   # env.NIX_CFLAGS_COMPILE = toString [ "-fcommon" ];
   #

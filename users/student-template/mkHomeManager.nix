@@ -39,7 +39,9 @@ in {
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  programs.firefox = {enable = true;};
+  programs.firefox = {
+    enable = true;
+  };
 
   # enable picom
   # services.picom.enable = true;
