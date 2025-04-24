@@ -13,6 +13,7 @@ in {
   age.secrets.berndMail = {
     file = ../../secrets/berndMail.age;
   };
+  # this follows https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/blob/master/docs/setup-guide.rst
   mailserver = {
     enable = true;
     fqdn = "mail.${domain}";
@@ -25,7 +26,6 @@ in {
         hashedPasswordFile = config.age.secrets.berndMail.path;
         aliases = ["postmaster@${domain}"];
       };
-      # "user2@example.com" = { ... };
     };
 
     # Use Let's Encrypt certificates. Note that this needs to set up a stripped
@@ -34,4 +34,18 @@ in {
   };
   # security.acme.acceptTerms = true;
   # security.acme.defaults.email = "security@example.com";
+  #https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/blob/master/docs/add-roundcube.rst?ref_type=heads
+  services.roundcube = {
+    enable = true;
+    # this is the url of the vhost, not necessarily the same as the fqdn of
+    # the mailserver
+    hostName = "webmail.${domain}";
+    extraConfig = ''
+      # starttls needed for authentication, so the fqdn required to match
+      # the certificate
+      $config['smtp_host'] = "tls://${config.mailserver.fqdn}";
+      $config['smtp_user'] = "%u";
+      $config['smtp_pass'] = "%p";
+    '';
+  };
 }
