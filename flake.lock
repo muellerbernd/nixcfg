@@ -141,14 +141,15 @@
         ],
         "nixpkgs-unstable": "nixpkgs-unstable",
         "rofi-music-rs": "rofi-music-rs",
-        "systems": "systems_4"
+        "systems": "systems_4",
+        "wazuh-nix": "wazuh-nix"
       },
       "locked": {
-        "lastModified": 1744993774,
-        "narHash": "sha256-rk249ZSFTrOVHvW8XhmohRkSYHst1zVMHOwC85TiG2c=",
+        "lastModified": 1745572951,
+        "narHash": "sha256-v4dQPdlfTlWGDL7LAKRgs7jBkg9JHPNM9a7kNRcqmVY=",
         "ref": "refs/heads/main",
-        "rev": "011e0470d931968863cc3be991f166d286149a7e",
-        "revCount": 450,
+        "rev": "e43293449185f496b9cc619df58168583aaa5ee3",
+        "revCount": 460,
         "type": "git",
         "url": "ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git"
       },
@@ -261,7 +262,7 @@
     },
     "flake-utils_2": {
       "inputs": {
-        "systems": "systems_5"
+        "systems": "systems_6"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -327,11 +328,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742655702,
-        "narHash": "sha256-jbqlw4sPArFtNtA1s3kLg7/A4fzP4GLk9bGbtUJg0JQ=",
+        "lastModified": 1744743431,
+        "narHash": "sha256-iyn/WBYDc7OtjSawbegINDe/gIkok888kQxk3aVnkgg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0948aeedc296f964140d9429223c7e4a0702a1ff",
+        "rev": "c61bfe3ae692f42ce688b5865fac9e0de58e1387",
         "type": "github"
       },
       "original": {
@@ -509,11 +510,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1743125403,
-        "narHash": "sha256-ax5yY7IA9XaO+qHiu2XNs7oivWlD4+YG+G8+VaAl8bE=",
+        "lastModified": 1745469902,
+        "narHash": "sha256-+kHgeD+3+WZZcOaIsS6XwQWb+qbYYWYXzoEjdmdW6OY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b25d37292b5b6a56a6a508d4632feceb52266333",
+        "rev": "4975ac49a527b505803958595fcb191c9e889f60",
         "type": "github"
       },
       "original": {
@@ -671,7 +672,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "rofi-music-rs": "rofi-music-rs_2",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
-        "systems": "systems_6"
+        "systems": "systems_7"
       }
     },
     "simple-nixos-mailserver": {
@@ -775,6 +776,21 @@
     },
     "systems_6": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_7": {
+      "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
         "owner": "nix-systems",
@@ -785,6 +801,28 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "wazuh-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "eis-nix-configs",
+          "nixpkgs"
+        ],
+        "systems": "systems_5"
+      },
+      "locked": {
+        "lastModified": 1745501780,
+        "narHash": "sha256-GdkNbSZVISRRzlWdZvAc0J8CkFiBlByT21N4hVrJrno=",
+        "owner": "muellerbernd",
+        "repo": "wazuh.nix",
+        "rev": "2d887b469747895a517956a476acdabad89bd5e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "muellerbernd",
+        "repo": "wazuh.nix",
         "type": "github"
       }
     }
