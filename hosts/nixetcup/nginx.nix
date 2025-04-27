@@ -28,6 +28,17 @@
           '';
         };
       };
+      "kaninchen.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          root = "/var/www/kaninchen.${domain}";
+          extraConfig = ''
+            autoindex on;
+            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+          '';
+        };
+      };
       "xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -151,6 +162,7 @@
           "blog.muellerbernd.de"
           "cloud.muellerbernd.de"
           "git.muellerbernd.de"
+          "kaninchen.muellerbernd.de"
         ];
       };
       "git.eineurl.de" = {
