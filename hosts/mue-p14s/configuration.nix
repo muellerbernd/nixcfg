@@ -438,7 +438,7 @@
   # ];
 
   services.icecream.daemon = {
-    enable = true;
+    enable = false;
     noRemote = false;
     maxProcesses = 2;
     openBroadcast = true;
