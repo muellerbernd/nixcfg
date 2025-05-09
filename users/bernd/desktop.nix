@@ -102,7 +102,7 @@ in {
       mullvad-vpn
       # downloader
       yt-dlg
-      ytmdl
+      unstable.ytmdl
       yt-dlp
       # theming
       lxqt.lxqt-qtplugin
