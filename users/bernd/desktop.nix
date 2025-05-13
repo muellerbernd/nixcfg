@@ -101,9 +101,9 @@ in {
       # mullvad vpn
       mullvad-vpn
       # downloader
-      yt-dlg
+      unstable.yt-dlg
       unstable.ytmdl
-      yt-dlp
+      unstable.yt-dlp
       # theming
       lxqt.lxqt-qtplugin
       libsForQt5.qtstyleplugin-kvantum
