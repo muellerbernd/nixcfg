@@ -27,6 +27,7 @@ in {
         aliases = [
           "postmaster@${domain}"
           "github@${domain}"
+          "haus@${domain}"
         ];
       };
     };
