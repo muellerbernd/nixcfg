@@ -69,3 +69,8 @@ nixetcup:
 [group('Main')]
 deploy-pi-mcrover:
   nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@pi-rover.local --flake ".#pi-rover"
+
+# build and deploy config for pi4
+[group('Main')]
+deploy-pi4:
+  nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@pi4.local --flake ".#pi4"

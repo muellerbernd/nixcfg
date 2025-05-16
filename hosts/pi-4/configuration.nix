@@ -10,6 +10,7 @@
     #   # little smaller
     #   "${modulesPath}/profiles/minimal.nix"
     ./pi-requirements.nix
+    ./distributed-builder.nix
   ];
 
   hardware = {
@@ -34,6 +35,26 @@
       extraGroups = [
         "wheel"
         "gpio"
+        "adbusers"
+        "wheel"
+        "disk"
+        "libvirtd"
+        "docker"
+        "audio"
+        "video"
+        "input"
+        "systemd-journal"
+        "networkmanager"
+        "network"
+        "davfs2"
+        "sudo"
+        "adm"
+        "lp"
+        "storage"
+        "users"
+        "tty"
+        "dialout"
+        "uucp"
       ];
       openssh.authorizedKeys.keys = [
         # bernd ssh
@@ -77,6 +98,10 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   environment.systemPackages = with pkgs; [
+    gnumake
+    just
+    stow
+    gnupg
     starship
     antigen
     zoxide
