@@ -108,6 +108,7 @@
       adwaita-icon-theme
       lxde.lxsession
       gnupg
+      traceroute
       # cli helpers
       usbutils
       man
