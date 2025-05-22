@@ -53,7 +53,7 @@ in {
       gparted
       filezilla
       #
-      unstable.dbeaver-bin
+      # unstable.dbeaver-bin
       # office
       libreoffice
       # audio
