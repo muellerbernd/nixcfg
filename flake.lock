@@ -145,11 +145,11 @@
         "wazuh-nix": "wazuh-nix"
       },
       "locked": {
-        "lastModified": 1747988787,
-        "narHash": "sha256-KSFV6Xg/7kHPwyWCfxB8K78MDYR01iuE+6iB8xLUKXM=",
+        "lastModified": 1748194340,
+        "narHash": "sha256-/7DlKKV2eNH+qG/f9qi17jYLDnPd6H314om4xQrr0cc=",
         "ref": "refs/heads/main",
-        "rev": "37a3389d7fcc35c75fee133150bb98d0de0de904",
-        "revCount": 479,
+        "rev": "8c81dca97ecf0042715ba307056644704a374f55",
+        "revCount": 481,
         "type": "git",
         "url": "ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git"
       },
