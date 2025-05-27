@@ -24,7 +24,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-      inputs.eis-nix-configs.overlays.additions
+      # inputs.eis-nix-configs.overlays.additions
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
       # inputs.hyprland.overlays.default

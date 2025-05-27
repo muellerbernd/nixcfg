@@ -35,11 +35,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    eis-nix-configs = {
-      url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
-      # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # eis-nix-configs = {
+    #   url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
+    #   # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
@@ -51,6 +51,16 @@
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
   };
+  # nixConfig = rec {
+  #   trusted-public-keys = [
+  #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+  #   ];
+  #   substituters = [
+  #     "https://cache.nixos.org"
+  #   ];
+  #   trusted-substituters = substituters;
+  #   # fallback = true;
+  # };
 
   outputs = {
     self,
