@@ -8,14 +8,15 @@
   # fonts
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override {
-        fonts = [
-          "FiraCode"
-          "DroidSansMono"
-          "Hack"
-          # "Iosevka"
-        ];
-      })
+      # (nerdfonts.override {
+      #   fonts = [
+      #     "FiraCode"
+      #     "DroidSansMono"
+      #     "Hack"
+      #     # "Iosevka"
+      #   ];
+      # })
+      nerd-fonts.hack
       fira-code
       fira-code-symbols
       terminus_font

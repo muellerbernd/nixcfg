@@ -7,7 +7,7 @@
 }: {
   config = lib.mkIf (config.services.pipewire.enable) {
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     # rtkit is optional but recommended
     security.rtkit.enable = true;
 

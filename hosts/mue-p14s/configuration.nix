@@ -265,7 +265,6 @@
     iw
     cloudcompare
     tio
-    setserial
     throttled
     drawio
     pandoc-drawio-filter
@@ -425,8 +424,6 @@
     KERNEL=="ttyACM1", MODE:="666"
     KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
-
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="A4WN1BDG", SYMLINK+="leica", MODE="666", RUN+="${pkgs.coreutils}/bin/stty -F /dev/leica cs8 115200 ${pkgs.setserial}/bin/setserial /dev/leica low_latency"
 
     SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup"
   '';
