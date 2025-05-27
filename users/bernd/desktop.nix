@@ -112,6 +112,8 @@ in {
       papirus-icon-theme
       # vm remote
       virt-viewer
+      #
+      rustdesk
       # fido
       fido2-manage
       # custom packages
