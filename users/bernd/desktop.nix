@@ -70,7 +70,7 @@ in {
       ntfs3g
       gvfs
       # 3d printing and modeling
-      meshlab
+      # meshlab
       # cloudcompare
       prusa-slicer
       blender
@@ -85,7 +85,6 @@ in {
       # spotify-player
       vlc
       strawberry
-      cantata
       # messenger
       gajim
       # matrix client
@@ -116,6 +115,9 @@ in {
       rustdesk
       # fido
       fido2-manage
+      # drawio stuff
+      drawio
+      pandoc-drawio-filter
       # custom packages
       annotator
       uvtools

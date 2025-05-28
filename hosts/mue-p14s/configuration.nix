@@ -264,6 +264,7 @@
     wirelesstools
     iw
     cloudcompare
+    # serial console
     tio
     throttled
     drawio
