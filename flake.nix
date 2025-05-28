@@ -86,6 +86,21 @@
   in {
     # custom images
     images = {
+      pi5 =
+        (self.nixosConfigurations.pi5.extendModules {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            {
+              disabledModules = ["profiles/base.nix"];
+              # Disable zstd compression
+              sdImage.compressImage = false;
+            }
+          ];
+        })
+        .config
+        .system
+        .build
+        .sdImage;
       pi4 =
         (self.nixosConfigurations.pi4.extendModules {
           modules = [
@@ -183,6 +198,23 @@
         system = "x86_64-linux";
         users = ["bernd"];
         headless = true;
+      };
+      # raspberry-pi-5
+      pi5 = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          nixos-hardware.nixosModules.raspberry-pi-5
+          # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
+          # agenix.nixosModules.default
+          # {
+          #   age.secrets = {
+          #     distributedBuilderKey = {
+          #       file = "${inputs.self}/secrets/distributedBuilderKey.age";
+          #     };
+          #   };
+          # }
+          # ./hosts/pi-4/configuration.nix
+        ];
       };
       # raspberry-pi-4
       pi4 = nixpkgs.lib.nixosSystem {
