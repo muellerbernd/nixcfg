@@ -213,7 +213,7 @@
           #     };
           #   };
           # }
-          # ./hosts/pi-4/configuration.nix
+          ./hosts/pi-5/configuration.nix
         ];
       };
       # raspberry-pi-4

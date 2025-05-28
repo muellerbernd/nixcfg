@@ -9,23 +9,16 @@
     #   # Import the minimal profile from Nixpkgs which makes the ISO image a
     #   # little smaller
     #   "${modulesPath}/profiles/minimal.nix"
-    ./pi-requirements.nix
-    ./distributed-builder.nix
+    # ./distributed-builder.nix
+    ./hardware_configuration.nix
   ];
 
-  hardware = {
-    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
-    deviceTree = {
-      enable = true;
-      filter = "*rpi-4-*.dtb";
-    };
-  };
+
   console.enable = false;
-  system.stateVersion = "24.11";
   # Enable ssh
   services.openssh.enable = true;
 
-  networking.hostName = "pi4";
+  networking.hostName = "pi5";
 
   # Add a user 'default' to the system
   users = {
@@ -152,4 +145,6 @@
   '';
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+
+  system.stateVersion = "25.05";
 }
