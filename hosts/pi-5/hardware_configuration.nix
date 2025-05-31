@@ -24,4 +24,6 @@
       "cgroup_memory=1"
     ];
   };
+
+  hardware.enableAllHardware = lib.mkForce false;
 }
