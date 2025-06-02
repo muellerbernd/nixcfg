@@ -27,6 +27,7 @@ in {
       libnotify
       # images
       feh
+      geeqie
       gimp
       graphicsmagick
       inkscape-with-extensions
