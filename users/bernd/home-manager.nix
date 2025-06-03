@@ -183,6 +183,11 @@
       nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.bash-language-server
       gopls
+
+      # for debugging
+      vscode-extensions.ms-vscode.cpptools
+      vscode-extensions.vadimcn.vscode-lldb
+      lldb
       # rust-analyzer
       # haskell
       haskellPackages.haskell-language-server
