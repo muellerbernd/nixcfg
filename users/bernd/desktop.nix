@@ -94,7 +94,7 @@ in {
       #
       teams-for-linux
       # email
-      thunderbird
+      unstable.thunderbird
       # vpn
       networkmanager-openconnect
       openconnect
