@@ -136,7 +136,6 @@ in {
 
     services = {
       logind.killUserProcesses = false;
-      gnome.gnome-keyring.enable = true;
       # Enable the OpenSSH daemon.
       openssh = {
         enable = lib.mkDefault true;
