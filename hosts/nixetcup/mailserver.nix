@@ -29,6 +29,7 @@ in {
           "github@${domain}"
           "haus@${domain}"
           "norma@${domain}"
+          "shopping@${domain}"
         ];
       };
     };
