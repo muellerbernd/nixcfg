@@ -85,4 +85,5 @@
   #     auth include login
   #   '';
   # };
+  # security.pam.services.login.fprintAuth = false;
 }
