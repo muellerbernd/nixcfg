@@ -278,7 +278,33 @@
     qgis
     # at command tool
     atinout
+    # gstreamer
+    gst_all_1.gstreamer
+    gst_all_1.gst-rtsp-server
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-rs
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
+    gst_all_1.gst-devtools
+    #
+    inetutils
   ];
+  environment.variables.GST_PLUGIN_SYSTEM_PATH_1_0 = pkgs.lib.mkForce (
+    pkgs.lib.concatStringsSep ":" [
+      "${pkgs.gst_all_1.gstreamer}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-plugins-base}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-plugins-good}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-plugins-bad}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-plugins-ugly}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-libav}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-devtools}/lib/gstreamer-1.0"
+      "${pkgs.gst_all_1.gst-plugins-rs}/lib/gstreamer-1.0"
+    ]
+  );
 
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
   # The TL;DR is: the kernel calls out to the hard-coded path of
