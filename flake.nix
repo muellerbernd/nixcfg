@@ -36,11 +36,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # eis-nix-configs = {
-    #   url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
-    #   # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    eis-nix-configs = {
+      url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
+      # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
