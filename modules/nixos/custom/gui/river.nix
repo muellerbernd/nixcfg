@@ -31,7 +31,6 @@ in {
 
         cliphist
         grim
-        grimblast
         slurp
         # wayland
         waybar
