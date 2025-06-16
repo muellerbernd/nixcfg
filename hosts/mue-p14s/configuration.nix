@@ -290,6 +290,8 @@
     # gst_all_1.gst-vaapi
     # gst_all_1.gst-devtools
     #
+    pcsc-tools
+    #
     inetutils
   ];
   environment.variables.GST_PLUGIN_SYSTEM_PATH_1_0 = pkgs.lib.mkForce (
@@ -500,6 +502,9 @@
   #     allow 10.100.0.0/24
   #   '';
   # };
+
+  services.pcscd.enable = true;
+  services.pcscd.plugins = [pkgs.acsccid pkgs.ccid pkgs.libacr38u pkgs.scmccid];
 }
 # vim: set ts=2 sw=2:
 
