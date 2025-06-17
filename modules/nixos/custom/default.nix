@@ -218,6 +218,7 @@ in {
           8384
           22000
           21027
+          config.services.tailscale.port
         ];
         # allowedUDPPortRanges = lib.mkDefault [
         #   {
@@ -256,6 +257,12 @@ in {
     boot.binfmt.preferStaticEmulators = true;
 
     hardware.enableRedistributableFirmware = true;
+
+    services.tailscale.enable = true;
+    # networking.firewall = {
+    #   checkReversePath = "loose";
+    #   trustedInterfaces = ["tailscale0"];
+    # };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
