@@ -23,13 +23,14 @@ in {
       gtk_engines
       gsettings-desktop-schemas
       playerctl
-      pcmanfm
       #
       unstable.remmina
       unstable.x2goclient
       unstable.freerdp
       xorg.xhost
       lxqt.lxqt-policykit
+      #
+      qmk
     ];
     ## Force Chromium based apps to render using wayland
     ## VSCode tends to break often with this
