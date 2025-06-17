@@ -259,10 +259,10 @@ in {
     hardware.enableRedistributableFirmware = true;
 
     services.tailscale.enable = true;
-    # networking.firewall = {
-    #   checkReversePath = "loose";
-    #   trustedInterfaces = ["tailscale0"];
-    # };
+    networking.firewall = {
+      checkReversePath = "loose";
+      trustedInterfaces = ["tailscale0"];
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
