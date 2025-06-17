@@ -14,6 +14,7 @@ in {
     ./fonts.nix
     ./nix-settings.nix
     ./pam.nix
+    ./smartcard.nix
     # ./mpd.nix
 
     ./boot-message.nix
