@@ -7,7 +7,7 @@
 }: {
   config = lib.mkIf (config.services.pipewire.enable) {
     # Enable sound with pipewire.
-    services.pulseaudio.enable = false;
+    # services.pulseaudio.enable = false;
     # rtkit is optional but recommended
     security.rtkit.enable = true;
 
@@ -85,6 +85,7 @@
       pavucontrol
       bluez # Bluetooth support
       bluez-tools # Bluetooth tools
+      helvum
     ];
   };
 }
