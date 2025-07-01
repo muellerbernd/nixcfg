@@ -12,10 +12,10 @@
     security.rtkit.enable = true;
 
     services.pipewire = {
-      alsa.enable = false;
-      alsa.support32Bit = false;
+      alsa.enable = true;
+      alsa.support32Bit = true;
       pulse.enable = true;
-      jack.enable = false;
+      jack.enable = true;
       wireplumber.enable = true;
     };
     services.pipewire.wireplumber.extraConfig = {
@@ -87,6 +87,7 @@
       bluez # Bluetooth support
       bluez-tools # Bluetooth tools
       helvum
+      libnotify
     ];
   };
 }
