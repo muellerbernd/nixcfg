@@ -12,10 +12,10 @@
     security.rtkit.enable = true;
 
     services.pipewire = {
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      alsa.enable = false;
+      alsa.support32Bit = false;
       pulse.enable = true;
-      jack.enable = true;
+      jack.enable = false;
       wireplumber.enable = true;
     };
     services.pipewire.wireplumber.extraConfig = {
@@ -82,7 +82,8 @@
     };
     environment.systemPackages = with pkgs; [
       pamixer
-      pavucontrol
+      # pavucontrol
+      pwvucontrol
       bluez # Bluetooth support
       bluez-tools # Bluetooth tools
       helvum
