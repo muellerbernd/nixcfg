@@ -47,6 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
     # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
@@ -70,6 +71,7 @@
     systems,
     agenix,
     nixos-hardware,
+    nixos-raspberrypi,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -185,6 +187,13 @@
           ./hosts/iso/configuration.nix
         ];
       };
+      ISO-arm = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+          ./hosts/iso/configuration.nix
+        ];
+      };
       # test VM
       balodil = mkDefault "balodil" {
         inherit nixpkgs home-manager agenix inputs outputs;
@@ -200,20 +209,31 @@
         headless = true;
       };
       # raspberry-pi-5
-      pi5 = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
+      pi5 = nixos-raspberrypi.lib.nixosSystem {
+        specialArgs = inputs;
         modules = [
-          nixos-hardware.nixosModules.raspberry-pi-5
-          # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
-          # agenix.nixosModules.default
-          # {
-          #   age.secrets = {
-          #     distributedBuilderKey = {
-          #       file = "${inputs.self}/secrets/distributedBuilderKey.age";
-          #     };
-          #   };
-          # }
+          {
+            # Hardware specific configuration, see section below for a more complete
+            # list of modules
+            imports = with nixos-raspberrypi.nixosModules; [
+              raspberry-pi-5.base
+              raspberry-pi-5.display-vc4
+              raspberry-pi-5.bluetooth
+            ];
+          }
           ./hosts/pi-5/configuration.nix
+
+          # ({ config, pkgs, lib, ... }: {
+          #   networking.hostName = "rpi5-demo";
+          #
+          #   system.nixos.tags = let
+          #     cfg = config.boot.loader.raspberryPi;
+          #   in [
+          #     "raspberry-pi-${cfg.variant}"
+          #     cfg.bootloader
+          #     config.boot.kernelPackages.kernel.version
+          #   ];
+          # })
         ];
       };
       # raspberry-pi-4

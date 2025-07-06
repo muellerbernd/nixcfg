@@ -11,6 +11,7 @@
     #   "${modulesPath}/profiles/minimal.nix"
     # ./distributed-builder.nix
     ./hardware_configuration.nix
+    ./pi5-configtxt.nix
   ];
 
   console.enable = false;
@@ -127,21 +128,22 @@
     git.enable = true;
     direnv.enable = true;
   };
-  zramSwap = {
-    enable = true;
-    memoryPercent = 50;
-  };
 
-  # Straight copy pasto from wiki
-  # Create gpio group
-  users.groups.gpio = {};
+  system.nixos.tags = let
+    cfg = config.boot.loader.raspberryPi;
+  in [
+    "raspberry-pi-${cfg.variant}"
+    cfg.bootloader
+    config.boot.kernelPackages.kernel.version
+  ];
 
-  # Change permissions gpio devices
-  # services.udev.extraRules = ''
-  #   SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio",MODE="0660"
-  #   SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
-  #   SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
-  # '';
+  services.udev.extraRules = ''
+    # Ignore partitions with "Required Partition" GPT partition attribute
+    # On our RPis this is firmware (/boot/firmware) partition
+    ENV{ID_PART_ENTRY_SCHEME}=="gpt", \
+      ENV{ID_PART_ENTRY_FLAGS}=="0x1", \
+      ENV{UDISKS_IGNORE}="1"
+  '';
 
   system.stateVersion = "25.05";
 }
