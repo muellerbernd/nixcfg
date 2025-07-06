@@ -95,6 +95,7 @@ in {
       openconnect
       # mullvad vpn
       mullvad-vpn
+      mullvad-browser
       # downloader
       unstable.yt-dlg
       unstable.ytmdl
@@ -108,7 +109,7 @@ in {
       # vm remote
       virt-viewer
       # remote desktop
-      rustdesk
+      # rustdesk
       # fido
       fido2-manage
       # drawio stuff
