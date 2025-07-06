@@ -47,7 +47,7 @@ upgrade: update switch
 # build custom NixOS ISO
 [group('Main')]
 iso:
-  nix build .#nixosConfigurations.ISO.config.system.build.isoImage --show-trace
+  nom build .#nixosConfigurations.ISO.config.system.build.isoImage --show-trace
 
 # build the setup for the current host as VM
 [group('VM')]
