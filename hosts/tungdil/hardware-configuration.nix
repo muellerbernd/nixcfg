@@ -12,97 +12,55 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "thunderbolt"
-    "usb_storage"
-    "sd_mod"
-  ];
+  boot.initrd.availableKernelModules = ["ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  # enable btrfs support
-  boot.supportedFilesystems = ["btrfs"];
-
-  # Linux kernel: two options, with the second one being useful
-  # when there are problems with the latest kernel and thus there
-  # is a need to pin the installation to a specific version
-  # --> Install the latest kernel from the NixOS channel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=root"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=root"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1ED2-6830";
+    device = "/dev/disk/by-uuid/FF60-C63B";
     fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
+    options = ["fmask=0022" "dmask=0022"];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=home"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=home"];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=nix"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=nix"];
   };
 
   fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=persist"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=persist"];
   };
 
   fileSystems."/snapshots" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=snapshots"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=snapshots"];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/3658247b-737f-4399-a791-2e5a1e2071da";
+    device = "/dev/disk/by-uuid/b109a417-be9c-48ad-ae9f-e24133ee9fc6";
     fsType = "btrfs";
-    options = [
-      "subvol=log"
-      "compress=zstd"
-      "noatime"
-    ];
+    options = ["subvol=log"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/a068b51b-8914-4b46-b52e-94323891161d";}
+    {device = "/dev/disk/by-uuid/d3c78815-5207-4d41-80b8-9aae10e8a592";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -110,9 +68,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eth0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp7s1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
