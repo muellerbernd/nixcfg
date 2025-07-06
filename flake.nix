@@ -163,6 +163,10 @@
         inherit nixpkgs home-manager agenix inputs outputs;
         system = "x86_64-linux";
       };
+      tungdil = mkDefault "tungdil" {
+        inherit nixpkgs home-manager agenix inputs outputs;
+        system = "x86_64-linux";
+      };
       ISO = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
