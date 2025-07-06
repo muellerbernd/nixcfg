@@ -162,6 +162,7 @@
           "blog.muellerbernd.de"
           "cloud.muellerbernd.de"
           "git.muellerbernd.de"
+          "headscale.muellerbernd.de"
           "kaninchen.muellerbernd.de"
         ];
       };

@@ -28,6 +28,8 @@ in {
           "postmaster@${domain}"
           "github@${domain}"
           "haus@${domain}"
+          "norma@${domain}"
+          "shopping@${domain}"
         ];
       };
     };

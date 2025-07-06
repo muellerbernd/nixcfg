@@ -77,7 +77,7 @@
   users.defaultUserShell = pkgs.zsh;
 
   # default to stateVersion for current lock
-  system.stateVersion = config.system.nixos.version;
+  system.stateVersion = "24.11";
 
   boot.initrd.availableKernelModules = [
     "usbhid"

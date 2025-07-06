@@ -24,7 +24,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-      # inputs.eis-nix-configs.overlays.additions
+      inputs.eis-nix-configs.overlays.additions
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
       # inputs.hyprland.overlays.default
@@ -183,6 +183,11 @@
       nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.bash-language-server
       gopls
+
+      # for debugging
+      vscode-extensions.ms-vscode.cpptools
+      vscode-extensions.vadimcn.vscode-lldb
+      lldb
       # rust-analyzer
       # haskell
       haskellPackages.haskell-language-server

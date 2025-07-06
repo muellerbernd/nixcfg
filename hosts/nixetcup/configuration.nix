@@ -14,6 +14,7 @@
     ./matterbridge.nix
     ./wireguard-server.nix
     ./mailserver.nix
+    ./headscale.nix
     # ./prosody.nix
     # modules
     customSystem

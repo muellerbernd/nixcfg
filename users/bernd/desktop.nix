@@ -22,24 +22,24 @@ in {
       # terminals
       alacritty
       foot
-      # notifications
-      dunst
-      libnotify
       # images
       feh
+      geeqie
       gimp
       graphicsmagick
-      inkscape-with-extensions
       xfce.ristretto
+      inkscape-with-extensions
       # pandoc
       pandoc
       haskellPackages.pandoc-crossref
+      # slideshow tools
+      presenterm
       # pdf
       zathura
       kdePackages.okular
       pdfarranger
       xdotool
-      # security
+      # password manager
       keepassxc
       # network
       networkmanagerapplet
@@ -48,8 +48,6 @@ in {
       blueman
       # apps
       simple-scan
-      xclip
-      redshift
       gparted
       filezilla
       #
@@ -60,7 +58,7 @@ in {
       sox
       # filesync
       nextcloud-client
-      #
+      # file managing
       xfce.thunar
       xfce.thunar-volman
       file-roller
@@ -80,20 +78,18 @@ in {
       luakit
       # wiki
       # kiwix
-      # media
-      # spotify
-      # spotify-player
+      # media players
       vlc
       strawberry
       # messenger
       gajim
       # matrix client
       element-desktop
-      # (lib.hiPrio element-desktop-fhg)
+      (lib.hiPrio element-desktop-fhg)
       #
       teams-for-linux
       # email
-      thunderbird
+      unstable.thunderbird
       # vpn
       networkmanager-openconnect
       openconnect
@@ -111,7 +107,7 @@ in {
       papirus-icon-theme
       # vm remote
       virt-viewer
-      #
+      # remote desktop
       rustdesk
       # fido
       fido2-manage
@@ -123,8 +119,6 @@ in {
       uvtools
       # from custom overlays
       rofi-music-rs
-      # lsleases
-
       rofi-script
     ];
   };

@@ -4,6 +4,9 @@
   lib,
   ...
 }: {
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+
   security.pam.services = {
     login = {
       u2fAuth = true;
@@ -15,6 +18,8 @@
       enableGnomeKeyring = true;
     };
   };
+
+  services.dbus.packages = [pkgs.gnome-keyring pkgs.gcr];
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
 
@@ -33,6 +38,11 @@
     };
     control = "sufficient";
   };
+
+  services.xserver.displayManager.sessionCommands = ''
+    eval $(gnome-keyring-daemon --start --daemonize --components=ssh,secrets)
+    export SSH_AUTH_SOCK
+  '';
 
   # services.udev.extraRules = ''
   #   ACTION=="remove", ENV{ID_BUS}=="usb", ENV{ID_PRODUCT}=="FIDO KB", RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
@@ -75,4 +85,5 @@
   #     auth include login
   #   '';
   # };
+  # security.pam.services.login.fprintAuth = false;
 }
