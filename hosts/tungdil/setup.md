@@ -7,6 +7,9 @@ curl https://raw.githubusercontent.com/muellerbernd/nixcfg/refs/heads/main/hosts
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /tmp/disk-config.nix
 # only mount
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode mount /tmp/disk-config.nix
+
+# get hardware config
+nixos-generate-config --root /mnt --show-hardware-config
 ```
 
 # install nixos
