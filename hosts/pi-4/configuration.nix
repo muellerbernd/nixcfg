@@ -11,6 +11,7 @@
     #   "${modulesPath}/profiles/minimal.nix"
     ./pi-requirements.nix
     ./distributed-builder.nix
+    ./jellyfin.nix
   ];
 
   hardware = {
