@@ -164,6 +164,7 @@
       typstyle
       alejandra
       nixfmt-rfc-style
+      unstable.mbake
       fish-lsp
       # lsp
       tinymist
