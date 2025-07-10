@@ -38,6 +38,13 @@
       };
       nativeBuildInputs = old.nativeBuildInputs ++ [prev.pkg-config];
     });
+    # networkmanager = prev.networkmanager.overrideAttrs (old: rec {
+    #   version = "1.52.1";
+    #   src = prev.fetchurl {
+    #     url = "https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/releases/${version}/downloads/NetworkManager-${version}.tar.xz";
+    #     hash = "sha256-ixIsc0k6cvK65SfBJc69h3EWcbkDUtvisXiKupV1rG8=";
+    #   };
+    # });
     # pcl = prev.pcl.overrideAttrs (old: {
     #   version = "1.14.1";
     #   src = prev.fetchFromGitHub {
