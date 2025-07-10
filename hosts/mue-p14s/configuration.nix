@@ -458,7 +458,7 @@
   # udev rules for rtls and co2monitor
   services.udev.extraRules = let
     peak_usb_setup = pkgs.writeShellScriptBin "peak_usb_setup" ''
-      ${pkgs.iproute2}/bin/ip link set can0 up type can bitrate 250000
+      ${pkgs.iproute2}/bin/ip link set $1 up type can bitrate 250000
     '';
   in ''
     KERNEL=="ttyACM0", MODE:="666"
@@ -466,7 +466,8 @@
     KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
 
-    SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup"
+    SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can0"
+    SUBSYSTEM=="net", KERNEL=="can1", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can1"
   '';
 
   # programs.nix-ld.enable = true;
