@@ -15,6 +15,30 @@
     "cifs"
   ];
 
+  boot.initrd.availableKernelModules = [
+    "thinkpad_acpi"
+    # # USB
+    "ehci_pci"
+    "xhci_pci"
+    "usb_storage"
+    "usbhid"
+    # Keyboard
+    "hid_generic"
+    # Disks
+    "nvme"
+    "ahci"
+    "sd_mod"
+    "sr_mod"
+    # SSD
+    "isci"
+  ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [
+    "kvm-intel"
+    "acpi_call"
+  ];
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   # Nix settings, auto cleanup and enable flakes
@@ -119,5 +143,8 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = lib.mkImageMediaOverride false;
 
-  system.stateVersion = "23.11";
+  isoImage.isoBaseName = lib.mkForce "bemu-nixos";
+  isoImage.edition = lib.mkForce "bemu-nixos";
+
+  system.stateVersion = "25.05";
 }
