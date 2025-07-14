@@ -6,5 +6,5 @@
   zenoh-c = pkgs.callPackage ./zenoh-c {};
   zenoh-cpp = pkgs.callPackage ./zenoh-cpp {};
   # prusa-slicer = pkgs.callPackage ./prusa-slicer {};
-  networkmanager-openconnect = pkgs.callPackage ./networkmanager-openconnect/ {};
+  networkmanager-openconnect = pkgs.callPackage ./networkmanager-openconnect {};
 }
