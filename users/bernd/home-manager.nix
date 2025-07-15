@@ -133,6 +133,8 @@
       ncdu
       lsd
       bc
+      #
+      tagutil
       # nix cli helpers
       manix
       #
