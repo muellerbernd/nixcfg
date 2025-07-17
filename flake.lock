@@ -150,11 +150,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1752572536,
-        "narHash": "sha256-MYUhcsk/8D1uGnwMdxVybJhFz9Xa373xu2QMsGCXtpk=",
+        "lastModified": 1752761307,
+        "narHash": "sha256-jpXfOnrOeOuDpJwujmBU9xXNsRFwIdCf4ks6P39Ueb8=",
         "ref": "refs/heads/main",
-        "rev": "197d410c148b5ce4f13555b69ca389d54ec3dd85",
-        "revCount": 511,
+        "rev": "742a5ba0180f337b0b9eacdb075ac56594c883a6",
+        "revCount": 513,
         "type": "git",
         "url": "ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git"
       },
