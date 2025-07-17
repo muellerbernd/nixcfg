@@ -222,7 +222,7 @@
           ./hosts/pi-rover/configuration.nix
         ];
       };
-      # virtual machine that is available on our student proxmox instance
+      # virtual machine that is available on my proxmox instance
       proxmox-VM = mkProxmox "proxmox-VM" {
         inherit nixpkgs home-manager inputs outputs agenix;
         system = "x86_64-linux";
