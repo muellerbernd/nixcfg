@@ -74,6 +74,8 @@
   } @ inputs: let
     inherit (self) outputs;
     mkDefault = import ./lib/mkdefault.nix;
+    mkProxmox = import ./lib/mkproxmox.nix;
+
     lib = nixpkgs.lib // home-manager.lib;
     forEachSystem = f: lib.genAttrs (import systems) (system: f pkgsFor.${system});
     pkgsFor = lib.genAttrs (import systems) (
@@ -219,6 +221,13 @@
           }
           ./hosts/pi-rover/configuration.nix
         ];
+      };
+      # virtual machine that is available on our student proxmox instance
+      proxmox-VM = mkProxmox "proxmox-VM" {
+        inherit nixpkgs home-manager inputs outputs agenix;
+        system = "x86_64-linux";
+        users = ["bernd"];
+        hostname = "proxmox-VM";
       };
     };
 

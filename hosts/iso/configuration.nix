@@ -31,6 +31,9 @@
     "sr_mod"
     # SSD
     "isci"
+
+    "ahci"
+    "firewire_ohci"
   ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [
@@ -39,7 +42,7 @@
   ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+  # isoImage.squashfsCompression = "gzip -Xcompression-level 1";
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
