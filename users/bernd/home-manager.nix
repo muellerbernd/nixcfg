@@ -206,7 +206,7 @@
       nixpkgs-review
       #
       sshfs
-      wakeonlan
+      wol
     ];
   };
 
