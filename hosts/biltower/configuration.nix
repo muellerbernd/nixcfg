@@ -196,6 +196,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
     ];
   };
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="net", NAME=="en*", RUN+="${pkgs.ethtool}/bin/ethtool -s enp42s0 wol g"
+  '';
 }
 # vim: set ts=2 sw=2:
 
