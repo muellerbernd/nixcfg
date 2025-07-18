@@ -35,6 +35,7 @@ in {
     boot.supportedFilesystems = [
       "ntfs"
       "cifs"
+      "nfs"
     ];
 
     security.polkit.enable = true;

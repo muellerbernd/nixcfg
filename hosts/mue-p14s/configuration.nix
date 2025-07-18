@@ -501,7 +501,15 @@
   #     allow 10.100.0.0/24
   #   '';
   # };
-
+  # fileSystems."/mnt/data_recordings" = {
+  #   device = "192.168.1.28:/data_recordings";
+  #   fsType = "nfs";
+  #   # options = ["x-systemd.automount" "noauto"];
+  #   options = let
+  #     # this line prevents hanging on network split
+  #     automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+  #   in ["${automount_opts}"];
+  # };
 }
 # vim: set ts=2 sw=2:
 
