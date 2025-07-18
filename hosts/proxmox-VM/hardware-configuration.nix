@@ -11,7 +11,7 @@
     # kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = ["ext4" "btrfs" "xfs" "fat" "vfat" "cifs" "nfs"];
     growPartition = true;
-    kernelModules = ["kvm-amd"];
+    kernelModules = ["kvm-intel"];
     kernelParams = lib.mkForce [];
 
     loader = {

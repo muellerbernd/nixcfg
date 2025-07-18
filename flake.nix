@@ -228,6 +228,7 @@
         system = "x86_64-linux";
         users = ["bernd"];
         hostname = "proxmox-VM";
+        headless = true;
       };
     };
 

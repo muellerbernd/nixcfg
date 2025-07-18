@@ -73,10 +73,9 @@ in
             qemuConf = {
               # EFI support
               bios = "ovmf";
-              cores = 4;
+              cores = 2;
               memory = 1024;
               net0 = "virtio=00:00:00:00:00:00,bridge=vmbr0,firewall=1";
-              # diskSize = "20480"; # 20g
             };
             qemuExtraConf = {
               # start the VM automatically on boot

@@ -34,15 +34,13 @@
     # nameservers = ["192.168.1.1"];
   };
 
-  services.spice-vdagentd.enable = true;  # enable copy and paste between host and guest
-  services.qemuGuest.enable = lib.mkDefault true; # Enable QEMU Guest for Proxmox
+  # services.spice-vdagentd.enable = true;  # enable copy and paste between host and guest
+  # services.qemuGuest.enable = lib.mkDefault true; # Enable QEMU Guest for Proxmox
 
   # Enable WireGuard
   networking.wg-quick.interfaces = {
     # "wg0" is the network interface name. You can name the interface arbitrarily.
   };
-
-  system.stateVersion = "23.11";
 }
 # vim: set ts=2 sw=2:
 
