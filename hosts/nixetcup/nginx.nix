@@ -16,6 +16,7 @@
     # resolver.addresses = ["8.8.8.8"];
     virtualHosts = let
       domain = "muellerbernd.de";
+      rkz-domain = "kv-rassekaninchen-muehlhausen.de";
     in {
       "blog.${domain}" = {
         enableACME = true;
@@ -28,11 +29,11 @@
           '';
         };
       };
-      "kaninchen.${domain}" = {
+      "${rkz-domain}" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-          root = "/var/www/kaninchen.${domain}";
+          root = "/var/www/${rkz-domain}";
           extraConfig = ''
             autoindex on;
             add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
@@ -163,7 +164,7 @@
           "cloud.muellerbernd.de"
           "git.muellerbernd.de"
           "headscale.muellerbernd.de"
-          "kaninchen.muellerbernd.de"
+          "kv-rassekaninchen-muehlhausen.de"
         ];
       };
       "git.eineurl.de" = {
