@@ -46,6 +46,10 @@
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fw-fanctrl = {
+      url = "github:TamtamHero/fw-fanctrl/packaging/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # disko.url = "github:nix-community/disko";
 

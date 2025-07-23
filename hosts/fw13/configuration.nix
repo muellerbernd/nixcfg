@@ -10,6 +10,7 @@
     customSystem
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    inputs.fw-fanctrl.nixosModules.default
     ./hardware-configuration.nix
   ];
 
@@ -193,6 +194,46 @@
   ];
 
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+
+  # Enable fw-fanctrl
+  programs.fw-fanctrl.enable = true;
+
+  # Add a custom config
+  programs.fw-fanctrl.config = {
+    defaultStrategy = "lazy";
+    strategies = {
+      "lazy" = {
+        fanSpeedUpdateFrequency = 5;
+        movingAverageInterval = 30;
+        speedCurve = [
+          {
+            temp = 0;
+            speed = 25;
+          }
+          {
+            temp = 50;
+            speed = 25;
+          }
+          {
+            temp = 65;
+            speed = 35;
+          }
+          {
+            temp = 70;
+            speed = 35;
+          }
+          {
+            temp = 75;
+            speed = 50;
+          }
+          {
+            temp = 85;
+            speed = 100;
+          }
+        ];
+      };
+    };
+  };
 }
 # vim: set ts=2 sw=2:
 
