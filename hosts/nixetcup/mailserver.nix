@@ -26,6 +26,8 @@ in {
         hashedPasswordFile = config.age.secrets.berndMail.path;
         aliases = [
           "postmaster@${domain}"
+          "webmeister@${domain}"
+          "test@${domain}"
           "github@${domain}"
           "haus@${domain}"
           "norma@${domain}"
