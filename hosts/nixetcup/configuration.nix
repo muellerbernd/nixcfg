@@ -38,6 +38,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 2;
     };
+    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   system.autoUpgrade = {

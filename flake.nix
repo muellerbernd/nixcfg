@@ -124,7 +124,7 @@
         .sdImage;
     };
 
-    # Your custom packages
+    # custom packages
     # Accessible through 'nix build', 'nix shell', etc
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     # // {packages.aarch64-linux.pi4-sdImage = outputs.images.pi4;};
