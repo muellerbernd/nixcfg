@@ -207,6 +207,9 @@
       #
       sshfs
       wol
+      # vna software
+      nanovna-qt
+      nanovna-saver
     ];
   };
 
