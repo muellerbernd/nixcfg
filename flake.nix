@@ -51,6 +51,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
@@ -74,6 +78,7 @@
     systems,
     agenix,
     nixos-hardware,
+    nix-on-droid,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -247,6 +252,11 @@
         inherit inputs outputs;
         headless = false;
       };
+    };
+
+    nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+      pkgs = import nixpkgs {system = "aarch64-linux";};
+      modules = [./nix-on-droid.nix];
     };
   };
 }
