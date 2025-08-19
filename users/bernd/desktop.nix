@@ -118,6 +118,9 @@ in {
       # custom packages
       annotator
       uvtools
+      # hamradio stuff
+      xnec2c
+      nanovna-saver
       # from custom overlays
       rofi-music-rs
       rofi-script
