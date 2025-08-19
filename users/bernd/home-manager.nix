@@ -236,6 +236,12 @@
   # changes in each release.
   # home.stateVersion = "24.05";
   home.stateVersion = "24.11";
+
+  services.home-manager.autoExpire = {
+    enable = true;
+    timestamp = "-7 days";
+    frequency = "weekly";
+  };
 }
 # vim: set ts=2 sw=2:
 
