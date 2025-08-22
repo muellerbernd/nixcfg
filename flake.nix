@@ -4,7 +4,6 @@
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs2405.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     home-manager-unstable = {
@@ -52,10 +51,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs2405";
-    };
+    # nix-on-droid = {
+    #   url = "github:nix-community/nix-on-droid/release-24.05";
+    #   inputs.nixpkgs.follows = "nixpkgs2405";
+    # };
     # disko.url = "github:nix-community/disko";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
@@ -75,12 +74,11 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs2405,
     home-manager,
     systems,
     agenix,
     nixos-hardware,
-    nix-on-droid,
+    # nix-on-droid,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -256,35 +254,35 @@
       };
     };
 
-    nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-      modules = [
-        ./nix-on-droid.nix
-
-        # list of extra modules for Nix-on-Droid system
-        # { nix.registry.nixpkgs.flake = nixpkgs; }
-        # ./path/to/module.nix
-
-        # or import source out-of-tree modules like:
-        # flake.nixOnDroidModules.module
-      ];
-
-      # list of extra special args for Nix-on-Droid modules
-      extraSpecialArgs = {
-        # rootPath = ./.;
-      };
-
-      # set nixpkgs instance, it is recommended to apply `nix-on-droid.overlays.default`
-      pkgs = import nixpkgs2405 {
-        system = "aarch64-linux";
-
-        overlays = [
-          nix-on-droid.overlays.default
-          # add other overlays
-        ];
-      };
-
-      # set path to home-manager flake
-      home-manager-path = home-manager.outPath;
-    };
+    # nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+    #   modules = [
+    #     ./nix-on-droid.nix
+    #
+    #     # list of extra modules for Nix-on-Droid system
+    #     # { nix.registry.nixpkgs.flake = nixpkgs; }
+    #     # ./path/to/module.nix
+    #
+    #     # or import source out-of-tree modules like:
+    #     # flake.nixOnDroidModules.module
+    #   ];
+    #
+    #   # list of extra special args for Nix-on-Droid modules
+    #   extraSpecialArgs = {
+    #     # rootPath = ./.;
+    #   };
+    #
+    #   # set nixpkgs instance, it is recommended to apply `nix-on-droid.overlays.default`
+    #   pkgs = import nixpkgs2405 {
+    #     system = "aarch64-linux";
+    #
+    #     overlays = [
+    #       nix-on-droid.overlays.default
+    #       # add other overlays
+    #     ];
+    #   };
+    #
+    #   # set path to home-manager flake
+    #   home-manager-path = home-manager.outPath;
+    # };
   };
 }

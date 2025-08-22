@@ -10,6 +10,7 @@ in {
     ./pipewire.nix
     ./river.nix
     ./niri.nix
+    ./i3.nix
   ];
 
   options.custom.system.gui = {
