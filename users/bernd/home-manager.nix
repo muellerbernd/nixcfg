@@ -77,6 +77,14 @@
       zoxide
       eza
       bat
+      # git commit graph
+      serie
+      # replacer for ripgrep
+      repgrep
+      # a database tool for the terminal
+      rainfrog
+      # Terminal Network scanner & diagnostic tool with modern TUI
+      netscanner
       # better shell history
       atuin
       # pdf
