@@ -51,7 +51,9 @@
     username = "bernd";
     homeDirectory = "/home/bernd";
     packages = with pkgs; [
+      # Utilities that give information about processes using the /proc filesystem; like kill, pgrep ...
       procps
+      # Tool to list open files
       lsof
       # editors
       unstable.neovim
@@ -64,8 +66,10 @@
       git
       git-lfs
       lazygit
-      lazydocker
       vcstool
+      # docker for the lazy GUI
+      lazydocker
+      #
       yarn
       nodejs
       # terminal
@@ -75,7 +79,9 @@
       screen
       zellij
       zoxide
+      # modern ls
       eza
+      # modern cat
       bat
       # git commit graph
       serie
@@ -90,47 +96,78 @@
       # pdf
       mupdf
       poppler_utils
-      #
-      exiftool
-      trash-cli
+      # terminal file manager
       unstable.yazi
+      # Tool to read, write and edit EXIF meta information
+      exiftool
+      # Command line interface to the freedesktop.org trashcan
+      # trash-cli
+      # a cli system trash manager, alternative to rm and trash-cli
+      # trashy
+      # Lightweight video thumbnailer
       ffmpegthumbnailer
+      # archive unpacker program
       unar
+      # command line json processor
       jq
-      # joshuto
+      # It's like cat, but for images
       imgcat
+      # terminal image and video viewer
       timg
+      # SIXEL library for console graphics, and converter programs
       libsixel
+      # Count your code, quickly
       tokei
+      # filepicker
       fzf
+      # Blazingly fast general purpose fuzzy finder TUI
       television
+      # modern find
       fd
+      # modern grep
       ripgrep
-      file
       ripgrep-all
+      # show file types
+      file
       # tools
       imagemagick
+      # gnu symlink manager
       stow
+      # keyring
       gnome-keyring
+      # Application for managing encryption keys and passwords in the GnomeKeyring
       seahorse
-      adwaita-icon-theme
-      lxde.lxsession
+      # lxde.lxsession
+      # Modern release of the GNU Privacy Guard, a GPL OpenPGP implementation
       gnupg
+      # Tracks the route taken by packets over an IP network
       traceroute
-      # cli helpers
+      # icon theme
+      adwaita-icon-theme
+      # Tools for working with USB devices, such as lsusb
       usbutils
+      # manpages
       man
+      # Very fast implementation of tldr in Rust
       tealdeer
-      # cli
+      # Command-line tool for generating license files
       license-generator
+      # port scanner
       nmap
+      #
       curl
       wget
+      # GNU/Linux application to control backlights
       light
+      # sensors
       lm_sensors
-      htop
+      # network monitoring
       nmon
+      nload
+      # monitoring
       bottom
+      htop
+      #
       dmidecode
       unzip
       scrot
@@ -138,10 +175,11 @@
       killall
       acpi
       ctags
-      ncdu
       lsd
       bc
-      #
+      # disk usage analyzer
+      ncdu
+      # Scriptable music files tags tool and editor
       tagutil
       # nix cli helpers
       manix
@@ -200,20 +238,24 @@
       vscode-extensions.vadimcn.vscode-lldb
       lldb
       # rust-analyzer
+
       # haskell
       haskellPackages.haskell-language-server
-      # # python packages I often use systemwide
+      # python packages I often use systemwide
       # pkgs.python3Packages.flask
       # pkgs.python3Packages.requests
       pkgs.python3Packages.pygments # needed for my custom markdown to beamer workflow
       # pkgs.python3Packages.numpy
-      #
+
+      # github cli tool
       gh
+
       # nix stuff
       statix
       nixpkgs-review
-      #
+      # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
       sshfs
+      # wake on lan tool
       wol
     ];
   };
