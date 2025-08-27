@@ -162,7 +162,7 @@
       # sensors
       lm_sensors
       # network monitoring
-      nmon
+      unstable.nmon
       nload
       # monitoring
       bottom
