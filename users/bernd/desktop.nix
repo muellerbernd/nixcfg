@@ -221,21 +221,52 @@ in {
   #   settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   # };
 
+  # gtk = {
+  #   enable = true;
+  #   font.name = "Cantarell 10";
+  #   theme = {
+  #     name = "Adwaita-dark";
+  #     package = pkgs.gnome-themes-extra;
+  #   };
+  #   iconTheme = {
+  #     name = "Adwaita-dark";
+  #     package = pkgs.gnome-themes-extra;
+  #   };
+  #   cursorTheme = {
+  #     name = "Adwaita-dark";
+  #     package = pkgs.gnome-themes-extra;
+  #   };
+  #   gtk3.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  #   gtk4.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  # };
+  #
+  # home.sessionVariables = {
+  #   QT_STYLE_OVERRIDE = "kvantum";
+  #   GTK_USE_PORTAL = 1;
+  # };
+
   gtk = {
     enable = true;
-    font.name = "Cantarell 10";
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
+
     iconTheme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
-    cursorTheme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+    theme = {
+      package = pkgs.materia-theme;
+      name = "Materia-dark";
     };
+
+    gtk2.extraConfig = ''
+      gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+      gtk-menu-images=1
+      gtk-button-images=1
+    '';
+
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
@@ -245,8 +276,13 @@ in {
   };
 
   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
-    GTK_USE_PORTAL = 1;
+    # Use gtk in jvm apps
+    _JAVA_OPTIONS = lib.concatStringsSep " " [
+      "-Dawt.useSystemAAFontSettings=on"
+      "-Dswing.aatext=true"
+      "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+      "-Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+    ];
   };
 
   qt = {
