@@ -256,9 +256,17 @@ in {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+    # theme = {
+    #   package = pkgs.materia-theme;
+    #   name = "Materia-dark";
+    # };
     theme = {
-      package = pkgs.materia-theme;
-      name = "Materia-dark";
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    cursorTheme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
     };
 
     gtk2.extraConfig = ''
