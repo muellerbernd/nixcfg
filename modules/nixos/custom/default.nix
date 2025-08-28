@@ -259,7 +259,7 @@ in {
 
     hardware.enableRedistributableFirmware = true;
 
-    services.tailscale.enable = true;
+    services.tailscale.enable = false;
     networking.firewall = {
       checkReversePath = "loose";
       trustedInterfaces = ["tailscale0"];
