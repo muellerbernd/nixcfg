@@ -93,9 +93,6 @@
       netscanner
       # better shell history
       atuin
-      # pdf
-      mupdf
-      poppler_utils
       # terminal file manager
       unstable.yazi
       # Tool to read, write and edit EXIF meta information

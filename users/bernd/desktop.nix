@@ -35,7 +35,10 @@ in {
       # slideshow tools
       presenterm
       # pdf
-      zathura
+      # mupdf
+      poppler
+      unstable.zathura
+      # (pkgs.zathura.override {plugins = with pkgs.zathuraPkgs; [zathura_pdf_mupdf];})
       kdePackages.okular
       pdfarranger
       xdotool
