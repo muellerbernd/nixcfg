@@ -93,6 +93,8 @@ in {
       # vpn
       networkmanager-openconnect
       openconnect
+      globalprotect-openconnect
+      gp-saml-gui
       # mullvad vpn
       mullvad-vpn
       mullvad-browser
