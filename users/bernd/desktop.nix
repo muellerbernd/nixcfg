@@ -309,53 +309,54 @@ in {
     configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
       General.theme = "Adwaita-dark";
     };
-    # desktopEntries = {
-    # spotify = {
-    #   genericName = "Music Player";
-    #   name = "Spotify";
-    #   exec = "spotify --use-angle=opengl";
-    #   type = "Application";
-    #   mimeType = ["x-scheme-handler/spotify"];
-    #   categories = [
-    #     "Audio"
-    #     "Music"
-    #     "Player"
-    #     "AudioVideo"
-    #   ];
-    #   icon = "spotify-client";
-    # };
-    # # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
-    # teams = {
-    #   name = "Microsoft Teams for Linux (wayland)";
-    #   exec = "teams-for-linux --use-angle=opengl";
-    #   categories = ["Network" "InstantMessaging" "Chat"];
-    #   icon = "teams-for-linux";
-    #   comment = "Unofficial Microsoft Teams client for Linux";
-    # };
-    # nvim = {
-    #   name = "Neovim";
-    #   genericName = "Texteditor";
-    #   exec = "alacritty -e nvim";
-    #   terminal = false;
-    #   # categories = ["Application"];
-    #   icon = "neovim";
-    #   mimeType = [
-    #     "application/xml"
-    #     "text/x-csrc"
-    #     "text/plain"
-    #     "text/x-c++src"
-    #     "application/x-shellscript"
-    #     "text/x-tex"
-    #     "text/x-makefile"
-    #     "text/x-lua"
-    #     "text/csv"
-    #     "application/json"
-    #     "text/markdown"
-    #     "text/x-chd"
-    #     "application/xm"
-    #   ];
-    # };
-    # };
+    desktopEntries = {
+      # spotify = {
+      #   genericName = "Music Player";
+      #   name = "Spotify";
+      #   exec = "spotify --use-angle=opengl";
+      #   type = "Application";
+      #   mimeType = ["x-scheme-handler/spotify"];
+      #   categories = [
+      #     "Audio"
+      #     "Music"
+      #     "Player"
+      #     "AudioVideo"
+      #   ];
+      #   icon = "spotify-client";
+      # };
+      # # https://forums.developer.nvidia.com/t/drm-kernel-error-for-chromium-based-apps-on-wayland/276876/8
+      # teams = {
+      #   name = "Microsoft Teams for Linux (wayland)";
+      #   exec = "teams-for-linux --use-angle=opengl";
+      #   categories = ["Network" "InstantMessaging" "Chat"];
+      #   icon = "teams-for-linux";
+      #   comment = "Unofficial Microsoft Teams client for Linux";
+      # };
+      nvim = {
+        name = "Neovim";
+        genericName = "Texteditor";
+        exec = "foot -e nvim";
+        terminal = false;
+        # categories = ["Application"];
+        icon = "neovim";
+        mimeType = [
+          "application/xml"
+          "text/x-csrc"
+          "text/plain"
+          "text/x-c++src"
+          "application/x-shellscript"
+          "text/x-tex"
+          "text/x-makefile"
+          "text/x-lua"
+          "text/csv"
+          "application/json"
+          "text/markdown"
+          "text/x-chd"
+          "application/xm"
+          "application/x-zerosize"
+        ];
+      };
+    };
   };
   # services.gammastep = {
   #   enable = true;
