@@ -37,10 +37,50 @@ in {
     ## VSCode tends to break often with this
     # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    services.displayManager.ly.enable = true;
+    services.displayManager.ly = {
+      settings = {
+        tty = 7; # Hopefully less logs flowing into the login screen, see https://codeberg.org/AnErrupTion/ly/issues/537
+      };
+      enable = true;
+    };
     programs.river.enable = true;
     programs.niri.enable = true;
     services.pipewire.enable = true;
+
+    xdg.portal = {
+      enable = lib.mkForce true;
+      config = {
+        common = {
+          default = [
+            "wlr"
+            "gtk"
+          ];
+        };
+        niri = {
+          default = [
+            "wlr"
+          ];
+          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+          "org.freedesktop.impl.portal.Inhibit" = ["none"];
+        };
+        river = {
+          default = [
+            "gtk"
+            "wlr"
+          ];
+          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+          "org.freedesktop.impl.portal.Inhibit" = ["none"];
+        };
+      };
+      extraPortals = [
+        # pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-wlr
+      ];
+      wlr.enable = true;
+    };
 
     hardware = {
       enableAllFirmware = true;
