@@ -60,7 +60,7 @@ in {
       # audio
       sox
       # filesync
-      nextcloud-client
+      # nextcloud-client
       # file managing
       xfce.thunar
       xfce.thunar-volman
