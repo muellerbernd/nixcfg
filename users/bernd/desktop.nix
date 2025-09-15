@@ -211,7 +211,6 @@ in {
   };
 
   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "adwaita-dark";
     GTK_USE_PORTAL = 1;
     # Use gtk in jvm apps
     _JAVA_OPTIONS = lib.concatStringsSep " " [
@@ -259,7 +258,7 @@ in {
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
+    style.name = "Adwaita-Dark";
   };
 
   xdg = {
