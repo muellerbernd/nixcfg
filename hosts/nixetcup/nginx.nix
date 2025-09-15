@@ -23,10 +23,10 @@
         enableACME = true;
         forceSSL = true;
       };
-      "conference.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-      };
+      # "conference.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
       # jitsi end
       # blogs start
       "blog.${domain}" = {
@@ -174,6 +174,7 @@
         email = "bernd@muellerbernd.de";
         extraDomainNames = [
           "jitsi.muellerbernd.de"
+          # "conference.muellerbernd.de"
           "upload.xmpp.muellerbernd.de"
           "conference.xmpp.muellerbernd.de"
           "blog.muellerbernd.de"
