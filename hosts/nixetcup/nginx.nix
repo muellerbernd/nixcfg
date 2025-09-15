@@ -18,6 +18,17 @@
       domain = "muellerbernd.de";
       rkz-domain = "kv-rassekaninchen-muehlhausen.de";
     in {
+      # jitsi start
+      "jitsi.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+      };
+      "conference.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+      };
+      # jitsi end
+      # blogs start
       "blog.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -40,6 +51,8 @@
           '';
         };
       };
+      # blogs end
+      # xmpp start
       "xmpp.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -84,6 +97,8 @@
           };
         };
       };
+      # xmpp end
+      # services start
       "cloud.${domain}" = {
         enableACME = true;
         forceSSL = true;
@@ -144,6 +159,7 @@
           };
         };
       };
+      # services end
     };
   };
 
