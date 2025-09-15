@@ -106,7 +106,6 @@ in {
       unstable.ytmdl
       unstable.yt-dlp
       # theming
-      lxqt.lxqt-qtplugin
       xdg-desktop-portal
       papirus-icon-theme
       # vm remote
@@ -211,42 +210,6 @@ in {
     };
   };
 
-  # gtk = {
-  #   enable = true;
-  #   font.name = "Hack Nerd Font 10";
-  #   theme = {
-  #     name = "prefer-dark";
-  #     package = pkgs.solarc-gtk-theme;
-  #   };
-  # };
-  # dconf = {
-  #   enable = true;
-  #   settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  # };
-
-  # gtk = {
-  #   enable = true;
-  #   font.name = "Cantarell 10";
-  #   theme = {
-  #     name = "Adwaita-dark";
-  #     package = pkgs.gnome-themes-extra;
-  #   };
-  #   iconTheme = {
-  #     name = "Adwaita-dark";
-  #     package = pkgs.gnome-themes-extra;
-  #   };
-  #   cursorTheme = {
-  #     name = "Adwaita-dark";
-  #     package = pkgs.gnome-themes-extra;
-  #   };
-  #   gtk3.extraConfig = {
-  #     gtk-application-prefer-dark-theme = 1;
-  #   };
-  #   gtk4.extraConfig = {
-  #     gtk-application-prefer-dark-theme = 1;
-  #   };
-  # };
-  #
   home.sessionVariables = {
     QT_STYLE_OVERRIDE = "adwaita-dark";
     GTK_USE_PORTAL = 1;
