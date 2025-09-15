@@ -75,7 +75,8 @@ in {
       # cloudcompare
       prusa-slicer
       blender
-      freecad-wayland
+      freecad
+      openscad
       # browsers
       chromium
       luakit
