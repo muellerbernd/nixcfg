@@ -107,8 +107,6 @@ in {
       unstable.yt-dlp
       # theming
       lxqt.lxqt-qtplugin
-      libsForQt5.qtstyleplugin-kvantum
-      libsForQt5.qt5ct
       xdg-desktop-portal
       papirus-icon-theme
       # vm remote
@@ -249,10 +247,17 @@ in {
   #   };
   # };
   #
-  # home.sessionVariables = {
-  #   QT_STYLE_OVERRIDE = "kvantum";
-  #   GTK_USE_PORTAL = 1;
-  # };
+  home.sessionVariables = {
+    QT_STYLE_OVERRIDE = "adwaita-dark";
+    GTK_USE_PORTAL = 1;
+    # Use gtk in jvm apps
+    _JAVA_OPTIONS = lib.concatStringsSep " " [
+      "-Dawt.useSystemAAFontSettings=on"
+      "-Dswing.aatext=true"
+      "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+      "-Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+    ];
+  };
 
   gtk = {
     enable = true;
@@ -288,27 +293,17 @@ in {
     };
   };
 
-  home.sessionVariables = {
-    # Use gtk in jvm apps
-    _JAVA_OPTIONS = lib.concatStringsSep " " [
-      "-Dawt.useSystemAAFontSettings=on"
-      "-Dswing.aatext=true"
-      "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-      "-Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-    ];
-  };
-
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    style.name = "kvantum";
+    style.name = "adwaita-dark";
   };
 
   xdg = {
     enable = true;
-    configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
-      General.theme = "Adwaita-dark";
-    };
+    # configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
+    #   General.theme = "Adwaita-dark";
+    # };
     desktopEntries = {
       # spotify = {
       #   genericName = "Music Player";
@@ -367,7 +362,7 @@ in {
 
   services.syncthing = {
     enable = true;
-    tray.enable = true;
+    tray.enable = false;
   };
   # not so fancy pointer
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
