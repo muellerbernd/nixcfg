@@ -19,10 +19,10 @@
       rkz-domain = "kv-rassekaninchen-muehlhausen.de";
     in {
       # jitsi start
-      "jitsi.${domain}" = {
-        enableACME = true;
-        forceSSL = true;
-      };
+      # "jitsi.${domain}" = {
+      #   enableACME = true;
+      #   forceSSL = true;
+      # };
       # "conference.${domain}" = {
       #   enableACME = true;
       #   forceSSL = true;
@@ -169,19 +169,25 @@
     defaults.email = "bernd@muellerbernd.de";
     acceptTerms = true;
     certs = {
-      "xmpp.muellerbernd.de" = {
+      "vserver.muellerbernd.de" = {
         webroot = "/var/lib/acme/acme-challenge/";
         email = "bernd@muellerbernd.de";
         extraDomainNames = [
           "jitsi.muellerbernd.de"
           # "conference.muellerbernd.de"
-          "upload.xmpp.muellerbernd.de"
-          "conference.xmpp.muellerbernd.de"
           "blog.muellerbernd.de"
           "cloud.muellerbernd.de"
           "git.muellerbernd.de"
           "headscale.muellerbernd.de"
           "kv-rassekaninchen-muehlhausen.de"
+        ];
+      };
+      "xmpp.muellerbernd.de" = {
+        webroot = "/var/lib/acme/acme-challenge/";
+        email = "bernd@muellerbernd.de";
+        extraDomainNames = [
+          "upload.xmpp.muellerbernd.de"
+          "conference.xmpp.muellerbernd.de"
         ];
       };
       "git.eineurl.de" = {
