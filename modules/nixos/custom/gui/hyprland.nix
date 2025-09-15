@@ -39,8 +39,8 @@
     slurp
     # wayland
     waybar
-    qt6.qtwayland
-    libsForQt5.qtwayland
+    # qt6.qtwayland
+    # libsForQt5.qtwayland
     glxinfo
     hyprpaper
     hyprshade
