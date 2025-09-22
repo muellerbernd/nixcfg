@@ -42,6 +42,8 @@ in {
       kdePackages.okular
       pdfarranger
       xdotool
+      # pdf annotator
+      xournalpp
       # password manager
       keepassxc
       # network
