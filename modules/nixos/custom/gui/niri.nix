@@ -13,6 +13,7 @@
       wl-clipboard
       wl-clip-persist
       wlr-randr
+      wlrctl
       wdisplays
       wl-mirror
       wayvnc

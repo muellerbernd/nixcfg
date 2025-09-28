@@ -91,7 +91,7 @@ in {
       gajim
       # matrix client
       element-desktop
-      (lib.hiPrio element-desktop-fhg)
+      # (lib.hiPrio element-desktop-fhg)
       #
       teams-for-linux
       # email
