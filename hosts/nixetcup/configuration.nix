@@ -15,6 +15,7 @@
     ./wireguard-server.nix
     ./mailserver.nix
     ./headscale.nix
+    # ./radicale.nix
     # ./prosody.nix
     # modules
     customSystem

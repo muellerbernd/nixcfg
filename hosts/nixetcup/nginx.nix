@@ -18,6 +18,15 @@
       domain = "muellerbernd.de";
       rkz-domain = "kv-rassekaninchen-muehlhausen.de";
     in {
+      "vserver.${domain}" = {
+        locations."/radicale/" = {
+          proxyPass = "http://127.0.0.1:5232/";
+          extraConfig = ''
+            proxy_set_header X-Script-Name /radicale;
+            proxy_pass_header Authorization;
+          '';
+        };
+      };
       # jitsi start
       # "jitsi.${domain}" = {
       #   enableACME = true;
