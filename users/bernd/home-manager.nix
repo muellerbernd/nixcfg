@@ -72,6 +72,8 @@
       #
       yarn
       nodejs
+      # emulators
+      ghostty
       # terminal
       antigen
       starship
