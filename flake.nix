@@ -2,12 +2,10 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     home-manager-unstable = {
-      # url = "github:nix-community/home-manager/release-23.11";
       url = "github:nix-community/home-manager";
 
       # We want to use the same set of nixpkgs as our system.
@@ -15,7 +13,6 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      # url = "github:nix-community/home-manager/release-24.11";
 
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,12 +20,7 @@
     # predefined hardware stuff
     nixos-hardware.url = "github:nixos/nixos-hardware";
     #
-    systems.url = "github:nix-systems/default-linux";
-
-    # neovim-nightly-overlay = {
-    #   url = "github:nix-community/neovim-nightly-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    systems.url = "github:nix-systems/default";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -51,25 +43,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix-on-droid = {
-    #   url = "github:nix-community/nix-on-droid/release-24.05";
-    #   inputs.nixpkgs.follows = "nixpkgs2405";
-    # };
-    # disko.url = "github:nix-community/disko";
+    inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
   };
-  # nixConfig = rec {
-  #   trusted-public-keys = [
-  #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-  #   ];
-  #   substituters = [
-  #     "https://cache.nixos.org"
-  #   ];
-  #   trusted-substituters = substituters;
-  #   # fallback = true;
-  # };
 
   outputs = {
     self,
@@ -78,7 +56,7 @@
     systems,
     agenix,
     nixos-hardware,
-    # nix-on-droid,
+    treefmt-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -94,6 +72,8 @@
           config.allowUnfree = true;
         }
     );
+    # Eval the treefmt modules from ./treefmt.nix
+    treefmtEval = forEachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
   in {
     # custom images
     images = {
@@ -135,8 +115,16 @@
     # // {packages.aarch64-linux.pi4-sdImage = outputs.images.pi4;};
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
-    formatter = forEachSystem (pkgs: pkgs.alejandra);
+    # formatter = forEachSystem (pkgs: pkgs.alejandra);
     # formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+
+    # for `nix fmt`
+    formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+    # for `nix flake check`
+    checks = forEachSystem (pkgs: {
+      formatting = treefmtEval.${pkgs.system}.config.build.check self;
+    });
+
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
 
@@ -253,36 +241,5 @@
         headless = false;
       };
     };
-
-    # nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-    #   modules = [
-    #     ./nix-on-droid.nix
-    #
-    #     # list of extra modules for Nix-on-Droid system
-    #     # { nix.registry.nixpkgs.flake = nixpkgs; }
-    #     # ./path/to/module.nix
-    #
-    #     # or import source out-of-tree modules like:
-    #     # flake.nixOnDroidModules.module
-    #   ];
-    #
-    #   # list of extra special args for Nix-on-Droid modules
-    #   extraSpecialArgs = {
-    #     # rootPath = ./.;
-    #   };
-    #
-    #   # set nixpkgs instance, it is recommended to apply `nix-on-droid.overlays.default`
-    #   pkgs = import nixpkgs2405 {
-    #     system = "aarch64-linux";
-    #
-    #     overlays = [
-    #       nix-on-droid.overlays.default
-    #       # add other overlays
-    #     ];
-    #   };
-    #
-    #   # set path to home-manager flake
-    #   home-manager-path = home-manager.outPath;
-    # };
   };
 }
