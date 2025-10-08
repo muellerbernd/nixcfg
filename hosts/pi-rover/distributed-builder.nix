@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
     subnet=$1
     ips=$(${pkgs.iproute2}/bin/ip -4 -o addr show scope global | ${pkgs.gawk}/bin/awk '{gsub(/\/.*/,"",$4); print $4}')
@@ -16,7 +17,8 @@
     done
     [ "$is_in" = true ]
   '';
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     gawk
     grepcidr

@@ -2,9 +2,11 @@
   pkgs,
   name,
   ...
-}: let
+}:
+let
   username = name;
-in {
+in
+{
   home = {
     username = username;
     homeDirectory = "/home/${username}";
@@ -57,4 +59,3 @@ in {
   home.stateVersion = "23.11";
 }
 # vim: set ts=2 sw=2:
-

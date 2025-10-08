@@ -5,9 +5,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system;
-in {
+in
+{
   imports = [
     # modules
     ./locale.nix
@@ -42,9 +44,9 @@ in {
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
-        wantedBy = ["graphical-session.target"];
-        wants = ["graphical-session.target"];
-        after = ["graphical-session.target"];
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -262,10 +264,14 @@ in {
     services.tailscale.enable = false;
     networking.firewall = {
       checkReversePath = "loose";
-      trustedInterfaces = ["tailscale0"];
+      trustedInterfaces = [ "tailscale0" ];
     };
 
-    security.pki.certificateFiles = [../../../cacert-root.pem ../../../cacert-user.pem ../../../cacert-service.pem];
+    security.pki.certificateFiles = [
+      ../../../cacert-root.pem
+      ../../../cacert-user.pem
+      ../../../cacert-service.pem
+    ];
     # security.pki.certificates = [
     #   "-----BEGIN CERTIFICATE-----
     #   MIIGBDCCA+ygAwIBAgIBATANBgkqhkiG9w0BAQsFADCBkjELMAkGA1UEBhMCREUx

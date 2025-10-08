@@ -4,9 +4,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.virtualisation;
-in {
+in
+{
   options.custom.system.virtualisation = {
     enable = lib.mkEnableOption "bootMessage";
   };
@@ -93,7 +95,7 @@ in {
     # virt-manager
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
-    users.groups.libvirtd.members = ["bernd"];
+    users.groups.libvirtd.members = [ "bernd" ];
     virtualisation.spiceUSBRedirection.enable = true;
   };
 }

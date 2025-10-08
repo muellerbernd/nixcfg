@@ -4,11 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
     ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
   '';
-in {
+in
+{
   home = {
     packages = with pkgs; [
       # latex
@@ -193,13 +195,13 @@ in {
               }
             ];
             icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = ["@np"];
+            definedAliases = [ "@np" ];
           };
           "NixOS Wiki" = {
-            urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+            urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
             icon = "https://nixos.wiki/favicon.png";
             updateInterval = 24 * 60 * 60 * 1000; # every day
-            definedAliases = ["@nw"];
+            definedAliases = [ "@nw" ];
           };
           # "Searx" = {
           #   urls = [{template = "https://searx.aicampground.com/?q={searchTerms}";}];

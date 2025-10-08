@@ -7,7 +7,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -19,12 +20,12 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   # enable btrfs support
-  boot.supportedFilesystems = ["btrfs"];
+  boot.supportedFilesystems = [ "btrfs" ];
 
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
@@ -102,7 +103,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/a068b51b-8914-4b46-b52e-94323891161d";}
+    { device = "/dev/disk/by-uuid/a068b51b-8914-4b46-b52e-94323891161d"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

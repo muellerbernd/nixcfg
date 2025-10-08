@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   river-script = pkgs.writeShellScriptBin "river-script" ''
     export MOZ_ENABLE_WAYLAND=1
     export XDG_SESSION_TYPE=wayland
@@ -13,7 +14,8 @@
     # exec river -log-level debug > /tmp/river-$timestamp.log 2>&1
     exec river
   '';
-in {
+in
+{
   config = lib.mkIf (config.programs.river.enable) {
     programs.river = {
       xwayland.enable = true;

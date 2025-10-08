@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   disko.devices = {
     disk.main = {
       type = "disk";
@@ -13,7 +14,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["defaults"];
+              mountOptions = [ "defaults" ];
             };
           };
           luks = {
@@ -44,42 +45,44 @@
           size = "100%FREE";
           content = {
             type = "btrfs";
-            extraArgs = ["-f"]; # Override existing partition
+            extraArgs = [ "-f" ]; # Override existing partition
             # Subvolumes must set a mountpoint in order to be mounted
             # unless its parent is mounted
-            subvolumes = let
-              mountOptions = [
-                "compress=zstd"
-                "noatime"
-                "nodiratime"
-                "discard"
-              ];
-            in {
-              "/root" = {
-                inherit mountOptions;
-                mountpoint = "/";
+            subvolumes =
+              let
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                  "nodiratime"
+                  "discard"
+                ];
+              in
+              {
+                "/root" = {
+                  inherit mountOptions;
+                  mountpoint = "/";
+                };
+                "/nix" = {
+                  inherit mountOptions;
+                  mountpoint = "/nix";
+                };
+                "/persist" = {
+                  inherit mountOptions;
+                  mountpoint = "/persist";
+                };
+                "/log" = {
+                  inherit mountOptions;
+                  mountpoint = "/var/log";
+                };
+                "/snapshots" = {
+                  inherit mountOptions;
+                  mountpoint = "/snapshots";
+                };
+                "/home" = {
+                  inherit mountOptions;
+                  mountpoint = "/home";
+                };
               };
-              "/nix" = {
-                inherit mountOptions;
-                mountpoint = "/nix";
-              };
-              "/persist" = {
-                inherit mountOptions;
-                mountpoint = "/persist";
-              };
-              "/log" = {
-                inherit mountOptions;
-                mountpoint = "/var/log";
-              };
-              "/snapshots" = {
-                inherit mountOptions;
-                mountpoint = "/snapshots";
-              };
-              "/home" = {
-                inherit mountOptions;
-                mountpoint = "/home";
-              };
-            };
           };
         };
       };

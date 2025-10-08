@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
     ./nginx.nix
@@ -102,4 +103,3 @@
   services.qemuGuest.enable = true;
 }
 # vim: set ts=2 sw=2:
-

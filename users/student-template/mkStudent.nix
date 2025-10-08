@@ -1,7 +1,9 @@
-{name, ...}: let
+{ name, ... }:
+let
   username = name;
-in {
-  nix.settings.trusted-users = ["${username}"];
+in
+{
+  nix.settings.trusted-users = [ "${username}" ];
   users.users."${username}" = {
     isNormalUser = true;
     description = "EIS Student ${username}";
@@ -22,7 +24,7 @@ in {
     ];
     initialPassword = "${username}";
   };
-  users.extraGroups.vboxusers.members = ["${username}"];
-  users.extraGroups.video.members = ["${username}"];
-  users.extraGroups.wireshark.members = ["${username}"];
+  users.extraGroups.vboxusers.members = [ "${username}" ];
+  users.extraGroups.video.members = [ "${username}" ];
+  users.extraGroups.wireshark.members = [ "${username}" ];
 }

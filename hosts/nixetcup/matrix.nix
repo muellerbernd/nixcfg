@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   fqdn = "${config.networking.domain}";
   baseUrl = "https://${fqdn}";
   clientConfig."m.homeserver".base_url = baseUrl;
@@ -13,7 +14,8 @@
     add_header Access-Control-Allow-Origin *;
     return 200 '${builtins.toJSON data}';
   '';
-in {
+in
+{
   networking.domain = "matrix.muellerbernd.de";
   networking.firewall.allowedTCPPorts = [
     80
@@ -127,11 +129,11 @@ in {
         x_forwarded = true;
         resources = [
           {
-            names = ["client"];
+            names = [ "client" ];
             compress = true;
           }
           {
-            names = ["federation"];
+            names = [ "federation" ];
             compress = false;
           }
         ];

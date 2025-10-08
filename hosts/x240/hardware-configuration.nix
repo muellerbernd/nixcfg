@@ -7,8 +7,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [
@@ -38,12 +39,12 @@
     # SSD
     "isci"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
   ];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ ];
 
   boot.extraModprobeConfig = lib.mkMerge [
     # idle audio card after one second
@@ -62,7 +63,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/swap";}];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   powerManagement = {
     enable = true;

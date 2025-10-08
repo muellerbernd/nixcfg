@@ -7,7 +7,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
@@ -19,9 +20,9 @@
     "sr_mod"
     "virtio_blk"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f6fb78d3-7cc1-47b6-9c6a-fd935991d768";

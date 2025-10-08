@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   age.secrets.matterbridgeConfig = {
     file = ../../secrets/matterbridge.age;
     owner = "matterbridge";

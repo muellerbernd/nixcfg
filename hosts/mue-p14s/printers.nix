@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   services.printing.drivers = [
     (pkgs.writeTextDir "share/cups/model/mfp_m880.ppd" (
       builtins.readFile ./HP_Color_LaserJet_flow_MFP_M880.ppd

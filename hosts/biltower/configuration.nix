@@ -7,7 +7,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -45,7 +46,7 @@
 
   # nvidia setup
   # services.xserver.videoDrivers = ["nvidia" "amdgpu"];
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   # try to fix tearing
   # services.xserver.screenSection = ''
   #   Option "metamodes" "nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
@@ -180,7 +181,7 @@
   #       sha256 = "13m820wggf6pkp351w06mdn2lfcwbn08ydwksyxilqb88vmr0lpq";
   #     };
   #   });
-  users.groups.nixremote = {};
+  users.groups.nixremote = { };
   users.users.nixremote = {
     group = "nixremote";
     isNormalUser = true;
@@ -201,4 +202,3 @@
   '';
 }
 # vim: set ts=2 sw=2:
-

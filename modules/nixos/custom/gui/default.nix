@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.gui;
-in {
+in
+{
   imports = [
     ./pipewire.nix
     ./river.nix
@@ -60,18 +62,18 @@ in {
           default = [
             "wlr"
           ];
-          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
-          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
-          "org.freedesktop.impl.portal.Inhibit" = ["none"];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+          "org.freedesktop.impl.portal.Inhibit" = [ "none" ];
         };
         river = {
           default = [
             "gtk"
             "wlr"
           ];
-          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
-          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
-          "org.freedesktop.impl.portal.Inhibit" = ["none"];
+          "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          "org.freedesktop.impl.portal.Inhibit" = [ "none" ];
         };
       };
       extraPortals = [
@@ -138,24 +140,26 @@ in {
     # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
     systemd.services.toggleLaptopKeyboard = lib.mkDefault {
       enable = true;
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       description = ".";
-      serviceConfig = let
-        toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
-          pipe=/tmp/laptopKeyboardState
-          target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
-          [ -p "$pipe" ] || mkfifo -m 0666 "$pipe" || exit 1
-          while :; do
-              while read -r val; do
-                  if [ "$val" ]; then
-                      echo "$val" > $target
-                  fi
-              done <"$pipe"
-          done
-        '';
-      in {
-        ExecStart = ''${toggleLaptopKeyboardScript}/bin/toggleLaptopKeyboardScript'';
-      };
+      serviceConfig =
+        let
+          toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
+            pipe=/tmp/laptopKeyboardState
+            target=/sys/devices/platform/i8042/serio0/input/input0/inhibited
+            [ -p "$pipe" ] || mkfifo -m 0666 "$pipe" || exit 1
+            while :; do
+                while read -r val; do
+                    if [ "$val" ]; then
+                        echo "$val" > $target
+                    fi
+                done <"$pipe"
+            done
+          '';
+        in
+        {
+          ExecStart = ''${toggleLaptopKeyboardScript}/bin/toggleLaptopKeyboardScript'';
+        };
     };
   };
 }

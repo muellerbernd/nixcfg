@@ -7,8 +7,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_4_19.override {
   #     argsOverride = rec {
@@ -90,12 +91,12 @@
     "slcan"
     "peak_usb"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
   ];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ ];
 
   boot.extraModprobeConfig = lib.mkMerge [
     # idle audio card after one second
@@ -115,7 +116,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/swap";}];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   powerManagement = {
     enable = true;

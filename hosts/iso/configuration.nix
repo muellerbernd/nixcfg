@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
   boot.supportedFilesystems = lib.mkForce [
     "btrfs"
@@ -35,7 +36,7 @@
     "ahci"
     "firewire_ohci"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
     "kvm-intel"
     "acpi_call"
@@ -46,8 +47,8 @@
 
   # Nix settings, auto cleanup and enable flakes
   nix = {
-    settings.allowed-users = [];
-    settings.trusted-users = ["root"];
+    settings.allowed-users = [ ];
+    settings.trusted-users = [ "root" ];
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
@@ -134,7 +135,7 @@
   };
 
   # Enable SSH in the boot process.
-  systemd.services.sshd.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
+  systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
   users.users.root.openssh.authorizedKeys.keys = [
     # bernd ssh
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJgmYk5cp157HAe1ZKSxcW5/dUgiKTpGi7Jwe0EQqqUe"

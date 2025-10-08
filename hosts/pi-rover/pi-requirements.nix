@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix" creates a
   # disk with this label on first boot. Therefore, we need to keep it. It is the
   # only information from the installer image that we need to keep persistent

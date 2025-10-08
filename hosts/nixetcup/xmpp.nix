@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   domain = "xmpp.muellerbernd.de";
   ejabberd_cfg = {
     loglevel = 4;
@@ -158,32 +159,32 @@
     };
     access_rules = {
       local = [
-        {allow = "local";}
+        { allow = "local"; }
       ];
       c2s = [
-        {deny = "blocked";}
+        { deny = "blocked"; }
         "allow"
       ];
       announce = [
-        {allow = "admin";}
+        { allow = "admin"; }
       ];
       configure = [
-        {allow = "admin";}
+        { allow = "admin"; }
       ];
       muc_create = [
-        {allow = "local";}
+        { allow = "local"; }
       ];
       pubsub_createnode = [
-        {allow = "local";}
+        { allow = "local"; }
       ];
       register = [
         "allow"
       ];
       trusted_network = [
-        {allow = "loopback";}
+        { allow = "loopback"; }
       ];
       registration_network = [
-        {allow = "loopback";}
+        { allow = "loopback"; }
       ];
     };
 
@@ -201,21 +202,21 @@
             access = [
               {
                 allow = [
-                  {acl = "loopback";}
-                  {acl = "admin";}
+                  { acl = "loopback"; }
+                  { acl = "admin"; }
                 ];
               }
             ];
           }
           {
             oauth = [
-              {scope = "ejabberd:admin";}
+              { scope = "ejabberd:admin"; }
               {
                 access = [
                   {
                     allow = [
-                      {acl = "loopback";}
-                      {acl = "admin";}
+                      { acl = "loopback"; }
+                      { acl = "admin"; }
                     ];
                   }
                 ];
@@ -230,23 +231,23 @@
         ];
       };
       "webadmin" = {
-        from = ["ejabberd_web_admin"];
+        from = [ "ejabberd_web_admin" ];
         who = [
           {
             access = [
               {
                 allow = [
-                  {acl = "admin";}
+                  { acl = "admin"; }
                 ];
               }
             ];
           }
         ];
-        what = ["*"];
+        what = [ "*" ];
       };
       "public commands" = {
         who = [
-          {ip = "127.0.0.1/8";}
+          { ip = "127.0.0.1/8"; }
         ];
         what = [
           "status"
@@ -262,34 +263,34 @@
     shaper_rules = {
       max_user_sessions = 10;
       max_user_offline_messages = [
-        {"5000" = "admin";}
+        { "5000" = "admin"; }
         1000
       ];
       c2s_shaper = [
-        {none = "admin";}
+        { none = "admin"; }
         "normal"
       ];
       s2s_shaper = "fast";
     };
 
     modules = {
-      mod_adhoc = {};
-      mod_admin_extra = {};
+      mod_adhoc = { };
+      mod_admin_extra = { };
       mod_announce = {
         access = "announce";
       };
-      mod_avatar = {};
-      mod_blocking = {};
-      mod_bosh = {};
-      mod_caps = {};
-      mod_carboncopy = {};
-      mod_client_state = {};
-      mod_configure = {};
+      mod_avatar = { };
+      mod_blocking = { };
+      mod_bosh = { };
+      mod_caps = { };
+      mod_carboncopy = { };
+      mod_client_state = { };
+      mod_configure = { };
       ## mod_delegation = {}   # for xep0356
       # fallback for when DNS-based STUN discovery is unsupported.
       # - see: <https://xmpp.org/extensions/xep-0215.html>
       # docs: <https://docs.ejabberd.im/admin/configuration/modules/#mod-stun-disco>
-      mod_stun_disco = {};
+      mod_stun_disco = { };
       mod_disco = {
         server_info = [
           {
@@ -315,15 +316,15 @@
           }
         ];
       };
-      mod_fail2ban = {};
-      mod_http_api = {};
+      mod_fail2ban = { };
+      mod_http_api = { };
       mod_http_upload = {
         put_url = "https://upload.${domain}";
         external_secret = "@UPLOAD_SECRET@";
         max_size = 52428800;
       };
 
-      mod_last = {};
+      mod_last = { };
       mod_mam = {
         # db_type = "sql";
         assume_mam_usage = true;
@@ -336,7 +337,7 @@
           "allow"
         ];
         access_admin = [
-          {allow = "admin";}
+          { allow = "admin"; }
         ];
         access_create = "muc_create";
         access_persistent = "muc_create";
@@ -347,19 +348,19 @@
           public_list = false;
         };
       };
-      mod_muc_admin = {};
-      mod_muc_occupantid = {};
+      mod_muc_admin = { };
+      mod_muc_occupantid = { };
       mod_offline = {
         access_max_user_messages = "max_user_offline_messages";
         store_groupchat = true;
       };
-      mod_ping = {};
+      mod_ping = { };
       mod_pres_counter = {
         count = 5;
         interval = 60;
       };
-      mod_privacy = {};
-      mod_private = {};
+      mod_privacy = { };
+      mod_private = { };
       mod_proxy65 = {
         # Bytestream Proxy
         max_connections = 5;
@@ -382,8 +383,8 @@
           };
         };
       };
-      mod_push = {};
-      mod_push_keepalive = {};
+      mod_push = { };
+      mod_push_keepalive = { };
       mod_register = {
         ## Only accept registration requests from the "trusted"
         ## network (see access_rules section above).
@@ -401,14 +402,14 @@
           '';
         };
       };
-      mod_register_web = {};
+      mod_register_web = { };
 
       mod_roster = {
         versioning = true;
       };
-      mod_s2s_dialback = {};
-      mod_shared_roster = {};
-      mod_sic = {};
+      mod_s2s_dialback = { };
+      mod_shared_roster = { };
+      mod_sic = { };
       mod_stream_mgmt = {
         # resend_on_timeout = "if_offline";
         resend_on_timeout = "true";
@@ -416,7 +417,7 @@
       mod_vcard = {
         search = false;
       };
-      mod_vcard_xupdate = {};
+      mod_vcard_xupdate = { };
       mod_version = {
         show_os = false;
       };
@@ -425,76 +426,76 @@
 
   configFile = pkgs.writeText "ejabberd.yml" (builtins.toJSON ejabberd_cfg);
 in
-  # databasePasswordFile = "/var/src/secrets/ejabberd-database-password";
-  # uploadSecretFile = "/var/src/secrets/upload-secret";
-  {
-    services.ejabberd = {
-      enable = true;
-      package = pkgs.ejabberd.override {withPgsql = true;};
-      configFile = "/run/ejabberd/ejabberd.yml";
-      imagemagick = true;
-      # Allow access to TLS certs
-      group = "nginx";
+# databasePasswordFile = "/var/src/secrets/ejabberd-database-password";
+# uploadSecretFile = "/var/src/secrets/upload-secret";
+{
+  services.ejabberd = {
+    enable = true;
+    package = pkgs.ejabberd.override { withPgsql = true; };
+    configFile = "/run/ejabberd/ejabberd.yml";
+    imagemagick = true;
+    # Allow access to TLS certs
+    group = "nginx";
+  };
+
+  systemd.services.ejabberd = {
+    serviceConfig = {
+      RuntimeDirectory = "ejabberd";
     };
+    preStart = ''
+      cp ${configFile} /run/ejabberd/ejabberd.yml
+      chmod u+rw /run/ejabberd/ejabberd.yml
+    '';
+  };
 
-    systemd.services.ejabberd = {
-      serviceConfig = {
-        RuntimeDirectory = "ejabberd";
-      };
-      preStart = ''
-        cp ${configFile} /run/ejabberd/ejabberd.yml
-        chmod u+rw /run/ejabberd/ejabberd.yml
-      '';
+  # system.activationScripts."ejabberd" = ''
+  #   secret=$(cat "${config.age.secrets.nixetcupSecret.path}")
+  #   configFile=/run/ejabberd/ejabberd.yml
+  #   ${pkgs.gnused}/bin/sed -i "s#@UPLOAD_SECRET@#$secret#" "$configFile"
+  # '';
+  # ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
+  # ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
+
+  services.prosody-filer = {
+    enable = true;
+    settings = {
+      ### IP address and port to listen to, e.g. "[::]:5050"
+      listenport = "127.0.0.1:5050";
+      ### Secret (must match the one in prosody.conf.lua!)
+      secret = "@UPLOAD_SECRET@";
+      ### Where to store the uploaded files
+      storeDir = "/var/www/${domain}/upload/";
+      ### Subdirectory for HTTP upload / download requests (usually "upload/")
+      uploadSubDir = "upload/";
     };
+  };
+  # systemd.services.prosody-filer = {
+  #   preStart = ''
+  #     ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" ${pkgs.prosody-filer}
+  #   '';
+  # };
 
-    # system.activationScripts."ejabberd" = ''
-    #   secret=$(cat "${config.age.secrets.nixetcupSecret.path}")
-    #   configFile=/run/ejabberd/ejabberd.yml
-    #   ${pkgs.gnused}/bin/sed -i "s#@UPLOAD_SECRET@#$secret#" "$configFile"
-    # '';
-    # ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" "/run/ejabberd/ejabberd.yml"
-    # ${pkgs.replace-secret}/bin/replace-secret "#DATABASE_PASSWORD#" "${databasePasswordFile}" "/run/ejabberd/ejabberd.yml"
+  # Notify ejabberd of new certs
+  security.acme.certs."${domain}".reloadServices = [ "ejabberd.service" ];
+  security.acme.certs."conference.${domain}".reloadServices = [ "ejabberd.service" ];
 
-    services.prosody-filer = {
-      enable = true;
-      settings = {
-        ### IP address and port to listen to, e.g. "[::]:5050"
-        listenport = "127.0.0.1:5050";
-        ### Secret (must match the one in prosody.conf.lua!)
-        secret = "@UPLOAD_SECRET@";
-        ### Where to store the uploaded files
-        storeDir = "/var/www/${domain}/upload/";
-        ### Subdirectory for HTTP upload / download requests (usually "upload/")
-        uploadSubDir = "upload/";
-      };
-    };
-    # systemd.services.prosody-filer = {
-    #   preStart = ''
-    #     ${pkgs.replace-secret}/bin/replace-secret "#UPLOAD_SECRET#" "${uploadSecretFile}" ${pkgs.prosody-filer}
-    #   '';
-    # };
-
-    # Notify ejabberd of new certs
-    security.acme.certs."${domain}".reloadServices = ["ejabberd.service"];
-    security.acme.certs."conference.${domain}".reloadServices = ["ejabberd.service"];
-
-    networking.firewall.allowedUDPPorts = [
-      5478
-    ];
-    networking.firewall.allowedTCPPorts = [
-      3478
-      5478
-      #
-      5222
-      5223
-      5269
-      5270
-      5280
-      5290
-      15222
-      15223
-      15269
-      15270
-      15280
-    ];
-  }
+  networking.firewall.allowedUDPPorts = [
+    5478
+  ];
+  networking.firewall.allowedTCPPorts = [
+    3478
+    5478
+    #
+    5222
+    5223
+    5269
+    5270
+    5280
+    5290
+    15222
+    15223
+    15269
+    15270
+    15280
+  ];
+}

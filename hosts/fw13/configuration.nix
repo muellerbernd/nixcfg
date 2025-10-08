@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     # my modules
     customSystem
@@ -106,35 +107,37 @@
   #       inherit (pkgs) system;
   #     })
   #   .fwupd;
-  services.fwupd.extraRemotes = ["lvfs-testing"];
+  services.fwupd.extraRemotes = [ "lvfs-testing" ];
 
   systemd.services.toggleLaptopKeyboard = lib.mkForce {
     enable = true;
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
     description = ".";
-    serviceConfig = let
-      toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
-        pipe=/tmp/laptopKeyboardState
-        target=/sys/devices/platform/i8042/serio0/input/input1/inhibited
-        [ -p "$pipe" ] || mkfifo -m 0666 "$pipe" || exit 1
-        while :; do
-            while read -r val; do
-                if [ "$val" ]; then
-                    echo "$val" > $target
-                fi
-            done <"$pipe"
-        done
-      '';
-    in {
-      ExecStart = ''${toggleLaptopKeyboardScript}/bin/toggleLaptopKeyboardScript'';
-      # and the command to execute
-      # ExecStop = ''${pkgs.screen}/bin/screen -S irc -X quit'';
-    };
+    serviceConfig =
+      let
+        toggleLaptopKeyboardScript = pkgs.writeShellScriptBin "toggleLaptopKeyboardScript" ''
+          pipe=/tmp/laptopKeyboardState
+          target=/sys/devices/platform/i8042/serio0/input/input1/inhibited
+          [ -p "$pipe" ] || mkfifo -m 0666 "$pipe" || exit 1
+          while :; do
+              while read -r val; do
+                  if [ "$val" ]; then
+                      echo "$val" > $target
+                  fi
+              done <"$pipe"
+          done
+        '';
+      in
+      {
+        ExecStart = ''${toggleLaptopKeyboardScript}/bin/toggleLaptopKeyboardScript'';
+        # and the command to execute
+        # ExecStop = ''${pkgs.screen}/bin/screen -S irc -X quit'';
+      };
   };
 
   # Start the driver at boot
   systemd.services.fprintd = {
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig.Type = "simple";
   };
 
@@ -236,4 +239,3 @@
   };
 }
 # vim: set ts=2 sw=2:
-

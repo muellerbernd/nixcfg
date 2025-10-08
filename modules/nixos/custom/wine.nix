@@ -4,9 +4,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.wine;
-in {
+in
+{
   options.custom.system.wine = {
     enable = lib.mkEnableOption "enable wine";
   };

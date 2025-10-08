@@ -5,7 +5,8 @@
   inputs,
   modulesPath,
   ...
-}: {
+}:
+{
   # imports = [
   #   # Import the minimal profile from Nixpkgs which makes the ISO image a
   #   # little smaller
@@ -134,7 +135,7 @@
 
   # Straight copy pasto from wiki
   # Create gpio group
-  users.groups.gpio = {};
+  users.groups.gpio = { };
 
   # Change permissions gpio devices
   services.udev.extraRules = ''

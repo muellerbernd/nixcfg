@@ -51,21 +51,20 @@ stdenv.mkDerivation rec {
   #   })
   # ];
 
-  buildInputs =
-    [
-      libxml2
-      openconnect
-      networkmanager
-      webkitgtk_4_1 # required, for SSO
-    ]
-    ++ lib.optionals withGnome [
-      gtk3
-      libnma
-      libnma-gtk4
-      gtk4
-      gcr
-      libsecret
-    ];
+  buildInputs = [
+    libxml2
+    openconnect
+    networkmanager
+    webkitgtk_4_1 # required, for SSO
+  ]
+  ++ lib.optionals withGnome [
+    gtk3
+    libnma
+    libnma-gtk4
+    gtk4
+    gcr
+    libsecret
+  ];
 
   nativeBuildInputs = [
     glib
@@ -78,16 +77,8 @@ stdenv.mkDerivation rec {
   ];
 
   configureFlags = [
-    "--with-gnome=${
-      if withGnome
-      then "yes"
-      else "no"
-    }"
-    "--with-gtk4=${
-      if withGnome
-      then "yes"
-      else "no"
-    }"
+    "--with-gnome=${if withGnome then "yes" else "no"}"
+    "--with-gtk4=${if withGnome then "yes" else "no"}"
     "--enable-absolute-paths"
   ];
 

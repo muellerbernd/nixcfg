@@ -2,8 +2,9 @@
   config,
   pkgs,
   ...
-}: {
-  nix.settings.trusted-users = ["student"];
+}:
+{
+  nix.settings.trusted-users = [ "student" ];
   users.users.student = {
     isNormalUser = true;
     description = "EIS Student";

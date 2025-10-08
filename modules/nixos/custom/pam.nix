@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services.gnome.gnome-keyring.enable = true;
   programs.seahorse.enable = true;
 
@@ -19,7 +20,10 @@
     };
   };
 
-  services.dbus.packages = [pkgs.gnome-keyring pkgs.gcr];
+  services.dbus.packages = [
+    pkgs.gnome-keyring
+    pkgs.gcr
+  ];
   # security.pam.services.swaylock = {};
   # security.pam.services.swaylock.fprintAuth = false;
 

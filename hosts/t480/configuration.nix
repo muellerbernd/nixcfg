@@ -6,7 +6,8 @@
   hostname,
   crypt_device,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
     # modules
@@ -190,4 +191,3 @@
   services.fwupd.enable = true;
 }
 # vim: set ts=2 sw=2:
-

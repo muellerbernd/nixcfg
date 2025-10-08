@@ -7,7 +7,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -19,9 +20,9 @@
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   # Linux kernel: two options, with the second one being useful
   # when there are problems with the latest kernel and thus there
@@ -44,7 +45,7 @@
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/8c656912-d04e-4e2b-860b-49d670fc97b3";}
+    { device = "/dev/disk/by-uuid/8c656912-d04e-4e2b-860b-49d670fc97b3"; }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

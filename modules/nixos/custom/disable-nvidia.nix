@@ -4,9 +4,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.disableNvidia;
-in {
+in
+{
   options.custom.system.disableNvidia = {
     enable = lib.mkEnableOption "disableNvidia";
   };

@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   config = lib.mkIf (config.programs.niri.enable) {
     programs.xwayland.enable = true;
     environment.systemPackages = with pkgs; [

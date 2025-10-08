@@ -5,14 +5,23 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   boot = {
     # use latest kernel
     # kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["ext4" "btrfs" "xfs" "fat" "vfat" "cifs" "nfs"];
+    supportedFilesystems = [
+      "ext4"
+      "btrfs"
+      "xfs"
+      "fat"
+      "vfat"
+      "cifs"
+      "nfs"
+    ];
     growPartition = true;
-    kernelModules = ["kvm-intel"];
-    kernelParams = lib.mkForce [];
+    kernelModules = [ "kvm-intel" ];
+    kernelParams = lib.mkForce [ ];
 
     loader = {
       systemd-boot.enable = true;
@@ -29,8 +38,22 @@
     };
 
     initrd = {
-      availableKernelModules = ["9p" "9pnet_virtio" "ata_piix" "uhci_hcd" "virtio_blk" "virtio_mmio" "virtio_net" "virtio_pci" "virtio_scsi"];
-      kernelModules = ["virtio_balloon" "virtio_console" "virtio_rng"];
+      availableKernelModules = [
+        "9p"
+        "9pnet_virtio"
+        "ata_piix"
+        "uhci_hcd"
+        "virtio_blk"
+        "virtio_mmio"
+        "virtio_net"
+        "virtio_pci"
+        "virtio_scsi"
+      ];
+      kernelModules = [
+        "virtio_balloon"
+        "virtio_console"
+        "virtio_rng"
+      ];
     };
 
     # clear /tmp on boot to get a stateless /tmp directory.

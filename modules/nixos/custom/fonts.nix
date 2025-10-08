@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -41,9 +42,9 @@
         # serif = ["JetBrains Mono Nerd Font"];
         # sansSerif = ["JetBrains Mono Nerd Font"];
         # monospace = ["JetBrains Mono Nerd Font Mono"];
-        serif = ["Hack Nerd Font"];
-        sansSerif = ["Hack Nerd Font"];
-        monospace = ["Hack Nerd Font Mono"];
+        serif = [ "Hack Nerd Font" ];
+        sansSerif = [ "Hack Nerd Font" ];
+        monospace = [ "Hack Nerd Font Mono" ];
       };
     };
     fontconfig.useEmbeddedBitmaps = true;

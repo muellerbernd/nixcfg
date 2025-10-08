@@ -4,7 +4,8 @@
   pkgs,
   username,
   ...
-}: {
+}:
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = username;
@@ -43,7 +44,8 @@
     ranger
   ];
   # unfree packages that use unfree licences
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
       "spotify"

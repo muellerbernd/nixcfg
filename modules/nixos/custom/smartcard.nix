@@ -3,9 +3,15 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services.pcscd.enable = true;
-  services.pcscd.plugins = [pkgs.acsccid pkgs.ccid pkgs.libacr38u pkgs.scmccid];
+  services.pcscd.plugins = [
+    pkgs.acsccid
+    pkgs.ccid
+    pkgs.libacr38u
+    pkgs.scmccid
+  ];
   environment.systemPackages = with pkgs; [
     #
     pcsc-tools

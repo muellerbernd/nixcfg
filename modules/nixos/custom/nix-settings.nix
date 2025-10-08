@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   # Nix settings, auto cleanup and enable flakes
   nix = {
     settings.auto-optimise-store = true;
@@ -22,7 +23,7 @@
       keep-derivations = true
       builders-use-substitutes = true
     '';
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     settings = {
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="

@@ -5,7 +5,8 @@
   inputs,
   headless ? true,
   ...
-}: {
+}:
+{
   home = {
     username = "student";
     homeDirectory = "/home/student";
@@ -219,4 +220,3 @@
   home.stateVersion = "23.11";
 }
 # vim: set ts=2 sw=2:
-

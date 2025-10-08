@@ -4,9 +4,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   interface-name = "ens3";
-in {
+in
+{
   age.secrets.wgServerPrivKey = {
     file = ../../secrets/wgServerPrivKey.age;
   };
@@ -24,13 +26,13 @@ in {
   # enable NAT
   networking.nat.enable = true;
   networking.nat.externalInterface = interface-name;
-  networking.nat.internalInterfaces = ["wg0"];
+  networking.nat.internalInterfaces = [ "wg0" ];
 
   networking.wireguard.interfaces = {
     # "wg0" is the network interface name. You can name the interface arbitrarily.
     wg0 = {
       # Determines the IP address and subnet of the server's end of the tunnel interface.
-      ips = ["10.200.100.1/24"];
+      ips = [ "10.200.100.1/24" ];
 
       # The port that WireGuard listens to. Must be accessible by the client.
       listenPort = 51820;
@@ -61,13 +63,13 @@ in {
           # fw13
           publicKey = "pNU1XtqscR6Ohns6aOZeJcI+lg7I4wpoHmVEmAZgpgU=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
-          allowedIPs = ["10.200.100.2/32"];
+          allowedIPs = [ "10.200.100.2/32" ];
         }
         {
           # woodserver
           publicKey = "yRjzHqZFxW3WYeI2hP3wt4EmpZpmWS9gUrqiSBa0WUU=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
-          allowedIPs = ["10.200.100.3/32"];
+          allowedIPs = [ "10.200.100.3/32" ];
         }
       ];
     };

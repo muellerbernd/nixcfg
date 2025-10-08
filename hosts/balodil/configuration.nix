@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     # modules
     customSystem
@@ -32,9 +33,6 @@
   hardware = {
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [
-        mesa.drivers
-      ];
     };
   };
 
@@ -57,7 +55,7 @@
   virtualisation.oci-containers.containers = {
     hackagecompare = {
       image = "chrissound/hackagecomparestats-webserver:latest";
-      ports = ["127.0.0.1:3010:3010"];
+      ports = [ "127.0.0.1:3010:3010" ];
       volumes = [
         "/root/hackagecompare/packageStatistics.json:/root/hackagecompare/packageStatistics.json"
       ];
@@ -69,4 +67,3 @@
   };
 }
 # vim: set ts=2 sw=2:
-

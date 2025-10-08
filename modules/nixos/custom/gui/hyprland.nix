@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   # imports = [
   #   inputs.hyprland.nixosModules.default
   # ];
@@ -26,7 +27,7 @@
     # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
   # programs.xwayland.enable = true;
   environment.systemPackages = with pkgs; [
     rofi-wayland

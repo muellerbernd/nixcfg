@@ -6,7 +6,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     ./hardware-configuration.nix
     # modules
@@ -42,7 +43,7 @@
         crypt = {
           device = "/dev/sda2";
           preLVM = true;
-          crypttabExtraOpts = ["fido2-device=auto"];
+          crypttabExtraOpts = [ "fido2-device=auto" ];
         };
       };
       systemd.enable = true;
@@ -99,4 +100,3 @@
   };
 }
 # vim: set ts=2 sw=2:
-

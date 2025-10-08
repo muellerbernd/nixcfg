@@ -83,7 +83,7 @@ stdenv.mkDerivation rec {
       # https://github.com/audacity/audacity/discussions/2142.
       gpl3
     ];
-    maintainers = with maintainers; [muellerbernd];
+    maintainers = with maintainers; [ muellerbernd ];
     platforms = platforms.linux;
   };
 }

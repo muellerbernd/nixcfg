@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.distributedBuilder;
   ssh-script = pkgs.writeShellScriptBin "ssh-script" ''
     subnet=$1
@@ -17,7 +18,8 @@
     done
     [ "$is_in" = true ]
   '';
-in {
+in
+{
   options.custom.system.distributedBuilder = {
     enable = lib.mkEnableOption "distributedBuilder";
   };

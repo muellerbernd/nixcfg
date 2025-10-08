@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   # Configure xserver
   services.xserver = {
     enable = true;

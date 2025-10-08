@@ -4,8 +4,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -52,12 +53,12 @@
     "usb_storage"
     "xhci_hcd"
   ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = lib.mkBefore [
     "kvm-intel"
     "xhci_hcd"
   ];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ ];
 
   # boot.extraModprobeConfig = lib.mkMerge [
   #   # idle audio card after one second
@@ -76,7 +77,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/swap";}];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   # Data mount
   # fileSystems."/data" = {

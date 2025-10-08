@@ -4,10 +4,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   domain = "muellerbernd.de";
   derpPort = 3478;
-in {
+in
+{
   services = {
     headscale = {
       enable = true;
@@ -17,9 +19,9 @@ in {
         dns = {
           override_local_dns = true;
           base_domain = "muellerbernd";
-          domains = ["headscale.${domain}"];
+          domains = [ "headscale.${domain}" ];
           magic_dns = true;
-          nameservers.global = ["9.9.9.9"];
+          nameservers.global = [ "9.9.9.9" ];
         };
         server_url = "https://headscale.${domain}";
         metrics_listen_addr = "127.0.0.1:8095";
@@ -55,10 +57,14 @@ in {
   };
 
   # Derp server
-  networking.firewall.allowedUDPPorts = [derpPort];
+  networking.firewall.allowedUDPPorts = [ derpPort ];
 
-  environment.systemPackages = [config.services.headscale.package];
+  environment.systemPackages = [ config.services.headscale.package ];
 
-  networking.nameservers = ["100.100.100.100" "8.8.8.8" "1.1.1.1"];
-  networking.search = ["headscale.muellerbernd.de"];
+  networking.nameservers = [
+    "100.100.100.100"
+    "8.8.8.8"
+    "1.1.1.1"
+  ];
+  networking.search = [ "headscale.muellerbernd.de" ];
 }

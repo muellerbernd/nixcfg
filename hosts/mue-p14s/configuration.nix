@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -153,7 +154,7 @@
   # https://github.com/NixOS/nixpkgs/issues/270809
   systemd.services.ModemManager = {
     enable = lib.mkForce true;
-    path = [pkgs.libqmi]; # required by fcc-unlock-script of 105b:e0ab
+    path = [ pkgs.libqmi ]; # required by fcc-unlock-script of 105b:e0ab
     wantedBy = [
       "multi-user.target"
       "network.target"
@@ -332,26 +333,28 @@
   '';
   # request-key expects a configuration file under /etc
   environment.etc."request-key.conf" = lib.mkForce {
-    text = let
-      upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
-      keyctl = "${pkgs.keyutils}/bin/keyctl";
-    in ''
-      #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
-      # -t is required for DFS share servers...
-      create  cifs.spnego   *            *             ${upcall} -t %k
-      create  dns_resolver  *            *             ${upcall} %k
-      # Everything below this point is essentially the default configuration,
-      # modified minimally to work under NixOS. Notably, it provides debug
-      # logging.
-      create  user          debug:*      negate        ${keyctl} negate %k 30 %S
-      create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
-      create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
-      create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
-      create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
-      create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
-      negate  *             *            *             ${keyctl} negate %k 30 %S
-      create dns_resolver * * /run/current-system/sw/bin/key.dns_resolver %k
-    '';
+    text =
+      let
+        upcall = "${pkgs.cifs-utils}/bin/cifs.upcall";
+        keyctl = "${pkgs.keyutils}/bin/keyctl";
+      in
+      ''
+        #OP     TYPE          DESCRIPTION  CALLOUT_INFO  PROGRAM
+        # -t is required for DFS share servers...
+        create  cifs.spnego   *            *             ${upcall} -t %k
+        create  dns_resolver  *            *             ${upcall} %k
+        # Everything below this point is essentially the default configuration,
+        # modified minimally to work under NixOS. Notably, it provides debug
+        # logging.
+        create  user          debug:*      negate        ${keyctl} negate %k 30 %S
+        create  user          debug:*      rejected      ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      expired       ${keyctl} reject %k 30 %c %S
+        create  user          debug:*      revoked       ${keyctl} reject %k 30 %c %S
+        create  user          debug:loop:* *             |${pkgs.coreutils}/bin/cat
+        create  user          debug:*      *             ${pkgs.keyutils}/share/keyutils/request-key-debug.sh %k %d %c %S
+        negate  *             *            *             ${keyctl} negate %k 30 %S
+        create dns_resolver * * /run/current-system/sw/bin/key.dns_resolver %k
+      '';
   };
 
   services.samba = {
@@ -362,26 +365,32 @@
   fileSystems."/mnt/EIS" = {
     device = "//ast.intern/EIS";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
-    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+      in
+      [ "${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}" ];
   };
   fileSystems."/mnt/AST" = {
     device = "//ast.intern/AST";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
-    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+      in
+      [ "${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}" ];
   };
   fileSystems."/mnt/ber54988" = {
     device = "//ast.intern/user/home/ber54988";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
-    in ["${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}"];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,uid=1000,gid=100";
+      in
+      [ "${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}" ];
   };
 
   # Configure xserver
@@ -456,19 +465,21 @@
   # };
 
   # udev rules for rtls and co2monitor
-  services.udev.extraRules = let
-    peak_usb_setup = pkgs.writeShellScriptBin "peak_usb_setup" ''
-      ${pkgs.iproute2}/bin/ip link set $1 up type can bitrate 250000
-    '';
-  in ''
-    KERNEL=="ttyACM0", MODE:="666"
-    KERNEL=="ttyACM1", MODE:="666"
-    KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
+  services.udev.extraRules =
+    let
+      peak_usb_setup = pkgs.writeShellScriptBin "peak_usb_setup" ''
+        ${pkgs.iproute2}/bin/ip link set $1 up type can bitrate 250000
+      '';
+    in
+    ''
+      KERNEL=="ttyACM0", MODE:="666"
+      KERNEL=="ttyACM1", MODE:="666"
+      KERNEL=="hidraw*", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", GROUP="plugdev", MODE="0666"
 
-    SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can0"
-    SUBSYSTEM=="net", KERNEL=="can1", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can1"
-  '';
+      SUBSYSTEM=="net", KERNEL=="can0", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can0"
+      SUBSYSTEM=="net", KERNEL=="can1", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can1"
+    '';
 
   # programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [
@@ -482,7 +493,7 @@
     maxProcesses = 2;
     openBroadcast = true;
     openFirewall = true;
-    extraArgs = ["-v"];
+    extraArgs = [ "-v" ];
   };
 
   systemd.services."icecc-daemon".environment = lib.mkForce {
@@ -512,4 +523,3 @@
   # };
 }
 # vim: set ts=2 sw=2:
-

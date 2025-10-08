@@ -4,9 +4,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.custom.system.flipperzero;
-in {
+in
+{
   options.custom.system.flipperzero = {
     enable = lib.mkEnableOption "enable flipperzero settings";
   };

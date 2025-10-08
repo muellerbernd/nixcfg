@@ -4,9 +4,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   domain = "muellerbernd.de";
-in {
+in
+{
   imports = [
     inputs.simple-nixos-mailserver.nixosModule
   ];
@@ -17,7 +19,7 @@ in {
   mailserver = {
     enable = true;
     fqdn = "mail.${domain}";
-    domains = ["${domain}"];
+    domains = [ "${domain}" ];
 
     # A list of all login accounts. To create the password hashes, use
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'

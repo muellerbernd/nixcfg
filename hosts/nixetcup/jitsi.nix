@@ -4,9 +4,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   jitsi_fqdn = "jitsi.muellerbernd.de";
-in {
+in
+{
   services.jitsi-meet = {
     enable = true;
     hostName = jitsi_fqdn;

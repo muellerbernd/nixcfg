@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Simply install just the packages
@@ -48,7 +53,12 @@
     useGlobalPkgs = true;
 
     config =
-      { config, lib, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         # Read the changelog before changing this value
         home.stateVersion = "24.05";

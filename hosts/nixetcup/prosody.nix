@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   services.prosody = {
     enable = true;
     allowRegistration = true;

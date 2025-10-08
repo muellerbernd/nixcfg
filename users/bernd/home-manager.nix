@@ -6,12 +6,16 @@
   outputs,
   headless ? true,
   ...
-}: {
+}:
+{
   imports =
-    if (!headless)
+    if
+      (!headless)
     # then [./desktop.nix ../../modules/profiles/kanshi.nix]
-    then [./desktop.nix]
-    else [];
+    then
+      [ ./desktop.nix ]
+    else
+      [ ];
 
   nixpkgs = {
     # You can add overlays here
@@ -290,4 +294,3 @@
   };
 }
 # vim: set ts=2 sw=2:
-

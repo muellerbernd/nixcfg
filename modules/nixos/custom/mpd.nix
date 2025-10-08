@@ -4,7 +4,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   # services.mpd = {
   # enable = true;
   #   user = "bernd";

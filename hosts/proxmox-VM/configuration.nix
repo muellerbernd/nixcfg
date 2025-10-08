@@ -8,7 +8,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = with inputs.self.nixosModules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -43,4 +44,3 @@
   };
 }
 # vim: set ts=2 sw=2:
-

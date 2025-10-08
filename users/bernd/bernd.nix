@@ -2,8 +2,9 @@
   config,
   pkgs,
   ...
-}: {
-  nix.settings.trusted-users = ["bernd"];
+}:
+{
+  nix.settings.trusted-users = [ "bernd" ];
   users.users.bernd = {
     isNormalUser = true;
     description = "Bernd Müller";
@@ -51,7 +52,7 @@
     initialPassword = "bernd";
     # shell = pkgs.fish;
   };
-  users.extraGroups.vboxusers.members = ["bernd"];
-  users.extraGroups.video.members = ["bernd"];
-  users.extraGroups.wireshark.members = ["bernd"];
+  users.extraGroups.vboxusers.members = [ "bernd" ];
+  users.extraGroups.video.members = [ "bernd" ];
+  users.extraGroups.wireshark.members = [ "bernd" ];
 }
