@@ -267,11 +267,11 @@ in
       trustedInterfaces = [ "tailscale0" ];
     };
 
-    security.pki.certificateFiles = [
-      ../../../cacert-root.pem
-      ../../../cacert-user.pem
-      ../../../cacert-service.pem
-    ];
+    # security.pki.certificateFiles = [
+    #   ../../../cacert-root.pem
+    #   ../../../cacert-user.pem
+    #   ../../../cacert-service.pem
+    # ];
     # security.pki.certificates = [
     #   "-----BEGIN CERTIFICATE-----
     #   MIIGBDCCA+ygAwIBAgIBATANBgkqhkiG9w0BAQsFADCBkjELMAkGA1UEBhMCREUx
