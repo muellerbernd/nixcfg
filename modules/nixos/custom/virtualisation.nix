@@ -93,9 +93,15 @@ in
     };
 
     # virt-manager
-    virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
     users.groups.libvirtd.members = [ "bernd" ];
     virtualisation.spiceUSBRedirection.enable = true;
+    virtualisation.libvirtd = {
+      enable = true;
+      allowedBridges = [
+        "virbr0"
+        "br0"
+      ];
+    };
   };
 }
