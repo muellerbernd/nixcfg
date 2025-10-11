@@ -194,6 +194,7 @@
       scriptisto
       # rust dev
       cargo
+      rust-analyzer
       # haskell
       ghc
       # make
@@ -249,7 +250,6 @@
       vscode-extensions.ms-vscode.cpptools
       vscode-extensions.vadimcn.vscode-lldb
       lldb
-      # rust-analyzer
 
       # haskell
       haskellPackages.haskell-language-server
