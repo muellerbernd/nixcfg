@@ -192,16 +192,23 @@
       direnv
       # Language-agnostic "shebang interpreter" that enables you to write scripts in compiled languages
       scriptisto
-      # programming
+      # rust dev
+      cargo
+      # haskell
       ghc
+      # make
       gnumake
+      # make in better
       just
+      # cpp
       cmake
       gcc
       gdb
-      rustup
+      # python
       python3
+      # go
       go
+      # typst
       typst
       # icecream
       # icemon
