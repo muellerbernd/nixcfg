@@ -64,6 +64,9 @@
 
   networking.hostName = "fw13"; # Define your hostname.
 
+  # networking.bridges.br0.interfaces = [ "eth0" ];
+  # networking.interfaces."br0".useDHCP = true;
+
   hardware = {
     graphics = {
       enable = true;
