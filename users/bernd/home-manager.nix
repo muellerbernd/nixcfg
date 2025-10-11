@@ -190,6 +190,8 @@
       ghostscript
       # env
       direnv
+      # Language-agnostic "shebang interpreter" that enables you to write scripts in compiled languages
+      scriptisto
       # programming
       ghc
       gnumake
