@@ -292,6 +292,8 @@
     # gst_all_1.gst-devtools
     #
     inetutils
+    #
+    oversteer
   ];
   environment.variables.GST_PLUGIN_SYSTEM_PATH_1_0 = pkgs.lib.mkForce (
     pkgs.lib.concatStringsSep ":" [
@@ -521,5 +523,10 @@
   #     automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
   #   in ["${automount_opts}"];
   # };
+
+  # Logitech G923
+  hardware.new-lg4ff.enable = true;
+  services.udev.packages = with pkgs; [ oversteer ];
+
 }
 # vim: set ts=2 sw=2:
