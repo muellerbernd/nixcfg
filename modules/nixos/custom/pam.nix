@@ -35,9 +35,13 @@
   #   ];
   # };
 
+  age.secrets.yubico = {
+    file = ../../../secrets/yubico.age;
+  };
   security.pam.u2f = {
     enable = true;
     settings = {
+      authfile = config.age.secrets.yubico.path;
       cue = true;
     };
     control = "sufficient";
