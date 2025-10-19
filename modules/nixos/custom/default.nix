@@ -27,6 +27,7 @@ in
     ./flipperzero.nix
     ./wine.nix
     ./virtualisation.nix
+    ./dns-blocky.nix
   ];
 
   options.custom.system = {
