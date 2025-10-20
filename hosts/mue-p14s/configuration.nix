@@ -23,6 +23,7 @@
     bootMessage.enable = true;
     disableNvidia.enable = false;
     virtualisation.enable = true;
+    dns-blocky.enable = true;
   };
 
   # needed for https://github.com/nixos/nixpkgs/issues/58959

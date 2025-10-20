@@ -22,6 +22,7 @@
     workVPN.enable = true;
     # bootMessage.enable = false;
     virtualisation.enable = true;
+    dns-blocky.enable = true;
   };
 
   # Bootloader.

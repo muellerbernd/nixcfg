@@ -34,6 +34,8 @@ in
   };
 
   config = {
+    # custom.system.dns-blocky.enable = true;
+
     # NixOS uses NTFS-3G for NTFS support.
     boot.supportedFilesystems = [
       "ntfs"
