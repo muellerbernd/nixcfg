@@ -28,6 +28,9 @@ in
       spice
     ];
 
+    # only XWayland, but better than nothing
+    services.spice-vdagentd.enable = true;
+
     virtualisation = {
       containers = {
         enable = true;
