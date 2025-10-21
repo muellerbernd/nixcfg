@@ -396,28 +396,6 @@
       [ "${automount_opts},credentials=${config.age.secrets.workSmbCredentials.path}" ];
   };
 
-  # Configure xserver
-  # services.libinput = {
-  #   enable = true;
-  #   mouse = {
-  #     accelProfile = "flat";
-  #     accelSpeed = "0";
-  #     middleEmulation = false;
-  #   };
-  #   touchpad = {
-  #     accelProfile = "flat";
-  #     accelSpeed = "0.6";
-  #     naturalScrolling = true;
-  #     tapping = true;
-  #   };
-  # };
-
-  # services.xserver = {
-  #   xkb.layout = "de";
-  #   xkb.variant = "";
-  #   #xkbOptions = "ctrl:nocaps";
-  # };
-
   # specialisation for traveling
   # specialisation = {
   #   use-nvidia.configuration = {
@@ -484,12 +462,6 @@
       SUBSYSTEM=="net", KERNEL=="can1", ACTION=="add", RUN+="${peak_usb_setup}/bin/peak_usb_setup can1"
     '';
 
-  # programs.nix-ld.enable = true;
-  # programs.nix-ld.libraries = with pkgs; [
-  #   # Add any missing dynamic libraries for unpackaged programs
-  #   # here, NOT in environment.systemPackages
-  # ];
-
   services.icecream.daemon = {
     enable = false;
     noRemote = false;
@@ -515,15 +487,28 @@
   #     allow 10.100.0.0/24
   #   '';
   # };
-  # fileSystems."/mnt/data_recordings" = {
-  #   device = "192.168.1.28:/data_recordings";
-  #   fsType = "nfs";
-  #   # options = ["x-systemd.automount" "noauto"];
-  #   options = let
-  #     # this line prevents hanging on network split
-  #     automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-  #   in ["${automount_opts}"];
-  # };
+
+  networking.hosts = {
+    "192.168.1.28" = [ "eisnas" ];
+    "10.200.200.28" = [ "eisnas" ];
+  };
+
+  services.rpcbind.enable = true;
+  fileSystems."/mnt/eisPublic/data_recordings" = {
+    device = "eisnas:/mnt/shares/public/data_recordings";
+    fsType = "nfs";
+    # options = [
+    #     "x-systemd.automount"
+    #     "noauto"
+    #     "x-systemd.idle-timeout=600"
+    #   ];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts}" ];
+  };
 
   # Logitech G923
   hardware.new-lg4ff.enable = true;
