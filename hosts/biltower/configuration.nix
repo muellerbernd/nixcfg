@@ -22,7 +22,7 @@
     workVPN.enable = true;
     # bootMessage.enable = false;
     virtualisation.enable = true;
-    dns-blocky.enable = false;
+    dns-blocky.enable = true;
   };
 
   # Bootloader.
@@ -45,8 +45,8 @@
 
   networking.hostName = "biltower"; # Define your hostname.
 
-  networking.bridges.br0.interfaces = [ "enp42s0" ];
-  networking.interfaces."br0".useDHCP = true;
+  # networking.bridges.br0.interfaces = [ "enp42s0" ];
+  # networking.interfaces."br0".useDHCP = true;
 
   # nvidia setup
   # services.xserver.videoDrivers = ["nvidia" "amdgpu"];
