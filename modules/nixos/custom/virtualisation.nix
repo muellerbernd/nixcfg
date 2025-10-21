@@ -30,6 +30,15 @@ in
 
     # only XWayland, but better than nothing
     services.spice-vdagentd.enable = true;
+    # hack to use the clipboard. every time you want to copy something - just
+    # open the clipboard manager and select what you want there.
+    systemd.user.services.copyq = rec {
+      script = "${pkgs.copyq}/bin/copyq";
+      postStart = "${script} config item_data_threshold 8192";
+      serviceConfig.Restart = "on-failure";
+      environment.QT_QPA_PLATFORM = "xcb";
+      wantedBy = [ "graphical-session.target" ];
+    };
 
     virtualisation = {
       containers = {
