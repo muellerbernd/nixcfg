@@ -71,6 +71,7 @@ in
       pciutils
       iw
       nix-output-monitor
+      dig
     ];
 
     environment.extraInit = ''
@@ -264,11 +265,16 @@ in
 
     hardware.enableRedistributableFirmware = true;
 
-    services.tailscale.enable = false;
-    networking.firewall = {
-      checkReversePath = "loose";
-      trustedInterfaces = [ "tailscale0" ];
+    services.tailscale = {
+      enable = true;
+      extraSetFlags = [
+        "--accept-dns=false"
+      ];
     };
+    # networking.firewall = {
+    #   checkReversePath = "loose";
+    #   trustedInterfaces = [ "tailscale0" ];
+    # };
 
     # security.pki.certificateFiles = [
     #   ../../../cacert-root.pem
