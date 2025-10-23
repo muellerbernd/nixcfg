@@ -4,19 +4,10 @@
   pkgs,
   inputs,
   outputs,
-  headless ? true,
+  headless ? false,
   ...
 }:
 {
-  imports =
-    if
-      (!headless)
-    # then [./desktop.nix ../../modules/profiles/kanshi.nix]
-    then
-      [ ./desktop.nix ]
-    else
-      [ ];
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -44,8 +35,15 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "olm-3.2.16"
+      ];
     };
   };
+
+  imports = [
+    ../../modules/home-manager/desktop.nix
+  ];
 
   # imports = with inputs.self.nixosModules; [
   # modules
@@ -301,5 +299,7 @@
     timestamp = "-7 days";
     frequency = "weekly";
   };
+
+  desktop-home.enable = !headless;
 }
 # vim: set ts=2 sw=2:
