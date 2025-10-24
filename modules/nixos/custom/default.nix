@@ -266,12 +266,12 @@ in
 
     hardware.enableRedistributableFirmware = true;
 
-    # services.tailscale = {
-    #   enable = true;
-    #   extraSetFlags = [
-    #     "--accept-dns=false"
-    #   ];
-    # };
+    services.tailscale = {
+      enable = true;
+      extraSetFlags = [
+        "--accept-dns=false"
+      ];
+    };
     # networking.firewall = {
     #   checkReversePath = "loose";
     #   trustedInterfaces = [ "tailscale0" ];
