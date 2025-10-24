@@ -268,8 +268,19 @@ in
     qt = {
       enable = true;
       platformTheme.name = "gtk";
-      style.name = "Brezy-Dark";
+      # style.name = "Brezy-Dark";
+      # platformTheme = "qtct";
+      # style.name = "kvantum";
     };
+
+    # xdg.configFile = {
+    #   "Kvantum/kvantum.kvconfig".text = ''
+    #     [General]
+    #     theme=GraphiteNordDark
+    #   '';
+    #
+    #   "Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
+    # };
 
     services.syncthing = {
       enable = true;
