@@ -41,13 +41,13 @@ in
       # For this to work you have to set the dnsserver IP of your router (or dnsserver of choice) in your clients
       postSetup = ''
         ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ${interface-name} -p udp -m multiport --dports 53,51820,989  -j REDIRECT --to-ports 51820
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.200.0/24 -o ${interface-name} -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.100.0/24 -o ${interface-name} -j MASQUERADE
       '';
 
       # This undoes the above command
       postShutdown = ''
         ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ${interface-name} -p udp -m multiport --dports 53,51820,989  -j REDIRECT --to-ports 51820
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.200.0/24 -o ${interface-name} -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.100.0/24 -o ${interface-name} -j MASQUERADE
       '';
 
       # Path to the private key file.
