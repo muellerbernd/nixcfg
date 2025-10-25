@@ -10,6 +10,7 @@ let
     fw13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkZszXXIt+xvGwWi6yp+m6yga92eBf7JXUHwFNOQJwx";
     rover = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAx9ti665hiwHgTelMMrpE5zVrvVxNgVS/xJCyQ869hc";
     pi4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBLoMwcSBDrjLx4c1XG29H9ACFhEf5cq3N5J6GUMkBjb";
+    ammera22-proxmox-vm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMxHgIYgxW4RLpDuVCpBhoozrtPojJQ11U/o/h5Cw0aI";
     # keep-sorted end
   };
   users = {
@@ -31,4 +32,5 @@ in
   "wgServerPrivKey.age".publicKeys = allUsers ++ allSystems;
   "berndMail.age".publicKeys = allUsers ++ allSystems;
   "yubico.age".publicKeys = allUsers ++ allSystems;
+  "ammera22WgNetcup.age".publicKeys = allUsers ++ allSystems;
 }

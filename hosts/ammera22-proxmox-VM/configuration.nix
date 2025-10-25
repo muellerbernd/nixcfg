@@ -38,9 +38,16 @@
   # services.spice-vdagentd.enable = true;  # enable copy and paste between host and guest
   # services.qemuGuest.enable = lib.mkDefault true; # Enable QEMU Guest for Proxmox
 
+  age.secrets.ammera22WgNetcup = {
+    file = ../../secrets/ammera22WgNetcup.age;
+  };
   # Enable WireGuard
   networking.wg-quick.interfaces = {
-    # "wg0" is the network interface name. You can name the interface arbitrarily.
+    "wgNetcup" = {
+      configFile = config.age.secrets.ammera22WgNetcup.path;
+      autostart = true;
+    };
+
   };
 
   services.qemuGuest.enable = true;

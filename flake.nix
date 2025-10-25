@@ -279,6 +279,20 @@
           hostname = "proxmox-VM";
           headless = true;
         };
+        # virtual machine that is available on my proxmox instance
+        ammera22-proxmox-VM = mkProxmox "ammera22-proxmox-VM" {
+          inherit
+            nixpkgs
+            home-manager
+            inputs
+            outputs
+            agenix
+            ;
+          system = "x86_64-linux";
+          users = [ "bernd" ];
+          hostname = "ammera22-proxmox-VM";
+          headless = true;
+        };
       };
 
       # Standalone home-manager configuration entrypoint
