@@ -77,6 +77,12 @@ in
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = [ "10.200.100.4/32" ];
         }
+        {
+          # ammera22-proxmox-pve
+          publicKey = "Oew71jLlQAv9wQVaiWHtArlWQh44bjnMK5Oikf6AL2Y=";
+          # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
+          allowedIPs = [ "10.200.100.22/32" ];
+        }
       ];
     };
   };
