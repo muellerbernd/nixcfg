@@ -16,13 +16,9 @@
     customSystem
   ];
 
-  custom.system = {
-    gui.enable = false;
-  };
-
   networking = {
     # networkmanager.enable = false;
-    hostName = "proxmox-VM"; # Define your hostname.
+    hostName = hostname; # Define your hostname.
     # defaultGateway = {
     #   address = "192.168.1.1";
     # };
@@ -35,8 +31,8 @@
     # nameservers = ["192.168.1.1"];
   };
 
-  # services.spice-vdagentd.enable = true;  # enable copy and paste between host and guest
-  # services.qemuGuest.enable = lib.mkDefault true; # Enable QEMU Guest for Proxmox
+  services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
+  services.qemuGuest.enable = lib.mkDefault true; # Enable QEMU Guest for Proxmox
 
   age.secrets.ammera22WgNetcup = {
     file = ../../secrets/ammera22WgNetcup.age;
@@ -49,7 +45,5 @@
     };
 
   };
-
-  services.qemuGuest.enable = true;
 }
 # vim: set ts=2 sw=2:

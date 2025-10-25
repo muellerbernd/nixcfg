@@ -268,9 +268,10 @@ in
     qt = {
       enable = true;
       platformTheme.name = "gtk";
-      # style.name = "Brezy-Dark";
-      # platformTheme = "qtct";
-      # style.name = "kvantum";
+      style = {
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
+      };
     };
 
     # xdg.configFile = {

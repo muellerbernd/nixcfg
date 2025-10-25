@@ -10,7 +10,7 @@ let
     fw13 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkZszXXIt+xvGwWi6yp+m6yga92eBf7JXUHwFNOQJwx";
     rover = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAx9ti665hiwHgTelMMrpE5zVrvVxNgVS/xJCyQ869hc";
     pi4 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBLoMwcSBDrjLx4c1XG29H9ACFhEf5cq3N5J6GUMkBjb";
-    ammera22-proxmox-vm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMxHgIYgxW4RLpDuVCpBhoozrtPojJQ11U/o/h5Cw0aI";
+    ammera22-proxmox-vm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEiNTLpXMoU6o0ag02mRtkr5SGO/mLSXCbovVxHXKw3B";
     # keep-sorted end
   };
   users = {
