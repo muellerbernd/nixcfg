@@ -35,7 +35,10 @@ in
         gimp
         graphicsmagick
         xfce.ristretto
-        inkscape-with-extensions
+        # inkscape
+        (inkscape-with-extensions.override {
+          inkscapeExtensions = with inkscape-extensions; [ inkstitch ];
+        })
         # pandoc
         pandoc
         haskellPackages.pandoc-crossref
@@ -221,67 +224,72 @@ in
     };
 
     home.sessionVariables = {
-      GTK_USE_PORTAL = 1;
-      # Use gtk in jvm apps
-      _JAVA_OPTIONS = lib.concatStringsSep " " [
-        "-Dawt.useSystemAAFontSettings=on"
-        "-Dswing.aatext=true"
-        "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-        "-Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
-      ];
+      # GTK_USE_PORTAL = 1;
+      # # Use gtk in jvm apps
+      # _JAVA_OPTIONS = lib.concatStringsSep " " [
+      #   "-Dawt.useSystemAAFontSettings=on"
+      #   "-Dswing.aatext=true"
+      #   "-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+      #   "-Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
+      # ];
     };
 
+    # gtk = {
+    #   enable = true;
+    #
+    #   iconTheme = {
+    #     name = "Papirus-Dark";
+    #     package = pkgs.papirus-icon-theme;
+    #   };
+    #   # theme = {
+    #   #   package = pkgs.materia-theme;
+    #   #   name = "Materia-dark";
+    #   # };
+    #   theme = {
+    #     # name = "Brezy-dark";
+    #     # package = pkgs.gnome-themes-extra;
+    #     name = "adwaita-dark";
+    #     package = pkgs.adwaita-qt;
+    #   };
+    #   cursorTheme = {
+    #     # name = "Brezy-dark";
+    #     # package = pkgs.gnome-themes-extra;
+    #     name = "adwaita-dark";
+    #     package = pkgs.adwaita-qt;
+    #   };
+    #
+    #   gtk2.extraConfig = ''
+    #     gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+    #     gtk-menu-images=1
+    #     gtk-button-images=1
+    #   '';
+    #
+    #   gtk3.extraConfig = {
+    #     gtk-application-prefer-dark-theme = 1;
+    #   };
+    #   gtk4.extraConfig = {
+    #     gtk-application-prefer-dark-theme = 1;
+    #   };
+    # };
     gtk = {
       enable = true;
-
       iconTheme = {
-        name = "Papirus-Dark";
-        package = pkgs.papirus-icon-theme;
-      };
-      # theme = {
-      #   package = pkgs.materia-theme;
-      #   name = "Materia-dark";
-      # };
-      theme = {
-        name = "Brezy-dark";
-        package = pkgs.gnome-themes-extra;
+        name = "oomox-gruvbox-dark";
+        package = pkgs.gruvbox-dark-icons-gtk;
       };
       cursorTheme = {
-        name = "Brezy-dark";
-        package = pkgs.gnome-themes-extra;
+        name = "capitaine-cursors-white";
+        package = pkgs.capitaine-cursors;
       };
-
-      gtk2.extraConfig = ''
-        gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-        gtk-menu-images=1
-        gtk-button-images=1
-      '';
-
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
+      theme = {
+        name = "Awesthetic-dark";
       };
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "gtk";
-      style = {
-        name = "adwaita-dark";
-        package = pkgs.adwaita-qt;
-      };
+      platformTheme = "gtk";
     };
-
-    # xdg.configFile = {
-    #   "Kvantum/kvantum.kvconfig".text = ''
-    #     [General]
-    #     theme=GraphiteNordDark
-    #   '';
-    #
-    #   "Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
-    # };
 
     services.syncthing = {
       enable = true;

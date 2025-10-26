@@ -25,7 +25,7 @@ in
   # setup WireGuard server
   # enable NAT
   networking.nat.enable = true;
-  networking.nat.externalInterface = interface-name;
+  networking.nat.externalInterface = "ens3";
   networking.nat.internalInterfaces = [ "wg0" ];
 
   networking.wireguard.interfaces = {
@@ -40,14 +40,14 @@ in
       # This allows the wireguard server to route your traffic to the internet and hence be like a VPN
       # For this to work you have to set the dnsserver IP of your router (or dnsserver of choice) in your clients
       postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ${interface-name} -p udp -m multiport --dports 53,51820,989  -j REDIRECT --to-ports 51820
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.100.0/24 -o ${interface-name} -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p udp -m multiport --dports 53,989  -j REDIRECT --to-ports 51820
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.200.100.0/24 -o ens3 -j MASQUERADE
       '';
 
       # This undoes the above command
       postShutdown = ''
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ${interface-name} -p udp -m multiport --dports 53,51820,989  -j REDIRECT --to-ports 51820
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.100.0/24 -o ${interface-name} -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p udp -m multiport --dports 53,989  -j REDIRECT --to-ports 51820
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.200.100.0/24 -o ens3 -j MASQUERADE
       '';
 
       # Path to the private key file.
@@ -79,7 +79,7 @@ in
         }
         {
           # ammera22-proxmox-pve
-          publicKey = "Oew71jLlQAv9wQVaiWHtArlWQh44bjnMK5Oikf6AL2Y=";
+          publicKey = "cT6iLOAkdRKeJ9dVak2InfUY322kv34f/JmeaG+krXE=";
           # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
           allowedIPs = [ "10.200.100.22/32" ];
         }
