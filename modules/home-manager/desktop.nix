@@ -282,7 +282,25 @@ in
         package = pkgs.capitaine-cursors;
       };
       theme = {
-        name = "Awesthetic-dark";
+        name = "Adwaita-dark";
+        package = pkgs.gnome-themes-extra;
+      };
+      gtk2.extraConfig = ''
+        gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+        gtk-menu-images=1
+        gtk-button-images=1
+      '';
+
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
+    };
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
       };
     };
 
