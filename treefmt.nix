@@ -4,6 +4,7 @@
   # Used to find the project root
   projectRootFile = "flake.nix";
   programs.nixfmt.enable = true;
+  programs.just.enable = true;
   # Enable the terraform formatter
   # programs.terraform.enable = true;
   # Override the default package
