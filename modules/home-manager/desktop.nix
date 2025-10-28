@@ -97,6 +97,10 @@ in
         # media players
         vlc
         strawberry
+        # MPD
+        mpc
+        inori
+        ncmpcpp
         # messenger
         gajim
         # matrix client
@@ -313,6 +317,13 @@ in
       enable = true;
       tray.enable = false;
     };
+
+    services.mpd = {
+      enable = true;
+      musicDirectory = "${config.home.homeDirectory}//Music/";
+      network.startWhenNeeded = true;
+    };
+
     # not so fancy pointer
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 
