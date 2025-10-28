@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -12,6 +13,7 @@ in
     ./pipewire.nix
     ./river.nix
     ./niri.nix
+    ./mango.nix
     ./i3.nix
   ];
 
@@ -47,6 +49,7 @@ in
     };
     programs.river.enable = true;
     programs.niri.enable = true;
+    programs.mango.enable = true;
     services.pipewire.enable = true;
 
     xdg.portal = {

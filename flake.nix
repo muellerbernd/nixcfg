@@ -47,6 +47,7 @@
 
     rofi-music-rs.url = "github:muellerbernd/rofi-music-rs";
     lsleases.url = "github:muellerbernd/lsleases";
+    mango.url = "github:DreamMaoMao/mango";
   };
 
   outputs =
