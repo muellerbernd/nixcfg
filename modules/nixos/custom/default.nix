@@ -28,13 +28,14 @@ in
     ./wine.nix
     ./virtualisation.nix
     ./dns-blocky.nix
+    ./spacenavd.nix
   ];
 
   options.custom.system = {
   };
 
   config = {
-    # custom.system.dns-blocky.enable = true;
+    custom.system.dns-blocky.enable = true;
 
     # NixOS uses NTFS-3G for NTFS support.
     boot.supportedFilesystems = [
@@ -379,7 +380,6 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
       ];
     };
-    hardware.spacenavd.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

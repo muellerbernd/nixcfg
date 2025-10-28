@@ -10,7 +10,7 @@ let
 in
 {
   options.custom.system.virtualisation = {
-    enable = lib.mkEnableOption "bootMessage";
+    enable = lib.mkEnableOption "virtualisation";
   };
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
