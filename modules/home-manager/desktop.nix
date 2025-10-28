@@ -323,6 +323,7 @@ in
       musicDirectory = "${config.home.homeDirectory}//Music/";
       network.startWhenNeeded = true;
     };
+    services.mpd-mpris.enable = true;
 
     # not so fancy pointer
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
