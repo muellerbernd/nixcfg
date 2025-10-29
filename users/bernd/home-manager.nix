@@ -243,6 +243,12 @@
       nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.bash-language-server
       gopls
+      ltex-ls-plus
+
+      # dictionaries
+      hunspell
+      hunspellDicts.de_DE
+      hunspellDicts.en_US
 
       # for debugging
       vscode-extensions.ms-vscode.cpptools
