@@ -101,6 +101,7 @@ in
         mpc
         inori
         ncmpcpp
+        rmpc
         # messenger
         gajim
         # matrix client
