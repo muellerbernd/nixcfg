@@ -8,7 +8,6 @@
   # keep-sorted start
   uvtools = pkgs.callPackage ./uvtools { };
   annotator = pkgs.callPackage ./annotator { };
-  zenoh-c = pkgs.callPackage ./zenoh-c { };
-  zenoh-cpp = pkgs.callPackage ./zenoh-cpp { };
+  scinterface = pkgs.callPackage ./scinterface { };
   # keep-sorted end
 }

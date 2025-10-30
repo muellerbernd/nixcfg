@@ -26,4 +26,9 @@
   '';
   programs.firefox.nativeMessagingHosts.euwebid = true;
   programs.firefox.policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+
+  environment.etc."chromium/native-messaging-hosts/eu.webeid.json".source =
+    "${pkgs.web-eid-app}/share/web-eid/eu.webeid.json";
+  environment.etc."opt/chrome/native-messaging-hosts/eu.webeid.json".source =
+    "${pkgs.web-eid-app}/share/web-eid/eu.webeid.json";
 }

@@ -23,7 +23,7 @@
     bootMessage.enable = true;
     disableNvidia.enable = false;
     virtualisation.enable = true;
-    dns-blocky.enable = true;
+    dns-blocky.enable = false;
     spacenavd.enable = true;
   };
 
