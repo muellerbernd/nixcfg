@@ -29,8 +29,7 @@ stdenv.mkDerivation rec {
 
   dontBuild = true;
 
-  installPhase = ''
-  '';
+  installPhase = '''';
 
   meta = with lib; {
     description = "";
@@ -39,4 +38,3 @@ stdenv.mkDerivation rec {
     maintainers = with maintainers; [ muellerbernd ];
   };
 }
-
