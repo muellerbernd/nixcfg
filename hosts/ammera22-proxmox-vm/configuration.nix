@@ -30,19 +30,20 @@
 
   services.cloud-init.network.enable = true;
 
+  networking.useDHCP = lib.mkDefault false;
   networking = {
     # networkmanager.enable = false;
     hostName = hostname; # Define your hostname.
-    # defaultGateway = {
-    #   address = "192.168.1.1";
-    # };
-    # interfaces.ens18.ipv4.addresses = [
-    #   {
-    #     address = "192.168.1.23";
-    #     prefixLength = 24;
-    #   }
-    # ];
-    # nameservers = ["192.168.1.1"];
+    defaultGateway = {
+      address = "192.168.1.1";
+    };
+    interfaces.ens18.ipv4.addresses = [
+      {
+        address = "192.168.1.23";
+        prefixLength = 24;
+      }
+    ];
+    nameservers = ["192.168.1.1"];
   };
 
   services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
@@ -52,12 +53,12 @@
     file = ../../secrets/ammera22WgNetcup.age;
   };
   # Enable WireGuard
-  # networking.wg-quick.interfaces = {
-  #   "wgNetcup" = {
-  #     configFile = config.age.secrets.ammera22WgNetcup.path;
-  #     autostart = true;
-  #   };
-  #
-  # };
+  networking.wg-quick.interfaces = {
+    "wgNetcup" = {
+      configFile = config.age.secrets.ammera22WgNetcup.path;
+      autostart = true;
+    };
+
+  };
 }
 # vim: set ts=2 sw=2:
