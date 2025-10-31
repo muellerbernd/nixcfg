@@ -43,7 +43,7 @@
         prefixLength = 24;
       }
     ];
-    nameservers = ["192.168.1.1"];
+    nameservers = [ "192.168.1.1" ];
   };
 
   services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
