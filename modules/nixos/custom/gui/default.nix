@@ -114,12 +114,17 @@ in
       blueman.enable = true;
       # Enable CUPS to print documents.
       printing.enable = true;
+      printing.drivers = [ pkgs.gutenprint ];
 
       avahi = {
         enable = true;
         nssmdns4 = true;
         # for a WiFi printer
         openFirewall = true;
+        # publish = {
+        #   enable = true;
+        #   userServices = true;
+        # };
       };
 
       # # Gamecube Controller Adapter

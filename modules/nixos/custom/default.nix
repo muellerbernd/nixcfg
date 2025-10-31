@@ -154,15 +154,15 @@ in
         settings.PermitRootLogin = lib.mkDefault "yes";
         openFirewall = lib.mkDefault true;
       };
-      avahi = {
-        enable = true;
-        publish = {
-          enable = true;
-          addresses = true;
-          workstation = true;
-        };
-        openFirewall = true;
-      };
+      # avahi = {
+      #   enable = true;
+      #   # publish = {
+      #   #   enable = true;
+      #   #   addresses = true;
+      #   #   workstation = true;
+      #   # };
+      #   openFirewall = true;
+      # };
     };
 
     # environment.shellInit = ''

@@ -23,7 +23,7 @@
     flipperzero.enable = true;
     wine.enable = true;
     virtualisation.enable = true;
-    dns-blocky.enable = true;
+    dns-blocky.enable = false;
   };
 
   # Bootloader.
