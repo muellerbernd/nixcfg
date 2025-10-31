@@ -77,7 +77,5 @@
     interval = "weekly";
   };
 
-  networking.useDHCP = lib.mkDefault false;
-
   nixpkgs.hostPlatform = lib.mkDefault system;
 }

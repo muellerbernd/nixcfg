@@ -13,8 +13,22 @@
   imports = with inputs.self.nixosModules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./homeassistant.nix
     customSystem
   ];
+
+  custom.system = {
+    gui.enable = false;
+    distributedBuilder.enable = false;
+    workVPN.enable = false;
+    bootMessage.enable = false;
+    disableNvidia.enable = false;
+    flipperzero.enable = false;
+    wine.enable = false;
+    virtualisation.enable = false;
+  };
+
+  services.cloud-init.network.enable = true;
 
   networking = {
     # networkmanager.enable = false;
@@ -38,12 +52,12 @@
     file = ../../secrets/ammera22WgNetcup.age;
   };
   # Enable WireGuard
-  networking.wg-quick.interfaces = {
-    "wgNetcup" = {
-      configFile = config.age.secrets.ammera22WgNetcup.path;
-      autostart = true;
-    };
-
-  };
+  # networking.wg-quick.interfaces = {
+  #   "wgNetcup" = {
+  #     configFile = config.age.secrets.ammera22WgNetcup.path;
+  #     autostart = true;
+  #   };
+  #
+  # };
 }
 # vim: set ts=2 sw=2:
