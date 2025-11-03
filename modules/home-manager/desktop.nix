@@ -146,6 +146,7 @@ in
         rofi-script
         # fonts
         # nerd-fonts.hack
+        mpd-notification
       ];
     };
     # fonts.fontconfig.enable = true;
@@ -321,7 +322,8 @@ in
 
     services.mpd = {
       enable = true;
-      musicDirectory = "${config.home.homeDirectory}//Music/";
+      musicDirectory = "${config.home.homeDirectory}/Music/";
+      dataDir = "${config.home.homeDirectory}/Music/mpd";
       network.startWhenNeeded = true;
     };
     services.mpd-mpris.enable = true;
