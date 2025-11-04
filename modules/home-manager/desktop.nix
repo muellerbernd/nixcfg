@@ -102,6 +102,8 @@ in
         inori
         ncmpcpp
         rmpc
+        cantata
+        mpd-notification
         # messenger
         gajim
         # matrix client
@@ -146,7 +148,6 @@ in
         rofi-script
         # fonts
         # nerd-fonts.hack
-        mpd-notification
       ];
     };
     # fonts.fontconfig.enable = true;
