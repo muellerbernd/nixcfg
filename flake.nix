@@ -281,7 +281,7 @@
           headless = true;
         };
         # virtual machine that is available on my proxmox instance
-        ammera22-proxmox-vm = mkProxmox "ammera22-proxmox-vm" {
+        ammera22-proxmox-vm = mkDefault "ammera22-proxmox-vm" {
           inherit
             nixpkgs
             home-manager

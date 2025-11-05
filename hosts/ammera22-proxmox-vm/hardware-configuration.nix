@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  system,
   pkgs,
   modulesPath,
   ...
@@ -77,5 +76,5 @@
     interval = "weekly";
   };
 
-  nixpkgs.hostPlatform = lib.mkDefault system;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

@@ -55,11 +55,11 @@
     group = "systemd-network";
   };
   # Enable WireGuard
-  # networking.wg-quick.interfaces = {
-  #   "wgNetcup" = {
-  #     configFile = config.age.secrets.ammera22WgNetcup.path;
-  #     autostart = false;
-  #   };
-  # };
+  networking.wg-quick.interfaces = {
+    "wgNetcup" = {
+      configFile = config.age.secrets.ammera22WgNetcup.path;
+      autostart = true;
+    };
+  };
 }
 # vim: set ts=2 sw=2:
