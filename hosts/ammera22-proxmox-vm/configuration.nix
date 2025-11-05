@@ -14,6 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./homeassistant.nix
+    ./paperless.nix
     customSystem
   ];
 
