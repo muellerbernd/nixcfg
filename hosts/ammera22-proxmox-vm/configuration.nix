@@ -29,8 +29,6 @@
     virtualisation.enable = false;
   };
 
-  services.cloud-init.network.enable = true;
-
   networking.useDHCP = lib.mkDefault false;
   networking = {
     # networkmanager.enable = false;
@@ -52,14 +50,16 @@
 
   age.secrets.ammera22WgNetcup = {
     file = ../../secrets/ammera22WgNetcup.age;
+    mode = "600";
+    owner = "bernd";
+    group = "systemd-network";
   };
   # Enable WireGuard
-  networking.wg-quick.interfaces = {
-    "wgNetcup" = {
-      configFile = config.age.secrets.ammera22WgNetcup.path;
-      autostart = true;
-    };
-
-  };
+  # networking.wg-quick.interfaces = {
+  #   "wgNetcup" = {
+  #     configFile = config.age.secrets.ammera22WgNetcup.path;
+  #     autostart = false;
+  #   };
+  # };
 }
 # vim: set ts=2 sw=2:
