@@ -325,9 +325,19 @@ in
       enable = true;
       musicDirectory = "${config.home.homeDirectory}/Music/";
       dataDir = "${config.home.homeDirectory}/Music/mpd";
-      network.startWhenNeeded = true;
+      # network.listenAddress = "any"; # if you want to allow non-localhost connections
+      network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+      extraConfig = ''
+        auto_update "yes"
+        audio_output {
+            type "pipewire"
+            name "PipeWire Sound Server"
+          }
+      '';
     };
+    services.playerctld.enable = true;
     services.mpd-mpris.enable = true;
+    services.mpris-proxy.enable = true;
 
     # not so fancy pointer
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
