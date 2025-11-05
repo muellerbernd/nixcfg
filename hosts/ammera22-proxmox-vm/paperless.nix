@@ -23,6 +23,8 @@
       };
       # PAPERLESS_URL = "https://paperless.example.com";
     };
+    port = 8000;
   };
+  networking.firewall.allowedTCPPorts = [ 8000 ];
 
 }
