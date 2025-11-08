@@ -152,6 +152,7 @@ in
         linthesia
         pianobooster
         zynaddsubfx
+        lmms
       ];
     };
     # fonts.fontconfig.enable = true;

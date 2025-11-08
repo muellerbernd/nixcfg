@@ -92,6 +92,7 @@
       bluez-tools # Bluetooth tools
       helvum
       libnotify
+      qpwgraph
     ];
   };
 }
