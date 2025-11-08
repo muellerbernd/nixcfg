@@ -148,6 +148,10 @@ in
         rofi-script
         # fonts
         # nerd-fonts.hack
+        # music stuff
+        linthesia
+        pianobooster
+        zynaddsubfx
       ];
     };
     # fonts.fontconfig.enable = true;
