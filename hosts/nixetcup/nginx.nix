@@ -24,13 +24,15 @@
         in
         {
           "vserver.${domain}" = {
-            locations."/radicale/" = {
-              proxyPass = "http://127.0.0.1:5232/";
-              extraConfig = ''
-                proxy_set_header X-Script-Name /radicale;
-                proxy_pass_header Authorization;
-              '';
-            };
+            enableACME = true;
+            forceSSL = true;
+            # locations."/radicale/" = {
+            #   proxyPass = "http://127.0.0.1:5232/";
+            #   extraConfig = ''
+            #     proxy_set_header X-Script-Name /radicale;
+            #     proxy_pass_header Authorization;
+            #   '';
+            # };
           };
           # jitsi start
           # "jitsi.${domain}" = {
@@ -112,6 +114,13 @@
             };
           };
           # xmpp end
+          # matterbridge
+          "matterbridge.${domain}" = {
+            enableACME = true;
+            forceSSL = true;
+            locations."/download".root = "/var/www/matterbridge.${domain}";
+          };
+
           # services start
           "cloud.${domain}" = {
             enableACME = true;
@@ -193,6 +202,7 @@
           "cloud.muellerbernd.de"
           "git.muellerbernd.de"
           "headscale.muellerbernd.de"
+          "matterbridge.muellerbernd.de"
           "kv-rassekaninchen-muehlhausen.de"
         ];
       };
