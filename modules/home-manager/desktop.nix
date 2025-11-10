@@ -48,6 +48,7 @@ in
         # mupdf
         poppler
         unstable.zathura
+        pympress
         # (pkgs.zathura.override {plugins = with pkgs.zathuraPkgs; [zathura_pdf_mupdf];})
         kdePackages.okular
         pdfarranger
