@@ -302,7 +302,29 @@
     },
     "flake-utils_2": {
       "inputs": {
-        "systems": "systems_5"
+        "systems": [
+          "mango",
+          "scenefx",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
+      "inputs": {
+        "systems": "systems_6"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -496,11 +518,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1762331183,
-        "narHash": "sha256-+PEET5FKYzvHDhkaJLzXxbraoOo2Nr5634fTI0BlWqU=",
+        "lastModified": 1762960209,
+        "narHash": "sha256-hSBtM2DRy4z/JwJMQ40wsl2VyJJrbuspytefGBgK//E=",
         "owner": "DreamMaoMao",
         "repo": "mango",
-        "rev": "48c34802f3c6b66d4e03e2cefe20069ede8c0abf",
+        "rev": "ade00f88f016ec796ae21382c929dcddee452c5f",
         "type": "github"
       },
       "original": {
@@ -799,7 +821,7 @@
     "rofi-music-rs_2": {
       "inputs": {
         "flake-compat": "flake-compat_3",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
@@ -830,23 +852,25 @@
         "nixpkgs-unstable": "nixpkgs-unstable_2",
         "rofi-music-rs": "rofi-music-rs_2",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
-        "systems": "systems_6",
+        "systems": "systems_7",
         "treefmt-nix": "treefmt-nix_2"
       }
     },
     "scenefx": {
       "inputs": {
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "mango",
           "nixpkgs"
-        ]
+        ],
+        "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1750785057,
-        "narHash": "sha256-tGX6j4W91rcb+glXJo43sjPI9zQvPotonknG1BdihR4=",
+        "lastModified": 1762447505,
+        "narHash": "sha256-VEBQ8KXkSS4c+kdAhmvq06lEd9WNeCXdRK1U+qSilFw=",
         "owner": "wlrfx",
         "repo": "scenefx",
-        "rev": "3a6cfb12e4ba97b43326357d14f7b3e40897adfc",
+        "rev": "7f9e7409f6169fa637f1265895c121a8f8b70272",
         "type": "github"
       },
       "original": {
@@ -942,6 +966,21 @@
     },
     "systems_5": {
       "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_6": {
+      "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
         "owner": "nix-systems",
@@ -955,7 +994,7 @@
         "type": "github"
       }
     },
-    "systems_6": {
+    "systems_7": {
       "locked": {
         "lastModified": 1689347949,
         "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
