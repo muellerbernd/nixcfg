@@ -59,7 +59,7 @@
 
   services.home-assistant = {
     enable = true;
-    package = (pkgs.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; });
+    package = (pkgs.unstable.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; });
     openFirewall = true;
   };
   services.home-assistant.extraComponents = [
@@ -74,12 +74,14 @@
       ];
     in
     {
-      home-assistant.name = "Home";
-      home-assistant.latitude = "!secret latitude";
-      home-assistant.longitude = "!secret longitude";
-      home-assistant.elevation = "!secret elevation";
-      home-assistant.unit_system = "metric";
-      home-assistant.time_zone = "Europe/Berlin";
+      home-assistant = {
+        name = "MyHome";
+        latitude = "!secret latitude";
+        longitude = "!secret longitude";
+        elevation = "!secret elevation";
+        unit_system = "metric";
+        time_zone = "Europe/Berlin";
+      };
       frontend = { };
       http = {
         use_x_forwarded_for = true;
@@ -130,7 +132,7 @@
   networking.firewall.allowedTCPPorts = [ 8123 ];
 
   age.secrets.hassSecrets = {
-    file = ../../secrets/hassSecrets.age;
+    file = ../../../secrets/hassSecrets.age;
     owner = "hass";
     path = "/var/lib/hass/secrets.yaml";
   };

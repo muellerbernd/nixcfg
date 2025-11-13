@@ -13,7 +13,7 @@
   imports = with inputs.self.nixosModules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./homeassistant.nix
+    ./homeassistant/default.nix
     ./paperless.nix
     customSystem
   ];
