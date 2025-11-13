@@ -55,6 +55,8 @@
     packages = with pkgs; [
       # Utilities that give information about processes using the /proc filesystem; like kill, pgrep ...
       procps
+      # directory listing
+      tree
       # Tool to list open files
       lsof
       # editors
@@ -269,6 +271,9 @@
       # nix stuff
       statix
       nixpkgs-review
+
+      # diagrams via plantuml
+      plantuml
       # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
       sshfs
       # wake on lan tool
