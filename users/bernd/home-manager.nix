@@ -55,6 +55,8 @@
     packages = with pkgs; [
       # Utilities that give information about processes using the /proc filesystem; like kill, pgrep ...
       procps
+      # directory listing
+      tree
       # Tool to list open files
       lsof
       # editors
