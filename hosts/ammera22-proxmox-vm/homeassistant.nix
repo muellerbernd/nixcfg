@@ -60,6 +60,7 @@
   services.home-assistant = {
     enable = true;
     package = (pkgs.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; });
+    openFirewall = true;
   };
   services.home-assistant.extraComponents = [
     "pushover"
@@ -73,6 +74,12 @@
       ];
     in
     {
+      home-assistant.name = "Home";
+      home-assistant.latitude = "!secret latitude";
+      home-assistant.longitude = "!secret longitude";
+      home-assistant.elevation = "!secret elevation";
+      home-assistant.unit_system = "metric";
+      home-assistant.time_zone = "Europe/Berlin";
       frontend = { };
       http = {
         use_x_forwarded_for = true;
@@ -88,7 +95,7 @@
           "updater"
         ];
       };
-      "map" = { };
+      # "map" = { };
       shopping_list = { };
       backup = { };
       logbook.exclude.entities = hiddenEntities;
@@ -103,7 +110,7 @@
           password = "!secret openwrt_password";
         }
       ];
-      config = { };
+      # config = { };
       mobile_app = { };
 
       #icloud = {
@@ -115,11 +122,10 @@
       network = { };
       zeroconf = { };
       system_health = { };
-      default_config = { };
+      # default_config = { };
       system_log = { };
       sensor = [
       ];
-      openFirewall = true;
     };
   networking.firewall.allowedTCPPorts = [ 8123 ];
 
