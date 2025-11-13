@@ -33,4 +33,5 @@ in
   "berndMail.age".publicKeys = allUsers ++ allSystems;
   "yubico.age".publicKeys = allUsers ++ allSystems;
   "ammera22WgNetcup.age".publicKeys = allUsers ++ allSystems;
+  "hassSecrets.age".publicKeys = allUsers ++ allSystems;
 }
