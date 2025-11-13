@@ -61,7 +61,10 @@
     enable = true;
     package = (pkgs.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; });
   };
-  services.home-assistant.extraComponents = [ "pushover" ];
+  services.home-assistant.extraComponents = [
+    "pushover"
+    "radio_browser"
+  ];
   services.home-assistant.config =
     let
       hiddenEntities = [
@@ -70,7 +73,6 @@
       ];
     in
     {
-      icloud = { };
       frontend = { };
       http = {
         use_x_forwarded_for = true;
