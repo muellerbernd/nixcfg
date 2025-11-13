@@ -28,7 +28,13 @@
       default_config = { };
       openFirewall = true;
     };
-    configWritable = true;
+    configWritable = false;
+    extraPackages =
+      python3Packages: with python3Packages; [
+        # postgresql support
+        psycopg2
+        gtts
+      ];
   };
   networking.firewall.allowedTCPPorts = [ 8123 ];
 }
