@@ -17,13 +17,18 @@
       "aranet"
       "lifx"
       "xiaomi_miio"
+      "xmpp"
+      "tasmota"
+      "weather"
+      "mqtt"
     ];
     config = {
       # Includes dependencies for a basic setup
       # https://www.home assistant.io/integrations/default_config/
       default_config = { };
+      openFirewall = true;
     };
-    openFirewall = true;
+    configWritable = true;
   };
   networking.firewall.allowedTCPPorts = [ 8123 ];
 }
