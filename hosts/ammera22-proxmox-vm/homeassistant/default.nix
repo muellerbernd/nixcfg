@@ -82,6 +82,7 @@
         unit_system = "metric";
         time_zone = "Europe/Berlin";
       };
+      automation = "!include automations.yaml";
       frontend = { };
       http = {
         use_x_forwarded_for = true;
