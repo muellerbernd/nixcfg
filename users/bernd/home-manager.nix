@@ -273,7 +273,7 @@
       nixpkgs-review
 
       # diagrams via plantuml
-      plantuml
+      unstable.plantuml
       # FUSE-based filesystem that allows remote filesystems to be mounted over SSH
       sshfs
       # wake on lan tool
