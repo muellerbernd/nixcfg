@@ -59,12 +59,22 @@
 
   services.home-assistant = {
     enable = true;
-    package = (pkgs.unstable.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; });
+    package = (
+      pkgs.unstable.home-assistant.override {
+        extraPackages = ps: [
+          ps.psycopg2
+          ps.gtts
+        ];
+      }
+    );
     openFirewall = true;
+    configWritable = false;
+    # configDir = "/var/lib/homeass";
   };
   services.home-assistant.extraComponents = [
     "pushover"
     "radio_browser"
+    "xmpp"
   ];
   services.home-assistant.config =
     let
@@ -82,7 +92,15 @@
         unit_system = "metric";
         time_zone = "Europe/Berlin";
       };
+      notify = {
+        name = "houseBot"; # e.g.,  jabber
+        platform = "xmpp";
+        sender = "!secret xmppSender";
+        password = "!secret xmppPassword";
+        recipient = "!secret xmppRecipient";
+      };
       automation = "!include automations.yaml";
+      script = "!include scripts.yaml";
       frontend = { };
       http = {
         use_x_forwarded_for = true;
@@ -99,6 +117,7 @@
         ];
       };
       # "map" = { };
+      default_config = { };
       shopping_list = { };
       backup = { };
       logbook.exclude.entities = hiddenEntities;
