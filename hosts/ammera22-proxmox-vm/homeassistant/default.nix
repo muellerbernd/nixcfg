@@ -99,7 +99,7 @@
         password = "!secret xmppPassword";
         recipient = "!secret xmppRecipient";
       };
-      automation = "!include automations.yaml";
+      # automation = "!include automations.yaml";
       script = "!include scripts.yaml";
       frontend = { };
       http = {
