@@ -259,6 +259,7 @@
 
       # haskell
       haskellPackages.haskell-language-server
+      cabal-install
       # python packages I often use systemwide
       # pkgs.python3Packages.flask
       # pkgs.python3Packages.requests
@@ -267,6 +268,8 @@
 
       # github cli tool
       gh
+      # pre-commit
+      pre-commit
 
       # nix stuff
       statix
