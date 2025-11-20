@@ -21,7 +21,7 @@
         condition = {
           condition = "numeric_state";
           entity_id = "sensor.shellypro3em_fce8c0d89098_total_active_power";
-          above = 160;
+          above = 170;
         };
         action =
           let
