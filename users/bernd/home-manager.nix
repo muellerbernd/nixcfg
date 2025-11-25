@@ -233,11 +233,11 @@
       ccls
       pyright
       ruff
-      python3Packages.python-lsp-server
-      python3Packages.python-lsp-ruff
-      python3Packages.pylsp-mypy
-      python3Packages.pylsp-rope
-      pylyzer
+      # python3Packages.python-lsp-server
+      # python3Packages.python-lsp-ruff
+      # python3Packages.pylsp-mypy
+      # python3Packages.pylsp-rope
+      # pylyzer
       nixd
       sumneko-lua-language-server
       marksman
