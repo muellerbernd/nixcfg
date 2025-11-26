@@ -361,6 +361,12 @@
       '';
   };
 
+  age.secrets = {
+    workSmbCredentials = {
+      file = "${inputs.self}/secrets/workSmbCredentials.age";
+    };
+  };
+
   services.samba = {
     openFirewall = true;
   };

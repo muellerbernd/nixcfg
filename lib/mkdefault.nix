@@ -91,22 +91,6 @@ lib.nixosSystem rec {
 
     # agenix.nixosModules.age
     agenix.nixosModules.default
-    {
-      age.secrets = {
-        distributedBuilderKey = {
-          file = "${inputs.self}/secrets/distributedBuilderKey.age";
-        };
-        eisVpnP14sConfig = {
-          file = "${inputs.self}/secrets/eisVpnP14sConfig.age";
-        };
-        eisVpnConfig = {
-          file = "${inputs.self}/secrets/eisVpnConfig.age";
-        };
-        workSmbCredentials = {
-          file = "${inputs.self}/secrets/workSmbCredentials.age";
-        };
-      };
-    }
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.

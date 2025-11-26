@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -57,6 +58,11 @@ in
       '';
     };
 
+    age.secrets = {
+      distributedBuilderKey = {
+        file = "${inputs.self}/secrets/distributedBuilderKey.age";
+      };
+    };
     # distributedBuilds
     nix = {
       distributedBuilds = true;
