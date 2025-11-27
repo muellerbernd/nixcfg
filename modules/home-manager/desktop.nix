@@ -153,6 +153,7 @@ in
         linthesia
         pianobooster
         zynaddsubfx
+        yoshimi
         lmms
       ];
     };
