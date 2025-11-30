@@ -143,7 +143,6 @@ in
     };
 
     services = {
-      logind.killUserProcesses = false;
       # Enable the OpenSSH daemon.
       openssh = {
         enable = lib.mkDefault true;
