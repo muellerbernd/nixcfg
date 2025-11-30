@@ -64,7 +64,7 @@ in
       pam_gnupg
       bc
       home-manager
-      inputs.agenix.packages.${system}.default
+      inputs.agenix.packages.${stdenv.hostPlatform.system}.default
       wireguard-tools
       samba
       pciutils

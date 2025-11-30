@@ -147,7 +147,7 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = lib.mkImageMediaOverride false;
 
-  isoImage.isoBaseName = lib.mkForce "bemu-nixos";
+  image.baseName = lib.mkForce "bemu-nixos";
   isoImage.edition = lib.mkForce "bemu-nixos";
 
   system.stateVersion = "25.05";
