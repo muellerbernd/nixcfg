@@ -28,17 +28,17 @@ default-arg := ''
 # build the configuration for current host
 [group('Main')]
 build args=default-arg:
-    nixos-rebuild build --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L {{ args }} --show-trace
+    nixos-rebuild build --option eval-cache false --sudo --flake .#${HOSTNAME} -L {{ args }} --show-trace
 
 # switch the configuration for current host
 [group('Main')]
 switch args=default-arg:
-    nixos-rebuild switch --option eval-cache false --use-remote-sudo --flake .#${HOSTNAME} -L {{ args }} --show-trace --upgrade
+    nixos-rebuild switch --option eval-cache false --sudo --flake .#${HOSTNAME} -L {{ args }} --show-trace --upgrade
 
 # rebuild for current host in test mode
 [group('Main')]
 test:
-    nixos-rebuild test --use-remote-sudo --flake .#${HOSTNAME} -L
+    nixos-rebuild test --sudo --flake .#${HOSTNAME} -L
 
 # update nix flake and switch for current host
 [group('Main')]
@@ -63,14 +63,14 @@ balodil:
 # build VM nixetcup
 [group('VM')]
 nixetcup:
-    nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@45.136.31.59 --flake ".#nixetcup" --show-trace
+    nixos-rebuild switch -j auto --sudo --build-host localhost --target-host root@45.136.31.59 --flake ".#nixetcup" --show-trace
 
 # build and deploy config for pi-mcrover
 [group('Main')]
 deploy-pi-mcrover:
-    nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@pi-rover.local --flake ".#pi-rover"
+    nixos-rebuild switch -j auto --sudo --build-host localhost --target-host root@pi-rover.local --flake ".#pi-rover"
 
 # build and deploy config for pi4
 [group('Main')]
 deploy-pi4:
-    nixos-rebuild switch -j auto --use-remote-sudo --build-host localhost --target-host root@pi4.local --flake ".#pi4"
+    nixos-rebuild switch -j auto --sudo --build-host localhost --target-host root@pi4.local --flake ".#pi4"

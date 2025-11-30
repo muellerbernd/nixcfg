@@ -35,7 +35,7 @@
     };
 
     simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fw-fanctrl = {
