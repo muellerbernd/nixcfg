@@ -213,6 +213,8 @@
           "upload.xmpp.muellerbernd.de"
           "conference.xmpp.muellerbernd.de"
         ];
+        postRun = "systemctl restart ejabberd.service";
+        # group = "ejabberd";
       };
       "git.eineurl.de" = {
         webroot = "/var/lib/acme/acme-challenge/";

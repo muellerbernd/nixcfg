@@ -29,8 +29,8 @@ let
     # default_db = "sql";
 
     certfiles = [
-      "${config.security.acme.certs."${domain}".directory}/*"
-      "${config.security.acme.certs."conference.${domain}".directory}/*"
+      "${config.security.acme.certs."${domain}".directory}/*.pem"
+      "${config.security.acme.certs."conference.${domain}".directory}/*.pem"
     ];
 
     define_macro = {
