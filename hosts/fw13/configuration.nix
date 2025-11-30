@@ -11,7 +11,6 @@
     customSystem
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    inputs.fw-fanctrl.nixosModules.default
     ./hardware-configuration.nix
   ];
 

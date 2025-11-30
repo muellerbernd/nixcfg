@@ -141,7 +141,7 @@ in
         xnec2c
         nanovna-saver
         # from custom overlays
-        rofi-music-rs
+        # rofi-music-rs
         rofi-script
         # fonts
         # nerd-fonts.hack
