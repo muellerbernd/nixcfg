@@ -42,12 +42,9 @@ in
     # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     services.displayManager.ly = {
-      settings = {
-        tty = 7; # Hopefully less logs flowing into the login screen, see https://codeberg.org/AnErrupTion/ly/issues/537
-      };
       enable = true;
     };
-    programs.river.enable = true;
+    programs.river-classic.enable = true;
     programs.niri.enable = true;
     programs.mango.enable = true;
     services.pipewire.enable = true;
@@ -136,15 +133,13 @@ in
     # enable the thunderbolt daemon
     services.hardware.bolt.enable = true;
     # ignore laptop lid
-    services.logind.lidSwitchDocked = "ignore";
-    services.logind.lidSwitch = "ignore";
-    services.logind.extraConfig = ''
-      # want to be able to listen to music while laptop closed
-      #LidSwitchIgnoreInhibited=no
-      HandleLidSwitch=ignore
-      # don’t shutdown when power button is short-pressed
-      HandlePowerKey=ignore
-    '';
+    services.logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandlePowerKey = "ignore";
+      KillUserProcesses = false;
+      lidSwitchDocked = "ignore";
+      lidSwitch = "ignore";
+    };
     # based on https://cubiclenate.com/2024/02/27/disable-input-devices-in-wayland/
     systemd.services.toggleLaptopKeyboard = lib.mkDefault {
       enable = true;

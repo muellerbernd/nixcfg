@@ -97,10 +97,6 @@
     #xkbOptions = "ctrl:nocaps";
   };
 
-  environment.systemPackages = with pkgs; [
-    glxinfo
-  ];
-
   services.fwupd.enable = true;
   # we need fwupd 1.9.7 to downgrade the fingerprint sensor firmware
   # services.fwupd.package =
@@ -203,10 +199,10 @@
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
 
   # Enable fw-fanctrl
-  programs.fw-fanctrl.enable = true;
+  hardware.fw-fanctrl.enable = true;
 
   # Add a custom config
-  programs.fw-fanctrl.config = {
+  hardware.fw-fanctrl.config = {
     defaultStrategy = "lazy";
     strategies = {
       "lazy" = {

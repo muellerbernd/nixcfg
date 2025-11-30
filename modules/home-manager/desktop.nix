@@ -7,7 +7,7 @@
 let
   cfg = config.desktop-home;
   rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
-    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
+    ${pkgs.rofi-unwrapped}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
   '';
 in
 {
@@ -116,8 +116,6 @@ in
         thunderbird
         # vpn
         networkmanager-openconnect
-        openconnect
-        globalprotect-openconnect
         gp-saml-gui
         # mullvad vpn
         mullvad-vpn
@@ -128,7 +126,6 @@ in
         unstable.yt-dlp
         # theming
         xdg-desktop-portal
-        papirus-icon-theme
         # vm remote
         virt-viewer
         # remote desktop
@@ -139,7 +136,6 @@ in
         drawio
         pandoc-drawio-filter
         # custom packages
-        annotator
         uvtools
         # hamradio stuff
         xnec2c

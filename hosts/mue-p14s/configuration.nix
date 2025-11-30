@@ -253,7 +253,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    glxinfo
     cifs-utils
     keyutils
     samba

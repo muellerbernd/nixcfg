@@ -179,7 +179,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    glxinfo
     # icecream
     # cups-filters
     # cups-bjnp

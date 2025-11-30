@@ -239,7 +239,7 @@
       # python3Packages.pylsp-rope
       # pylyzer
       nixd
-      sumneko-lua-language-server
+      lua-language-server
       marksman
       cmake-language-server
       texlab
