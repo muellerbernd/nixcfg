@@ -166,6 +166,7 @@
           modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
             ./hosts/iso/configuration.nix
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
         };
         # test VM

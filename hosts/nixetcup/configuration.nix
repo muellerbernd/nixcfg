@@ -81,9 +81,6 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-  ];
-
   # Configure xserver
   services.xserver = {
     xkb.layout = "de";
