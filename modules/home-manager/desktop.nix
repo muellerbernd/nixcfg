@@ -141,9 +141,10 @@ in
         xnec2c
         nanovna-saver
         # from custom overlays
-        # rofi-music-rs
+        rofi-music-rs
         rofi-script
-        # fonts
+        # icons
+        tango-icon-theme
         # nerd-fonts.hack
         # music stuff
         linthesia

@@ -385,16 +385,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1701174899,
-        "narHash": "sha256-1W+FMe8mWsJKXoBc+QgKmEeRj33kTFnPq7XCjU+bfnA=",
+        "lastModified": 1764522689,
+        "narHash": "sha256-SqUuBFjhl/kpDiVaKLQBoD8TLD+/cTUzzgVFoaHrkqY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "010c7296f3b19a58b206fdf7d68d75a5b0a09e9e",
+        "rev": "8bb5646e0bed5dbd3ab08c7a7cc15b75ab4e1d0f",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
+        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -422,11 +422,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1704381692,
-        "narHash": "sha256-dmadrJ+VICCJQhq39A/KflN2nZMghAHkyK5JDwOrFUM=",
+        "lastModified": 1764578569,
+        "narHash": "sha256-kGDo12g/OhByGFSlJxMpuN88b+mEWpEO1UdE039Om8E=",
         "owner": "muellerbernd",
         "repo": "rofi-music-rs",
-        "rev": "978350fd8f25f34e923f84d64cc39fe706899a8f",
+        "rev": "ce9de833a50c7179d356c0cc78a6307205ae8c09",
         "type": "github"
       },
       "original": {
