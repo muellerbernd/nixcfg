@@ -272,7 +272,7 @@
     drawio
     pandoc-drawio-filter
     # distributed compiling
-    icemon
+    # icemon
 
     can-utils
     savvycan
