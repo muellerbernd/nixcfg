@@ -28,7 +28,6 @@
       waybar
       # qt6.qtwayland
       # libsForQt5.qtwayland
-      glxinfo
       nwg-displays
       nwg-look
       pipectl
@@ -48,7 +47,7 @@
       gammastep
       wlsunset
       # other
-      rofi-wayland
+      rofi-unwrapped
       fuzzel
       shikane
       dinit

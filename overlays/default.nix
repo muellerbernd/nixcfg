@@ -4,16 +4,16 @@
   # For every flake input, aliases 'pkgs.inputs.${flake}' to
   # 'inputs.${flake}.packages.${pkgs.system}' or
   # 'inputs.${flake}.legacyPackages.${pkgs.system}'
-  flake-inputs = final: _: {
-    inputs = builtins.mapAttrs (
-      _: flake:
-      let
-        legacyPackages = (flake.legacyPackages or { }).${final.system} or { };
-        packages = (flake.packages or { }).${final.system} or { };
-      in
-      if legacyPackages != { } then legacyPackages else packages
-    ) inputs;
-  };
+  # flake-inputs = final: _: {
+  #   inputs = builtins.mapAttrs (
+  #     _: flake:
+  #     let
+  #       legacyPackages = (flake.legacyPackages or { }).${final.system} or { };
+  #       packages = (flake.packages or { }).${final.system} or { };
+  #     in
+  #     if legacyPackages != { } then legacyPackages else packages
+  #   ) inputs;
+  # };
 
   # This one brings our custom packages from the 'pkgs' directory
   additions = final: prev: import ../pkgs { pkgs = final; };
@@ -58,7 +58,7 @@
   # # be accessible through 'pkgs.stable'
   unstable-packages = final: _prev: {
     unstable = import inputs.nixpkgs-unstable {
-      system = final.system;
+      system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
       permittedInsecurePackages = [
         "olm-3.2.16"

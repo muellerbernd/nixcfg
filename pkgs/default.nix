@@ -7,7 +7,7 @@
 {
   # keep-sorted start
   uvtools = pkgs.callPackage ./uvtools { };
-  annotator = pkgs.callPackage ./annotator { };
-  scinterface = pkgs.callPackage ./scinterface { };
+  # annotator = pkgs.callPackage ./annotator { };
+  # scinterface = pkgs.callPackage ./scinterface { };
   # keep-sorted end
 }

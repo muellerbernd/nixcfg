@@ -7,7 +7,7 @@
 let
   cfg = config.desktop-home;
   rofi-script = pkgs.writeShellScriptBin "rofi-script" ''
-    ${pkgs.rofi-wayland}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
+    ${pkgs.rofi-unwrapped}/bin/rofi -modi "window,run,drun,combi" -combi-modi "window#drun#run" -show combi -lines 20 -show-icons
   '';
 in
 {
@@ -116,8 +116,6 @@ in
         thunderbird
         # vpn
         networkmanager-openconnect
-        openconnect
-        globalprotect-openconnect
         gp-saml-gui
         # mullvad vpn
         mullvad-vpn
@@ -128,7 +126,6 @@ in
         unstable.yt-dlp
         # theming
         xdg-desktop-portal
-        papirus-icon-theme
         # vm remote
         virt-viewer
         # remote desktop
@@ -139,7 +136,6 @@ in
         drawio
         pandoc-drawio-filter
         # custom packages
-        annotator
         uvtools
         # hamradio stuff
         xnec2c
@@ -147,8 +143,6 @@ in
         # from custom overlays
         rofi-music-rs
         rofi-script
-        # fonts
-        # nerd-fonts.hack
         # music stuff
         linthesia
         pianobooster
@@ -248,48 +242,11 @@ in
       # ];
     };
 
-    # gtk = {
-    #   enable = true;
-    #
-    #   iconTheme = {
-    #     name = "Papirus-Dark";
-    #     package = pkgs.papirus-icon-theme;
-    #   };
-    #   # theme = {
-    #   #   package = pkgs.materia-theme;
-    #   #   name = "Materia-dark";
-    #   # };
-    #   theme = {
-    #     # name = "Brezy-dark";
-    #     # package = pkgs.gnome-themes-extra;
-    #     name = "adwaita-dark";
-    #     package = pkgs.adwaita-qt;
-    #   };
-    #   cursorTheme = {
-    #     # name = "Brezy-dark";
-    #     # package = pkgs.gnome-themes-extra;
-    #     name = "adwaita-dark";
-    #     package = pkgs.adwaita-qt;
-    #   };
-    #
-    #   gtk2.extraConfig = ''
-    #     gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-    #     gtk-menu-images=1
-    #     gtk-button-images=1
-    #   '';
-    #
-    #   gtk3.extraConfig = {
-    #     gtk-application-prefer-dark-theme = 1;
-    #   };
-    #   gtk4.extraConfig = {
-    #     gtk-application-prefer-dark-theme = 1;
-    #   };
-    # };
     gtk = {
       enable = true;
       iconTheme = {
-        name = "oomox-gruvbox-dark";
-        package = pkgs.gruvbox-dark-icons-gtk;
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
       };
       cursorTheme = {
         name = "capitaine-cursors-white";
@@ -348,6 +305,63 @@ in
 
     # not so fancy pointer
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+    # home.pointerCursor = {
+    #   x11.enable = true;
+    #   gtk.enable = true;
+    #   name = "Vanilla-DMZ";
+    #   package = pkgs.vanilla-dmz;
+    # };
 
+    # xdg.configFile."mimeapps.list".force = true;
+    programs.anyrun = {
+      enable = true;
+      config = {
+        x = {
+          fraction = 0.5;
+        };
+        y = {
+          fraction = 0.3;
+        };
+        width = {
+          fraction = 0.3;
+        };
+        hideIcons = false;
+        ignoreExclusiveZones = false;
+        layer = "overlay";
+        hidePluginInfo = false;
+        closeOnClick = false;
+        showResultsImmediately = true;
+        maxEntries = null;
+
+        plugins = [
+          "${pkgs.anyrun}/lib/libniri_focus.so"
+          "${pkgs.anyrun}/lib/libapplications.so"
+          "${pkgs.anyrun}/lib/libsymbols.so"
+          "${pkgs.anyrun}/lib/libshell.so"
+        ];
+      };
+
+      # Inline comments are supported for language injection into
+      # multi-line strings with Treesitter! (Depends on your editor)
+      extraCss = /* css */ ''
+        .some_class {
+          background: red;
+        }
+      '';
+      extraConfigFiles = {
+        "symbols.ron".text = ''
+          Config(
+            prefix: ":s ",
+            symbols: {},
+            max_entries: 3,
+          )
+        '';
+        "niri-focus.ron".text = ''
+          Config(
+            max_entries: 3,
+          )
+        '';
+      };
+    };
   };
 }

@@ -11,7 +11,6 @@
     customSystem
     # modules
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    inputs.fw-fanctrl.nixosModules.default
     ./hardware-configuration.nix
   ];
 
@@ -96,10 +95,6 @@
     xkb.variant = "";
     #xkbOptions = "ctrl:nocaps";
   };
-
-  environment.systemPackages = with pkgs; [
-    glxinfo
-  ];
 
   services.fwupd.enable = true;
   # we need fwupd 1.9.7 to downgrade the fingerprint sensor firmware
@@ -203,10 +198,10 @@
   services.openssh.settings.PasswordAuthentication = lib.mkForce true;
 
   # Enable fw-fanctrl
-  programs.fw-fanctrl.enable = true;
+  hardware.fw-fanctrl.enable = true;
 
   # Add a custom config
-  programs.fw-fanctrl.config = {
+  hardware.fw-fanctrl.config = {
     defaultStrategy = "lazy";
     strategies = {
       "lazy" = {

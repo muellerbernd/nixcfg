@@ -253,7 +253,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    glxinfo
     cifs-utils
     keyutils
     samba
@@ -273,7 +272,7 @@
     drawio
     pandoc-drawio-filter
     # distributed compiling
-    icemon
+    # icemon
 
     can-utils
     savvycan

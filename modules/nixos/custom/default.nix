@@ -64,7 +64,7 @@ in
       pam_gnupg
       bc
       home-manager
-      inputs.agenix.packages.${system}.default
+      inputs.agenix.packages.${stdenv.hostPlatform.system}.default
       wireguard-tools
       samba
       pciutils
@@ -143,7 +143,6 @@ in
     };
 
     services = {
-      logind.killUserProcesses = false;
       # Enable the OpenSSH daemon.
       openssh = {
         enable = lib.mkDefault true;
@@ -378,6 +377,7 @@ in
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGRd4LEWh7KvCNHXPJm39YcCAqwwdqJsGr9ARS6UJkJQ"
       ];
     };
+    xdg.icons.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

@@ -16,10 +16,9 @@ let
   '';
 in
 {
-  config = lib.mkIf (config.programs.river.enable) {
-    programs.river = {
+  config = lib.mkIf (config.programs.river-classic.enable) {
+    programs.river-classic = {
       xwayland.enable = true;
-      package = pkgs.river;
       extraPackages = with pkgs; [
         wlsunset
         wl-gammactl
@@ -38,7 +37,6 @@ in
         waybar
         # qt6.qtwayland
         # libsForQt5.qtwayland
-        glxinfo
         nwg-displays
         nwg-look
         pipectl
@@ -62,7 +60,7 @@ in
         gammastep
         wlsunset
         # other
-        rofi-wayland
+        rofi-unwrapped
         fuzzel
         shikane
         dinit

@@ -2,7 +2,7 @@
   description = "NixOS systems and tools by muellerbernd";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     home-manager-unstable = {
@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
 
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,18 +28,8 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    eis-nix-configs = {
-      url = "git+ssh://git@gitlab.cc-asp.fraunhofer.de/eisil/software/eis-nix-configs.git";
-      # url = "path:/home/bernd/work/fhg/eisil/software/eis-nix-configs/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    fw-fanctrl = {
-      url = "github:TamtamHero/fw-fanctrl/packaging/nix";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -115,10 +105,12 @@
       # formatter = forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
       # for `nix fmt`
-      formatter = forEachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      formatter = forEachSystem (
+        pkgs: treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper
+      );
       # for `nix flake check`
       checks = forEachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+        formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
       });
 
       # Your custom packages and modifications, exported as overlays
@@ -131,74 +123,50 @@
       nixosConfigurations = {
         mue-p14s = mkDefault "mue-p14s" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
           users = [ "bernd" ];
         };
         x240 = mkDefault "x240" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
         };
         ilmpad = mkDefault "t480" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
           crypt_device = "/dev/disk/by-uuid/4e79e8f8-ed3e-48e0-9ff0-7b1a44b8f76c";
           hostname = "ilmpad";
         };
         ammerapad = mkDefault "t480" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
           crypt_device = "/dev/disk/by-uuid/38cfcbfc-ae82-4232-b4c8-c486f18a82b8";
           hostname = "ammerapad";
         };
         fw13 = mkDefault "fw13" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
         };
         biltower = mkDefault "biltower" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
         };
         ISO = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
             ./hosts/iso/configuration.nix
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
         };
         # test VM
@@ -220,19 +188,14 @@
         # VM
         nixetcup = mkDefault "nixetcup" {
           inherit
-            nixpkgs
-            home-manager
-            agenix
             inputs
             outputs
             ;
-          system = "x86_64-linux";
           users = [ "bernd" ];
           headless = true;
         };
         # raspberry-pi-4
         pi4 = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
           modules = [
             nixos-hardware.nixosModules.raspberry-pi-4
             # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
@@ -245,12 +208,12 @@
               };
             }
             ./hosts/pi-4/configuration.nix
+            { nixpkgs.hostPlatform = "aarch64-linux"; }
           ];
         };
         # raspberry-pi-3 rover
         pi-rover = inputs.nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          system = "aarch64-linux";
           modules = [
             inputs.nixos-hardware.nixosModules.raspberry-pi-3
             # "${inputs.nixpkgs}/nixos/modules/profiles/minimal.nix"
@@ -264,6 +227,7 @@
               };
             }
             ./hosts/pi-rover/configuration.nix
+            { nixpkgs.hostPlatform = "aarch64-linux"; }
           ];
         };
         # virtual machine that is available on my proxmox instance
@@ -283,13 +247,9 @@
         # virtual machine that is available on my proxmox instance
         ammera22-proxmox-vm = mkDefault "ammera22-proxmox-vm" {
           inherit
-            nixpkgs
-            home-manager
             inputs
             outputs
-            agenix
             ;
-          system = "x86_64-linux";
           users = [ "bernd" ];
           hostname = "ammera22-proxmox-vm";
           headless = true;
@@ -298,8 +258,8 @@
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations.bernd = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+      homeConfigurations."bernd" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgsFor."x86_64-linux";
         modules = [
           ./users/bernd/home-manager.nix
         ];
