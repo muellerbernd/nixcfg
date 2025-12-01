@@ -244,18 +244,14 @@ in
 
     gtk = {
       enable = true;
-      # iconTheme = {
-      #   name = "oomox-gruvbox-dark";
-      #   package = pkgs.gruvbox-dark-icons-gtk;
-      # };
-      # iconTheme = {
-      #   name = "Papirus-Dark";
-      #   package = pkgs.papirus-icon-theme;
-      # };
-      # cursorTheme = {
-      #   name = "capitaine-cursors-white";
-      #   package = pkgs.capitaine-cursors;
-      # };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+      cursorTheme = {
+        name = "capitaine-cursors-white";
+        package = pkgs.capitaine-cursors;
+      };
       theme = {
         name = "Adwaita-dark";
         package = pkgs.gnome-themes-extra;
@@ -317,5 +313,55 @@ in
     # };
 
     # xdg.configFile."mimeapps.list".force = true;
+    programs.anyrun = {
+      enable = true;
+      config = {
+        x = {
+          fraction = 0.5;
+        };
+        y = {
+          fraction = 0.3;
+        };
+        width = {
+          fraction = 0.3;
+        };
+        hideIcons = false;
+        ignoreExclusiveZones = false;
+        layer = "overlay";
+        hidePluginInfo = false;
+        closeOnClick = false;
+        showResultsImmediately = true;
+        maxEntries = null;
+
+        plugins = [
+          "${pkgs.anyrun}/lib/libniri_focus.so"
+          "${pkgs.anyrun}/lib/libapplications.so"
+          "${pkgs.anyrun}/lib/libsymbols.so"
+          "${pkgs.anyrun}/lib/libshell.so"
+        ];
+      };
+
+      # Inline comments are supported for language injection into
+      # multi-line strings with Treesitter! (Depends on your editor)
+      extraCss = /* css */ ''
+        .some_class {
+          background: red;
+        }
+      '';
+      extraConfigFiles = {
+        "symbols.ron".text = ''
+          Config(
+            prefix: ":s ",
+            symbols: {},
+            max_entries: 3,
+          )
+        '';
+        "niri-focus.ron".text = ''
+          Config(
+            max_entries: 3,
+          )
+        '';
+      };
+    };
   };
 }
