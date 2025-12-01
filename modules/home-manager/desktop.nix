@@ -143,9 +143,6 @@ in
         # from custom overlays
         rofi-music-rs
         rofi-script
-        # icons
-        tango-icon-theme
-        # nerd-fonts.hack
         # music stuff
         linthesia
         pianobooster
@@ -245,53 +242,20 @@ in
       # ];
     };
 
-    # gtk = {
-    #   enable = true;
-    #
-    #   iconTheme = {
-    #     name = "Papirus-Dark";
-    #     package = pkgs.papirus-icon-theme;
-    #   };
-    #   # theme = {
-    #   #   package = pkgs.materia-theme;
-    #   #   name = "Materia-dark";
-    #   # };
-    #   theme = {
-    #     # name = "Brezy-dark";
-    #     # package = pkgs.gnome-themes-extra;
-    #     name = "adwaita-dark";
-    #     package = pkgs.adwaita-qt;
-    #   };
-    #   cursorTheme = {
-    #     # name = "Brezy-dark";
-    #     # package = pkgs.gnome-themes-extra;
-    #     name = "adwaita-dark";
-    #     package = pkgs.adwaita-qt;
-    #   };
-    #
-    #   gtk2.extraConfig = ''
-    #     gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-    #     gtk-menu-images=1
-    #     gtk-button-images=1
-    #   '';
-    #
-    #   gtk3.extraConfig = {
-    #     gtk-application-prefer-dark-theme = 1;
-    #   };
-    #   gtk4.extraConfig = {
-    #     gtk-application-prefer-dark-theme = 1;
-    #   };
-    # };
     gtk = {
       enable = true;
-      iconTheme = {
-        name = "oomox-gruvbox-dark";
-        package = pkgs.gruvbox-dark-icons-gtk;
-      };
-      cursorTheme = {
-        name = "capitaine-cursors-white";
-        package = pkgs.capitaine-cursors;
-      };
+      # iconTheme = {
+      #   name = "oomox-gruvbox-dark";
+      #   package = pkgs.gruvbox-dark-icons-gtk;
+      # };
+      # iconTheme = {
+      #   name = "Papirus-Dark";
+      #   package = pkgs.papirus-icon-theme;
+      # };
+      # cursorTheme = {
+      #   name = "capitaine-cursors-white";
+      #   package = pkgs.capitaine-cursors;
+      # };
       theme = {
         name = "Adwaita-dark";
         package = pkgs.gnome-themes-extra;
@@ -345,6 +309,13 @@ in
 
     # not so fancy pointer
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+    # home.pointerCursor = {
+    #   x11.enable = true;
+    #   gtk.enable = true;
+    #   name = "Vanilla-DMZ";
+    #   package = pkgs.vanilla-dmz;
+    # };
 
+    # xdg.configFile."mimeapps.list".force = true;
   };
 }
