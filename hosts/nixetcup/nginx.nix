@@ -35,10 +35,10 @@
             # };
           };
           # jitsi start
-          # "jitsi.${domain}" = {
-          #   enableACME = true;
-          #   forceSSL = true;
-          # };
+          "jitsi.${domain}" = {
+            enableACME = true;
+            forceSSL = true;
+          };
           # "conference.${domain}" = {
           #   enableACME = true;
           #   forceSSL = true;

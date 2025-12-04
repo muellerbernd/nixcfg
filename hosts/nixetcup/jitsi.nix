@@ -13,20 +13,21 @@ in
     enable = true;
     hostName = jitsi_fqdn;
     prosody.lockdown = true;
-    # config = {
-    #   enableWelcomePage = false;
-    #   prejoinPageEnabled = true;
-    #   defaultLang = "en";
-    # };
-    # interfaceConfig = {
-    #   SHOW_JITSI_WATERMARK = false;
-    #   SHOW_WATERMARK_FOR_GUESTS = false;
-    # };
+    nginx.enable = true;
+    config = {
+      enableWelcomePage = true;
+      prejoinPageEnabled = true;
+      defaultLang = "en";
+    };
+    interfaceConfig = {
+      SHOW_JITSI_WATERMARK = false;
+      SHOW_WATERMARK_FOR_GUESTS = false;
+    };
   };
-  services.jitsi-videobridge = {
-    enable = true;
-    openFirewall = true;
-  };
+  # services.jitsi-videobridge = {
+  #   enable = true;
+  #   openFirewall = true;
+  # };
 
   networking.firewall.allowedTCPPorts = [
     80
@@ -82,6 +83,6 @@ in
   # networking.firewall.allowedTCPPorts = [5222 5223 5269 5270 5280 5290];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "jitsi-meet-1.0.8043"
+    "jitsi-meet-1.0.8792"
   ];
 }
