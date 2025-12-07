@@ -117,6 +117,7 @@ in
         # vpn
         networkmanager-openconnect
         gp-saml-gui
+        ktailctl
         # mullvad vpn
         mullvad-vpn
         mullvad-browser
