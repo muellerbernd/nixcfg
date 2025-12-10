@@ -11,10 +11,10 @@ in
 {
   imports = [
     ./pipewire.nix
-    ./river.nix
+    # ./river.nix
     ./niri.nix
     ./mango.nix
-    # ./i3.nix
+    ./i3.nix
   ];
 
   options.custom.system.gui = {
@@ -44,7 +44,7 @@ in
     services.displayManager.ly = {
       enable = true;
     };
-    programs.river-classic.enable = true;
+    programs.river-classic.enable = false;
     programs.niri.enable = true;
     programs.mango.enable = true;
     services.pipewire.enable = true;

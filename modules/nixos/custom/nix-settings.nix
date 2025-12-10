@@ -2,6 +2,7 @@
 {
   # Nix settings, auto cleanup and enable flakes
   nix = {
+    # settings.download-buffer-size = 524288000; # 500 MB
     # settings.auto-optimise-store = true;
     settings.allowed-users = [
       "bernd"
