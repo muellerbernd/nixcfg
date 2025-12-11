@@ -250,6 +250,7 @@
       settings.PermitRootLogin = "yes";
       openFirewall = true;
     };
+    onedrive.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -295,9 +296,9 @@
     inetutils
     #
     oversteer
-    onedrive
     onedrivegui
   ];
+
   environment.variables.GST_PLUGIN_SYSTEM_PATH_1_0 = pkgs.lib.mkForce (
     pkgs.lib.concatStringsSep ":" [
       "${pkgs.gst_all_1.gstreamer.out}/lib/gstreamer-1.0"
