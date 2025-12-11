@@ -46,7 +46,7 @@ in
     };
     programs.river-classic.enable = false;
     programs.niri.enable = true;
-    programs.mango.enable = true;
+    programs.mango.enable = false;
     services.pipewire.enable = true;
 
     xdg.portal = {
