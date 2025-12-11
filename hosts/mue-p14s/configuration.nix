@@ -297,6 +297,7 @@
     #
     oversteer
     onedrivegui
+    goose-cli
   ];
 
   environment.variables.GST_PLUGIN_SYSTEM_PATH_1_0 = pkgs.lib.mkForce (
