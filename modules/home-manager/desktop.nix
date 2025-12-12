@@ -370,7 +370,7 @@ in
         # layer = "overlay";
         # hidePluginInfo = false;
         # closeOnClick = false;
-        # showResultsImmediately = true;
+        showResultsImmediately = true;
         # maxEntries = null;
 
         plugins = [
