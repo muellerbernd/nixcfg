@@ -353,7 +353,7 @@ in
       };
     };
     programs.anyrun = {
-      package = pkgs.unstable.anyrun;
+      # package = pkgs.unstable.anyrun;
       enable = true;
       config = {
         x = {
