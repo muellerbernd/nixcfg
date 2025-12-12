@@ -14,7 +14,7 @@ in
     # ./river.nix
     ./niri.nix
     ./mango.nix
-    ./i3.nix
+    # ./i3.nix
   ];
 
   options.custom.system.gui = {

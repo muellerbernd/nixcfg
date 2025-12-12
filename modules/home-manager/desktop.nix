@@ -97,6 +97,7 @@ in
         # kiwix
         # media players
         vlc
+        mpv
         strawberry
         # MPD
         mpc
@@ -313,8 +314,46 @@ in
     #   package = pkgs.vanilla-dmz;
     # };
 
-    # xdg.configFile."mimeapps.list".force = true;
+    xdg.configFile."mimeapps.list".force = true;
+    xdg = {
+      mimeApps = {
+        enable = true;
+        defaultApplications = {
+          "inode/directory" = [ "yazi.desktop" ]; # Directories
+          "text/*" = [ "neovim.desktop" ]; # Plain text
+
+          "video/mp4" = [ "mpv" ];
+          "video/ogg" = [ "mpv" ];
+          "video/webm" = [ "mpv" ];
+          "video/x-flv" = [ "mpv" ];
+          "video/x-matroska" = [ "mpv" ];
+          "video/x-ms-wmv" = [ "mpv" ];
+          "video/x-ogm+ogg" = [ "mpv" ];
+          "video/x-theora+ogg" = [ "mpv" ];
+
+          "audio/aac" = [ "mpv" ];
+          "audio/flac" = [ "mpv" ];
+          "audio/mp4" = [ "mpv" ];
+          "audio/mpeg" = [ "mpv" ];
+          "audio/ogg" = [ "mpv" ];
+          "audio/x-wav" = [ "mpv" ];
+
+          "x-scheme-handler/https" = [ "firefox.desktop" ]; # Links
+          "x-scheme-handler/http" = [ "firefox.desktop" ]; # Links
+          "x-scheme-handler/mailto" = [ "thunderbird.desktop" ]; # Links
+          "image/*" = [ "feh.desktop" ]; # Images
+          "image/png" = [ "feh.desktop" ];
+          "image/jpeg" = [ "feh.desktop" ];
+          "application/pdf" = [
+            "org.pwmt.zathura.desktop"
+            "firefox.desktop"
+          ];
+          "model/*" = [ "PrusaSlicer.desktop" ];
+        };
+      };
+    };
     programs.anyrun = {
+      package = pkgs.unstable.anyrun;
       enable = true;
       config = {
         x = {
@@ -326,43 +365,36 @@ in
         width = {
           fraction = 0.3;
         };
-        hideIcons = false;
-        ignoreExclusiveZones = false;
-        layer = "overlay";
-        hidePluginInfo = false;
-        closeOnClick = false;
-        showResultsImmediately = true;
-        maxEntries = null;
+        # hideIcons = false;
+        # ignoreExclusiveZones = false;
+        # layer = "overlay";
+        # hidePluginInfo = false;
+        # closeOnClick = false;
+        # showResultsImmediately = true;
+        # maxEntries = null;
 
         plugins = [
           "${pkgs.anyrun}/lib/libniri_focus.so"
           "${pkgs.anyrun}/lib/libapplications.so"
-          "${pkgs.anyrun}/lib/libsymbols.so"
           "${pkgs.anyrun}/lib/libshell.so"
+          # "${pkgs.anyrun}/lib/libsymbols.so"
         ];
       };
 
       # Inline comments are supported for language injection into
       # multi-line strings with Treesitter! (Depends on your editor)
       extraCss = /* css */ ''
-        .some_class {
-          background: red;
+        /* window { */
+        /*   background: transparent; */
+        /* } */
+
+        box.main {
+          padding: 5px;
+          border-radius: 10px;
+          border: 2px solid white;
+          background-color: #282a36dd;
         }
       '';
-      extraConfigFiles = {
-        "symbols.ron".text = ''
-          Config(
-            prefix: ":s ",
-            symbols: {},
-            max_entries: 3,
-          )
-        '';
-        "niri-focus.ron".text = ''
-          Config(
-            max_entries: 3,
-          )
-        '';
-      };
     };
   };
 }
